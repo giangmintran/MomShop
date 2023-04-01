@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "70YnTAmDNvcOOa4BBhHgL4bGK1UPHtGzfy/1K92P/tedc2AG7sYgdPsmEH/WdIb82IxhG+Hak321YOigeeCDkQ==",
+  "dgSpecHash": "VVmEnq26NJbkgKJIaKXy6anSB3yTxSMbZ1e0eQ4CjiOWcqMKySbLxi+2Xy6UgokCj426Jh2qs/sgDSuFL3vP2A==",
   "success": true,
-  "projectFilePath": "E:\\Ky2Nam4\\DATH\\MOMShop\\MOMShop\\MOMShop\\MOMShop.csproj",
+  "projectFilePath": "E:\\Ky2Nam4\\DATH\\MOMShop\\MomShop\\MOMShop\\MOMShop.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\MSIISM\\.nuget\\packages\\automapper\\12.0.1\\automapper.12.0.1.nupkg.sha512",
     "C:\\Users\\MSIISM\\.nuget\\packages\\automapper.extensions.microsoft.dependencyinjection\\12.0.0\\automapper.extensions.microsoft.dependencyinjection.12.0.0.nupkg.sha512",
