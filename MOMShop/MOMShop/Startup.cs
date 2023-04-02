@@ -10,6 +10,8 @@ using Microsoft.Extensions.Logging;
 using Microsoft.OpenApi.Models;
 using MOMShop.MomShopDbContext;
 using MOMShop.MomShopMapperProfile;
+using MOMShop.Services.Implements;
+using MOMShop.Services.Interfaces;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -45,6 +47,8 @@ namespace MOMShop
             });
 
             services.AddAutoMapper(typeof(MapperProfile));
+            //Add Services
+            services.AddScoped<IProductServices, ProductServices>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

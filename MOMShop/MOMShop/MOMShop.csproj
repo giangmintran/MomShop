@@ -21,11 +21,8 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Entites\" />
+    <Folder Include="Dto\" />
     <Folder Include="Utils\" />
-    <Folder Include="Repositories\" />
-    <Folder Include="Services\Implements\" />
-    <Folder Include="Services\Interfaces\" />
   </ItemGroup>
 
 </Project>
