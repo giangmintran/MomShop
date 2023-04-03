@@ -1,19 +1,61 @@
-﻿using MOMShop.Entites;
+﻿using AutoMapper;
+using MOMShop.Dto.Product;
+using MOMShop.Entites;
+using MOMShop.MomShopDbContext;
 using MOMShop.Services.Interfaces;
 using System.Collections.Generic;
+using System.Linq;
 
 namespace MOMShop.Services.Implements
 {
     public class ProductServices : IProductServices
     {
+        private readonly ApplicationDbContext _dbContext;
+        private readonly IMapper _mapper;
+
+        public ProductServices(ApplicationDbContext dbContext, IMapper mapper)
+        {
+            _dbContext = dbContext;
+            _mapper = mapper;
+
+        }
+
+        public Product AddProducts(CreateProductDto input)
+        {
+            var result = _dbContext.Products.Add(_mapper.Map<Product>(input));
+            _dbContext.SaveChanges();
+            return result.Entity;
+        }
+
+        public Product UpdateProducts(UpdateProductDto input)
+        {
+            var product = _dbContext.Products.FirstOrDefault(e => e.Id == input.Id);
+            if(product == null)
+            {
+                throw new System.Exception("Không tìm thấy sản phẩm");
+            }
+            product.Name = input.Name;
+            product.Category = input.Category;
+            product.Quantity = input.Quantity;
+            _dbContext.SaveChanges();
+            return product;
+        }
+
+        public void DeleteProducts(int id)
+        {
+            var product = _dbContext.Products.FirstOrDefault(e => e.Id == id);
+            if (product == null)
+            {
+                throw new System.Exception("Không tìm thấy sản phẩm");
+            }
+            _dbContext.Products.Remove(product);
+            _dbContext.SaveChanges();
+
+        }
+
         public List<Product> GetProducts()
         {
-            List<Product> result = new();
-            result.Add(new Product { Id = 1, Name = "New Jacket AC", Category = 1, Quantity = 100 });
-            result.Add(new Product { Id = 2, Name = "Bad Habbit CC", Category = 1, Quantity = 100 });
-            result.Add(new Product { Id = 3, Name = "Quần 1", Category = 2, Quantity = 100 });
-            result.Add(new Product { Id = 4, Name = "Mũ", Category = 3, Quantity = 100 });
-            result.Add(new Product { Id = 5, Name = "Túi", Category = 4, Quantity = 100 });
+            var result = _dbContext.Products.ToList();
             return result;
         }
     }

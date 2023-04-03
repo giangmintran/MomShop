@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using MOMShop.Dto.Product;
 using MOMShop.Entites;
 using MOMShop.Services.Interfaces;
 using System;
@@ -11,7 +12,6 @@ namespace MOMShop.Controllers
     public class ProductController : ControllerBase
     {
         private IProductServices _services;
-
         public ProductController(IProductServices services)
         {
             _services = services;
@@ -24,6 +24,48 @@ namespace MOMShop.Controllers
             {
                 var result = _services.GetProducts();
                 return result;
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(ex.Message);
+            }
+        }
+
+        [HttpPost("add")]
+        public Product AddProducts([FromBody]CreateProductDto input)
+        {
+            try
+            {
+                var result = _services.AddProducts(input);
+                return result;
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(ex.Message);
+            }
+        }
+
+        [HttpPut("update")]
+        public Product UpdateProducts([FromBody] UpdateProductDto input)
+        {
+            try
+            {
+                var result = _services.UpdateProducts(input);
+                return result;
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(ex.Message);
+            }
+        }
+
+        [HttpDelete("delete/{id}")]
+        public string DeleteProduct(int id)
+        {
+            try
+            {
+                _services.DeleteProducts(id);
+                return "OK";
             }
             catch (Exception ex)
             {
