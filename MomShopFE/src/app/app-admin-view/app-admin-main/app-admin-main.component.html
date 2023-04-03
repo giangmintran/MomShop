@@ -1,5 +1,9 @@
-<div class="container d-flex justify-content-between">
-    <app-admin-menu></app-admin-menu>
-    <table-custom [rowData]="weatherData" (onSelection)="onSelectionChange($event)" scrollHeight="400px">
-    </table-custom>
+<div class="container">
+    <div class="app-menu">
+        <app-admin-menu></app-admin-menu>
+    </div>
+    <div class="table-custom">
+        <table-custom [rowData]="tableData" [colDef]="cols" (onSelection)="onSelectionChange($event)">
+        </table-custom>
+    </div>
 </div>

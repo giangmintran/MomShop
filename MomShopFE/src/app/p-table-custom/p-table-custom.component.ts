@@ -10,7 +10,7 @@ import { SortEvent } from 'primeng/api';
 export class PTableCustomComponent implements OnInit {
   @Input() colDef;
   @Input() rowData;
-  @Input() pageSize : number = 2;
+  @Input() pageSize : number = 15;
   @Input() rowSelectionable: boolean = false;
 
   @Output() onSelection = new EventEmitter();

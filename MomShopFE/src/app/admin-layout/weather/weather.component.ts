@@ -56,7 +56,6 @@ export class WeatherComponent implements OnInit {
     this.http.get(url).subscribe(
       data => {
         this.tableData = data;
-        console.log(this.tableData);
         console.log(data);
       },
       error => {
@@ -64,7 +63,7 @@ export class WeatherComponent implements OnInit {
       }
     );
   }
-  onSelectionChange(){
-    
+  onSelectionChange(event){
+
   }
 }

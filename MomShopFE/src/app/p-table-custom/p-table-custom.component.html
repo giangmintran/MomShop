@@ -1,6 +1,6 @@
 <p-table [value]="rowData" [tableStyle]="{'width': '800px'}"
   [columns]="colDef" selectionMode="single" [(selection)]="selectedRow" (selectionChange)="onSelectionChange($event)"
-  [paginator]="true" [rows]="pageSize" (sortFunction)="customSort($event)" [customSort]="true" >
+  [paginator]="false" [rows]="pageSize" (sortFunction)="customSort($event)" [customSort]="true" >
 	<ng-template pTemplate="header" let-columns>
 		<tr>
 			<th *ngFor="let cols of columns"><p-columnFilter field={{cols.field}}></p-columnFilter>

@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, EventEmitter, Input, Output } from '@angular/core';
 
 @Component({
   selector: 'app-admin-menu',
@@ -6,5 +6,8 @@ import { Component } from '@angular/core';
   styleUrls: ['./app-admin-menu.component.scss']
 })
 export class AppAdminMenuComponent {
+  @Input() isExpanded: boolean = false;
+  @Output() toggleSidebar: EventEmitter<boolean> = new EventEmitter<boolean>();
 
+  handleSidebarToggle = () => this.toggleSidebar.emit(!this.isExpanded);
 }
