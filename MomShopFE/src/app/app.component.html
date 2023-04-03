@@ -1,2 +1,15 @@
-<router-outlet></router-outlet>
-<app-weather></app-weather>
+<div *ngIf="user">
+    <div *ngIf="user.type === 1">
+        <my-sidebar [isExpanded]="sidebarExpanded" (toggleSidebar)="sidebarExpanded = !sidebarExpanded"></my-sidebar>
+        <div class="content" [ngClass]="{ 'sidebarExpanded': sidebarExpanded }">
+            <router-outlet></router-outlet>
+        </div>
+    </div>
+
+    <div *ngIf="user.type === 2">
+        <my-sidebar [isExpanded]="sidebarExpanded" (toggleSidebar)="sidebarExpanded = !sidebarExpanded"></my-sidebar>
+        <div class="content" [ngClass]="{ 'sidebarExpanded': sidebarExpanded }">
+            <h1>Hello</h1>
+        </div>
+    </div>
+</div>
