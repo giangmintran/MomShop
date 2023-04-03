@@ -1,22 +1,16 @@
-import { Component, OnInit } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-interface Product {
-  Id?: number;
-  name?: string;
-  category?: string;
-  quantity?: number;
-}
-@Component({
-  selector: 'app-weather',
-  templateUrl: './weather.component.html',
-  styleUrls: ['./weather.component.scss']
-})
-export class WeatherComponent implements OnInit {
-  weatherData: any;
-  tableData: any;
-  cols: any[] = [];
-  constructor(private http: HttpClient) { }
+import { Component } from '@angular/core';
 
+@Component({
+  selector: 'app-admin-main',
+  templateUrl: './app-admin-main.component.html',
+  styleUrls: ['./app-admin-main.component.scss']
+})
+export class AppAdminMainComponent {
+  cols;
+  tableData
+  weatherData
+  constructor(private http: HttpClient) { }
   ngOnInit(): void {
     this.cols = [
       {
@@ -64,7 +58,5 @@ export class WeatherComponent implements OnInit {
       }
     );
   }
-  onSelectionChange(){
-    
-  }
+  onSelectionChange(event){}
 }

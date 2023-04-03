@@ -1,25 +1,29 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
-
-import { AppRoutingModule } from './app-routing.module';
-import { AppComponent } from './app.component';
-import { WeatherComponent } from './admin-layout/weather/weather.component';
+import { CommonModule } from '@angular/common';
 import { HttpClientModule } from '@angular/common/http';
 import { TableModule } from 'primeng/table';
 import { SidebarComponent } from './admin-layout/sidebar/sidebar.component';
-import { TopbarComponent } from './admin-layout/topbar/topbar.component';
-import { AdminHomeComponent } from './admin-home/admin-home.component';
-import { MainComponent } from './admin-layout/main/main.component';
+import { WeatherComponent } from './admin-layout/weather/weather.component';
+import { AppRoutingModule } from './app-routing.module';
+import { AppComponent } from './app.component';
 import { PTableCustomComponent } from './p-table-custom/p-table-custom.component';
+import { AppUserMainComponent } from './app-user-view/app-user-main/app-user-main.component';
+import { AppAdminMainComponent } from './app-admin-view/app-admin-main/app-admin-main.component';
+import { AppAdminMenuComponent } from './app-admin-view/app-admin-menu/app-admin-menu.component';
 @NgModule({
   declarations: [
     AppComponent,
     WeatherComponent,
     SidebarComponent,
-    TopbarComponent,
-    MainComponent,
     PTableCustomComponent,
+    AppUserMainComponent,
+    AppAdminMainComponent,
+    AppAdminMenuComponent
+  ],
   imports: [
+    BrowserModule,
+    CommonModule,
     AppRoutingModule,
     HttpClientModule,
     TableModule,
