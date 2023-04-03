@@ -10,17 +10,16 @@ import { SidebarComponent } from './admin-layout/sidebar/sidebar.component';
 import { TopbarComponent } from './admin-layout/topbar/topbar.component';
 import { AdminHomeComponent } from './admin-home/admin-home.component';
 import { MainComponent } from './admin-layout/main/main.component';
+import { PTableCustomComponent } from './p-table-custom/p-table-custom.component';
 @NgModule({
   declarations: [
     AppComponent,
     WeatherComponent,
     SidebarComponent,
     TopbarComponent,
-    AdminHomeComponent,
     MainComponent,
-  ],
+    PTableCustomComponent,
   imports: [
-    BrowserModule,
     AppRoutingModule,
     HttpClientModule,
     TableModule,
