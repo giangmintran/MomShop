@@ -49,6 +49,7 @@ namespace MOMShop
             services.AddAutoMapper(typeof(MapperProfile));
             //Add Services
             services.AddScoped<IProductServices, ProductServices>();
+            services.AddScoped<IUserServices, UserServices>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
