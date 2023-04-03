@@ -3,7 +3,7 @@
   [paginator]="true" [rows]="pageSize" (sortFunction)="customSort($event)" [customSort]="true" >
 	<ng-template pTemplate="header" let-columns>
 		<tr>
-			<th  *ngFor="let cols of columns"><p-columnFilter field={{cols.field}}></p-columnFilter>
+			<th *ngFor="let cols of columns"><p-columnFilter field={{cols.field}}></p-columnFilter>
 				{{cols.header}}
 			</th>
 		</tr>

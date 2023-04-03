@@ -44,5 +44,9 @@
 	</ng-template>
 </p-table>  -->
 <p *ngIf="selectedProduct">{{selectedProduct.field}}</p>
-<table-custom [colDef]="colDef" [rowData]="weatherData" [rowSelectionable]="true" (selectionChange)="onSelectionChange($event)"></table-custom>
+<table-custom [colDef]="colDef" [rowData]="weatherData" [rowSelectionable]="true" (onSelection)="onSelectionChange($event)"></table-custom>
 
+<span class="p-input-icon-left">
+  <i class="pi pi-search"></i>
+  <input type="text" pInputText />
+</span>
