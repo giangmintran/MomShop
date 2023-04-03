@@ -6,10 +6,12 @@ import { AppComponent } from './app.component';
 import { WeatherComponent } from './weather/weather.component';
 import { HttpClientModule } from '@angular/common/http';
 import { TableModule } from 'primeng/table';
+import { PTableCustomComponent } from './p-table-custom/p-table-custom.component';
 @NgModule({
   declarations: [
     AppComponent,
-    WeatherComponent
+    WeatherComponent,
+    PTableCustomComponent,
   ],
   imports: [
     BrowserModule,

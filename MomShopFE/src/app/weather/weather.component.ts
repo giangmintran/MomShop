@@ -9,81 +9,35 @@ import { HttpClient } from '@angular/common/http';
 export class WeatherComponent implements OnInit {
   weatherData: any;
  tableData;
+ colDef: any[];
+ cols;
+ selectedProduct;
   constructor(private http: HttpClient) { }
 
   ngOnInit(): void {
-    this.getWeatherData();
-    this.tableData = [
-      {
-          firstname: 'David',
-          lastname: 'ace',
-          age: '40',
-      },
-      {
-          firstname: 'AJne',
-          lastname: 'west',
-          age: '40',
-      },
-      {
-          firstname: 'Mak',
-          lastname: 'Lame',
-          age: '40',
-      },
-      {
-          firstname: 'Peter',
-          lastname: 'raw',
-          age: '40',
-      },
-      {
-          firstname: 'Kane',
-          lastname: 'James',
-          age: '40',
-      },
-      {
-          firstname: 'Peter',
-          lastname: 'raw',
-          age: '40',
-      },
-      {
-          firstname: 'Kane',
-          lastname: 'James',
-          age: '40',
-      },
-      {
-          firstname: 'Peter',
-          lastname: 'raw',
-          age: '40',
-      },
-      {
-          firstname: 'Kane',
-          lastname: 'James',
-          age: '40',
-      },
-      {
-          firstname: 'Peter',
-          lastname: 'raw',
-          age: '40',
-      },
-      {
-          firstname: 'Kane',
-          lastname: 'James',
-          age: '40',
-      },
-      {
-          firstname: 'Peter',
-          lastname: 'raw',
-          age: '40',
-      },
-      {
-          firstname: 'Kane',
-          lastname: 'James',
-          age: '40',
-      },
+    this.cols = [
+      { field: 'name', header: 'Name' },
+      { field: 'category', header: 'Category' },
+      { field: 'quantity', header: 'Quantity' }
   ];
+    this.getWeatherData();
+    this.colDef = [
+     {
+       field: 'name',
+       header: 'Name'
+     },
+     {
+       field: 'category',
+       header: 'category'
+     },
+     {
+       field: 'quantity',
+       header: 'quantity'
+     }
+    ]
   }
-
   getWeatherData(): void {
-    const url = 'http://localhost:5000/WeatherForecast';
+    const url = 'http://localhost:5000/api/product/find-all';
     this.http.get(url).subscribe(
       data => {
         this.weatherData = data;
@@ -92,5 +46,8 @@ export class WeatherComponent implements OnInit {
         console.error(error);
       }
     );
+  }
+  onSelectionChange(event){
+    console.log(event);
   }
 }

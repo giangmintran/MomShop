@@ -25,26 +25,24 @@
 	Angular PrimeNG Table Basic
 </h4>
 
- <p-table [value]="	">
-	<ng-template pTemplate="header">
+ <!-- <p-table [value]="weatherData" (selectionChange)="onSelectionChange($event)" 
+  [columns]="colDef" selectionMode="single" [(selection)]="selectedProduct" [paginator]="true" [rows]="6">
+	<ng-template pTemplate="header" let-columns>
 		<tr>
-			<th>First Name</th>
-			<th>Last Name</th>
-			<th>Age</th>
+			<th *ngFor="let cols of columns">
+				{{cols.header}}
+			</th>
 		</tr>
 	</ng-template>
 
-	<ng-template pTemplate="body" let-people>
-		<tr>
-			<td>
-				{{ people.firstname }}
-			</td>
-			<td>
-				{{ people.lastname }}
-			</td>
-			<td>
-				{{ people.age }}
+	<ng-template pTemplate="body" let-tableData let-columns="columns">
+		<tr [pSelectableRow]="tableData">
+			<td *ngFor="let cols of columns">
+				{{tableData[cols.field]}}
 			</td>
 		</tr>
 	</ng-template>
-</p-table> 
+</p-table>  -->
+<p *ngIf="selectedProduct">{{selectedProduct.field}}</p>
+<table-custom [colDef]="colDef" [rowData]="weatherData" [rowSelectionable]="true" (selectionChange)="onSelectionChange($event)"></table-custom>
+
