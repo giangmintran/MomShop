@@ -12,3 +12,5 @@ obj/
 *.cache
 *.dll
 *.vsidx
+*.v2
+*.v5.2
