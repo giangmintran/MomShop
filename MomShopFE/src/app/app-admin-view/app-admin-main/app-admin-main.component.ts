@@ -1,5 +1,6 @@
 import { HttpClient } from '@angular/common/http';
-import { Component } from '@angular/core';
+import { Component, ViewChild } from '@angular/core';
+import { CreateOrEditWeatherComponent } from 'src/app/admin-layout/weather/create-or-edit-weather/create-or-edit-weather.component';
 
 @Component({
   selector: 'app-admin-main',
@@ -10,6 +11,8 @@ export class AppAdminMainComponent {
   cols;
   tableData
   weatherData
+  @ViewChild('Create', { static: true }) createWeather: CreateOrEditWeatherComponent;
+
   constructor(private http: HttpClient) { }
   ngOnInit(): void {
     this.cols = [
@@ -59,4 +62,8 @@ export class AppAdminMainComponent {
     );
   }
   onSelectionChange(event){}
+  Create(){
+    this.createWeather.show();
+  }
+
 }

@@ -1,17 +1,16 @@
-<div *ngIf="user">
-    <div *ngIf="user.type === 1">
-        <app-user-main></app-user-main>
+<div>
+    <!-- <div *ngIf="user.type === 1"> -->
+        <!-- <app-user-main></app-user-main> -->
         <!-- <my-sidebar [isExpanded]="sidebarExpanded" (toggleSidebar)="sidebarExpanded = !sidebarExpanded"></my-sidebar>
         <div class="content" [ngClass]="{ 'sidebarExpanded': sidebarExpanded }">
             <router-outlet></router-outlet>
         </div> -->
-    </div>
+    <!-- </div> -->
 
-    <div *ngIf="user.type === 2">
+    <div>
         <!-- <my-sidebar [isExpanded]="sidebarExpanded" (toggleSidebar)="sidebarExpanded = !sidebarExpanded"></my-sidebar> -->
         <app-admin-main>
-            <app-admin-menu></app-admin-menu>
         </app-admin-main>
     </div>
-    <!-- <router-outlet></router-outlet> -->
+     <router-outlet></router-outlet> 
 </div>

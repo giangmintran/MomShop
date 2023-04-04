@@ -1,0 +1,28 @@
+
+<div class="container1">
+    <!-- <button class="btn btn-add btn-primary" (click)="createUsers()">Thêm</button>
+    <button class="btn btn-add btn-primary" (click)="editUser()">Sửa</button> -->
+    <button class="btn btn-add btn-primary" (click)="deleteUser()">Xoá</button>
+    <div class="user mt-4">
+        <p-table [value]="tableData" (onLazyLoad)="getProductData()" [tableStyle]="{'width': '100% -280px'}"
+  [columns]="cols" selectionMode="single" [(selection)]="selectedRow" (selectionChange)="onSelectionChange($event)"
+  [paginator]="false" [rows]="2" >
+	<ng-template pTemplate="header" let-columns>
+		<tr>
+			<th *ngFor="let cols of columns">
+				{{cols.header}}
+			</th>
+		</tr>
+	</ng-template>
+
+	<ng-template pTemplate="body" let-tableData let-columns="columns">
+		<tr [pSelectableRow]="tableData">
+			<td *ngFor="let cols of columns">
+				{{tableData[cols.field]}}
+			</td>
+		</tr>
+	</ng-template>
+</p-table> 
+    </div>
+</div>
+<app-create-or-edit-user #createUser></app-create-or-edit-user>

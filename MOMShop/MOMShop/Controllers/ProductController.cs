@@ -60,12 +60,12 @@ namespace MOMShop.Controllers
         }
 
         [HttpDelete("delete/{id}")]
-        public string DeleteProduct(int id)
+        public void DeleteProduct(int id)
         {
             try
             {
                 _services.DeleteProducts(id);
-                return "OK";
+                //return "OK";
             }
             catch (Exception ex)
             {

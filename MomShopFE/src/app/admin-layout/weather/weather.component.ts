@@ -1,5 +1,6 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
+import { CreateOrEditWeatherComponent } from './create-or-edit-weather/create-or-edit-weather.component';
 interface Product {
   Id?: number;
   name?: string;
@@ -12,6 +13,7 @@ interface Product {
   styleUrls: ['./weather.component.scss']
 })
 export class WeatherComponent implements OnInit {
+  @ViewChild('Create', { static: true }) createWeather: CreateOrEditWeatherComponent;
   weatherData: any;
   tableData: any;
   cols: any[] = [];
@@ -65,5 +67,8 @@ export class WeatherComponent implements OnInit {
   }
   onSelectionChange(event){
 
+  }
+  Creates(){
+    this.createWeather.show();
   }
 }

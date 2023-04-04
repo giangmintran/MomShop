@@ -12,10 +12,45 @@ export class PTableCustomComponent implements OnInit {
   @Input() rowData;
   @Input() pageSize : number = 15;
   @Input() rowSelectionable: boolean = false;
+  cols;
+  tableData;
 
   @Output() onSelection = new EventEmitter();
   selectedRow;
-  constructor(private http: HttpClient) {}
+  constructor(private http: HttpClient) {
+    this.cols = [
+      {
+        field: 'id',
+        header: '#Id',
+      },
+      {
+        field: 'name',
+        header: 'Name',
+      },
+      {
+        field: 'category',
+        header: 'Category',
+      },
+      {
+        field: 'quantity',
+        header: 'Quantity',
+      },
+    ];
+    this.getProductData();
+  }
+  getProductData(): void {
+    const url = 'http://localhost:5001/api/product/find-all';
+    this.http.get(url).subscribe(
+      (data) => {
+        this.tableData = data;
+        console.log(data);
+      },
+      (error) => {
+        console.error(error);
+      }
+    );
+  }
+
   ngOnInit(): void {}
   onSelectionChange(event){
       this.onSelection.emit(event);
