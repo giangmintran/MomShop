@@ -1,8 +1,0 @@
-{
-    "remoteServiceBaseUrl": "https://api-staging.epicpartner.vn",
-    "appBaseUrl": "http://localhost:4206",
-    "baseUrlHome": "http://localhost:4200",
-    "clientId": "client1",
-    "clientSecret": "secret1"
-  }
-  
