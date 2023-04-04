@@ -32,7 +32,7 @@ namespace MOMShop.Controllers
         }
 
         [HttpPost("add")]
-        public Product AddProducts([FromBody]CreateProductDto input)
+        public Product AddProducts([FromBody] UpdateProductDto input)
         {
             try
             {

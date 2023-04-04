@@ -17,10 +17,7 @@ export class AppAdminManagementUserComponent implements OnInit {
   tableData;
   selectedRow;
   ngOnInit(): void {}
-  constructor(
-    private http: HttpClient,
-    public productServices: ProductService
-  ) {
+  constructor(private http: HttpClient,public productServices : ProductService) {
     this.cols = [
       {
         field: 'id',
@@ -42,7 +39,7 @@ export class AppAdminManagementUserComponent implements OnInit {
     this.getProductData();
   }
   getProductData(): void {
-    this.productServices.getAllProduct().subscribe((data) => {
+    this.productServices.getAllProduct().subscribe((data)=>{
       this.tableData = data;
     });
   }
