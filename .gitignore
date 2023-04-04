@@ -14,3 +14,6 @@ obj/
 *.vsidx
 *.v2
 *.v5.2
+*.cache
+*.editorconfig
+
