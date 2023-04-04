@@ -72,5 +72,19 @@ namespace MOMShop.Controllers
                 throw new Exception(ex.Message);
             }
         }
+
+        [HttpGet("detail/{id}")]
+        public Product FindById(int id)
+        {
+            try
+            {
+                var result = _services.FindById(id);
+                return result;
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(ex.Message);
+            }
+        }
     }
 }
