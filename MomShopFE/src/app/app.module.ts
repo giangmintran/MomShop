@@ -15,8 +15,9 @@ import { CreateOrEditWeatherComponent } from './admin-layout/weather/create-or-e
 import { ModalModule } from 'ng2-modal-module';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { AppBsModalModule } from 'src/directive/app-bs-modal.module';
-import { TestTableModule } from './test-table/test-table.module';
 import { AppAdminManagementUserModule } from './app-admin-view/app-admin-management-user/app-admin-management-user.module';
+import { ProductService } from 'src/services/product.service';
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -26,7 +27,7 @@ import { AppAdminManagementUserModule } from './app-admin-view/app-admin-managem
     AppUserMainComponent,
     AppAdminMainComponent,
     AppAdminMenuComponent,
-    CreateOrEditWeatherComponent
+    CreateOrEditWeatherComponent,
   ],
   imports: [
     BrowserModule,
@@ -36,12 +37,12 @@ import { AppAdminManagementUserModule } from './app-admin-view/app-admin-managem
     TableModule,
     BrowserAnimationsModule,
     AppBsModalModule,
-    TestTableModule,
-    AppAdminManagementUserModule
+    AppAdminManagementUserModule,
     //BsModalService,
     //ModalModule
   ],
-  providers: [],
+  providers: [
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
