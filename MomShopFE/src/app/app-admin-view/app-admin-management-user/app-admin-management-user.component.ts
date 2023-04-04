@@ -1,6 +1,8 @@
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { CreateOrEditUserComponent } from './create-or-edit-user/create-or-edit-user.component';
+import { Product } from 'src/models/product';
+import { ProductService } from 'src/services/product.service';
 
 @Component({
   selector: 'app-app-admin-management-user',
@@ -10,11 +12,12 @@ import { CreateOrEditUserComponent } from './create-or-edit-user/create-or-edit-
 export class AppAdminManagementUserComponent implements OnInit {
   @ViewChild('createUser', { static: true })
   modalUser: CreateOrEditUserComponent;
+  product: Product;
   cols;
   tableData;
   selectedRow;
   ngOnInit(): void {}
-  constructor(private http: HttpClient) {
+  constructor(private http: HttpClient,public productServices : ProductService) {
     this.cols = [
       {
         field: 'id',
@@ -36,8 +39,7 @@ export class AppAdminManagementUserComponent implements OnInit {
     this.getProductData();
   }
   getProductData(): void {
-    const url = 'http://localhost:5001/api/product/find-all';
-    this.http.get(url).subscribe((data) => {
+    this.productServices.getAllProduct().subscribe((data)=>{
       this.tableData = data;
     });
   }
@@ -47,25 +49,8 @@ export class AppAdminManagementUserComponent implements OnInit {
   }
   editUser() {}
   deleteUser() {
-    const url =
-      'http://localhost:5001/api/product/delete/' + this.selectedRow.id;
-    this.http.delete(url).subscribe(
-      // (data1) => {
-      //   this.getProductData();
-      // },
-      // (error) => {
-      //   // console.error(error);
-      // },
-      // ()=>{
-      // }
-      {
-        next: () => {
-          this.getProductData();
-        },
-        error: (error) => {
-          console.error('There was an error!', error);
-        },
-      }
-    );
+    this.productServices.deleteProduct(this.selectedRow.id).subscribe((data)=>{
+      this.productServices.getAllProduct().subscribe(()=>{})
+    });
   }
 }

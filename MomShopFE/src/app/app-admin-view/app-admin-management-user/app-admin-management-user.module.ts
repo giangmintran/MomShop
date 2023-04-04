@@ -5,6 +5,7 @@ import { TableModule } from 'primeng/table';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { CreateOrEditUserComponent } from './create-or-edit-user/create-or-edit-user.component';
 import { AppBsModalModule } from 'src/directive/app-bs-modal.module';
+import { FormsModule } from '@angular/forms';
 
 
 
@@ -17,7 +18,7 @@ import { AppBsModalModule } from 'src/directive/app-bs-modal.module';
     CommonModule,
     TableModule,
     BrowserAnimationsModule,
-    AppBsModalModule
+    AppBsModalModule,FormsModule
   ]
 })
 export class AppAdminManagementUserModule { }

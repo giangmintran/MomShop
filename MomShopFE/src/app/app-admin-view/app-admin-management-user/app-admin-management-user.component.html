@@ -1,9 +1,11 @@
 
 <div class="container1">
-    <!-- <button class="btn btn-add btn-primary" (click)="createUsers()">Thêm</button>
-    <button class="btn btn-add btn-primary" (click)="editUser()">Sửa</button> -->
-    <button class="btn btn-add btn-primary" (click)="deleteUser()">Xoá</button>
-    <div class="user mt-4">
+    <div class="block-button">
+        <button class="btn btn-add btn-primary mr-2"  (click)="createUsers()">Thêm</button>
+        <button class="btn btn-add btn-primary ml-2" [disabled]="!selectedRow" (click)="editUser()">Sửa</button>
+        <button class="btn btn-add btn-primary ml-2" [disabled]="!selectedRow" (click)="deleteUser()">Xoá</button>
+    </div>
+    <div class="user">
         <p-table [value]="tableData" (onLazyLoad)="getProductData()" [tableStyle]="{'width': '100% -280px'}"
   [columns]="cols" selectionMode="single" [(selection)]="selectedRow" (selectionChange)="onSelectionChange($event)"
   [paginator]="false" [rows]="2" >
@@ -25,4 +27,4 @@
 </p-table> 
     </div>
 </div>
-<app-create-or-edit-user #createUser></app-create-or-edit-user>
+<app-create-or-edit-user #createUser (modalSave)="getProductData()"></app-create-or-edit-user>
