@@ -49,12 +49,8 @@ export class AppAdminManagementUserComponent implements OnInit {
   }
   editUser() {}
   deleteUser() {
-    this.productServices
-      .deleteProduct(this.selectedRow.id)
-      .subscribe((data) => {
-        this.productServices.getAllProduct().subscribe((data) => {
-          this.tableData = data;
-        });
-      });
+    this.productServices.deleteProduct(this.selectedRow.id).subscribe((data)=>{
+      this.productServices.getAllProduct().subscribe(()=>{})
+    });
   }
 }
