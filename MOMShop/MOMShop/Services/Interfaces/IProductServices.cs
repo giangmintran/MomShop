@@ -8,6 +8,7 @@ namespace MOMShop.Services.Interfaces
     {
         List<Product> GetProducts();
         Product AddProducts(CreateProductDto input);
+        Product FindById(int id);
         Product UpdateProducts(UpdateProductDto input);
         void DeleteProducts(int id);
 
