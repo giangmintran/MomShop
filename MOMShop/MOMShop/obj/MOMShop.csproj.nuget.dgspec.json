@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "E:\\Ky2Nam4\\DATH\\MOMShop\\MomShop\\MOMShop\\MOMShop.csproj": {}
+    "E:\\Ky2Nam4\\DATH\\MOMShop\\MOMShop\\MOMShop\\MOMShop.csproj": {}
   },
   "projects": {
-    "E:\\Ky2Nam4\\DATH\\MOMShop\\MomShop\\MOMShop\\MOMShop.csproj": {
+    "E:\\Ky2Nam4\\DATH\\MOMShop\\MOMShop\\MOMShop\\MOMShop.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "E:\\Ky2Nam4\\DATH\\MOMShop\\MomShop\\MOMShop\\MOMShop.csproj",
+        "projectUniqueName": "E:\\Ky2Nam4\\DATH\\MOMShop\\MOMShop\\MOMShop\\MOMShop.csproj",
         "projectName": "MOMShop",
-        "projectPath": "E:\\Ky2Nam4\\DATH\\MOMShop\\MomShop\\MOMShop\\MOMShop.csproj",
+        "projectPath": "E:\\Ky2Nam4\\DATH\\MOMShop\\MOMShop\\MOMShop\\MOMShop.csproj",
         "packagesPath": "C:\\Users\\MSIISM\\.nuget\\packages\\",
-        "outputPath": "E:\\Ky2Nam4\\DATH\\MOMShop\\MomShop\\MOMShop\\obj\\",
+        "outputPath": "E:\\Ky2Nam4\\DATH\\MOMShop\\MOMShop\\MOMShop\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"
