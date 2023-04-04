@@ -32,7 +32,7 @@ namespace MOMShop.Controllers
         }
 
         [HttpPost("add")]
-        public Product AddProducts([FromBody]CreateProductDto input)
+        public Product AddProducts([FromBody] UpdateProductDto input)
         {
             try
             {
@@ -60,12 +60,26 @@ namespace MOMShop.Controllers
         }
 
         [HttpDelete("delete/{id}")]
-        public string DeleteProduct(int id)
+        public void DeleteProduct(int id)
         {
             try
             {
                 _services.DeleteProducts(id);
-                return "OK";
+                //return "OK";
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(ex.Message);
+            }
+        }
+
+        [HttpGet("detail/{id}")]
+        public Product FindById(int id)
+        {
+            try
+            {
+                var result = _services.FindById(id);
+                return result;
             }
             catch (Exception ex)
             {

@@ -53,6 +53,16 @@ namespace MOMShop.Services.Implements
 
         }
 
+        public Product FindById(int id)
+        {
+            var product = _dbContext.Products.FirstOrDefault(e => e.Id == id);
+            if (product == null)
+            {
+                throw new System.Exception("Không tìm thấy sản phẩm");
+            }
+            return product;
+        }
+
         public List<Product> GetProducts()
         {
             var result = _dbContext.Products.ToList();

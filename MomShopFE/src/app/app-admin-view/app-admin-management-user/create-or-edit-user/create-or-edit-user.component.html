@@ -1,0 +1,29 @@
+<div appBsModal #createOrEditModal="bs-modal" class="modal fade" tabindex="-1" role="dialog"
+    aria-labelledby="createOrEditModal" aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+                <div class="modal-body modal-body-master">
+                    <div class="form-group form-group-master form-md-line-input form-md-floating-label no-hint input-bottom-form">
+                        <div class="row">
+                            <div class="col-4">
+                                <label for="name">Tên sản phẩm</label>
+                                <input type="text" [(ngModel)]="product.name" id="name">
+                            </div>
+                            <div class="col-4">
+                                <label for="category">Phân loại</label>
+                                <input type="text" [(ngModel)]="product.category" id="category">
+                            </div>
+                            <div class="col-4">
+                                <label for="quantity">Số lượng</label>
+                                <input type="text" [(ngModel)]="product.quantity" id="quantity">
+                            </div>
+                        </div>
+                </div>
+                <div class="modal-footer modal-footer-master">
+                    <button [disabled]="saving" type="button" class="btn btn-default" (click)="close()">Huỷ</button>
+                    <button type="button" (click)="save()" class="btn btn-primary">Lưu</button>
+                </div>
+            </div>
+    </div>
+</div>
+</div>
