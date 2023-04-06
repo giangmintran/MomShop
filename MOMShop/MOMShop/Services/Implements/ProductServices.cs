@@ -22,7 +22,10 @@ namespace MOMShop.Services.Implements
 
         public Product AddProducts(UpdateProductDto input)
         {
-            var result = _dbContext.Products.Add(_mapper.Map<Product>(input));
+            var productCode = input.Name.ToLower();
+            var insert = _mapper.Map<Product>(input);
+            insert.Code = productCode;
+            var result = _dbContext.Products.Add(insert);
             _dbContext.SaveChanges();
             return result.Entity;
         }
