@@ -1,6 +1,7 @@
 import { Component, EventEmitter, Output, ViewChild } from '@angular/core';
 import { ModalDirective } from 'ngx-bootstrap/modal';
-import { CreateProductDto } from 'src/models/createProductDto';
+import { UpdateProductDto } from 'src/models/UpdateProductDto';
+import { Product } from 'src/models/product';
 import { ProductService } from 'src/services/product.service';
 
 @Component({
@@ -9,19 +10,18 @@ import { ProductService } from 'src/services/product.service';
   styleUrls: ['./create-or-edit-user.component.scss'],
 })
 export class CreateOrEditUserComponent {
-  product: CreateProductDto = new CreateProductDto();
+  input: UpdateProductDto = new UpdateProductDto();
+  product : Product = new Product;
   saving = false;
   active;
-  test;
-  name;
-  category
-  quantity
   @ViewChild('createOrEditModal', { static: true }) modal: ModalDirective;
   @Output() modalSave: EventEmitter<any> = new EventEmitter<any>();
   constructor(public productServices: ProductService) {}
   show(id?) {
     if(id){
-        
+        this.productServices.detailProduct(id).subscribe((data:UpdateProductDto)=>{
+              this.input = data;
+        })
     }
     this.modal.show();
     this.active = true;
@@ -31,7 +31,8 @@ export class CreateOrEditUserComponent {
     this.modal.hide();
   }
   save() {
-    this.productServices.createOrEdit(this.product).subscribe(()=>{
+    
+    this.productServices.createOrEdit(this.input).subscribe(()=>{
       this.active = false;
       this.modalSave.emit(null);
       this.close();
