@@ -20,7 +20,7 @@ namespace MOMShop.Services.Implements
 
         }
 
-        public Product AddProducts(CreateProductDto input)
+        public Product AddProducts(UpdateProductDto input)
         {
             var result = _dbContext.Products.Add(_mapper.Map<Product>(input));
             _dbContext.SaveChanges();
@@ -35,8 +35,6 @@ namespace MOMShop.Services.Implements
                 throw new System.Exception("Không tìm thấy sản phẩm");
             }
             product.Name = input.Name;
-            product.Category = input.Category;
-            product.Quantity = input.Quantity;
             _dbContext.SaveChanges();
             return product;
         }
