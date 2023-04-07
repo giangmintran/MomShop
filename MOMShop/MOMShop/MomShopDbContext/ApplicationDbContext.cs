@@ -9,7 +9,22 @@ namespace MOMShop.MomShopDbContext
         public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options) : base(options)
         {
         }
+        public DbSet<Cart> Carts { get; set; }
+        public DbSet<Collection> Collections { get; set; }
+        public DbSet<Customer> Customers { get; set; }
+        public DbSet<CustomerContact> CustomerContacts { get; set; }
+        public DbSet<CustomerFavourite> CustomerFavourites { get; set; }
+        public DbSet<Feedback> Feedbacks { get; set; }
+        public DbSet<Order> Orders { get; set; }
+        public DbSet<OrderDetail> OrderDetails { get; set; }
         public DbSet<Product> Products { get; set; }
+        public DbSet<ProductDetail> ProductDetails { get; set; }
+        public DbSet<ProductImage> ProductImages { get; set; }
+        public DbSet<ReceivedProduct> ReceivedProducts { get; set; }
+        public DbSet<ReceiveProductDetail> ReceiveProductDetails { get; set; }
+        public DbSet<ReceiveOrder> ReceiveOrders { get; set; }
+        public DbSet<ReceiveOrderDetail> ReceiveOrderDetails { get; set; }
+        public DbSet<Users> Users { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {

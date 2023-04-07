@@ -1,5 +1,9 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using MOMShop.Domain.Interfaces;
+using MOMShop.Dto.Product;
+using MOMShop.Dto.Users;
 using MOMShop.Entites;
+using MOMShop.Services.Implements;
 using MOMShop.Services.Interfaces;
 using System;
 
@@ -9,18 +13,18 @@ namespace MOMShop.Controllers
     [ApiController]
     public class UserController : ControllerBase
     {
-        private IUserServices _userServices;
+        private IUsersServices _usersServices;
 
-        public UserController(IUserServices userServices)
+        public UserController(IUsersServices userServices)
         {
-            _userServices = userServices;
+            _usersServices = userServices;
         }
-        [HttpGet("find-all")]
-        public User Login()
+        [HttpPost("login")]
+        public LoginResultDto Login([FromBody] LoginDto input)
         {
             try
             {
-                var result = _userServices.Login();
+                var result = _usersServices.Login(input);
                 return result;
             }
             catch (Exception ex)

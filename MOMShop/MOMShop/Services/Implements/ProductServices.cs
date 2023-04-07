@@ -38,6 +38,9 @@ namespace MOMShop.Services.Implements
                 throw new System.Exception("Không tìm thấy sản phẩm");
             }
             product.Name = input.Name;
+            product.Price = input.Price;
+            product.Status = input.Status;
+            product.Description = input.Description;
             _dbContext.SaveChanges();
             return product;
         }
@@ -66,7 +69,7 @@ namespace MOMShop.Services.Implements
 
         public List<Product> GetProducts()
         {
-            var result = _dbContext.Products.ToList();
+            var result = _dbContext.Products.Where(e => e.Status == 1 || e.Status == 2).ToList();
             return result;
         }
     }
