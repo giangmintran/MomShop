@@ -143,8 +143,6 @@ export abstract class CrudComponentBase extends AppComponentBase {
                 id: data.id,
                 summary: data?.summary ?? null,
                 actionType: data?.actionType || null,
-                isInvestorProf: data?.isInvestorProf, 
-                phone: data?.phone ?? null,
             },
         };
     }
@@ -152,6 +150,20 @@ export abstract class CrudComponentBase extends AppComponentBase {
     getConfigDialogServiceDisplayTableColumn(title:string, cols:any[], comlumnSelected:any[]){
         return {    
             header: title,
+            width: '300px',
+            contentStyle: { "max-height": "600px", "overflow": "auto", "margin-bottom": "60px" },
+            style: {"overflow": "hidden"},
+            styleClass:'dialog-setcolumn',
+            baseZIndex: 10000,
+            data: {
+                cols: cols,
+                comlumnSelected: comlumnSelected,
+            },
+        };        
+    }
+    getConfigDialogServiceDisplayTableColumn1(cols:any[], comlumnSelected:any[]) {
+        return {    
+            header: "Sửa cột hiển thị",
             width: '300px',
             contentStyle: { "max-height": "600px", "overflow": "auto", "margin-bottom": "60px" },
             style: {"overflow": "hidden"},

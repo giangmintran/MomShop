@@ -14,7 +14,7 @@ import * as ApproveServiceProxies from "./approve-service";
 import * as BankServiceProxies from "./bank-service";
 import * as ProvinceServiceProxies from "./province-service";
 import * as FileServiceProxies from "./file-service";
-import { BroadcastService } from "./broadcast-service";
+import { ProductService } from "./product-service";
 import { NotificationService } from "./notification-service";
 import { PartnerAccountService } from "./partner-account-service";
 import { ProvinceServiceProxy } from "./province-service";
@@ -80,7 +80,7 @@ import { NotVerifiedServiceProxy } from './not-verified-service';
         BusinessCustomerServiceProxies.BusinessCustomerApproveServiceProxy,
         BusinessCustomerServiceProxies.BusinessCustomerServiceProxy,
         BusinessCustomerServiceProxies.BusinessCustomerBankServiceProxy,
-        BroadcastService,
+        ProductService,
         NotificationService,
         PartnerAccountService,
         DepartmentService,

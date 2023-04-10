@@ -13,12 +13,12 @@ import { debounceTime } from 'rxjs/operators';
 import { FormSetDisplayColumnComponent } from '../form-set-display-column/form-set-display-column.component';
 import { SaleService } from '@shared/service-proxies/sale-service';
 import { Router } from '@angular/router';
-import { OBJECT_INVESTOR_EKYC } from '@shared/base-object';
+// import { OBJECT_INVESTOR_EKYC } from '@shared/base-object';
 import { FormNotificationComponent } from '../form-notification/form-notification.component';
 import { AddSaleDirectionalComponent } from './add-sale-directional/add-sale-directional.component';
 import { BehaviorSubject, forkJoin } from 'rxjs';
 
-const { DEFAULT_IMAGE } = OBJECT_INVESTOR_EKYC;
+// const { DEFAULT_IMAGE } = OBJECT_INVESTOR_EKYC;
 
 @Component({
     selector: 'app-department',
@@ -52,7 +52,7 @@ export class DepartmentComponent extends CrudComponentBase {
 
     departmentName: string;
 
-    avatarDefault: any = DEFAULT_IMAGE.IMAGE_AVATAR;
+    // avatarDefault: any = DEFAULT_IMAGE.IMAGE_AVATAR;
 
     SaleConst = SaleConst;
     //

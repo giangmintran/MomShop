@@ -146,109 +146,53 @@ import { UserComponent } from './user/user.component';
 import { SharedModule } from '@shared/shared.module';
 import { OrderService } from '@shared/service-proxies/shared-data-service';
 
-import { BroadcastNewsComponent } from './broadcast/news/broadcast-news.component';
-import { MediaComponent } from './broadcast/media/media.component';
 // import { SimpleModalModule } from 'ngx-simple-modal'; 
-import { AddNewsComponent } from './broadcast/news/add-news/add-news.component';
-
-import { PartnerComponent } from './partner-manager/partner/partner.component';
-import { PartnerDetailComponent } from './partner-manager/partner/partner-detail/partner-detail.component';
-
-import { InvestorComponent } from './investor/investor.component';
-import { CreateInvestorEkycComponent } from './investor/create-investor-ekyc/create-investor-ekyc.component';
 import { UploadImageComponent } from './components/upload-image/upload-image.component';
-import { AddMediaComponent } from './broadcast/add-media/add-media.component';
 import { DialogService, DynamicDialogModule } from 'primeng/dynamicdialog';
-import { InvestorDetailComponent } from './investor/investor-detail/investor-detail.component';
 
-import { InvesorViewImageComponent } from './investor/invesor-view-image/invesor-view-image.component';
-import { TrinhDuyetInvestorComponent } from './investor/trinh-duyet-investor/trinh-duyet-investor.component';
 import { KeyFilterModule } from 'primeng/keyfilter';
-import { ApproveSuperAdminComponent } from './investor/approve-super-admin/approve-super-admin.component';
-import { ApproveTradingProviderComponent } from './investor/approve-trading-provider/approve-trading-provider.component';
-import { InvestorImageComponent } from './investor/investor-image/investor-image.component';
-import { ApproveComponent } from './approve-manager/approve/approve.component';
 import { FormRequestComponent } from './form-request-approve-cancel/form-request/form-request.component';
 import { FormApproveComponent } from './form-request-approve-cancel/form-approve/form-approve.component';
 import { FormCancelComponent } from './form-request-approve-cancel/form-cancel/form-cancel.component';
-import { InvestorApproveComponent } from './investor-approve/investor-approve.component';
-import { InvestorBankComponent } from './investor/investor-bank/investor-bank.component';
-import { InvestorAccountComponent } from './investor/investor-account/investor-account.component';
 import { NotificationTemplateComponent } from './notification/notification-template/notification-template.component';
 import { NotificationManagerComponent } from './notification/notification-manager/notification-manager.component';
 import { AddNotificationTemplateComponent } from './notification/add-notification-template/add-notification-template.component';
-import { InvestorListAccountComponent } from './investor-list-account/investor-list-account.component';
-import { CreateUserComponent } from './investor/create-user/create-user.component';
 import { MarkdownModule } from 'ngx-markdown';
 import { NotificationDetailComponent } from './notification/notification-detail/notification-detail.component';
 import { AddNotificationComponent } from './notification/add-notification/add-notification.component';
 import { AddPersonListComponent } from './notification/add-person-list/add-person-list.component';
-import { KnowledgeBaseComponent } from './broadcast/knowledge-base/knowledge-base.component';
-import { CreateUpdateComponent } from './broadcast/knowledge-base/create-update/create-update.component';
-import { UserResetPasswordComponent } from './investor/user-reset-password/user-reset-password.component';
 import { FormCloseComponent } from './form-request-approve-cancel/form-close/form-close.component';
 import { LoginUrlComponent } from './login-url/login-url.component';
 import { SystemTemplateComponent } from './notification/system-template/system-template.component';
-import { PartnerAccountsComponent } from './partner-manager/partner/partner-accounts/partner-accounts.component';
-import { CreatePartnerAccountComponent } from './partner-manager/partner/partner-accounts/create-partner-account/create-partner-account.component';
-import { InvestorContactAddressComponent } from './investor/investor-contact-address/investor-contact-address.component';
 import { ChatComponent } from './support/chat/chat.component';
-import { InvestorFileComponent } from './investor/investor-file/investor-file.component';
 import { FormSetDisplayColumnComponent } from './form-set-display-column/form-set-display-column.component';
 import { DepartmentComponent } from './department/department.component';
 import { CreateDepartmentComponent } from './department/create-department/create-department.component';
 import { AddSalseDepartmentComponent } from './department/add-salse-department/add-salse-department.component';
 import { AddSalseManagerDepartmentComponent } from './department/add-salse-manager-department/add-salse-manager-department.component';
-import { InvestorDiffComponent } from './investor/investor-diff/investor-diff.component';
-import { SaleTemporaryComponent } from './sale/sale-temporary/sale-temporary.component';
-import { SaleActiveComponent } from './sale/sale-active/sale-active.component';
-import { FormApproveInvestorComponent } from './investor/form-approve-investor/form-approve-investor.component';
-import { CreateSaleComponent } from './sale/sale-temporary/create-sale/create-sale.component';
-import { SaleActiveDetailComponent } from './sale/sale-active/sale-active-detail/sale-active-detail.component';
-import { InvestorFilterComponent } from './sale/sale-temporary/create-sale/investor-filter/investor-filter.component';
-import { SaleTemporaryDetailComponent } from './sale/sale-temporary/sale-temporary-detail/sale-temporary-detail.component';
-import { FormApproveSaleComponent } from './sale/sale-temporary/sale-temporary-detail/form-approve-sale/form-approve-sale.component';
-import { InvestorProfessionalComponent } from './investor/investor-professional/investor-professional.component';
-import { SaleRegisterComponent } from './sale/sale-register/sale-register.component';
-import { CollabContractTemplateComponent } from './sale/collab-contract-template/collab-contract-template.component';
-import { CollabContractComponent } from './sale/sale-active/sale-active-detail/collab-contract/collab-contract.component';
-import { CreatePartnerComponent } from './partner-manager/partner/create-partner/create-partner.component';
-import { InvestorSaleComponent } from './investor/investor-detail/investor-sale/investor-sale.component';
 
 import { DefaultSystemTemplateComponent } from './notification/default-system-template/system-template.component';
 
 import { FormViewPdfFileComponent } from './form-view-pdf-file/form-view-pdf-file.component';
 import { PdfViewerModule } from 'ng2-pdf-viewer';
-import { InvestorReferralComponent } from './investor/investor-detail/investor-referral/investor-referral.component';
 import { FormNotificationComponent } from './form-notification/form-notification.component';
-import { AddInvestorSaleComponent } from './investor/investor-detail/investor-sale/add-investor-sale/add-investor-sale.component';
-import { InvestorSaleFilerComponent } from './investor/investor-detail/investor-sale/add-investor-sale/investor-sale-filer/investor-sale-filer.component';
-import { SaleDirectionalComponent } from './sale/sale-register/sale-directional/sale-directional.component';
 import { ProviderConfigurationComponent } from './notification/provider-configuration/provider-configuration.component';
-import { PaymentManagerComponent } from './payment-manager/payment-manager.component';
-import { DigitalSignComponent } from './notification/digital-sign/digital-sign.component';
 import { OperationalReportComponent } from './export-report/operational-report/operational-report.component';
 import { ManagementReportComponent } from './export-report/management-report/management-report.component';
 import { BusinessReportComponent } from './export-report/business-report/business-report.component';
-import { InvestorRequestPhoneComponent } from './investor/investor-detail/investor-request-phone/investor-request-phone.component';
-import { ApproveEmailPhoneComponent } from './approve-manager/approve-email-phone/approve-email-phone.component';
 import { AddSaleDirectionalComponent } from './department/add-sale-directional/add-sale-directional.component';
-import { InvestorCancelHistoryComponent } from './investor/investor-cancel-history/investor-cancel-history.component';
-import { InvestorStockComponent } from './investor/investor-detail/investor-stock/investor-stock.component';
 import { DateMaskDirective } from './date-mask.directive';
 import { WhileListIpComponent } from './notification/while-list-ip/while-list-ip.component';
 import { CreateWhileListComponent } from './notification/while-list-ip/create-while-list/create-while-list.component';
 import { CreateWhileListDetailComponent } from './notification/while-list-ip/create-while-list/create-while-list-detail/create-while-list-detail.component';
 import { MsbPrefixAccountComponent } from './notification/msb-prefix-account/msb-prefix-account.component';
 import { CreateMsbPrefixAccountComponent } from './notification/msb-prefix-account/create-msb-prefix-account/create-msb-prefix-account.component';
-import { UserAccountComponent } from './app-account/user-account/user-account.component';
-import { NotVerifiedComponent } from './app-account/not-verified/not-verified.component';
 import { SystemReportComponent } from './export-report/system-report/system-report.component';
-import { TradingProviderComponent } from './partner-manager/trading-provider/trading-provider.component';
 import { FilterBusinessCustomerComponent } from './components/filter-business-customer/filter-business-customer.component';
-import { TradingProviderDetailComponent } from './partner-manager/trading-provider/trading-provider-detail/trading-provider-detail.component';
-import { SaleHistoryUpdateComponent } from './sale/sale-active/sale-active-detail/sale-history-update/sale-history-update.component';
-import { ReplaceIdentificationComponent } from './investor/investor-file/replace-identification/replace-identification.component';
+import { ProductManagementComponent } from './product-management/product-management.component';
+import { CreateProductComponent } from './product-management/create-product/create-product.component';
+import { DistributionService } from '@shared/services/distribution.service';
+import { CreateProductDetailComponent } from './product-management/create-product/create-product-detail/create-product-detail.component';
 
 
 FullCalendarModule.registerPlugins([
@@ -383,102 +327,46 @@ FullCalendarModule.registerPlugins([
         FileDemoComponent,
         HomeComponent,
         UserComponent,
-        InvestorComponent,
-        CreateInvestorEkycComponent,
-        BroadcastNewsComponent,
-        AddNewsComponent,
-        MediaComponent,
         UploadImageComponent,
-        AddMediaComponent,
-        InvestorDetailComponent,
-        InvesorViewImageComponent,
-        TrinhDuyetInvestorComponent,
-        ApproveSuperAdminComponent,
-        ApproveTradingProviderComponent,
-        InvestorImageComponent,
-        ApproveComponent,
         FormRequestComponent,
         FormApproveComponent,
         FormCancelComponent,
-        InvestorApproveComponent,
-        InvestorBankComponent,
-        InvestorAccountComponent,
         NotificationTemplateComponent,
         NotificationManagerComponent,
         AddNotificationTemplateComponent,
-        InvestorListAccountComponent,
-        CreateUserComponent,
         NotificationDetailComponent,
         AddNotificationComponent,
         AddPersonListComponent,
-        KnowledgeBaseComponent,
-        CreateUpdateComponent,
-        UserResetPasswordComponent,
         FormCloseComponent,
         LoginUrlComponent,
         SystemTemplateComponent,
         DefaultSystemTemplateComponent,
-        InvestorContactAddressComponent,
         ChatComponent,
-        InvestorFileComponent,
         FormSetDisplayColumnComponent,
         DepartmentComponent,
         CreateDepartmentComponent,
         AddSalseDepartmentComponent,
         AddSalseManagerDepartmentComponent,
-        InvestorDiffComponent,
-        SaleTemporaryComponent,
-        SaleActiveComponent,
-        FormApproveInvestorComponent,
-        CreateSaleComponent,
-        SaleTemporaryDetailComponent,
-        SaleActiveDetailComponent,
-        InvestorFilterComponent,
-        FormApproveSaleComponent,
-        CollabContractTemplateComponent,
-        CollabContractComponent,
-        InvestorProfessionalComponent,
-        SaleRegisterComponent,
-        PartnerComponent,
-        CreatePartnerComponent,
-        PartnerDetailComponent,
-        PartnerAccountsComponent,
-        CreatePartnerAccountComponent,
-        InvestorSaleComponent,
         FormViewPdfFileComponent,
-        InvestorReferralComponent,
         FormNotificationComponent,
-        AddInvestorSaleComponent,
-        InvestorSaleFilerComponent,
-        SaleDirectionalComponent,
         ProviderConfigurationComponent,
-        PaymentManagerComponent,
-        DigitalSignComponent,
         OperationalReportComponent,
         ManagementReportComponent,
         BusinessReportComponent,
         SystemReportComponent,
-        InvestorRequestPhoneComponent,
-        ApproveEmailPhoneComponent,
         AddSaleDirectionalComponent,
-        InvestorCancelHistoryComponent,
-        InvestorStockComponent,
         DateMaskDirective,
         WhileListIpComponent,
         CreateWhileListComponent,
         CreateWhileListDetailComponent,
         MsbPrefixAccountComponent,
         CreateMsbPrefixAccountComponent,
-        UserAccountComponent,
-        NotVerifiedComponent,
-        TradingProviderComponent,
         FilterBusinessCustomerComponent,
-        TradingProviderDetailComponent,
-        SaleHistoryUpdateComponent,
-        ReplaceIdentificationComponent,
+        ProductManagementComponent,
+        CreateProductComponent,
+        CreateProductDetailComponent
     ],
     entryComponents: [
-        AddNewsComponent,
         UploadImageComponent,
     ],
     providers: [
@@ -494,7 +382,8 @@ FullCalendarModule.registerPlugins([
         BreadcrumbService,
         ConfigService,
         OrderService,
-        DialogService
+        DialogService,
+        DistributionService
     ],
     bootstrap: [AppComponent]
 })

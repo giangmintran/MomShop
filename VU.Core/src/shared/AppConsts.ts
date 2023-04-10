@@ -1,5 +1,6 @@
 
 export class AppConsts {
+    static readonly messageError = "Có lỗi xảy ra. Vui lòng thử lại sau ít phút!";
     static remoteServiceBaseUrl: string;
     static nodeBaseUrl: string;
     static rocketchatUrl: string;
@@ -39,6 +40,349 @@ export class AppConsts {
         setToken: 'setToken',
         doNothing: 'doNothing',
     }
+}
+
+export class MessageErrorConst {
+
+    public static message = {
+        Error: "ACTIVE",
+        Validate: "Vui lòng nhập đủ thông tin cho các trường có dấu (*)",
+        DataNotFound: "Không tìm thấy dữ liệu!"
+    }
+    
+}
+export class PolicyTempConst {
+    //
+    public static garnerType = [
+        {
+            name: 'Không chọn kỳ hạn',
+            code: 1,
+        },
+        // {
+        //     name: 'Chọn kỳ hạn',
+        //     code: 2,
+        // },
+        
+    ];
+
+    public static GARNERTYPE_KC_KY_HAN = 1;
+    public static GARNERTYPE_C_KY_HAN = 2;
+
+    public static withdrawFeeType = [
+        {
+            name: 'Theo năm',
+            code: 2,
+        },
+        {
+            name: 'Số tiền',
+            code: 1,
+        },
+    ];
+
+    public static investorType = [
+        {
+            name: 'Tất cả',
+            code: 'A',
+        },
+        {
+            name: 'Chuyên nghiệp',
+            code: 'P',
+        },
+    ];
+
+    public static renewalsTypes = [
+        {
+            name: "Tạo hợp đồng mới",
+            code: 1,
+        },
+        {
+            name: "Giữ hợp đồng cũ",
+            code: 2,
+        }
+    ]
+    //
+    public static interestType = [
+        {
+            name: 'Cuối kỳ',
+            code: 2,
+        },
+        {
+            name: 'Định kỳ',
+            code: 1,
+        },
+        {
+            name: 'Ngày cố định',
+            code: 3,
+        },
+        {
+            name: 'Ngày đầu tiên của tháng',
+            code: 4,
+        },
+        {
+            name: 'Ngày cuối cùng của tháng',
+            code: 5,
+        },
+    ];
+    //
+    public static INTEREST_TYPE_DINH_KY = 1;
+    public static INTEREST_TYPE_CUOI_KY = 2;
+    public static INTEREST_TYPE_NGAY_CO_DINH = 3;
+    public static INTEREST_TYPE_NGAY_DAU_THANG = 4;
+    public static INTEREST_TYPE_NGAY_CUOI_THANG = 5;
+
+    public static orderOfWithdrawal = [
+        {
+            name: 'Mới nhất - Cũ nhất',
+            code: 1,
+        },
+        {
+            name: 'Cũ nhất - Mới nhất',
+            code: 2,
+        },
+        {
+            name: 'HĐ có giá trị gần nhất giá trị rút',
+            code: 3,
+        },
+    ];
+    //
+    public static classify = [
+       
+        {
+            name: 'Hợp tác',
+            code: 1,
+        },
+        {
+            name: 'Mua bán',
+            code: 2,
+        },
+    ];
+
+    public static calculateType = [
+        {
+            name: 'Gross',
+            code: 2,
+        },
+        {
+            name: 'Net',
+            code: 1,
+        },
+        
+    ];
+
+    public static exitFeeType = [
+        {
+            name: 'Theo số tiền',
+            code: 1,
+        },
+        {
+            name: 'Theo năm',
+            code: 2,
+        }
+    ];
+
+    public static sortOrder = [
+        {
+            name: 'Kỳ hạn ngắn - Kỳ hạn dài',
+            code: 1,
+        },
+        {
+            name: 'Kỳ hạn dài - Kỳ hạn ngắn',
+            code: 2,
+        }
+    ];
+    
+
+    // Danh sách ngày chi trả cố định
+    public static getListRepeatFixedDate() {
+        let listRepeatFixedDate = [];
+        for (let i = 1; i < 29; i++) {
+            listRepeatFixedDate.push({
+              name: `Ngày ${i} hàng tháng`,
+              code: i,
+            });
+        }
+        return listRepeatFixedDate;
+    }
+
+    public static REPEAT_FIXED_DATE_DEFAULT = 1;
+
+    public static TYPE_CHI_TRA_CO_DINH_THEO_NGAY = 4;
+    //
+    public static CLASSIFY_FLEX = 1;
+    public static CLASSIFY_FLASH = 2;
+    public static CLASSIFY_FIX = 3;
+
+    //
+    public static POLICY_DETAIL_TAB = 0;
+    public static CONTRACT_TAB = 1;
+
+    public static getsortOrderName(code) {
+        let type = this.sortOrder.find(type => type.code == code);
+        if (type) return type.name;
+        return '';
+    }
+
+    public static getNameClassify(code) {
+        let type = this.classify.find(type => type.code == code);
+        if (type) return type.name;
+        return '';
+    }
+    //
+    public static getInterestType(code, atribution = 'name') {
+        let type = this.interestType.find(type => type.code == code);
+        return type ? type[atribution] : null;
+    }
+
+    public static getInvestorType(code, atribution = 'name') {
+        let type = this.investorType.find(type => type.code == code);
+        return type ? type[atribution] : null;
+    }
+}
+
+export class PolicyDetailTemplateConst {
+    public static interestPeriodType = [
+        {
+            name: 'Ngày',
+            code: 'D'
+        },
+        // {
+        //     name: 'Tuần',
+        //     code: 'W'
+        // },
+        {
+            name: 'Tháng',
+            code: 'M'
+        },
+        {
+            name: 'Năm',
+            code: 'Y'
+        }
+    ];
+    public static interestPeriodTypeQuarter = [
+        {
+            name: 'Tháng',
+            code: 'M'
+        },
+        {
+            name: 'Quý',
+            code: 'Q'
+        }
+    ];
+
+    public static typePolicyContractTemplate = [
+        {
+            name: 'Dành cho nhà đầu tư cá nhân',
+            code: 'I'
+        },
+        {
+            name: 'Dành cho nhà đầu tư doanh nghiệp',
+            code: 'B'
+        }
+    ];
+
+    public static displayTypePolicyContractTemplate = [
+        {
+            name: 'Hiện thị trước khi hợp đồng được duyệt',
+            code: 'B'
+        },
+        {
+            name: 'Hiện thị sau khi hợp đồng được duyệt',
+            code: 'A'
+        }
+    ];
+
+    public static contractTypePolicyContractTemplate = [
+        {
+            name: 'Hồ sơ đặt lệnh',
+            code: 1
+        },
+        {
+            name: 'Hồ sơ rút tiền',
+            code: 2
+        }
+    ];
+
+
+
+    public static interestType = [
+        {
+            name: 'Định kỳ',
+            code: 1,
+        },
+        {
+            name: 'Cuối kỳ',
+            code: 2,
+        }
+    ];
+
+    public static INTEREST_RATE_TYPE_PERIODIC = 1;
+    public static INTEREST_RATE_TYPE_PERIOD_END = 2;
+
+    public static INTEREST_PERIOD_TYPE_MONTH = 'M';
+    public static INTEREST_PERIOD_TYPE_YEAR = 'Y';
+
+    public static KICH_HOAT = 'A';
+    public static KHOA = 'D';
+
+    public static status = [
+        {
+            name: "Kích hoạt",
+            code: "A",
+            severity: 'success'
+        },
+        {
+            name: "Khóa",
+            code: "D",
+            severity: 'secondary'
+        }
+    ];
+
+    public static getSeverityStatus(code) {
+        const status = this.status.find(p => p.code == code);
+        return status ? status.severity : '-';
+    }
+
+    public static getNameStatus(code) {
+        let type = this.status.find(type => type.code == code);
+        if (type) return type.name;
+        return '';
+    }
+
+    public static getNameInterestPeriodType(code) {
+        let type = this.interestPeriodType.find(type => type.code == code);
+        if (type) return type.name;
+        return '';
+    }
+    public static getNameInterestPeriodTypeQuarter(code) {
+        let type = this.interestPeriodTypeQuarter.find(type => type.code == code);
+        if (type) return type.name;
+        return '';
+    }
+
+    public static getNameInterestType(code) {
+        let type = this.interestType.find(type => type.code == code);
+        if (type) return type.name;
+        return '';
+    }
+
+    public static getNameTypePolicyContractTemplate(code) {
+        let type = this.typePolicyContractTemplate.find(type => type.code == code);
+        if (type) return type.name;
+        return '';
+    }
+
+    public static getNameDisplayTypePolicyContractTemplate(code) {
+        let type = this.displayTypePolicyContractTemplate.find(type => type.code == code);
+        if (type) return type.name;
+        return '';
+    }
+
+    public static getNameContractTypePolicyContractTemplate(code) {
+        let type = this.contractTypePolicyContractTemplate.find(type => type.code == code);
+        if (type) return type.name;
+        return '';
+    }
+
 }
 
 export class PermissionCoreConst {
@@ -2914,8 +3258,16 @@ export class MediaConst {
             code: 2
         },
         {
-            name: 'Quần',
+            name: 'Áo Khoác',
             code: 3
+        },
+        {
+            name: 'Quần',
+            code: 4
+        },
+        {
+            name: 'Phụ Kiến',
+            code: 5
         },
     ]
 
@@ -3310,7 +3662,107 @@ export class FormNotificationConst{
 export class PathConst{
     public static AVATAR_GENNERAL_DEFAULT = "assets/layout/images/image-bg-default.png";
 }
+export class DistributionConst {
 
+    public static KHOI_TAO = 1;
+    public static CHO_DUYET = 2;
+    public static HOAT_DONG = 3;
+    public static CANCEL = 4
+    public static CLOSED = '';
+
+    public static statusConst = [
+        {
+            name: 'Khởi tạo',
+            code: this.KHOI_TAO,
+            severity: 'help',
+        },
+        {
+            name: 'Trình duyệt',
+            code: this.CHO_DUYET,
+            severity: 'warning',
+        },
+        {
+            name: 'Hoạt động',
+            code: this.HOAT_DONG,
+            severity: 'success',
+        },
+        {
+            name: 'Hủy duyệt',
+            code: this.CANCEL,
+            severity: 'danger',
+        },
+        {
+            name: 'Đóng',
+            code: this.CLOSED,
+            severity: 'secondary'
+        },
+    ];
+
+    public static countTypeList = [
+        {
+            name: 'Tính từ ngày phát hành',
+            code: 1,
+            severity: 'help',
+        },
+        {
+            name: 'Tính từ ngày thanh toán',
+            code: 2,
+            severity: 'warning',
+        },
+        
+    ]
+
+    public static getCountTypeName(code) {
+        for (let item of this.countTypeList) {
+            if (item.code == code) return item.name;
+        }
+        return '';
+    }
+
+    public static getStatusName(code, isClose) {
+        if (isClose) {
+            return 'Đóng';
+        }
+        let status = this.statusConst.find(status => status.code == code);
+        if (status) return status.name;
+        return '';
+    }
+
+    public static getStatusSeverity(code, isClose) {
+        if (isClose) {
+            return 'secondary';
+        }
+        let status = this.statusConst.find(status => status.code == code);
+        if (status) return status.severity;
+        return '';
+    }
+    public static getNameStatus(code) {
+        let type = this.statusConst.find(type => type.code == code);
+        if (type) return type.name;
+        return '';
+    }
+
+    public static fields = [
+        {
+            code: '1',
+            name: 'Thêm mới'
+        },
+        {
+            code: '2',
+            name: 'Cập nhật'
+        },
+        {
+            code: '3',
+            name: 'Xóa'
+        },
+    ]
+
+    public static getNameField(code){
+        let field = this.fields.find(f => f.code == code);
+        return field.name ?? "";
+    }
+    
+}
 
 export class PaymentManagerConst {
     public static statusName = {

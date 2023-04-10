@@ -45,25 +45,6 @@ namespace MOMShop.Controllers
             var fex = ex as FaultException;
             if (fex != null)
             {
-                if (int.Parse(fex.Code.Name) <= 1000)
-                {
-                    try
-                    {
-                        //if (claims != null)
-                        //{
-                        //    errStr += $"claims = {JsonSerializer.Serialize(claims.Claims.ToList())}";
-                        //}
-                    }
-                    catch (Exception exClaim)
-                    {
-                        throw new Exception($"Lỗi HttpContext.User.Identity as ClaimsIdentity, {exClaim.GetType()}: Message = {exClaim.Message}");
-                    }
-
-                }
-                else
-                {
-                    throw new Exception($"{ex.GetType()}: {errStr}, Message = {ex.Message}");
-                }
                 return new APIResponse(null, int.Parse(fex.Code.Name), fex.Message,1);
             }
 

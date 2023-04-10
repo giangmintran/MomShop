@@ -78,7 +78,7 @@ export class AppMenuComponent extends AppComponentBase {
             // },
             // {label: 'Table Demo', icon: 'pi pi-fw pi-table', routerLink: ['/uikit/table']},   
             {
-                label: 'Quản lý sản phẩm', icon: 'pi pi-box', routerLink: ['/broadcast'], isShow: true,
+                label: 'Quản lý sản phẩm', icon: 'pi pi-box', routerLink: ['/product'], isShow: true,
                 // items: [
                 //     { label: 'Tin tức', icon: '', routerLink: ['broadcast/broadcast-news'], isShow: this.isPermission(PermissionCoreConst.CoreMenu_TinTuc) },
                 //     { label: 'Hình ảnh', icon: '', routerLink: ['broadcast/broadcast-media'], isShow: this.isPermission(PermissionCoreConst.CoreMenu_HinhAnh) },

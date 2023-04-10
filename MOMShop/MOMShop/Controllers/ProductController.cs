@@ -1,7 +1,9 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using MOMShop.Dto.Product;
+using MOMShop.Dto.ProductDetail;
 using MOMShop.Entites;
 using MOMShop.Services.Interfaces;
+using MOMShop.Utils;
 using System;
 using System.Collections.Generic;
 
@@ -9,7 +11,7 @@ namespace MOMShop.Controllers
 {
     [Route("api/product")]
     [ApiController]
-    public class ProductController : ControllerBase
+    public class ProductController : BaseController
     {
         private IProductServices _services;
         public ProductController(IProductServices services)
@@ -18,72 +20,129 @@ namespace MOMShop.Controllers
         }
 
         [HttpGet("find-all")]
-        public List<Product> GetProducts()
+        public APIResponse GetProducts([FromQuery] FilterProductDto input)
         {
             try
             {
-                var result = _services.GetProducts();
-                return result;
+                var result = _services.GetProducts(input);
+                return new APIResponse(result, 200, "OK", 1);
             }
             catch (Exception ex)
             {
-                throw new Exception(ex.Message);
+                return OkException(ex);
             }
         }
 
         [HttpPost("add")]
-        public Product AddProducts([FromBody] UpdateProductDto input)
+        public APIResponse AddProducts([FromBody] UpdateProductDto input)
         {
             try
             {
                 var result = _services.AddProducts(input);
-                return result;
+                return new APIResponse(result, 200, "OK", 1);
             }
             catch (Exception ex)
             {
-                throw new Exception(ex.Message);
+                return OkException(ex);
+            }
+        }
+
+        [HttpPost("add-detail")]
+        public APIResponse AddProductDetails([FromBody] ProductDetailDto input)
+        {
+            try
+            {
+                var result = _services.AddProductDetail(input);
+                return new APIResponse(result, 200, "OK", 1);
+            }
+            catch (Exception ex)
+            {
+                return OkException(ex);
             }
         }
 
         [HttpPut("update")]
-        public Product UpdateProducts([FromBody] UpdateProductDto input)
+        public APIResponse UpdateProducts([FromBody] UpdateProductDto input)
         {
             try
             {
                 var result = _services.UpdateProducts(input);
-                return result;
+                return new APIResponse(result, 200, "OK", 1);
             }
             catch (Exception ex)
             {
-                throw new Exception(ex.Message);
+                return OkException(ex);
+            }
+        }
+
+        [HttpPut("update-detail")]
+        public APIResponse UpdateProductDetails([FromBody] ProductDetailDto input)
+        {
+            try
+            {
+                var result = _services.UpdateProductDetail(input);
+                return new APIResponse(result, 200, "OK", 1);
+            }
+            catch (Exception ex)
+            {
+                return OkException(ex);
             }
         }
 
         [HttpDelete("delete/{id}")]
-        public void DeleteProduct(int id)
+        public APIResponse DeleteProduct(int id)
         {
             try
             {
                 _services.DeleteProducts(id);
-                //return "OK";
+                return new APIResponse(null, 200, "OK", 1);
             }
             catch (Exception ex)
             {
-                throw new Exception(ex.Message);
+                return OkException(ex);
             }
         }
 
-        [HttpGet("detail/{id}")]
-        public Product FindById(int id)
+        [HttpDelete("delete-detail/{id}")]
+        public APIResponse DeleteProducDetailt(int id)
+        {
+            try
+            {
+                _services.DeleteProductDetail(id);
+                return new APIResponse(null, 200, "OK", 1);
+            }
+            catch (Exception ex)
+            {
+                return OkException(ex);
+            }
+        }
+
+
+        [HttpGet("find-by-id/{id}")]
+        public APIResponse FindById(int id)
         {
             try
             {
                 var result = _services.FindById(id);
-                return result;
+                return new APIResponse(result, 200, "OK", 1);
             }
             catch (Exception ex)
             {
-                throw new Exception(ex.Message);
+                return OkException(ex);
+            }
+        }
+
+        [HttpGet("product-detail/{id}")]
+        public APIResponse FindDetailById(int id)
+        {
+            try
+            {
+                var result = _services.FindDetailById(id);
+                return new APIResponse(result, 200, "OK", 1);
+            }
+            catch (Exception ex)
+            {
+                return OkException(ex);
             }
         }
     }

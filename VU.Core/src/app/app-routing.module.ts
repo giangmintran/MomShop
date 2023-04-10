@@ -7,45 +7,23 @@ import { HomeComponent } from "./home/home.component";
 import { UserComponent } from "./user/user.component";
 import { AppRouteGuard } from "@shared/auth/auth-route-guard";
 
-import { PartnerComponent } from "./partner-manager/partner/partner.component";
-import { PartnerDetailComponent } from "./partner-manager/partner/partner-detail/partner-detail.component";
-import { InvestorComponent } from "./investor/investor.component";
-import { BroadcastNewsComponent } from "./broadcast/news/broadcast-news.component";
-import { MediaComponent } from "./broadcast/media/media.component";
 
-import { InvestorDetailComponent } from "./investor/investor-detail/investor-detail.component";
-import { ApproveComponent } from "./approve-manager/approve/approve.component";
-import { InvestorApproveComponent } from "./investor-approve/investor-approve.component";
 import { NotificationTemplateComponent } from "./notification/notification-template/notification-template.component";
 import { NotificationManagerComponent } from "./notification/notification-manager/notification-manager.component";
-import { InvestorListAccountComponent } from "./investor-list-account/investor-list-account.component";
 import { NotificationDetailComponent } from "./notification/notification-detail/notification-detail.component";
-import { KnowledgeBaseComponent } from "./broadcast/knowledge-base/knowledge-base.component";
 import { SystemTemplateComponent } from './notification/system-template/system-template.component';
 import { ChatComponent } from './support/chat/chat.component';
-import { SaleTemporaryComponent } from './sale/sale-temporary/sale-temporary.component';
-import { SaleTemporaryDetailComponent } from './sale/sale-temporary/sale-temporary-detail/sale-temporary-detail.component';
-import { SaleActiveComponent } from './sale/sale-active/sale-active.component';
-import { SaleActiveDetailComponent } from './sale/sale-active/sale-active-detail/sale-active-detail.component';
-import { CollabContractTemplateComponent } from './sale/collab-contract-template/collab-contract-template.component';
-import { CollabContractComponent } from './sale/sale-active/sale-active-detail/collab-contract/collab-contract.component';	
-import { SaleRegisterComponent } from './sale/sale-register/sale-register.component';
+
 import { DefaultSystemTemplateComponent } from './notification/default-system-template/system-template.component';
 import { PermissionCoreConst } from '@shared/AppConsts';
 import { ProviderConfigurationComponent } from './notification/provider-configuration/provider-configuration.component';
-import { PaymentManagerComponent } from './payment-manager/payment-manager.component';
-import { DigitalSignComponent } from './notification/digital-sign/digital-sign.component';
 import { ManagementReportComponent } from './export-report/management-report/management-report.component';
 import { OperationalReportComponent } from './export-report/operational-report/operational-report.component';
 import { BusinessReportComponent } from './export-report/business-report/business-report.component';
-import { ApproveEmailPhoneComponent } from './approve-manager/approve-email-phone/approve-email-phone.component';
 import { WhileListIpComponent } from './notification/while-list-ip/while-list-ip.component';
 import { SystemReportComponent } from './export-report/system-report/system-report.component';
 import { MsbPrefixAccountComponent } from './notification/msb-prefix-account/msb-prefix-account.component';
-import { UserAccountComponent } from './app-account/user-account/user-account.component';
-import { NotVerifiedComponent } from './app-account/not-verified/not-verified.component';
-import { TradingProviderComponent } from './partner-manager/trading-provider/trading-provider.component';
-import { TradingProviderDetailComponent } from './partner-manager/trading-provider/trading-provider-detail/trading-provider-detail.component';
+import { ProductManagementComponent } from './product-management/product-management.component';
 
 @NgModule({
 	imports: [
@@ -57,130 +35,101 @@ import { TradingProviderDetailComponent } from './partner-manager/trading-provid
 					{ path: "login/url/:accessToken/:refreshToken", component: LoginUrlComponent},
 					{ path: "home", component: HomeComponent, canActivate: [AppRouteGuard] },
 					{ path: "user", component: UserComponent, canActivate: [AppRouteGuard] },
-					{ path: "investor-account", component: InvestorListAccountComponent, data: {permissions: [PermissionCoreConst.CorePageInvestorAccount]}, canActivate: [AppRouteGuard] },
+					// {
+					// 	path: "app-account",
+					// 	children: [
+					// 		{
+					// 			path: "user-account",
+					// 			component: InvestorListAccountComponent,
+					// 			canActivate: [AppRouteGuard],
+					// 		},
+					// 		{
+					// 			path: "not-verified",
+					// 			component: NotVerifiedComponent,
+					// 			canActivate: [AppRouteGuard],
+					// 		},
+					// 	],
+					// },
+					// {
+					// 	path: 'customer',
+					// 	children: [
+					// 		{ path: 'investor', component: InvestorComponent, data: {permissions: [PermissionCoreConst.CoreMenuKHCN]}, canActivate: [AppRouteGuard] },
+					// 		{ path: 'investor/approve', component: InvestorApproveComponent, data: {permissions: [PermissionCoreConst.CoreMenuDuyetKHCN]}, canActivate: [AppRouteGuard] },
+					// 		{
+					// 			path: 'investor/:id/temp/:isTemp',
+					// 			data: {permissions: [PermissionCoreConst.CoreDuyetKHCN_ThongTinKhachHang, PermissionCoreConst.CoreKHCN_ThongTinKhachHang]},
+					// 			component: InvestorDetailComponent,
+					// 			canActivate: [AppRouteGuard], 
+					// 		},
+					// 		{
+					// 			path: 'investor/:id/temp/:isTemp/:isApprove',
+					// 			data: {permissions: [PermissionCoreConst.CoreQLPD_KHCN_ThongTinChiTiet]},
+					// 			component: InvestorDetailComponent,
+					// 			canActivate: [AppRouteGuard], 
+					// 		},
+					// 	],
+					// },
+					// {
+					// 	path: "partner-manager",
+					// 	children: [
+					// 		{ 
+					// 			path: 'partner',
+					// 			data: {permissions: [PermissionCoreConst.CoreMenu_DoiTac]}, 
+					// 			component: PartnerComponent, 
+					// 			canActivate: [AppRouteGuard] 
+					// 		},
+					// 		{
+					// 			path: "partner/detail/:id",
+					// 			data: {permissions: [PermissionCoreConst.CoreDoiTac_ThongTinChiTiet]}, 
+					// 			component: PartnerDetailComponent,
+					// 			canActivate: [AppRouteGuard],
+					// 		},
+					// 		{ 
+					// 			path: 'trading-provider',
+					// 			data: {permissions: [PermissionCoreConst.CoreMenu_DaiLy]}, 
+					// 			component: TradingProviderComponent, 
+					// 			canActivate: [AppRouteGuard] 
+					// 		},
+					// 		{
+					// 			path: "trading-provider/detail/:id",
+					// 			data: {permissions: [PermissionCoreConst.CoreDaiLy_ThongTinChiTiet]}, 
+					// 			component: TradingProviderDetailComponent,
+					// 			canActivate: [AppRouteGuard],
+					// 		}
+					// 	],
+					// },
+					// {
+					// 	path: "sale-manager",
+					// },
+					// {
+					// 	path: "approve-manager",
+					// 	children: [
+					// 		{ 
+					// 			path: 'approve/:dataType', 
+					// 			data: {permissions: [
+					// 					PermissionCoreConst.CoreQLPD_KHCN_DanhSach, 
+					// 					PermissionCoreConst.CoreQLPD_KHDN_DanhSach, 
+					// 					PermissionCoreConst.CoreQLPD_NDTCN_DanhSach, 
+					// 					PermissionCoreConst.CoreQLPD_Sale_DanhSach
+					// 				]
+					// 			}, 
+					// 			component: ApproveComponent, 
+					// 			canActivate: [AppRouteGuard] 
+					// 		},
+					// 		{ 
+					// 			path: 'approve-email-phone/:dataType', 
+					// 			data: {permissions: [
+					// 					PermissionCoreConst.CoreQLPD_Email_DanhSach, 
+					// 					PermissionCoreConst.CoreQLPD_Phone_DanhSach, 
+					// 				]
+					// 			}, 
+					// 			component: ApproveEmailPhoneComponent, 
+					// 			canActivate: [AppRouteGuard] 
+					// 		},
+					// 	],
+					// },
 					{
-						path: "app-account",
-						children: [
-							{
-								path: "user-account",
-								component: InvestorListAccountComponent,
-								canActivate: [AppRouteGuard],
-							},
-							{
-								path: "not-verified",
-								component: NotVerifiedComponent,
-								canActivate: [AppRouteGuard],
-							},
-						],
-					},
-					{
-						path: 'customer',
-						children: [
-							{ path: 'investor', component: InvestorComponent, data: {permissions: [PermissionCoreConst.CoreMenuKHCN]}, canActivate: [AppRouteGuard] },
-							{ path: 'investor/approve', component: InvestorApproveComponent, data: {permissions: [PermissionCoreConst.CoreMenuDuyetKHCN]}, canActivate: [AppRouteGuard] },
-							{
-								path: 'investor/:id/temp/:isTemp',
-								data: {permissions: [PermissionCoreConst.CoreDuyetKHCN_ThongTinKhachHang, PermissionCoreConst.CoreKHCN_ThongTinKhachHang]},
-								component: InvestorDetailComponent,
-								canActivate: [AppRouteGuard], 
-							},
-							{
-								path: 'investor/:id/temp/:isTemp/:isApprove',
-								data: {permissions: [PermissionCoreConst.CoreQLPD_KHCN_ThongTinChiTiet]},
-								component: InvestorDetailComponent,
-								canActivate: [AppRouteGuard], 
-							},
-						],
-					},
-					{
-						path: "partner-manager",
-						children: [
-							{ 
-								path: 'partner',
-								data: {permissions: [PermissionCoreConst.CoreMenu_DoiTac]}, 
-								component: PartnerComponent, 
-								canActivate: [AppRouteGuard] 
-							},
-							{
-								path: "partner/detail/:id",
-								data: {permissions: [PermissionCoreConst.CoreDoiTac_ThongTinChiTiet]}, 
-								component: PartnerDetailComponent,
-								canActivate: [AppRouteGuard],
-							},
-							{ 
-								path: 'trading-provider',
-								data: {permissions: [PermissionCoreConst.CoreMenu_DaiLy]}, 
-								component: TradingProviderComponent, 
-								canActivate: [AppRouteGuard] 
-							},
-							{
-								path: "trading-provider/detail/:id",
-								data: {permissions: [PermissionCoreConst.CoreDaiLy_ThongTinChiTiet]}, 
-								component: TradingProviderDetailComponent,
-								canActivate: [AppRouteGuard],
-							}
-						],
-					},
-					{
-						path: "sale-manager",
-						children: [
-							{ path: 'sale-active', component: SaleActiveComponent, data: {permissions: [PermissionCoreConst.CoreMenuSaleActive]}, canActivate: [AppRouteGuard] },
-							{ path: "sale-active/detail/:id", component: SaleActiveDetailComponent, data: {permissions: [PermissionCoreConst.CoreSaleActive_ThongTinSale]}, canActivate: [AppRouteGuard] },
-							{ path: 'sale-temporary', component: SaleTemporaryComponent, data: {permissions: [PermissionCoreConst.CoreMenuDuyetSale]}, canActivate: [AppRouteGuard] },
-							{ path: "sale-temporary/detail/:id", component: SaleTemporaryDetailComponent, data: {permissions: [PermissionCoreConst.CoreDuyetSale_ThongTinSale]}, canActivate: [AppRouteGuard] },
-							{ path: "sale-register", component: SaleRegisterComponent, data: {permissions: [PermissionCoreConst.CoreMenuSaleApp]}, canActivate: [AppRouteGuard] },
-							{ path: "collab-contract-template", component: CollabContractTemplateComponent, data: {permissions: [PermissionCoreConst.CoreMenu_HDCT_Template]}, canActivate: [AppRouteGuard]},
-						],
-					},
-					{
-						path: "approve-manager",
-						children: [
-							{ 
-								path: 'approve/:dataType', 
-								data: {permissions: [
-										PermissionCoreConst.CoreQLPD_KHCN_DanhSach, 
-										PermissionCoreConst.CoreQLPD_KHDN_DanhSach, 
-										PermissionCoreConst.CoreQLPD_NDTCN_DanhSach, 
-										PermissionCoreConst.CoreQLPD_Sale_DanhSach
-									]
-								}, 
-								component: ApproveComponent, 
-								canActivate: [AppRouteGuard] 
-							},
-							{ 
-								path: 'approve-email-phone/:dataType', 
-								data: {permissions: [
-										PermissionCoreConst.CoreQLPD_Email_DanhSach, 
-										PermissionCoreConst.CoreQLPD_Phone_DanhSach, 
-									]
-								}, 
-								component: ApproveEmailPhoneComponent, 
-								canActivate: [AppRouteGuard] 
-							},
-						],
-					},
-					{
-						path: "broadcast", component: BroadcastNewsComponent,
-						children: [
-							{
-								path: "broadcast-news",
-								data: {permissions: [PermissionCoreConst.CoreMenu_TinTuc]}, 
-								component: BroadcastNewsComponent,
-								canActivate: [AppRouteGuard],
-							},
-							{
-								path: "broadcast-media",
-								data: {permissions: [PermissionCoreConst.CoreMenu_HinhAnh]}, 
-								component: MediaComponent,
-								canActivate: [AppRouteGuard],
-							},
-							{
-								path: "knowledge-base",
-								data: {permissions: [PermissionCoreConst.CoreMenu_KienThucDauTu]}, 
-								component: KnowledgeBaseComponent,
-								canActivate: [AppRouteGuard],
-							}
-						],
+						path: "product", component: ProductManagementComponent
 					},
 					{
 						path: "notification",
@@ -265,7 +214,6 @@ import { TradingProviderDetailComponent } from './partner-manager/trading-provid
 							{
 								path: "digital-sign",
 								data: {permissions: [PermissionCoreConst.CoreMenu_CauHinhCKS]}, 
-								component: DigitalSignComponent,
 								canActivate: [AppRouteGuard],
 							}, 
 							{
@@ -301,14 +249,7 @@ import { TradingProviderDetailComponent } from './partner-manager/trading-provid
 					{	
 						path: "collab-contract", 
 						data: {permissions: [PermissionCoreConst.CoreSaleActive_HDCT]}, 
-						component: CollabContractComponent, 
 						canActivate: [AppRouteGuard]
-					},
-					{
-						path: "payment-manager",
-						// data: {permissions: [PermissionCoreConst.CoreMenu_PhongBan]}, 
-						component: PaymentManagerComponent,
-						canActivate: [AppRouteGuard],
 					},
 					
 					{ 
