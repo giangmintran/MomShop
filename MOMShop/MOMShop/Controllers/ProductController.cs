@@ -73,6 +73,7 @@ namespace MOMShop.Controllers
             }
         }
 
+
         [HttpGet("detail/{id}")]
         public Product FindById(int id)
         {

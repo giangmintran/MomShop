@@ -22,4 +22,7 @@ export class ProductService {
         .post(this.baseUrl + 'add', product);
     }
   }
+  detailProduct(id:number) {
+    return this.http.get(this.baseUrl + 'detail/' + id);
+  }
 }
