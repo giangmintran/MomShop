@@ -43,7 +43,7 @@ export class CreateOrEditUserComponent {
   save() {
     this.productServices.createOrEdit(this.product).subscribe(()=>{
       this.active = false;
-      this.toastr.success('Thêm thành công','Thông báo');
+      this.toastr.success('Thêm thành công','Thông báo',{timeOut: 1000});
       this.modalSave.emit(null);
       this.close();
     });

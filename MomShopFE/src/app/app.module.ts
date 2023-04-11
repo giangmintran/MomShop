@@ -43,8 +43,7 @@ import { AppAdminMenuComponent } from './app-admin-view/app-admin-menu/app-admin
     DropdownModule,
     SharedModule,
     ToastrModule.forRoot({
-      timeOut: 2000,
-      positionClass :'toast-top-right'
+      positionClass :'toast-top-right',
     })
     //BsModalService,
     //ModalModule

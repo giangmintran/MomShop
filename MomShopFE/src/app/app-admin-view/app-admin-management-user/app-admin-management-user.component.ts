@@ -4,6 +4,7 @@ import { CreateOrEditUserComponent } from './create-or-edit-user/create-or-edit-
 import { Product } from 'src/models/product';
 import { ProductService } from 'src/services/product.service';
 import { ToastrService } from 'ngx-toastr';
+import { timeout } from 'rxjs';
 
 @Component({
   selector: 'app-app-admin-management-user',
@@ -55,10 +56,8 @@ export class AppAdminManagementUserComponent implements OnInit {
   }
   deleteUser() {
     this.productServices.deleteProduct(this.selectedRow.id).subscribe((data)=>{
+      this.toastr.success('Xoá thành công','Thông báo',{timeOut: 1000});
       this.productServices.getAllProduct().subscribe(()=>{
-        this.toastr.success('Xoá thành công','Thông báo',{
-          timeOut:100
-        });
         this.getProductData();
       })
     });
