@@ -1,16 +1,16 @@
-import { HttpClient, HttpHeaders } from '@angular/common/http';
-import { Component, OnInit, ViewChild } from '@angular/core';
-import { CreateOrEditUserComponent } from './create-or-edit-user/create-or-edit-user.component';
+import { HttpClient } from '@angular/common/http';
+import { Component, ViewChild } from '@angular/core';
+import { ToastrService } from 'ngx-toastr';
 import { Product } from 'src/models/product';
 import { ProductService } from 'src/services/product.service';
-import { ToastrService } from 'ngx-toastr';
+import { CreateOrEditUserComponent } from '../app-admin-management-user/create-or-edit-user/create-or-edit-user.component';
 
 @Component({
-  selector: 'app-app-admin-management-user',
-  templateUrl: './app-admin-management-user.component.html',
-  styleUrls: ['./app-admin-management-user.component.scss'],
+  selector: 'app-app-admin-mangement-customer',
+  templateUrl: './app-admin-mangement-customer.component.html',
+  styleUrls: ['./app-admin-mangement-customer.component.scss']
 })
-export class AppAdminManagementUserComponent implements OnInit {
+export class AppAdminMangementCustomerComponent {
   @ViewChild('createUser', { static: true })
   modalUser: CreateOrEditUserComponent;
   product: Product;
@@ -21,21 +21,37 @@ export class AppAdminManagementUserComponent implements OnInit {
   ngOnInit(): void {}
   constructor(private http: HttpClient,public productServices : ProductService,public toastr: ToastrService) {
     this.cols = [
+      // {
+      //   field: 'id',
+      //   header: '#Id',
+      // },
       {
-        field: 'id',
-        header: '#Id',
+        field: 'STT',
+        header: 'Id',
       },
       {
-        field: 'name',
-        header: 'Name',
+        field: 'nameCustomer',
+        header: 'Tên khách hàng',
       },
       {
-        field: 'category',
-        header: 'Category',
+        field: 'email',
+        header: 'Email',
       },
       {
-        field: 'quantity',
-        header: 'Quantity',
+        field: 'phone',
+        header: 'SDT',
+      },
+      {
+        field: 'address',
+        header: 'Địa chỉ  ',
+      },
+      {
+        field: 'phone',
+        header: 'SDT',
+      },
+      {
+        field: 'phone',
+        header: 'SDT',
       },
     ];
     this.getProductData();

@@ -10,13 +10,16 @@ import { AppComponent } from './app.component';
 import { PTableCustomComponent } from './p-table-custom/p-table-custom.component';
 import { AppUserMainComponent } from './app-user-view/app-user-main/app-user-main.component';
 import { AppAdminMainComponent } from './app-admin-view/app-admin-main/app-admin-main.component';
-import { AppAdminMenuComponent } from './app-admin-view/app-admin-menu/app-admin-menu.component';
 import { CreateOrEditWeatherComponent } from './admin-layout/weather/create-or-edit-weather/create-or-edit-weather.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { AppBsModalModule } from 'src/directive/app-bs-modal.module';
 import { AppAdminManagementUserModule } from './app-admin-view/app-admin-management-user/app-admin-management-user.module';
 import { ProductService } from 'src/services/product.service';
-
+import { DropdownModule } from 'primeng/dropdown';
+import { ToastrModule, ToastrService } from 'ngx-toastr';
+import { AppAdminMangementCustomerModule } from './app-admin-view/app-admin-mangement-customer/app-admin-mangement-customer.module';
+import { SharedModule } from 'src/share.module';
+import { AppAdminMenuComponent } from './app-admin-view/app-admin-menu/app-admin-menu.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -25,8 +28,8 @@ import { ProductService } from 'src/services/product.service';
     PTableCustomComponent,
     AppUserMainComponent,
     AppAdminMainComponent,
-    AppAdminMenuComponent,
     CreateOrEditWeatherComponent,
+    //AppAdminMenuComponent
   ],
   imports: [
     BrowserModule,
@@ -37,10 +40,17 @@ import { ProductService } from 'src/services/product.service';
     BrowserAnimationsModule,
     AppBsModalModule,
     AppAdminManagementUserModule,
+    DropdownModule,
+    SharedModule,
+    ToastrModule.forRoot({
+      timeOut: 2000,
+      positionClass :'toast-top-right'
+    })
     //BsModalService,
     //ModalModule
   ],
   providers: [
+    ToastrService
   ],
   bootstrap: [AppComponent]
 })

@@ -5,11 +5,11 @@ import { CreateProductDto } from 'src/models/createProductDto';
 import { ProductService } from 'src/services/product.service';
 
 @Component({
-  selector: 'app-create-or-edit-user',
-  templateUrl: './create-or-edit-user.component.html',
-  styleUrls: ['./create-or-edit-user.component.scss'],
+  selector: 'app-create-or-edit-customer',
+  templateUrl: './create-or-edit-customer.component.html',
+  styleUrls: ['./create-or-edit-customer.component.scss']
 })
-export class CreateOrEditUserComponent {
+export class CreateOrEditCustomerComponent {
   product: CreateProductDto = new CreateProductDto();
   saving = false;
   active;
@@ -43,7 +43,7 @@ export class CreateOrEditUserComponent {
   save() {
     this.productServices.createOrEdit(this.product).subscribe(()=>{
       this.active = false;
-      this.toastr.success('Thêm thành công','Thông báo');
+      this.toastr.success('Thêm thành công','Toartr fun!');
       this.modalSave.emit(null);
       this.close();
     });

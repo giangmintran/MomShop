@@ -6,8 +6,11 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { CreateOrEditUserComponent } from './create-or-edit-user/create-or-edit-user.component';
 import { AppBsModalModule } from 'src/directive/app-bs-modal.module';
 import { FormsModule } from '@angular/forms';
-
-
+import { DropdownModule } from 'primeng/dropdown';
+import { InputTextModule } from 'primeng/inputtext';
+import { ButtonModule } from 'primeng/button';
+import { ToastrModule } from 'ngx-toastr';
+import { SharedModule } from 'primeng/api';
 
 @NgModule({
   declarations: [
@@ -18,7 +21,12 @@ import { FormsModule } from '@angular/forms';
     CommonModule,
     TableModule,
     BrowserAnimationsModule,
-    AppBsModalModule,FormsModule
-  ]
+    AppBsModalModule,FormsModule,
+    DropdownModule,
+    InputTextModule,
+    ButtonModule,
+    ToastrModule,
+    SharedModule
+  ],
 })
 export class AppAdminManagementUserModule { }
