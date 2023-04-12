@@ -1,7 +1,8 @@
 import { Component, EventEmitter, Output, ViewChild } from '@angular/core';
 import { ModalDirective } from 'ngx-bootstrap/modal';
 import { ToastrService } from 'ngx-toastr';
-import { CreateProductDto } from 'src/models/createProductDto';
+import { UpdateProductDto } from 'src/models/UpdateProductDto';
+import { Product } from 'src/models/product';
 import { ProductService } from 'src/services/product.service';
 
 @Component({
@@ -10,7 +11,8 @@ import { ProductService } from 'src/services/product.service';
   styleUrls: ['./create-or-edit-product.component.scss']
 })
 export class CreateOrEditProductComponent {
-  product: CreateProductDto = new CreateProductDto();
+  product: UpdateProductDto = new UpdateProductDto();
+  input: UpdateProductDto = new UpdateProductDto();
   saving = false;
   active;
   cities;
@@ -31,7 +33,9 @@ export class CreateOrEditProductComponent {
   }
   show(id?) {
     if(id){
-        
+        this.productServices.detailProduct(id).subscribe((data:UpdateProductDto)=>{
+              this.input = data;
+        })
     }
     this.modal.show();
     this.active = true;
@@ -41,7 +45,8 @@ export class CreateOrEditProductComponent {
     this.modal.hide();
   }
   save() {
-    this.productServices.createOrEdit(this.product).subscribe(()=>{
+    
+    this.productServices.createOrEdit(this.input).subscribe(()=>{
       this.active = false;
       this.toastr.success('Thêm thành công','Toartr fun!');
       this.modalSave.emit(null);

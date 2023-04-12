@@ -41,9 +41,9 @@ export class AppAdminManagementProductComponent {
     this.getProductData();
   }
   getProductData(): void {
-    this.productServices.getAllProduct().subscribe((data)=>{
+    this.productServices.getAllProduct().subscribe((data) => {
       this.tableData = data;
-      this.totalRecords = this.tableData.l
+      this.selectedRow = undefined
     });
   }
   onSelectionChange(event) {}

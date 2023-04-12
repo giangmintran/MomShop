@@ -10,16 +10,14 @@ export class ProductService {
   getAllProduct() {
     return this.http.get(this.baseUrl + 'find-all');
   }
-  deleteProduct(id) {
+  deleteProduct(id:number) {
     return this.http.delete(this.baseUrl + 'delete/' + id);
   }
   createOrEdit(product: any) {
     if (product.id) {
-      return this.http
-        .put(this.baseUrl + 'update', product);
+      return this.http.put(this.baseUrl + 'update', product);
     } else {
-      return this.http
-        .post(this.baseUrl + 'add', product);
+      return this.http.post(this.baseUrl + 'add', product);
     }
   }
   detailProduct(id:number) {
