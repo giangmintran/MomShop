@@ -10,7 +10,7 @@ import { DialogService, DynamicDialogConfig, DynamicDialogRef } from "primeng/dy
 import { CreateProductDetailComponent } from "./create-product-detail/create-product-detail.component";
 import { ProductService } from "@shared/service-proxies/product-service";
 import { DistributionService } from "@shared/services/distribution.service";
-import { FormNotificationComponent } from "../../form-notification/form-notification.component";
+import { FormNotificationComponent } from "../../../app/form-notification/form-notification.component";
 
 @Component({
   selector: 'app-create-product',
@@ -51,41 +51,6 @@ export class CreateProductComponent extends CrudComponentBase {
   row: any;
   col: any;
 
-  policy: any = {
-    'distributionId': null,
-    'code': null,   // Mã chính sách
-    'name': null,   // Tên chính sách
-    'incomeTax': null,  // Thuế lợi nhuận
-    'minMoney': null,  // Số tiền tích lũy tối thổi
-    'maxMoney': null,  // Số tiền tích lũy tối thổi
-    'investorType': null,   // Loại nhà đầu tư
-    'minInvestDay': null, // Số ngày tích lũy tối thiểu
-    'classify': null, // phân loại
-    'calculateType': null,  
-    'garnerType': null,
-    'interestType': null,
-    'interestPeriodType': null,
-    'repeatFixedDate': null,
-    'minWithdraw': null,    
-    'maxWithdraw': null,
-    'withdrawFee': null,    
-    'orderOfWithdrawal': null,
-    'isTransferAssets': null,
-    'transferAssetsFee': null, // Thuế CN
-    'withdrawFeeType': null,
-    'startDate': null,
-    'endDate': null,
-    'sortOrder': null,
-    'description': null,
-   
-    //'type': null,   // Kiểu chính sách
-    'transferTax': null, // Thuế chuyển nhượng %
-    // 'isTransfer': null, 
-    'policyDetails': [],  // Kỳ hạn
-    // 'exitFee': null,   
-    // 'exitFeeType': null, 
-    'contractTemplates' : [],
-   };
   product: any = {
     'name': null,
     'price': null,
@@ -165,7 +130,6 @@ export class CreateProductComponent extends CrudComponentBase {
           if(this.isCreateContractTemp) {
             this.isCreateContractTemp = false;
             this.isCollapse = true;
-            this.activeIndex = PolicyTempConst.CONTRACT_TAB;
           }
         }
       },(err) => {
@@ -178,8 +142,8 @@ export class CreateProductComponent extends CrudComponentBase {
     this._distributionService.getAllPolicyDetail(productId).subscribe(
       (res) => {
         if (this.handleResponseInterceptor(res, "")) {
-          this.policy.policyDetails = res?.data;
-          this.genlistActionPolicyDetail(this.policy.policyDetails);
+          // this.policy.policyDetails = res?.data;
+          // this.genlistActionPolicyDetail(this.policy.policyDetails);
         }
       },
       (err) => {
@@ -203,15 +167,6 @@ export class CreateProductComponent extends CrudComponentBase {
           },
         });
       //
-				// actions.push({
-				// 	data: productDetail,
-				// 	label: productDetail.status == ActiveDeactiveConst.ACTIVE ? 'Khóa' : 'Kích hoạt',
-				// 	icon: productDetail.status == ActiveDeactiveConst.ACTIVE ? 'pi pi-lock' : 'pi pi-lock-open',
-				// 	command: ($event) => {
-				// 		this.changeStatusPolicyDetail($event.item.data);
-				// 	}
-				// });
-
         actions.push({
           data: productDetail,
           index: index,
@@ -243,7 +198,6 @@ export class CreateProductComponent extends CrudComponentBase {
     );
     ref.onClose.subscribe((statusCreate) => {      
       if(statusCreate) {
-        //this.messageSuccess('Thêm mới thành công');
         this.getDetail(this.product.id);
       }
     });
@@ -265,7 +219,6 @@ export class CreateProductComponent extends CrudComponentBase {
     );
     //
     ref.onClose.subscribe((statusUpdate) => {
-        //this.messageSuccess('Cập nhật thành công');
         this.getDetail(this.product.id);
     });
   }
@@ -332,12 +285,11 @@ export class CreateProductComponent extends CrudComponentBase {
   //
   save() {
     if(this.validForm()) { 
-      console.log("Đây là sản phẩm",this.product)
       this.submitted = true;
       if (this.product.id) {
         this.productService.saveProduct(this.product).subscribe((response) => {
             if (this.handleResponseInterceptor(response, "Cập nhật thành công")) {
-              this.ref.close(true);
+              this.ref.close();
             }
             this.submitted = false;
             //
@@ -347,9 +299,10 @@ export class CreateProductComponent extends CrudComponentBase {
           }
         );
       } else {
+        console.log("Vào đây");
         this.productService.createProduct(this.product).subscribe((response) => {
             if (this.handleResponseInterceptor(response, "Thêm thành công")) {
-              this.ref.close(true);
+                this.ref.close();
             }
             this.submitted = false;
           }, (err) => {

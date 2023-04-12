@@ -1,4 +1,3 @@
-import { DepartmentComponent } from './department/department.component';
 import { LoginUrlComponent } from './login-url/login-url.component';
 import { RouterModule } from "@angular/router";
 import { NgModule } from "@angular/core";
@@ -6,23 +5,11 @@ import { AppMainComponent } from "./layout/main/app.main.component";
 import { HomeComponent } from "./home/home.component";
 import { UserComponent } from "./user/user.component";
 import { AppRouteGuard } from "@shared/auth/auth-route-guard";
-
-
-import { NotificationTemplateComponent } from "./notification/notification-template/notification-template.component";
-import { NotificationManagerComponent } from "./notification/notification-manager/notification-manager.component";
-import { NotificationDetailComponent } from "./notification/notification-detail/notification-detail.component";
-import { SystemTemplateComponent } from './notification/system-template/system-template.component';
-import { ChatComponent } from './support/chat/chat.component';
-
-import { DefaultSystemTemplateComponent } from './notification/default-system-template/system-template.component';
 import { PermissionCoreConst } from '@shared/AppConsts';
-import { ProviderConfigurationComponent } from './notification/provider-configuration/provider-configuration.component';
 import { ManagementReportComponent } from './export-report/management-report/management-report.component';
 import { OperationalReportComponent } from './export-report/operational-report/operational-report.component';
 import { BusinessReportComponent } from './export-report/business-report/business-report.component';
-import { WhileListIpComponent } from './notification/while-list-ip/while-list-ip.component';
 import { SystemReportComponent } from './export-report/system-report/system-report.component';
-import { MsbPrefixAccountComponent } from './notification/msb-prefix-account/msb-prefix-account.component';
 import { ProductManagementComponent } from './product-management/product-management.component';
 
 @NgModule({
@@ -133,118 +120,6 @@ import { ProductManagementComponent } from './product-management/product-managem
 					},
 					{
 						path: "notification",
-						children: [
-							{
-								path: "system-notification-config",
-								data: {permissions: [PermissionCoreConst.CoreMenu_CauHinhThongBaoHeThong]}, 
-								component: SystemTemplateComponent,
-								canActivate: [AppRouteGuard],
-							}, 
-							{
-								path: "default-system-notification-config",
-								data: {permissions: [PermissionCoreConst.CoreMenu_ThongBaoMacDinh]}, 
-								component: DefaultSystemTemplateComponent,
-								canActivate: [AppRouteGuard],
-							},
-							{
-								path: "notification-template",
-								data: {permissions: [PermissionCoreConst.CoreMenu_MauThongBao]}, 
-								component: NotificationTemplateComponent,
-								canActivate: [AppRouteGuard],
-							},
-							{
-								path: "notification-manager",
-								data: {permissions: [PermissionCoreConst.CoreMenu_QLTB]}, 
-								component: NotificationManagerComponent,
-								canActivate: [AppRouteGuard],
-							},
-							{
-								path: "notification-detail",
-								data: {permissions: [PermissionCoreConst.CoreQLTB_PageChiTiet]}, 
-								component: NotificationDetailComponent,
-								canActivate: [AppRouteGuard],
-							},
-							{
-								path: "provider-config",
-								data: {permission: PermissionCoreConst.CoreMenu_CauHinhNCC}, 
-								component: ProviderConfigurationComponent,
-								canActivate: [AppRouteGuard],
-							}, 
-						],
-					},
-					{
-						path: "establish",
-						children: [
-							{
-								path: "system-notification-config",
-								data: {permissions: [PermissionCoreConst.CoreMenu_CauHinhThongBaoHeThong]}, 
-								component: SystemTemplateComponent,
-								canActivate: [AppRouteGuard],
-							}, 
-							// {
-							// 	path: "default-system-notification-config",
-							// 	data: {permissions: [PermissionCoreConst.CoreMenu_ThongBaoMacDinh]}, 
-							// 	component: DefaultSystemTemplateComponent,
-							// 	canActivate: [AppRouteGuard],
-							// },
-							// {
-							// 	path: "notification-template",
-							// 	data: {permissions: [PermissionCoreConst.CoreMenu_MauThongBao]}, 
-							// 	component: NotificationTemplateComponent,
-							// 	canActivate: [AppRouteGuard],
-							// },
-							// {
-							// 	path: "notification-manager",
-							// 	data: {permissions: [PermissionCoreConst.CoreMenu_QLTB]}, 
-							// 	component: NotificationManagerComponent,
-							// 	canActivate: [AppRouteGuard],
-							// },
-							// {
-							// 	path: "notification-detail",
-							// 	data: {permissions: [PermissionCoreConst.CoreQLTB_PageChiTiet]}, 
-							// 	component: NotificationDetailComponent,
-							// 	canActivate: [AppRouteGuard],
-							// },
-							{
-								path: "provider-config",
-								data: {permission: PermissionCoreConst.CoreMenu_CauHinhNCC}, 
-								component: ProviderConfigurationComponent,
-								canActivate: [AppRouteGuard],
-							}, 
-							{
-								path: "digital-sign",
-								data: {permissions: [PermissionCoreConst.CoreMenu_CauHinhCKS]}, 
-								canActivate: [AppRouteGuard],
-							}, 
-							{
-								path: "whitelist-ip",
-								data: {permissions: [PermissionCoreConst.CoreMenu_WhitelistIp]}, 
-								component: WhileListIpComponent,
-								canActivate: [AppRouteGuard],
-							}, 
-							{
-								path: "msb-prefix-account",
-								data: {permissions: [PermissionCoreConst.CoreMenu_MsbPrefix]}, 
-								component: MsbPrefixAccountComponent,
-								canActivate: [AppRouteGuard],
-							}, 
-						],
-					},
-					{
-						path: "support",
-						children: [
-							{
-								path: "chat",
-								component: ChatComponent,
-								canActivate: [AppRouteGuard],
-							}
-						],
-					},
-					{
-						path: "department",
-						data: {permissions: [PermissionCoreConst.CoreMenu_PhongBan]}, 
-						component: DepartmentComponent,
-						canActivate: [AppRouteGuard],
 					},
 					{	
 						path: "collab-contract", 

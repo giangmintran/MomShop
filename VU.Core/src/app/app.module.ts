@@ -151,48 +151,22 @@ import { UploadImageComponent } from './components/upload-image/upload-image.com
 import { DialogService, DynamicDialogModule } from 'primeng/dynamicdialog';
 
 import { KeyFilterModule } from 'primeng/keyfilter';
-import { FormRequestComponent } from './form-request-approve-cancel/form-request/form-request.component';
-import { FormApproveComponent } from './form-request-approve-cancel/form-approve/form-approve.component';
-import { FormCancelComponent } from './form-request-approve-cancel/form-cancel/form-cancel.component';
-import { NotificationTemplateComponent } from './notification/notification-template/notification-template.component';
-import { NotificationManagerComponent } from './notification/notification-manager/notification-manager.component';
-import { AddNotificationTemplateComponent } from './notification/add-notification-template/add-notification-template.component';
+
 import { MarkdownModule } from 'ngx-markdown';
-import { NotificationDetailComponent } from './notification/notification-detail/notification-detail.component';
-import { AddNotificationComponent } from './notification/add-notification/add-notification.component';
-import { AddPersonListComponent } from './notification/add-person-list/add-person-list.component';
-import { FormCloseComponent } from './form-request-approve-cancel/form-close/form-close.component';
 import { LoginUrlComponent } from './login-url/login-url.component';
-import { SystemTemplateComponent } from './notification/system-template/system-template.component';
-import { ChatComponent } from './support/chat/chat.component';
-import { FormSetDisplayColumnComponent } from './form-set-display-column/form-set-display-column.component';
-import { DepartmentComponent } from './department/department.component';
-import { CreateDepartmentComponent } from './department/create-department/create-department.component';
-import { AddSalseDepartmentComponent } from './department/add-salse-department/add-salse-department.component';
-import { AddSalseManagerDepartmentComponent } from './department/add-salse-manager-department/add-salse-manager-department.component';
-
-import { DefaultSystemTemplateComponent } from './notification/default-system-template/system-template.component';
-
-import { FormViewPdfFileComponent } from './form-view-pdf-file/form-view-pdf-file.component';
 import { PdfViewerModule } from 'ng2-pdf-viewer';
-import { FormNotificationComponent } from './form-notification/form-notification.component';
-import { ProviderConfigurationComponent } from './notification/provider-configuration/provider-configuration.component';
 import { OperationalReportComponent } from './export-report/operational-report/operational-report.component';
 import { ManagementReportComponent } from './export-report/management-report/management-report.component';
 import { BusinessReportComponent } from './export-report/business-report/business-report.component';
-import { AddSaleDirectionalComponent } from './department/add-sale-directional/add-sale-directional.component';
 import { DateMaskDirective } from './date-mask.directive';
-import { WhileListIpComponent } from './notification/while-list-ip/while-list-ip.component';
-import { CreateWhileListComponent } from './notification/while-list-ip/create-while-list/create-while-list.component';
-import { CreateWhileListDetailComponent } from './notification/while-list-ip/create-while-list/create-while-list-detail/create-while-list-detail.component';
-import { MsbPrefixAccountComponent } from './notification/msb-prefix-account/msb-prefix-account.component';
-import { CreateMsbPrefixAccountComponent } from './notification/msb-prefix-account/create-msb-prefix-account/create-msb-prefix-account.component';
 import { SystemReportComponent } from './export-report/system-report/system-report.component';
 import { FilterBusinessCustomerComponent } from './components/filter-business-customer/filter-business-customer.component';
 import { ProductManagementComponent } from './product-management/product-management.component';
 import { CreateProductComponent } from './product-management/create-product/create-product.component';
 import { DistributionService } from '@shared/services/distribution.service';
 import { CreateProductDetailComponent } from './product-management/create-product/create-product-detail/create-product-detail.component';
+import { FormSetDisplayColumnComponent } from './form-set-display-column/form-set-display-column.component';
+import { FormNotificationComponent } from './form-notification/form-notification.component';
 
 
 FullCalendarModule.registerPlugins([
@@ -328,43 +302,18 @@ FullCalendarModule.registerPlugins([
         HomeComponent,
         UserComponent,
         UploadImageComponent,
-        FormRequestComponent,
-        FormApproveComponent,
-        FormCancelComponent,
-        NotificationTemplateComponent,
-        NotificationManagerComponent,
-        AddNotificationTemplateComponent,
-        NotificationDetailComponent,
-        AddNotificationComponent,
-        AddPersonListComponent,
-        FormCloseComponent,
         LoginUrlComponent,
-        SystemTemplateComponent,
-        DefaultSystemTemplateComponent,
-        ChatComponent,
-        FormSetDisplayColumnComponent,
-        DepartmentComponent,
-        CreateDepartmentComponent,
-        AddSalseDepartmentComponent,
-        AddSalseManagerDepartmentComponent,
-        FormViewPdfFileComponent,
-        FormNotificationComponent,
-        ProviderConfigurationComponent,
         OperationalReportComponent,
         ManagementReportComponent,
         BusinessReportComponent,
         SystemReportComponent,
-        AddSaleDirectionalComponent,
         DateMaskDirective,
-        WhileListIpComponent,
-        CreateWhileListComponent,
-        CreateWhileListDetailComponent,
-        MsbPrefixAccountComponent,
-        CreateMsbPrefixAccountComponent,
         FilterBusinessCustomerComponent,
         ProductManagementComponent,
         CreateProductComponent,
-        CreateProductDetailComponent
+        CreateProductDetailComponent,
+        FormSetDisplayColumnComponent,
+        FormNotificationComponent
     ],
     entryComponents: [
         UploadImageComponent,

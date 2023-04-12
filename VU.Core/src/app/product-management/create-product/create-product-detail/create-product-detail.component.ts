@@ -22,7 +22,6 @@ export class CreateProductDetailComponent extends CrudComponentBase {
     public ref: DynamicDialogRef,
     public configDialog: DynamicDialogConfig,
     private routeActive: ActivatedRoute,
-    private _distributionService: DistributionService,
     private productService: ProductService
       ) {
     super(injector, messageService);
@@ -35,7 +34,6 @@ export class CreateProductDetailComponent extends CrudComponentBase {
   policyDetails: any[] = [];
 
   fieldErrors: any = {};
-
 
   // Data Init
   PolicyTempConst = PolicyTempConst;

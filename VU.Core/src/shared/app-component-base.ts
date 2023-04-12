@@ -44,6 +44,7 @@ export abstract class AppComponentBase {
     }
 
     handleResponseInterceptor(response, message: string =''): boolean {
+        console.log("zô đây", response?.status);
         if (response.status == StatusResponseConst.RESPONSE_TRUE) {
             if (message) {
 				this.messageService.add({

@@ -20,7 +20,7 @@
                             </span>
                             <span class="p-float-label b-custom ml-2">
                                 <p-dropdown id="dropdownStatus" [style]="{'width':'14rem'}" [options]="statusSearch" optionLabel="name"
-                                optionValue="code" placeholder="Chọn trạng thái" [(ngModel)]="status"
+                                optionValue="code" placeholder="Chọn trạng thái" [(ngModel)]="status" [showClear]="true"
                                 (onChange)="changeStatus($event.value)">
                                 </p-dropdown>   
                                 <label class="font-normal" for="dropdownStatus">Trạng thái bài tin</label>

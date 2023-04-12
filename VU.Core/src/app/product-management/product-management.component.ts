@@ -4,14 +4,14 @@ import { CrudComponentBase } from "@shared/crud-component-base";
 import { PageBondPolicyTemplate } from "@shared/model/pageBondPolicyTemplate";
 import { DistributionService } from "@shared/services/distribution.service";
 import { ConfirmationService, MessageService } from "primeng/api";
-import { DialogService } from "primeng/dynamicdialog";
+import { DialogService, DynamicDialogRef } from "primeng/dynamicdialog";
 import { debounceTime } from "rxjs/operators";
 import { BreadcrumbService } from "../layout/breadcrumb/breadcrumb.service";
 import { CreateProductComponent } from "./create-product/create-product.component";
 import { Page } from '@shared/model/page';
+import { ProductService } from "@shared/service-proxies/product-service";
 import { FormSetDisplayColumnComponent } from "../form-set-display-column/form-set-display-column.component";
 import { FormNotificationComponent } from "../form-notification/form-notification.component";
-import { ProductService } from "@shared/service-proxies/product-service";
 
 @Component({
   selector: 'app-product-management',
@@ -24,7 +24,6 @@ export class ProductManagementComponent extends CrudComponentBase {
     messageService: MessageService,
     private dialogService: DialogService,
     private breadcrumbService: BreadcrumbService,
-    private _dialogService: DialogService,
     private _distributionService: DistributionService,
     private productService: ProductService,
     public confirmationService: ConfirmationService,
@@ -33,7 +32,7 @@ export class ProductManagementComponent extends CrudComponentBase {
     super(injector, messageService);
     this.breadcrumbService.setItems([
       { label: "Trang chủ", routerLink: ["/home"] },
-      { label: "Chính sách mẫu" },
+      { label: "Quản lý sản phẩm" },
     ]);
   }
 
@@ -48,8 +47,6 @@ export class ProductManagementComponent extends CrudComponentBase {
 
   row: any;
   col: any;
-
-  policyTemp: any[] = [];
 
   _selectedColumns: any[];
   statusSearch = MediaConst.productStatus;
@@ -66,21 +63,21 @@ export class ProductManagementComponent extends CrudComponentBase {
 
   ngOnInit(): void {
     this.setPage({ page: this.offset });
-    this.subject.keyword.pipe(debounceTime(SearchConst.DEBOUNCE_TIME)).subscribe(() => {
-      if (this.keyword === "") {
-        this.setPage({ page: this.offset });
-      } else {
-        this.setPage();
-      }
-    });
+    // this.subject.keyword.pipe(debounceTime(SearchConst.DEBOUNCE_TIME)).subscribe(() => {
+    //   if (this.keyword === "") {
+    //     this.setPage({ page: this.offset });
+    //   } else {
+    //     this.setPage();
+    //   }
+    // });
 
     // Xử lý ẩn hiện cột trong bảng
     this.cols = [
-      { field: 'code', header: 'Code', width: '12rem', isPin: true },
-      { field: 'name', header: 'Name', width: '16rem', isPin: true },
+      { field: 'code', header: 'Code', width: '12rem' },
+      { field: 'name', header: 'Name', width: '16rem' },
       { field: 'price', header: 'Price', width: '12rem' },
-      { field: 'productType', header: 'ProductType', width: '15rem', isPin: true},
-      { field: 'description', header: 'Description', width: '45rem', isPin: true}
+      { field: 'productTypeName', header: 'ProductType', width: '15rem'},
+      { field: 'description', header: 'Description', width: '45rem'}
     ];
 
     this.cols = this.cols.map((item, index) => {
@@ -88,15 +85,7 @@ export class ProductManagementComponent extends CrudComponentBase {
       return item;
     });
 
-    this._selectedColumns = this.getLocalStorage("") ?? this.cols;
-  }
-
-  getLocalStorage(key) {
-    return JSON.parse(localStorage.getItem(key));
-  }
-
-  setLocalStorage(data) {
-    return localStorage.setItem("", JSON.stringify(data));
+    this._selectedColumns = this.cols;
   }
 
   setColumn(col, _selectedColumns) {
@@ -110,8 +99,6 @@ export class ProductManagementComponent extends CrudComponentBase {
         this._selectedColumns = dataCallBack.data.sort(function (a, b) {
           return a.position - b.position;
         });
-        this.setLocalStorage(this._selectedColumns);
-        console.log("Luu o local", this.getLocalStorage("bondPolicy"));
       }
     });
   }
@@ -119,42 +106,13 @@ export class ProductManagementComponent extends CrudComponentBase {
   showData(rows) {
     for (let row of rows) {
       row.code = row.code,
-      row.name = row.name
-  }
-    console.log("row", rows);
+      row.productTypeName = MediaConst.getProductType(row.productType);
+    }
   }
 
   genListAction(data = []) {
     this.listAction = data.map((product, index) => {
       const actions = [];
-
-        // actions.push({
-        //   data: policy,
-        //   label: "Thêm kỳ hạn",
-        //   icon: "pi pi-plus",
-        //   command: ($event) => {
-        //     this.edit($event.item.data, true);
-        //   },
-        // });
-
-				// actions.push({
-				// 	data: policy,
-				// 	label: policy.isShowApp == false ? 'Bật show app' : 'Tắt show app',
-				// 	icon: policy.isShowApp == false ? 'pi pi-eye' : 'pi pi-eye-slash',
-				// 	command: ($event) => {
-				// 		this.toggleIsShowAppPolicy($event.item.data?.id);
-				// 	}
-				// });
-      //
-				// actions.push({
-				// 	data: product,
-				// 	label: product.status == ActiveDeactiveConst.ACTIVE ? 'Khóa' : 'Kích hoạt',
-				// 	icon: product.status == ActiveDeactiveConst.ACTIVE ? 'pi pi-lock' : 'pi pi-lock-open',
-				// 	command: ($event) => {
-				// 		this.changeStatusPolicy($event.item.data);
-				// 	}
-				// });
-      //
         actions.push({
           data: product,
           index: index,
@@ -176,7 +134,6 @@ export class ProductManagementComponent extends CrudComponentBase {
       //
       return actions;
     });
-    console.log("listActions", this.listAction);
   }
 
   create() {
@@ -195,9 +152,8 @@ export class ProductManagementComponent extends CrudComponentBase {
   }
 
   edit(product, isCreateDetail?: boolean) {
-    console.log("product11111: ", product);
     const ref = this.dialogService.open(CreateProductComponent, {
-      header: "Cập nhật chính sách",
+      header: "Cập nhật thông tin",
       width: "1000px",
       contentStyle: { "max-height": "600px", overflow: "auto", "margin-bottom": "60px", },
       baseZIndex: 10000,
@@ -208,14 +164,13 @@ export class ProductManagementComponent extends CrudComponentBase {
     //
     ref.onClose.subscribe((statusUpdate) => {
       if (statusUpdate) {
-        this.messageSuccess('Cập nhật thành công');
         this.setPage();
       }
     });
   }
 
   delete(product) {
-    const ref = this._dialogService.open(FormNotificationComponent, {
+    const ref = this.dialogService.open(FormNotificationComponent, {
       header: "Thông báo",
       width: "600px",
       contentStyle: { "max-height": "600px", overflow: "auto", "padding-bottom": "50px", },
@@ -227,10 +182,9 @@ export class ProductManagementComponent extends CrudComponentBase {
       },
     });
     ref.onClose.subscribe((dataCallBack) => {
-      console.log({ dataCallBack });
       if (dataCallBack?.accept) {
         this.productService.deleteProduct(product.id).subscribe((response) => {
-            if ( this.handleResponseInterceptor(response, "Xóa sản phẩm thành công")) {
+            if (this.handleResponseInterceptor(response, "Xóa sản phẩm thành công")) {
               this.setPage();
             }
           }, (err) => {

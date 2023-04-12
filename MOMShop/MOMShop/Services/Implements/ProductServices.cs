@@ -105,19 +105,19 @@ namespace MOMShop.Services.Implements
             foreach ( var product in products)
             {
                 var item = _mapper.Map<ProductDto>(product);
-                item.ProductType = product.ProductType switch
-                {
-                    ProductType.AO_THUN => ProductTypeString.AO_THUN,
-                    ProductType.AO_SO_MI => ProductTypeString.SO_MI,
-                    ProductType.AO_KHOAC => ProductTypeString.AO_KHOAC,
-                    ProductType.QUAN => ProductTypeString.QUAN,
-                    ProductType.PHU_KIEN => ProductTypeString.PHU_KIEN,
-                };
+                //item.ProductType = product.ProductType switch
+                //{
+                //    ProductType.AO_THUN => ProductTypeString.AO_THUN,
+                //    ProductType.AO_SO_MI => ProductTypeString.SO_MI,
+                //    ProductType.AO_KHOAC => ProductTypeString.AO_KHOAC,
+                //    ProductType.QUAN => ProductTypeString.QUAN,
+                //    ProductType.PHU_KIEN => ProductTypeString.PHU_KIEN,
+                //};
                 result.Items.Add(item);
             }
+            result.TotalItems = result.Items.Count;
 
             result.Items = result.Items.Skip(input.Skip).Take(input.PageSize).ToList();
-            result.TotalItems = result.Items.Count;
             return result;
         }
 
