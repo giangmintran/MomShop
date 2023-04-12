@@ -16,4 +16,5 @@ obj/
 *.v5.2
 *.cache
 *.editorconfig
+*.lock
 
