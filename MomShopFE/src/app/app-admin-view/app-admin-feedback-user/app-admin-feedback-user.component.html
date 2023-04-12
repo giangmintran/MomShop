@@ -1,13 +1,5 @@
 
 <div class="container1">
-    <div class="block-button mb-3">
-		<!-- <p-button label="Submit"></p-button> -->
-        <button class="btn btn-add mr-2 btn-outline-primary"  (click)="createUsers()">Thêm</button>
-        <button class="btn btn-add ml-2 btn-outline-primary" [disabled]="!selectedRow" (click)="editUser()">Sửa</button>
-        <button class="btn btn-add ml-2 btn-delete btn-outline-danger" [disabled]="!selectedRow" (click)="deleteUser()">Xoá</button>
-        <button *ngIf="!filter" class="btn btn-filter mr-2 btn-outline-primary"  (click)="onFilterChange()">Hiện bộ lọc</button>
-        <button *ngIf="filter"class="btn btn-filter mr-2 btn-outline-primary"  (click)="onFilterChange()">Ẩn bộ lọc</button>
-    </div>
     <div class="user">
 		<div class="row mb-3 mt-3" *ngIf="filter">
 			<div class="col-md-3"><input type="text" class="input-text" placeholder="Nhập tên khách hàng" pInputText [(ngModel)]="phone" /></div>
@@ -38,4 +30,3 @@
 		</div>
     </div>
 </div>
-<app-create-or-edit-customer #createCustomer (modalSave)="getAllCustomer()"></app-create-or-edit-customer>

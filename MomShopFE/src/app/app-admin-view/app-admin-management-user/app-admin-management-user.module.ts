@@ -10,7 +10,6 @@ import { DropdownModule } from 'primeng/dropdown';
 import { InputTextModule } from 'primeng/inputtext';
 import { ButtonModule } from 'primeng/button';
 import { ToastrModule } from 'ngx-toastr';
-import { SharedModule } from 'primeng/api';
 
 @NgModule({
   declarations: [
@@ -26,7 +25,6 @@ import { SharedModule } from 'primeng/api';
     InputTextModule,
     ButtonModule,
     ToastrModule,
-    SharedModule
   ],
 })
 export class AppAdminManagementUserModule { }

@@ -20,6 +20,10 @@ import { ToastrModule, ToastrService } from 'ngx-toastr';
 import { AppAdminMangementCustomerModule } from './app-admin-view/app-admin-mangement-customer/app-admin-mangement-customer.module';
 import { SharedModule } from 'src/share.module';
 import { AppAdminMenuComponent } from './app-admin-view/app-admin-menu/app-admin-menu.component';
+import { AppAdminFeedbackUserComponent } from './app-admin-view/app-admin-feedback-user/app-admin-feedback-user.component';
+import { ButtonModule } from 'primeng/button';
+import { InputTextModule } from 'primeng/inputtext';
+import { FormsModule } from '@angular/forms';
 @NgModule({
   declarations: [
     AppComponent,
@@ -42,6 +46,9 @@ import { AppAdminMenuComponent } from './app-admin-view/app-admin-menu/app-admin
     AppAdminManagementUserModule,
     DropdownModule,
     SharedModule,
+    InputTextModule,
+    ButtonModule,
+    FormsModule,
     ToastrModule.forRoot({
       positionClass :'toast-top-right',
     })

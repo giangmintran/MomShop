@@ -4,10 +4,12 @@ import { WeatherComponent } from './admin-layout/weather/weather.component';
 import { AppAdminManagementUserComponent } from './app-admin-view/app-admin-management-user/app-admin-management-user.component';
 import { PTableCustomComponent } from './p-table-custom/p-table-custom.component';
 import { AppAdminMangementCustomerComponent } from './app-admin-view/app-admin-mangement-customer/app-admin-mangement-customer.component';
+import { AppAdminFeedbackUserComponent } from './app-admin-view/app-admin-feedback-user/app-admin-feedback-user.component';
 
 const routes: Routes = [
   { path: 'user', component: AppAdminManagementUserComponent },
   { path: 'customer', component: AppAdminMangementCustomerComponent },
+  { path: 'feedback', component: AppAdminFeedbackUserComponent },
   //{ path: 'home', component: MainComponent },
 ];
 

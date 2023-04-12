@@ -1,17 +1,16 @@
 import { HttpClient } from '@angular/common/http';
-import { Component, ViewChild } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { ToastrService } from 'ngx-toastr';
 import { Product } from 'src/models/product';
 import { ProductService } from 'src/services/product.service';
-import { CreateOrEditUserComponent } from '../app-admin-management-user/create-or-edit-user/create-or-edit-user.component';
-import { CreateOrEditCustomerComponent } from './create-or-edit-customer/create-or-edit-customer.component';
+import { CreateOrEditCustomerComponent } from '../app-admin-mangement-customer/create-or-edit-customer/create-or-edit-customer.component';
 
 @Component({
-  selector: 'app-app-admin-mangement-customer',
-  templateUrl: './app-admin-mangement-customer.component.html',
-  styleUrls: ['./app-admin-mangement-customer.component.scss']
+  selector: 'app-app-admin-feedback-user',
+  templateUrl: './app-admin-feedback-user.component.html',
+  styleUrls: ['./app-admin-feedback-user.component.scss']
 })
-export class AppAdminMangementCustomerComponent {
+export class AppAdminFeedbackUserComponent implements OnInit {
   @ViewChild('createCustomer', { static: true })
   modalUser: CreateOrEditCustomerComponent;
   product: Product;
@@ -65,12 +64,12 @@ export class AppAdminMangementCustomerComponent {
     });
   }
   onSelectionChange(event) {}
-  createUsers() {
-    this.modalUser.show();
-  }
-  editUser() {
-    this.modalUser.show(this.selectedRow.id);
-  }
+  // createUsers() {
+  //   this.modalUser.show();
+  // }
+  // editUser() {
+  //   this.modalUser.show(this.selectedRow.id);
+  // }
   deleteUser() {
     this.productServices.deleteProduct(this.selectedRow.id).subscribe((data)=>{
       this.productServices.getAllProduct().subscribe(()=>{

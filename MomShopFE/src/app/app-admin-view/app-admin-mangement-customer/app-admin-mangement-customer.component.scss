@@ -50,7 +50,8 @@
     height: 40px;
     width: 100%;
     position: fixed;
-    top:0
+    top:0;
+    right: 10px;
 }
 // .btn-add:disabled{
 //     background-color: gainsboro;
@@ -62,5 +63,6 @@ p-table{
     height: 20px;
 }
 .input-text{
-    height: 30px;
+    height: 35px;
+    width: 100%;
 }
