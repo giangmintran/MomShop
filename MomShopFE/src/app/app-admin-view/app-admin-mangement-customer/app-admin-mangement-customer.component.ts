@@ -4,6 +4,7 @@ import { ToastrService } from 'ngx-toastr';
 import { Product } from 'src/models/product';
 import { ProductService } from 'src/services/product.service';
 import { CreateOrEditUserComponent } from '../app-admin-management-user/create-or-edit-user/create-or-edit-user.component';
+import { CreateOrEditCustomerComponent } from './create-or-edit-customer/create-or-edit-customer.component';
 
 @Component({
   selector: 'app-app-admin-mangement-customer',
@@ -11,11 +12,16 @@ import { CreateOrEditUserComponent } from '../app-admin-management-user/create-o
   styleUrls: ['./app-admin-mangement-customer.component.scss']
 })
 export class AppAdminMangementCustomerComponent {
-  @ViewChild('createUser', { static: true })
-  modalUser: CreateOrEditUserComponent;
+  @ViewChild('createCustomer', { static: true })
+  modalUser: CreateOrEditCustomerComponent;
   product: Product;
+  //filter
+  name;
+  phone;
+  email
   cols;
   tableData;
+  filter: boolean = false
   selectedRow;
   totalRecords;
   ngOnInit(): void {}
@@ -43,20 +49,16 @@ export class AppAdminMangementCustomerComponent {
       },
       {
         field: 'address',
-        header: 'Địa chỉ  ',
+        header: 'Địa chỉ',
       },
       {
-        field: 'phone',
-        header: 'SDT',
-      },
-      {
-        field: 'phone',
-        header: 'SDT',
+        field: 'accumulatePoint',
+        header: 'Điểm tích lũy',
       },
     ];
-    this.getProductData();
+    this.getAllCustomer();
   }
-  getProductData(): void {
+  getAllCustomer(): void {
     this.productServices.getAllProduct().subscribe((data)=>{
       this.tableData = data;
       this.totalRecords = this.tableData.l
@@ -75,8 +77,11 @@ export class AppAdminMangementCustomerComponent {
         this.toastr.success('Xoá thành công','Thông báo',{
           timeOut:100
         });
-        this.getProductData();
+        this.getAllCustomer();
       })
     });
+  }
+  onFilterChange(){
+    this.filter = !this.filter;
   }
 }

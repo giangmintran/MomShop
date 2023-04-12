@@ -5,29 +5,39 @@
         <button class="btn btn-add mr-2 btn-outline-primary"  (click)="createUsers()">Thêm</button>
         <button class="btn btn-add ml-2 btn-outline-primary" [disabled]="!selectedRow" (click)="editUser()">Sửa</button>
         <button class="btn btn-add ml-2 btn-delete btn-outline-danger" [disabled]="!selectedRow" (click)="deleteUser()">Xoá</button>
+        <button *ngIf="!filter" class="btn btn-filter mr-2 btn-outline-primary"  (click)="onFilterChange()">Hiện bộ lọc</button>
+        <button *ngIf="filter"class="btn btn-filter mr-2 btn-outline-primary"  (click)="onFilterChange()">Ẩn bộ lọc</button>
     </div>
     <div class="user">
-        <p-table [value]="tableData"  [paginator]="true" [rows]="10" [rowsPerPageOptions]="[5,10,15,20]"
-		(onLazyLoad)="getProductData()" [tableStyle]="{'width': '100% -280px'}" paginatorPosition="bottom"
-  [columns]="cols" selectionMode="single" [(selection)]="selectedRow" (selectionChange)="onSelectionChange($event)"
-   [rows]="2" >
-	<ng-template pTemplate="header" let-columns>
-		<tr>
-			<th *ngFor="let cols of columns">
-				{{cols.header}}
-			</th>
-		</tr>
-	</ng-template>
-
-	<ng-template pTemplate="body" let-tableData let-columns="columns">
-		<tr [pSelectableRow]="tableData">
-			<td *ngFor="let cols of columns">
-				{{tableData[cols.field]}}
-			</td>
-		</tr>
-	</ng-template>
-</p-table> 
+		<div class="row mb-3 mt-3" *ngIf="filter">
+			<div class="col-md-3"><input type="text" class="input-text" placeholder="Nhập tìm kiếm" pInputText [(ngModel)]="phone" /></div>
+			<div class="col-md-3"><input type="text" class="input-text" placeholder="Nhập tìm kiếm" pInputText [(ngModel)]="name" /></div>
+			<div class="col-md-3"><input type="text" class="input-text" placeholder="Nhập tìm kiếm" pInputText [(ngModel)]="email" /></div>
+		</div>
+		<div class="row">
+			<p-table [value]="tableData"  [paginator]="true" [rows]="10" [rowsPerPageOptions]="[5,10,15,20]"
+			(onLazyLoad)="getAllCustomer()" [tableStyle]="{'width': '100% -280px'}" paginatorPosition="bottom"
+	  [columns]="cols" selectionMode="single" [(selection)]="selectedRow" (selectionChange)="onSelectionChange($event)"
+	   [rows]="2" >
+		<ng-template pTemplate="header" let-columns>
+			<tr>
+				<th *ngFor="let cols of columns">
+					{{cols.header}}
+				</th>
+			</tr>
+		</ng-template>
+	
+		<ng-template pTemplate="body" let-tableData let-columns="columns">
+			<tr [pSelectableRow]="tableData">
+				<td *ngFor="let cols of columns">
+					{{tableData[cols.field]}}
+				</td>
+			</tr>
+		</ng-template>
+			</p-table> 
+		</div>
     </div>
 </div>
 <!-- <app-admin-menu></app-admin-menu> -->
 <!-- <app-create-or-edit-user #createUser (modalSave)="getProductData()"></app-create-or-edit-user> -->
+<app-create-or-edit-customer #createCustomer (modalSave)="getAllCustomer()"></app-create-or-edit-customer>

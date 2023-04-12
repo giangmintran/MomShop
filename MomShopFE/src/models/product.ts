@@ -1,5 +1,6 @@
 export interface Product {
   productName: string;
-  category: number;
-  quantity: number;
+  productCode: string
+  status: boolean;
+  price: number;
 }
