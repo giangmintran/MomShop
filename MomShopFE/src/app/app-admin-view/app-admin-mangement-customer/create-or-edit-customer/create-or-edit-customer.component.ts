@@ -1,7 +1,7 @@
 import { Component, EventEmitter, Output, ViewChild } from '@angular/core';
 import { ModalDirective } from 'ngx-bootstrap/modal';
 import { ToastrService } from 'ngx-toastr';
-import { CreateProductDto } from 'src/models/createProductDto';
+import { UpdateProductDto } from 'src/models/UpdateProductDto';
 import { ProductService } from 'src/services/product.service';
 
 @Component({
@@ -10,7 +10,7 @@ import { ProductService } from 'src/services/product.service';
   styleUrls: ['./create-or-edit-customer.component.scss']
 })
 export class CreateOrEditCustomerComponent {
-  product: CreateProductDto = new CreateProductDto();
+  product: UpdateProductDto = new UpdateProductDto();
   saving = false;
   active;
   cities;
