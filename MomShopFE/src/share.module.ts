@@ -1,7 +1,6 @@
 import { AppAdminMenuComponent } from "./app/app-admin-view/app-admin-menu/app-admin-menu.component";
 import { NgModule } from "@angular/core";
 import { AppRoutingModule } from "./app/app-routing.module";
-import { AppAdminFeedbackUserComponent } from "./app/app-admin-view/app-admin-feedback-user/app-admin-feedback-user.component";
 import { ToastrModule } from "ngx-toastr";
 import { ButtonModule } from "primeng/button";
 import { DropdownModule } from "primeng/dropdown";
@@ -12,24 +11,28 @@ import { HttpClientModule } from "@angular/common/http";
 import { BrowserModule } from "@angular/platform-browser";
 import { BrowserAnimationsModule } from "@angular/platform-browser/animations";
 import { AppBsModalModule } from "./directive/app-bs-modal.module";
+import { AppAdminMangementCustomerModule } from "./app/app-admin-view/app-admin-mangement-customer/app-admin-mangement-customer.module";
+import { AppAdminFeedbackUserModule } from "./app/app-admin-view/app-admin-feedback-user/app-admin-feedback-user.module";
+import { AppAdminManagementImportProductModule } from "./app/app-admin-view/app-admin-management-import-product/app-admin-management-import-product.module";
 
 @NgModule({
   declarations: [AppAdminMenuComponent],
   imports: [
     AppRoutingModule,
     DropdownModule,
-    //InputTextModule,
+    InputTextModule,
     ButtonModule,
     ToastrModule,
-    TableModule,
     CommonModule,
     BrowserModule,
     HttpClientModule,
     TableModule,
     BrowserAnimationsModule,
     AppBsModalModule,
-    DropdownModule
+    AppAdminMangementCustomerModule,
+    AppAdminFeedbackUserModule,
+    AppAdminManagementImportProductModule
   ],
-  exports: [AppAdminMenuComponent,],
+  exports: [AppAdminMenuComponent],
 })
 export class SharedModule {}

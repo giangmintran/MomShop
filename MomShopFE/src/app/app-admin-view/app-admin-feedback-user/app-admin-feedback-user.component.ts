@@ -15,12 +15,12 @@ export class AppAdminFeedbackUserComponent implements OnInit {
   modalUser: CreateOrEditCustomerComponent;
   product: Product;
   //filter
-  name;
-  phone;
-  email
+  orderCode;
+  pointEvaluate;
+  //---
   cols;
   tableData;
-  filter: boolean = false
+  filter: boolean = true
   selectedRow;
   totalRecords;
   ngOnInit(): void {}
@@ -31,28 +31,28 @@ export class AppAdminFeedbackUserComponent implements OnInit {
       //   header: '#Id',
       // },
       {
-        field: 'STT',
-        header: 'Id',
+        field: 'id',
+        header: 'STT',
       },
       {
-        field: 'nameCustomer',
+        field: 'orderCode',
+        header: 'Mã đơn hàng',
+      },
+      {
+        field: 'customerName',
         header: 'Tên khách hàng',
       },
       {
-        field: 'email',
-        header: 'Email',
-      },
-      {
-        field: 'phone',
-        header: 'SDT',
+        field: 'productName',
+        header: 'Tên sản phẩm',
       },
       {
         field: 'address',
-        header: 'Địa chỉ',
+        header: 'Phản hồi',
       },
       {
-        field: 'accumulatePoint',
-        header: 'Điểm tích lũy',
+        field: 'pointEvaluate',
+        header: 'Số sao đánh giá',
       },
     ];
     this.getAllCustomer();

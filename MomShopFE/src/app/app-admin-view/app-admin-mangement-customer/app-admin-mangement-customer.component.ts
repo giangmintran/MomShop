@@ -3,7 +3,6 @@ import { Component, ViewChild } from '@angular/core';
 import { ToastrService } from 'ngx-toastr';
 import { Product } from 'src/models/product';
 import { ProductService } from 'src/services/product.service';
-import { CreateOrEditUserComponent } from '../app-admin-management-user/create-or-edit-user/create-or-edit-user.component';
 import { CreateOrEditCustomerComponent } from './create-or-edit-customer/create-or-edit-customer.component';
 
 @Component({
@@ -21,7 +20,7 @@ export class AppAdminMangementCustomerComponent {
   email
   cols;
   tableData;
-  filter: boolean = false
+  filter: boolean = true;
   selectedRow;
   totalRecords;
   ngOnInit(): void {}
@@ -45,7 +44,7 @@ export class AppAdminMangementCustomerComponent {
       },
       {
         field: 'phone',
-        header: 'SDT',
+        header: 'SĐT',
       },
       {
         field: 'address',

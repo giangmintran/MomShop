@@ -5,11 +5,11 @@ import { CreateProductDto } from 'src/models/createProductDto';
 import { ProductService } from 'src/services/product.service';
 
 @Component({
-  selector: 'app-creat-or-edit-import-product',
-  templateUrl: './creat-or-edit-import-product.component.html',
-  styleUrls: ['./creat-or-edit-import-product.component.scss']
+  selector: 'app-create-or-edit-product',
+  templateUrl: './create-or-edit-product.component.html',
+  styleUrls: ['./create-or-edit-product.component.scss']
 })
-export class CreatOrEditImportProductComponent {
+export class CreateOrEditProductComponent {
   product: CreateProductDto = new CreateProductDto();
   saving = false;
   active;

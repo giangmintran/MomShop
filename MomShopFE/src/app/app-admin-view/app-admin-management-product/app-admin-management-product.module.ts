@@ -1,7 +1,7 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { AppAdminManagementImportProductComponent } from './app-admin-management-import-product.component';
-import { CreatOrEditImportProductComponent } from './creat-or-edit-import-product/creat-or-edit-import-product.component';
+import { AppAdminManagementProductComponent } from './app-admin-management-product.component';
+import { CreateOrEditProductComponent } from './create-or-edit-product/create-or-edit-product.component';
 import { FormsModule } from '@angular/forms';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { ToastrModule } from 'ngx-toastr';
@@ -10,13 +10,14 @@ import { DropdownModule } from 'primeng/dropdown';
 import { InputTextModule } from 'primeng/inputtext';
 import { TableModule } from 'primeng/table';
 import { AppBsModalModule } from 'src/directive/app-bs-modal.module';
+import { SharedModule } from 'src/share.module';
 
 
 
 @NgModule({
   declarations: [
-    AppAdminManagementImportProductComponent,
-    CreatOrEditImportProductComponent
+    CreateOrEditProductComponent,
+    AppAdminManagementProductComponent
   ],
   imports: [
     CommonModule,
@@ -27,6 +28,6 @@ import { AppBsModalModule } from 'src/directive/app-bs-modal.module';
     InputTextModule,
     ButtonModule,
     ToastrModule,
-  ]
+  ],
 })
-export class AppAdminManagementImportProductModule { }
+export class AppAdminManagementProductModule { }

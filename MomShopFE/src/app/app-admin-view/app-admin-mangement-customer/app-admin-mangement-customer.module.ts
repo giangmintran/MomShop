@@ -28,7 +28,6 @@ import { SharedModule } from 'src/share.module';
     InputTextModule,
     ButtonModule,
     ToastrModule,
-    SharedModule
   ]
 })
 export class AppAdminMangementCustomerModule { }

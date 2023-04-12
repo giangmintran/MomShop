@@ -1,10 +1,13 @@
 
 <div class="container1">
     <div class="user">
+		<div class="block-button">
+			<button class="btn btn-outline-primary" *ngIf="!filter" (click)="onFilterChange()">Hiện bộ lọc</button>
+			<button class="btn btn-outline-primary" *ngIf="filter" (click)="onFilterChange()">Ẩn bộ lọc</button>
+		</div>
 		<div class="row mb-3 mt-3" *ngIf="filter">
-			<div class="col-md-3"><input type="text" class="input-text" placeholder="Nhập tên khách hàng" pInputText [(ngModel)]="phone" /></div>
-			<div class="col-md-2"><input type="text" class="input-text" placeholder="Nhập SDT" pInputText [(ngModel)]="name" /></div>
-			<div class="col-md-2"><input type="text" class="input-text" placeholder="Nhập email" pInputText [(ngModel)]="email" /></div>
+			<div class="col-md-3"><input type="text" class="input-text" placeholder="Nhập tên khách hàng" pInputText [(ngModel)]="orderCode" /></div>
+			<div class="col-md-3"><input type="text" class="input-text" placeholder="Nhập email" pInputText [(ngModel)]="pointEvaluate" /></div>
 		</div>
 		<div class="row">
 			<p-table [value]="tableData"  [paginator]="true" [rows]="10" [rowsPerPageOptions]="[5,10,15,20]"

@@ -1,19 +1,18 @@
-import { HttpClient, HttpHeaders } from '@angular/common/http';
-import { Component, OnInit, ViewChild } from '@angular/core';
-import { CreateOrEditUserComponent } from './create-or-edit-user/create-or-edit-user.component';
+import { HttpClient } from '@angular/common/http';
+import { Component, ViewChild } from '@angular/core';
+import { ToastrService } from 'ngx-toastr';
 import { Product } from 'src/models/product';
 import { ProductService } from 'src/services/product.service';
-import { ToastrService } from 'ngx-toastr';
-import { timeout } from 'rxjs';
+import { CreateOrEditProductComponent } from './create-or-edit-product/create-or-edit-product.component';
 
 @Component({
-  selector: 'app-app-admin-management-user',
-  templateUrl: './app-admin-management-user.component.html',
-  styleUrls: ['./app-admin-management-user.component.scss'],
+  selector: 'app-app-admin-management-product',
+  templateUrl: './app-admin-management-product.component.html',
+  styleUrls: ['./app-admin-management-product.component.scss']
 })
-export class AppAdminManagementUserComponent implements OnInit {
+export class AppAdminManagementProductComponent {
   @ViewChild('createUser', { static: true })
-  modalUser: CreateOrEditUserComponent;
+  modalUser: CreateOrEditProductComponent;
   product: Product;
   cols;
   tableData;

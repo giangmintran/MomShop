@@ -1,15 +1,15 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import { WeatherComponent } from './admin-layout/weather/weather.component';
-import { AppAdminManagementUserComponent } from './app-admin-view/app-admin-management-user/app-admin-management-user.component';
-import { PTableCustomComponent } from './p-table-custom/p-table-custom.component';
-import { AppAdminMangementCustomerComponent } from './app-admin-view/app-admin-mangement-customer/app-admin-mangement-customer.component';
 import { AppAdminFeedbackUserComponent } from './app-admin-view/app-admin-feedback-user/app-admin-feedback-user.component';
+import { AppAdminManagementProductComponent } from './app-admin-view/app-admin-management-product/app-admin-management-product.component';
+import { AppAdminMangementCustomerComponent } from './app-admin-view/app-admin-mangement-customer/app-admin-mangement-customer.component';
+import { AppAdminManagementImportProductComponent } from './app-admin-view/app-admin-management-import-product/app-admin-management-import-product.component';
 
 const routes: Routes = [
-  { path: 'user', component: AppAdminManagementUserComponent },
+  { path: 'product', component: AppAdminManagementProductComponent },
   { path: 'customer', component: AppAdminMangementCustomerComponent },
   { path: 'feedback', component: AppAdminFeedbackUserComponent },
+  { path: 'importProduct', component: AppAdminManagementImportProductComponent },
   //{ path: 'home', component: MainComponent },
 ];
 
