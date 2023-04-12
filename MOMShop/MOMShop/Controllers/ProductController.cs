@@ -1,7 +1,9 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using MOMShop.Dto.Product;
+using MOMShop.Dto.ProductDetail;
 using MOMShop.Entites;
 using MOMShop.Services.Interfaces;
+using MOMShop.Utils;
 using System;
 using System.Collections.Generic;
 
@@ -12,17 +14,19 @@ namespace MOMShop.Controllers
     public class ProductController : ControllerBase
     {
         private IProductServices _services;
-        public ProductController(IProductServices services)
+        private IProductDetailServices _productDetailServices;
+        public ProductController(IProductServices services, IProductDetailServices productDetailServices)
         {
             _services = services;
+            _productDetailServices = productDetailServices;
         }
 
         [HttpGet("find-all")]
-        public List<Product> GetProducts()
+        public Paging<ProductDto> GetProducts([FromQuery]FilterProductDto input)
         {
             try
             {
-                var result = _services.GetProducts();
+                var result = _services.GetProducts(input);
                 return result;
             }
             catch (Exception ex)
@@ -32,7 +36,7 @@ namespace MOMShop.Controllers
         }
 
         [HttpPost("add")]
-        public Product AddProducts([FromBody] UpdateProductDto input)
+        public ProductDto AddProducts([FromBody] UpdateProductDto input)
         {
             try
             {
@@ -46,7 +50,7 @@ namespace MOMShop.Controllers
         }
 
         [HttpPut("update")]
-        public Product UpdateProducts([FromBody] UpdateProductDto input)
+        public ProductDto UpdateProducts([FromBody] UpdateProductDto input)
         {
             try
             {
@@ -65,7 +69,6 @@ namespace MOMShop.Controllers
             try
             {
                 _services.DeleteProducts(id);
-                //return "OK";
             }
             catch (Exception ex)
             {
@@ -75,11 +78,66 @@ namespace MOMShop.Controllers
 
 
         [HttpGet("detail/{id}")]
-        public Product FindById(int id)
+        public ProductDto FindById(int id)
         {
             try
             {
                 var result = _services.FindById(id);
+                return result;
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(ex.Message);
+            }
+        }
+
+        [HttpPost("add-detail")]
+        public ProductDetailDto AddProductDetails([FromBody] ProductDetailDto input)
+        {
+            try
+            {
+                var result = _productDetailServices.AddProductDetail(input);
+                return result;
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(ex.Message);
+            }
+        }
+
+        [HttpPut("update-detail")]
+        public ProductDetailDto UpdateProductDetails([FromBody] ProductDetailDto input)
+        {
+            try
+            {
+                var result = _productDetailServices.UpdateProductDetail(input);
+                return result;
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(ex.Message);
+            }
+        }
+
+        [HttpDelete("delete-detail/{id}")]
+        public void DeleteProducDetailt(int id)
+        {
+            try
+            {
+                _productDetailServices.DeleteProductDetail(id);
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(ex.Message);
+            }
+        }
+
+        [HttpGet("product-detail/{id}")]
+        public ProductDetailDto FindDetailById(int id)
+        {
+            try
+            {
+                var result = _productDetailServices.FindDetailById(id);
                 return result;
             }
             catch (Exception ex)

@@ -1,15 +1,16 @@
 ﻿using MOMShop.Dto.Product;
 using MOMShop.Entites;
+using MOMShop.Utils;
 using System.Collections.Generic;
 
 namespace MOMShop.Services.Interfaces
 {
     public interface IProductServices
     {
-        List<Product> GetProducts();
-        Product AddProducts(UpdateProductDto input);
-        Product FindById(int id);
-        Product UpdateProducts(UpdateProductDto input);
+        Paging<ProductDto> GetProducts(FilterProductDto input);
+        ProductDto AddProducts(UpdateProductDto input);
+        ProductDto FindById(int id);
+        ProductDto UpdateProducts(UpdateProductDto input);
         void DeleteProducts(int id);
 
     }

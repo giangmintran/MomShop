@@ -1,8 +1,10 @@
 ﻿using AutoMapper;
+using Microsoft.AspNetCore.Mvc;
 using MOMShop.Dto.Product;
 using MOMShop.Entites;
 using MOMShop.MomShopDbContext;
 using MOMShop.Services.Interfaces;
+using MOMShop.Utils;
 using System.Collections.Generic;
 using System.Linq;
 
@@ -20,17 +22,18 @@ namespace MOMShop.Services.Implements
 
         }
 
-        public Product AddProducts(UpdateProductDto input)
+        public ProductDto AddProducts(UpdateProductDto input)
         {
             var productCode = input.Name.ToLower();
+            productCode = System.Text.RegularExpressions.Regex.Replace(productCode, @"\p{IsCombiningDiacriticalMarks}+", string.Empty);
             var insert = _mapper.Map<Product>(input);
             insert.Code = productCode;
             var result = _dbContext.Products.Add(insert);
             _dbContext.SaveChanges();
-            return result.Entity;
+            return _mapper.Map<ProductDto>(result.Entity);
         }
 
-        public Product UpdateProducts(UpdateProductDto input)
+        public ProductDto UpdateProducts(UpdateProductDto input)
         {
             var product = _dbContext.Products.FirstOrDefault(e => e.Id == input.Id);
             if(product == null)
@@ -38,8 +41,12 @@ namespace MOMShop.Services.Implements
                 throw new System.Exception("Không tìm thấy sản phẩm");
             }
             product.Name = input.Name;
+            product.Status = input.Status;
+            product.Status = input.Status;
+            product.Description = input.Description;
+            product.ProductType = input.ProductType;
             _dbContext.SaveChanges();
-            return product;
+            return _mapper.Map<ProductDto>(product);
         }
 
         public void DeleteProducts(int id)
@@ -54,20 +61,34 @@ namespace MOMShop.Services.Implements
 
         }
 
-        public Product FindById(int id)
+        public ProductDto FindById(int id)
         {
             var product = _dbContext.Products.FirstOrDefault(e => e.Id == id);
             if (product == null)
             {
                 throw new System.Exception("Không tìm thấy sản phẩm");
             }
-            return product;
+            return _mapper.Map<ProductDto>(product);
         }
 
-        public List<Product> GetProducts()
+        public Paging<ProductDto> GetProducts(FilterProductDto input)
         {
-            var result = _dbContext.Products.ToList();
+            var result = new Paging<ProductDto>();
+            result.Items = new List<ProductDto>();
+
+            var products = _dbContext.Products.Where(e => !e.Deleted && (input.Status == null || e.Status == input.Status) && (input.Keyword == null || e.Name.Contains(input.Keyword) || e.Code.Contains(input.Keyword))).ToList();
+
+            foreach (var product in products)
+            {
+                var item = _mapper.Map<ProductDto>(product);
+                result.Items.Add(item);
+            }
+            result.TotalItems = result.Items.Count;
+
+            result.Items = result.Items.Skip(input.Skip).Take(input.PageSize).ToList();
             return result;
         }
+
+
     }
 }

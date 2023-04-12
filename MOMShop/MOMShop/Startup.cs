@@ -50,7 +50,10 @@ namespace MOMShop
             services.AddAutoMapper(typeof(MapperProfile));
             //Add Services
             services.AddScoped<IProductServices, ProductServices>();
+            services.AddScoped<IProductDetailServices, ProductDetailServices>();
             services.AddScoped<IUserServices, UserServices>();
+            services.AddScoped<IOrderServices, OrderServices>();
+            services.AddScoped<IOrderDetailServices, OrderDetailServices>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

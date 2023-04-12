@@ -1,10 +1,10 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using MOMShop.Dto.ProductDetail;
+using System.Collections.Generic;
 
-namespace MOMShop.Entites
+namespace MOMShop.Dto.Product
 {
-    public class Product
+    public class ProductDto
     {
-        [Key]
         public int Id { get; set; }
         public string Code { get; set; }
         public string Name { get; set; }
@@ -16,5 +16,6 @@ namespace MOMShop.Entites
         public string Description { get; set; }
         public int Status { get; set; }
         public bool Deleted { get; set; }
+        public List<ProductDetailDto> ProductDetails { get; set; }
     }
 }
