@@ -5,7 +5,10 @@ using MOMShop.Entites;
 using MOMShop.MomShopDbContext;
 using MOMShop.Services.Interfaces;
 using MOMShop.Utils;
+using MOMShop.Utils.HistoryUpdate;
+using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 
 namespace MOMShop.Services.Implements
@@ -40,11 +43,22 @@ namespace MOMShop.Services.Implements
             {
                 throw new System.Exception("Không tìm thấy sản phẩm");
             }
+
+            _dbContext.HistoryUpdates.Add(new HistoryUpdate()
+            {
+                Table = HistoryUpdateTable.PRODUCT,
+                ReferId = product.Id,
+                ColumnUpdate = HistoryUpdateColumn.PRODUCT_PRICE,
+                OldValue = product.Price.ToString(),
+                NewValue = input.Price.ToString()
+            });
+
             product.Name = input.Name;
-            product.Status = input.Status;
+            product.Code = input.Code;
             product.Status = input.Status;
             product.Description = input.Description;
             product.ProductType = input.ProductType;
+
             _dbContext.SaveChanges();
             return _mapper.Map<ProductDto>(product);
         }
