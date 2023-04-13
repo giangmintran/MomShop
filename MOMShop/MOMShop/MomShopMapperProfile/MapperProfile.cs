@@ -1,6 +1,8 @@
 ﻿using AutoMapper;
 using MOMShop.Dto.Order;
 using MOMShop.Dto.Product;
+using MOMShop.Dto.ReceiveOrder;
+using MOMShop.Dto.ReceiveOrderDetail;
 using MOMShop.Entites;
 
 namespace MOMShop.MomShopMapperProfile
@@ -14,6 +16,14 @@ namespace MOMShop.MomShopMapperProfile
             CreateMap<ProductDto, Product>().ReverseMap();
             #region Order
             CreateMap<OrderDto, Order>().ReverseMap();
+            #endregion
+
+            #region ReceiveOrder
+            CreateMap<ReceiveOrderDto, ReceiveOrder>().ReverseMap();
+            CreateMap<CreateReceiveOrderDto, ReceiveOrder>().ReverseMap();
+            #endregion
+            #region ReceiveOrderDetail
+            CreateMap<ReceiveOrderDetailDto, ReceiveOrderDetail>().ReverseMap();
             #endregion
         }
     }

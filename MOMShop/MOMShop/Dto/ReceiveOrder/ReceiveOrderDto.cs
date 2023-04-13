@@ -1,22 +1,21 @@
 ﻿using Microsoft.EntityFrameworkCore;
-using System;
 using System.ComponentModel.DataAnnotations;
+using System;
+using System.Collections.Generic;
+using MOMShop.Dto.ReceiveOrderDetail;
 
-namespace MOMShop.Entites
+namespace MOMShop.Dto.ReceiveOrder
 {
-    public class ReceiveOrder
+    public class ReceiveOrderDto
     {
-        [Key]
-        public int Id { get; set; }
+        public int? Id { get; set; }
         public string Code { get; set; }
         public DateTime CreatedDate { get; set; }
         public DateTime ReceivedDate { get; set; }
-        [Comment("Nguoi gui (Xuong may gui))")]
         public string Supplier { get; set; }
         public string Receiver { get; set; }
-        public int Status { get; set; }
         public string Description { get; set; }
-        public bool Deleted { get; set; }
-
+        public int Status { get; set; }
+        public List<ReceiveOrderDetailDto> Details { get; set; }    
     }
 }
