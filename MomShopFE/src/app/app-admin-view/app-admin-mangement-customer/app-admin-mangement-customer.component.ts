@@ -35,8 +35,12 @@ export class AppAdminMangementCustomerComponent {
         header: 'Id',
       },
       {
-        field: 'nameCustomer',
-        header: 'Tên khách hàng',
+        field: 'firstName',
+        header: 'Họ',
+      },
+      {
+        field: 'lastName',
+        header: 'Tên Đệm',
       },
       {
         field: 'email',
@@ -47,13 +51,25 @@ export class AppAdminMangementCustomerComponent {
         header: 'SĐT',
       },
       {
-        field: 'address',
-        header: 'Địa chỉ',
+        field: 'gender',
+        header: 'Giới tính',
       },
       {
-        field: 'accumulatePoint',
-        header: 'Điểm tích lũy',
+        field: 'birthDate',
+        header: 'Ngày sinh',
       },
+      {
+        field: 'bankName',
+        header: 'Tên ngân hàng',
+      },
+      {
+        field: 'bankAccount',
+        header: 'Tên ngân hàng',
+      },
+      // {
+      //   field: 'accumulatePoint',
+      //   header: 'Điểm tích lũy',
+      // },
     ];
     this.getAllCustomer();
   }

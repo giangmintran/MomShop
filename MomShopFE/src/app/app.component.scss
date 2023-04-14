@@ -178,3 +178,11 @@
    overflow: hidden;
    height: 100vh;
 }
+:host ::ng-deep{
+    .p-element .p-dropdown.p-component
+   {
+    height: 35px;
+    display: flex !important;
+    align-items: center;
+   }
+}

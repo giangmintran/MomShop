@@ -6,6 +6,11 @@
 			<button class="btn btn-outline-primary" *ngIf="filter" (click)="onFilterChange()">Ẩn bộ lọc</button>
 		</div>
 		<div class="row mb-3 mt-3" *ngIf="filter">
+			<div class="col-md-3">
+				<div class="form-group">
+					<p-dropdown [options]="cities" [(ngModel)]="selectedCity" [style]="{'height':'35px','width':'100%'}" optionLabel="name" optionValue="code"></p-dropdown>
+				</div>
+			</div>
 			<div class="col-md-3"><input type="text" class="input-text" placeholder="Nhập tên khách hàng" pInputText [(ngModel)]="orderCode" /></div>
 			<div class="col-md-3"><input type="text" class="input-text" placeholder="Nhập email" pInputText [(ngModel)]="pointEvaluate" /></div>
 		</div>

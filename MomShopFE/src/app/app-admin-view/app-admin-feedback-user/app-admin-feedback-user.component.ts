@@ -17,6 +17,8 @@ export class AppAdminFeedbackUserComponent implements OnInit {
   //filter
   orderCode;
   pointEvaluate;
+  selectedCity;
+  cities;
   //---
   cols;
   tableData;
@@ -55,6 +57,13 @@ export class AppAdminFeedbackUserComponent implements OnInit {
         header: 'Số sao đánh giá',
       },
     ];
+    this.cities = [
+      {name: 'New York', code: 'NY'},
+      {name: 'Rome', code: 'RM'},
+      {name: 'London', code: 'LDN'},
+      {name: 'Istanbul', code: 'IST'},
+      {name: 'Paris', code: 'PRS'}
+  ];
     this.getAllCustomer();
   }
   getAllCustomer(): void {

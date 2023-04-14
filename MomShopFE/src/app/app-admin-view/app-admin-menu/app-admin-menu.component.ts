@@ -10,4 +10,14 @@ export class AppAdminMenuComponent {
   @Output() toggleSidebar: EventEmitter<boolean> = new EventEmitter<boolean>();
 
   handleSidebarToggle = () => this.toggleSidebar.emit(!this.isExpanded);
+  ClickMenu(){
+    var menuItem = document.querySelectorAll(".item");
+    var menuActive = document.getElementsByClassName("active")[0];
+    menuActive.classList.remove("active");
+    menuItem.forEach((item)=>{
+       item.addEventListener("click",function(){
+         item.classList.add("active");
+       })
+    })
+  }
 }
