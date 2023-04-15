@@ -4,6 +4,7 @@ import { ToastrService } from 'ngx-toastr';
 import { Product } from 'src/models/product';
 import { ProductService } from 'src/services/product.service';
 import { AppAdminViewDetailProductComponent } from './app-admin-view-detail-product/app-admin-view-detail-product.component';
+import { CreateOrEditProductComponent } from './create-or-edit-product/create-or-edit-product.component';
 
 @Component({
   selector: 'app-app-admin-management-product',
@@ -14,12 +15,20 @@ export class AppAdminManagementProductComponent {
   //@ViewChild('createUser', { static: true })
   //modalUser: CreateOrEditProductComponent;
   @ViewChild('viewDetail', { static: true }) viewDetail : AppAdminViewDetailProductComponent
+  @ViewChild('createOrEdit', { static: true }) modalCreateOrEdit : CreateOrEditProductComponent
   product: Product;
   cols;
   tableData;
   selectedProduct;
   selectedDetailProduct
   totalRecords;
+  status = undefined;
+  listStatus = [
+    {code :'Tất cả',value:undefined},
+    {code :'1',value:1},
+    {code :'2',value:2},
+    {code :'3',value:3},
+  ]
   ngOnInit(): void {}
   constructor(private http: HttpClient,public productServices : ProductService,public toastr: ToastrService) {
     this.cols = [
@@ -36,16 +45,12 @@ export class AppAdminManagementProductComponent {
         header: 'Tên sản phẩm',
       },
       {
-        field: 'producType',
+        field: 'productType',
         header: 'Loại sản phẩm',
       },
       {
-        field: 'priceSell',
+        field: 'price',
         header: 'Giá bán',
-      },
-      {
-        field: 'priceImport',
-        header: 'Giá nhập',
       },
       {
         field: 'description',
@@ -59,14 +64,14 @@ export class AppAdminManagementProductComponent {
     this.getProductData();
   }
   getProductData(): void {
-    this.productServices.getAllProduct().subscribe((data) => {
-      this.tableData = data;
+    this.productServices.getAllProduct(this.status).subscribe((data) => {
+      this.tableData = data.items;
       this.selectedProduct = undefined
     });
   }
   onSelectionChange(event) {}
   createUsers() {
-    //this.modalUser.show();
+    this.modalCreateOrEdit.show();
   }
   editUser() {
     //this.modalUser.show(this.selectedProduct.id);

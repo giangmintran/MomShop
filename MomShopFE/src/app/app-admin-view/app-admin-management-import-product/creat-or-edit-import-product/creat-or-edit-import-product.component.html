@@ -9,25 +9,8 @@
                                 <label class="label-text" for="name">Mã sản phẩm</label>
                                 <input type="text" class="input-text" pInputText [(ngModel)]="product.name" />
                             </div>
-                            <div class="col-4">
-                                <label class="label-text" for="category">Tên sản phẩm</label>
-                                <input type="text" class="input-text" pInputText [(ngModel)]="product.category" />
-                            </div>
-                                <div class="col-md-4 d-flex">
-                                    <!-- <div class="form-group"> -->
-                                        <p-dropdown [options]="listTypeProduct" [(ngModel)]="product.category" placeholder="Loại sản phẩm" [style]="{'height':'29px','width':'100%'}" optionLabel="name" optionValue="value"></p-dropdown>
-                                    <!-- </div> -->
-                                </div>
                         </div>
                         <div class="row">
-                            <div class="col-4">
-                                <label class="label-text" for="quantity">Giá nhập</label>
-                                <input type="text" class="input-text" pInputText [(ngModel)]="product.quantity" />
-                            </div>
-                            <div class="col-4">
-                                <label class="label-text" for="quantity">Trạng thái</label>
-                                <input type="text" class="input-text" pInputText [(ngModel)]="product.quantity" />
-                            </div>
                         </div>
                 </div>
                 <div class="modal-footer modal-footer-master">

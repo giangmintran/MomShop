@@ -1,15 +1,19 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
+import { Observable } from 'rxjs';
 
 @Injectable({
   providedIn: 'root',
 })
 export class ProductService {
-  baseUrl = 'https://localhost:44308/api/product/';
+  baseUrl = 'http://localhost:5001/api/product/';
   constructor(private http: HttpClient) {}
-  getAllProduct() {
+  getAllProduct(status?): Observable<any> {
+    if(status == undefined){
     return this.http.get(this.baseUrl + 'find-all');
-  }
+    }
+    return this.http.get(this.baseUrl + 'find-all' +'?status=' + status);
+  } 
   deleteProduct(id:number) {
     return this.http.delete(this.baseUrl + 'delete/' + id);
   }

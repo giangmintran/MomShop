@@ -6,7 +6,7 @@ import { NgModel } from "@angular/forms";
     providedIn: 'root',
   })
   export class OrderService{
-    baseUrl = 'https://localhost:44308/api/order/';
+    baseUrl = 'http://localhost:5001    /api/order/';
     constructor(private http: HttpClient) {}
     getAllOrder() {
       return this.http.get(this.baseUrl + 'find-all');

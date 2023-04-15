@@ -6,11 +6,16 @@
         <button class="btn btn-add ml-2 btn-delete btn-outline-danger" [disabled]="!selectedProduct" (click)="deleteUser()">Xoá</button>
     </div>
     <div class="user">							
+		<div class="row mb-3">
+			<div class="col-md-3">
+				<p-dropdown [options]="listStatus" [showClear]="true" [(ngModel)]="status" placeholder="Trạng thái" [style]="{'height':'29px','width':'100%'}" (onChange)="getProductData()" optionLabel="code" optionValue="value"></p-dropdown>
+			</div>
+		</div>
 		<h3 class="mb-3">Danh sách sản phẩm</h3>
-        <p-table [value]="tableData"  [paginator]="true" [rows]="10" [rowsPerPageOptions]="[5,10,15,20]"
+        <p-table [value]="tableData"  [paginator]="true"  [rows]="10" [rowsPerPageOptions]="[5,10,15,20]"
 		(onLazyLoad)="getProductData()" [tableStyle]="{'width': '100% -280px'}" paginatorPosition="bottom"
   [columns]="cols" selectionMode="single" [(selection)]="selectedProduct" (selectionChange)="onSelectionChange($event)"
-   [rows]="2" >
+   [rows]="3" >
 	<ng-template pTemplate="header" let-columns>
 		<tr>
 			<th *ngFor="let cols of columns">
@@ -35,3 +40,4 @@
     </div>
 </div>
 <app-admin-view-detail-product #viewDetail></app-admin-view-detail-product>
+<app-create-or-edit-product #createOrEdit (modalSave)="getProductData()"></app-create-or-edit-product>

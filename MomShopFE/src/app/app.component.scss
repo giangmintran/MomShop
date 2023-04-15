@@ -169,7 +169,7 @@
         height: 28px;
     }
     .label-text{
-        font-size:8px !important
+        font-size:14px !important
     }
     .p-table{
         min-height: 400px;
@@ -195,6 +195,10 @@
     height: 600px;
     //align-items: flex-end;
 }
+    p-dropdown{
+       display: flex;
+        align-items: flex-end;
+    }
 .container1{
     display: flex;
     justify-content: space-between;

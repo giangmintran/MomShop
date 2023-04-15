@@ -90,7 +90,7 @@ namespace MOMShop.Services.Implements
             var result = new Paging<ProductDto>();
             result.Items = new List<ProductDto>();
 
-            var products = _dbContext.Products.Where(e => !e.Deleted && (input.Status == null || e.Status == input.Status) && (input.Keyword == null || e.Name.Contains(input.Keyword) || e.Code.Contains(input.Keyword))).ToList();
+            var products = _dbContext.Products.Where(e => !e.Deleted && (input.Status == null || e.Status == input.Status)).ToList();
 
             foreach (var product in products)
             {

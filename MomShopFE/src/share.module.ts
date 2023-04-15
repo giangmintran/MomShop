@@ -34,5 +34,5 @@ import { AppAdminManagementImportProductModule } from "./app/app-admin-view/app-
     AppAdminManagementImportProductModule
   ],
   exports: [AppAdminMenuComponent],
-})
+}) 
 export class SharedModule {}

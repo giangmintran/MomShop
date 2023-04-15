@@ -5,11 +5,11 @@ import { UpdateProductDto } from 'src/models/updateProduct';
 import { ProductService } from 'src/services/product.service';
 
 @Component({
-  selector: 'app-create-or-edit-customer',
-  templateUrl: './create-or-edit-customer.component.html',
-  styleUrls: ['./create-or-edit-customer.component.scss']
+  selector: 'app-create-or-edit-product',
+  templateUrl: './create-or-edit-product.component.html',
+  styleUrls: ['./create-or-edit-product.component.scss']
 })
-export class CreateOrEditCustomerComponent {
+export class CreateOrEditProductComponent {
   product: UpdateProductDto = new UpdateProductDto();
   saving = false;
   active;
@@ -17,17 +17,51 @@ export class CreateOrEditCustomerComponent {
   name:string;
   test;
   category
-  quantity
+  quantity;
+  tableData;
+  cols;
+  listTypeProduct
+  selectedProduct
   @ViewChild('createOrEditModal', { static: true }) modal: ModalDirective;
   @Output() modalSave: EventEmitter<any> = new EventEmitter<any>();
   constructor(public productServices: ProductService,public toastr: ToastrService) {
-    this.cities = [
-      { name: 'New York', code: 'NY' },
-      { name: 'Rome', code: 'RM' },
-      { name: 'London', code: 'LDN' },
-      { name: 'Istanbul', code: 'IST' },
-      { name: 'Paris', code: 'PRS' }
-  ];
+    this.listTypeProduct = [
+      { name: "Áo thun", value: 1 },
+      { name: "Áo sơ mi", value: 2 },
+      { name: "Áo khoác", value: 3 },
+      { name: "Quần", value: 4 },
+      { name: "Phụ kiện", value: 5 },
+    ];
+   this.cols = [
+      {
+        field: 'id',
+        header: 'STT',
+      },
+      {
+        field: 'code',
+        header: 'Mã sản phẩm',
+      },
+      {
+        field: 'name',
+        header: 'Tên sản phẩm',
+      },
+      {
+        field: 'producType',
+        header: 'Loại sản phẩm',
+      },
+      {
+        field: 'price',
+        header: 'Giá bán',
+      },
+      {
+        field: 'description',
+        header: 'Mô tả',
+      },
+      {
+        field: 'status',
+        header: 'Trạng thái',
+      },
+    ];
   }
   show(id?) {
     if(id){

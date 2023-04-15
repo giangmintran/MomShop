@@ -1,7 +1,7 @@
 import { Component, EventEmitter, Output, ViewChild } from '@angular/core';
 import { ModalDirective } from 'ngx-bootstrap/modal';
 import { ToastrService } from 'ngx-toastr';
-import { UpdateProductDto } from 'src/models/UpdateProductDto';
+import { UpdateProductDto } from 'src/models/updateProduct';
 import { ProductService } from 'src/services/product.service';
 
 @Component({

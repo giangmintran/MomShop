@@ -63,7 +63,7 @@ export class AppAdminMangementCustomerComponent {
         header: 'Tên ngân hàng',
       },
       {
-        field: 'bankAccount',
+        field: 'ankAccount',
         header: 'Tên ngân hàng',
       },
       // {
@@ -74,7 +74,7 @@ export class AppAdminMangementCustomerComponent {
     this.getAllCustomer();
   }
   getAllCustomer(): void {
-    this.productServices.getAllProduct().subscribe((data)=>{
+    this.productServices.getAllProduct(3).subscribe((data)=>{
       this.tableData = data;
       this.totalRecords = this.tableData
     });
@@ -88,7 +88,7 @@ export class AppAdminMangementCustomerComponent {
   }
   deleteUser() {
     this.productServices.deleteProduct(this.selectedRow.id).subscribe((data)=>{
-      this.productServices.getAllProduct().subscribe(()=>{
+      this.productServices.getAllProduct(3).subscribe(()=>{
         this.toastr.success('Xoá thành công','Thông báo',{
           timeOut:100
         });

@@ -1,5 +1,8 @@
 export class UpdateProductDto{
     name : any;
-    category: any;
-    quantity: any
+    code :string;
+    status : number;
+    productType:number;
+    price:number;
+    description:string;
 }

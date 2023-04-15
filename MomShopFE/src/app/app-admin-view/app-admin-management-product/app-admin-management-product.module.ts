@@ -10,13 +10,15 @@ import { InputTextModule } from 'primeng/inputtext';
 import { TableModule } from 'primeng/table';
 import { AppBsModalModule } from 'src/directive/app-bs-modal.module';
 import { AppAdminViewDetailProductComponent } from './app-admin-view-detail-product/app-admin-view-detail-product.component';
+import { CreateOrEditProductComponent } from './create-or-edit-product/create-or-edit-product.component';
 
 
 
 @NgModule({
   declarations: [
     AppAdminManagementProductComponent,
-    AppAdminViewDetailProductComponent
+    AppAdminViewDetailProductComponent,
+    CreateOrEditProductComponent
   ],
   imports: [
     CommonModule,
