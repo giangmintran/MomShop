@@ -3,7 +3,6 @@ import { Component, ViewChild } from '@angular/core';
 import { ToastrService } from 'ngx-toastr';
 import { Product } from 'src/models/product';
 import { ProductService } from 'src/services/product.service';
-import { CreateOrEditProductComponent } from './create-or-edit-product/create-or-edit-product.component';
 
 @Component({
   selector: 'app-app-admin-management-product',
@@ -12,30 +11,47 @@ import { CreateOrEditProductComponent } from './create-or-edit-product/create-or
 })
 export class AppAdminManagementProductComponent {
   @ViewChild('createUser', { static: true })
-  modalUser: CreateOrEditProductComponent;
+  //modalUser: CreateOrEditProductComponent;
   product: Product;
   cols;
   tableData;
-  selectedRow;
+  selectedProduct;
+  selectedDetailProduct
   totalRecords;
   ngOnInit(): void {}
   constructor(private http: HttpClient,public productServices : ProductService,public toastr: ToastrService) {
     this.cols = [
       {
         field: 'id',
-        header: '#Id',
+        header: 'STT',
+      },
+      {
+        field: 'code',
+        header: 'Mã sản phẩm',
       },
       {
         field: 'name',
-        header: 'Name',
+        header: 'Tên sản phẩm',
       },
       {
-        field: 'category',
-        header: 'Category',
+        field: 'producType',
+        header: 'Loại sản phẩm',
       },
       {
-        field: 'quantity',
-        header: 'Quantity',
+        field: 'priceSell',
+        header: 'Giá bán',
+      },
+      {
+        field: 'priceImport',
+        header: 'Giá nhập',
+      },
+      {
+        field: 'description',
+        header: 'Mô tả',
+      },
+      {
+        field: 'status',
+        header: 'Trạng thái',
       },
     ];
     this.getProductData();
@@ -43,18 +59,18 @@ export class AppAdminManagementProductComponent {
   getProductData(): void {
     this.productServices.getAllProduct().subscribe((data) => {
       this.tableData = data;
-      this.selectedRow = undefined
+      this.selectedProduct = undefined
     });
   }
   onSelectionChange(event) {}
   createUsers() {
-    this.modalUser.show();
+    //this.modalUser.show();
   }
   editUser() {
-    this.modalUser.show(this.selectedRow.id);
+    //this.modalUser.show(this.selectedProduct.id);
   }
   deleteUser() {
-    this.productServices.deleteProduct(this.selectedRow.id).subscribe((data)=>{
+    this.productServices.deleteProduct(this.selectedProduct.id).subscribe((data)=>{
       this.toastr.success('Xoá thành công','Thông báo',{timeOut: 1000});
       this.productServices.getAllProduct().subscribe(()=>{
         this.getProductData();

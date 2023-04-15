@@ -23,4 +23,16 @@ export class ProductService {
   detailProduct(id:number) {
     return this.http.get(this.baseUrl + 'detail/' + id);
   }
+  addDetailProduct(product:any){
+    return this.http.post(this.baseUrl+ 'add-detail',product)
+  }
+  updateDetailProduct(product:any){
+    return this.http.put(this.baseUrl+ 'add-detail',product)
+  }
+  deleteDetailProduct(productDetailId:number) {
+    return this.http.get(this.baseUrl + 'delete-detail/' + productDetailId);
+  }
+  getAllViewDetailProduct(productDetailId:number) {
+    return this.http.get(this.baseUrl + 'product-detail/' + productDetailId);
+  }
 }

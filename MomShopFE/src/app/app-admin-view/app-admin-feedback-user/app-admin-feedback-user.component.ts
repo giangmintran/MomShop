@@ -18,7 +18,7 @@ export class AppAdminFeedbackUserComponent implements OnInit {
   orderCode;
   pointEvaluate;
   selectedCity;
-  cities;
+  listPoint;
   //---
   cols;
   tableData;
@@ -42,27 +42,35 @@ export class AppAdminFeedbackUserComponent implements OnInit {
       },
       {
         field: 'customerName',
-        header: 'Tên khách hàng',
+        header: 'Mã khách hàng',
       },
       {
         field: 'productName',
         header: 'Tên sản phẩm',
       },
       {
-        field: 'address',
+        field: 'content',
         header: 'Phản hồi',
+      },
+      {
+        field: 'email',
+        header: 'Email',
+      },
+      {
+        field: 'createdDate',
+        header: 'Ngày tạo',
       },
       {
         field: 'pointEvaluate',
         header: 'Số sao đánh giá',
       },
     ];
-    this.cities = [
-      {name: 'New York', code: 'NY'},
-      {name: 'Rome', code: 'RM'},
-      {name: 'London', code: 'LDN'},
-      {name: 'Istanbul', code: 'IST'},
-      {name: 'Paris', code: 'PRS'}
+    this.listPoint = [
+      {name: '1 sao ', code: '1'},
+      {name: '2 sao', code: '2'},
+      {name: '3 sap', code: '3'},
+      {name: '4 sao', code: '4'},
+      {name: '5 sao', code: '5'}
   ];
     this.getAllCustomer();
   }

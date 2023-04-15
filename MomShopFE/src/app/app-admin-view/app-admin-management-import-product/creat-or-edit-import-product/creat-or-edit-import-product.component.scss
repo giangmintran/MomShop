@@ -4,3 +4,9 @@
 .input-text{
     height: 28px;
 }
+:host ::ng-deep{
+    p-dropdown{
+        display: flex;
+        align-items: flex-end;
+    }
+}

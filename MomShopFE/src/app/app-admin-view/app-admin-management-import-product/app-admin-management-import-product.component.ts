@@ -3,7 +3,6 @@ import { Component, ViewChild } from '@angular/core';
 import { ToastrService } from 'ngx-toastr';
 import { Product } from 'src/models/product';
 import { ProductService } from 'src/services/product.service';
-import { CreateOrEditProductComponent } from '../app-admin-management-product/create-or-edit-product/create-or-edit-product.component';
 import { CreatOrEditImportProductComponent } from './creat-or-edit-import-product/creat-or-edit-import-product.component';
 
 @Component({
@@ -24,19 +23,31 @@ export class AppAdminManagementImportProductComponent {
     this.cols = [
       {
         field: 'id',
-        header: '#Id',
+        header: 'STT',
+      },
+      {
+        field: 'code',
+        header: 'Code',
       },
       {
         field: 'name',
         header: 'Name',
       },
       {
-        field: 'category',
-        header: 'Category',
+        field: 'type',
+        header: 'Loại sản phẩm',
       },
       {
-        field: 'quantity',
-        header: 'Quantity',
+        field: 'price',
+        header: 'Giá nhập',
+      },
+      {
+        field: 'status',
+        header: 'Trạng thái',
+      },
+      {
+        field: 'description',
+        header: 'Mô tả',
       },
     ];
     this.getProductData();
@@ -44,7 +55,7 @@ export class AppAdminManagementImportProductComponent {
   getProductData(): void {
     this.productServices.getAllProduct().subscribe((data)=>{
       this.tableData = data;
-      this.totalRecords = this.tableData.l
+      this.totalRecords = this.tableData
     });
   }
   onSelectionChange(event) {}

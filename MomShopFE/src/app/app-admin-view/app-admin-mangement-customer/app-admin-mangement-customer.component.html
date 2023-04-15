@@ -27,10 +27,14 @@
 			</tr>
 		</ng-template>
 	
-		<ng-template pTemplate="body" let-tableData let-columns="columns">
+		<ng-template pTemplate="body" let-tableData="$implicit" let-columns="columns">
 			<tr [pSelectableRow]="tableData">
 				<td *ngFor="let cols of columns">
 					{{tableData[cols.field]}}
+				</td>
+				<td>
+					<button class="btn btn-add ml-2 btn-outline-primary" [disabled]="!selectedRow" (click)="editUser()">Sửa</button>
+        <button class="btn btn-add ml-2 btn-delete btn-outline-danger" [disabled]="!selectedRow" (click)="deleteUser()">Xoá</button>
 				</td>
 			</tr>
 		</ng-template>
