@@ -44,7 +44,6 @@ namespace MOMShop
             //Add Services
             services.AddScoped<IProductServices, ProductServices>();
             services.AddScoped<IProductDetailServices, ProductDetailServices>();
-            services.AddScoped<IUserServices, UserServices>();
             services.AddScoped<IOrderServices, OrderServices>();
             services.AddScoped<IOrderDetailServices, OrderDetailServices>();
             services.AddScoped<IReceiveOrderServices, ReceiveOrderServices>();

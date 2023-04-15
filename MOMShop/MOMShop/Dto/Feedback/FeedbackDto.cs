@@ -1,11 +1,9 @@
 ﻿using System;
-using System.ComponentModel.DataAnnotations;
 
-namespace MOMShop.Entites
+namespace MOMShop.Dto.Feedback
 {
-    public class Feedback
+    public class FeedbackDto
     {
-        [Key]
         public int Id { get; set; }
         public string CustomerName { get; set; }
         public string OrderCode { get; set; }

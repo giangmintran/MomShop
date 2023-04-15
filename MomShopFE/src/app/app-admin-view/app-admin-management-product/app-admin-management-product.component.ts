@@ -16,9 +16,10 @@ export class AppAdminManagementProductComponent {
   //modalUser: CreateOrEditProductComponent;
   @ViewChild('viewDetail', { static: true }) viewDetail : AppAdminViewDetailProductComponent
   @ViewChild('createOrEdit', { static: true }) modalCreateOrEdit : CreateOrEditProductComponent
+  rows: any[] = [];
   product: Product;
   cols;
-  tableData;
+  tableData: any;
   selectedProduct;
   selectedDetailProduct
   totalRecords;
@@ -64,8 +65,9 @@ export class AppAdminManagementProductComponent {
     this.getProductData();
   }
   getProductData(): void {
-    this.productServices.getAllProduct(this.status).subscribe((data) => {
-      this.tableData = data.items;
+    this.productServices.getAllProduct().subscribe((data) => {
+      this.rows = data?.items;
+      console.log(this.tableData);
       this.selectedProduct = undefined
     });
   }
@@ -84,7 +86,8 @@ export class AppAdminManagementProductComponent {
       })
     });
   }
-  viewDetailProduct(){
-    this.viewDetail.show();
+  viewDetailProduct(data){
+    console.log("abc",data);
+    this.viewDetail.show(data.id);
   }
 }

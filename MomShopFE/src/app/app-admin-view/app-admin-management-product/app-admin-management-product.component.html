@@ -1,6 +1,6 @@
 <div class="container1">
     <div class="block-button mb-3">
-        <button class="btn btn-filter mr-2 btn-outline-primary"  (click)="viewDetailProduct()">Xem chi tiết</button>
+        <!-- <button class="btn btn-filter mr-2 btn-outline-primary"  (click)="viewDetailProduct()">Xem chi tiết</button> -->
         <button class="btn btn-add mr-2 btn-outline-primary"  (click)="createUsers()">Thêm</button>
         <button class="btn btn-add ml-2 btn-outline-primary" [disabled]="!selectedProduct" (click)="editUser()">Sửa</button>
         <button class="btn btn-add ml-2 btn-delete btn-outline-danger" [disabled]="!selectedProduct" (click)="deleteUser()">Xoá</button>
@@ -12,7 +12,7 @@
 			</div>
 		</div>
 		<h3 class="mb-3">Danh sách sản phẩm</h3>
-        <p-table [value]="tableData"  [paginator]="true"  [rows]="10" [rowsPerPageOptions]="[5,10,15,20]"
+        <p-table [value]="rows"  [paginator]="true" [rows]="10" [rowsPerPageOptions]="[5,10,15,20]"
 		(onLazyLoad)="getProductData()" [tableStyle]="{'width': '100% -280px'}" paginatorPosition="bottom"
   [columns]="cols" selectionMode="single" [(selection)]="selectedProduct" (selectionChange)="onSelectionChange($event)"
    [rows]="3" >
@@ -21,13 +21,17 @@
 			<th *ngFor="let cols of columns">
 				{{cols.header}}
 			</th>
+			<th></th>
 		</tr>
 	</ng-template>
 
-	<ng-template pTemplate="body" let-tableData let-columns="columns">
-		<tr [pSelectableRow]="tableData">
+	<ng-template pTemplate="body" let-row let-columns="columns">
+		<tr [pSelectableRow]="rows">
 			<td *ngFor="let cols of columns">
-				{{tableData[cols.field]}}
+				{{row[cols.field]}}
+			</td>
+			<td>
+				<button class="btn btn-filter mr-2 btn-outline-primary"  (click)="viewDetailProduct(row)">Xem chi tiết</button>
 			</td>
 		</tr>
 	</ng-template>

@@ -20,8 +20,6 @@ namespace MOMShop.MomShopDbContext
         public DbSet<Product> Products { get; set; }
         public DbSet<ProductDetail> ProductDetails { get; set; }
         public DbSet<ProductImage> ProductImages { get; set; }
-        public DbSet<ReceivedProduct> ReceivedProducts { get; set; }
-        public DbSet<ReceiveProductDetail> ReceiveProductDetails { get; set; }
         public DbSet<ReceiveOrder> ReceiveOrders { get; set; }
         public DbSet<ReceiveOrderDetail> ReceiveOrderDetails { get; set; }
         public DbSet<Users> Users { get; set; }

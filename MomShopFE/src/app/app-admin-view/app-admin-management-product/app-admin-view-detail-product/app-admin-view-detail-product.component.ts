@@ -10,6 +10,7 @@ import { ProductService } from 'src/services/product.service';
   styleUrls: ['./app-admin-view-detail-product.component.scss']
 })
 export class AppAdminViewDetailProductComponent {
+  rows: any[] = [];
   product: UpdateProductDto = new UpdateProductDto();
   saving = false;
   active;
@@ -18,7 +19,8 @@ export class AppAdminViewDetailProductComponent {
   test;
   category
   quantity;
-  tableData;
+  tableData: any;
+  productDetail: any;
   cols
   selectedProduct
   @ViewChild('createOrEditModal', { static: true }) modal: ModalDirective;
@@ -37,38 +39,28 @@ export class AppAdminViewDetailProductComponent {
         header: 'STT',
       },
       {
-        field: 'code',
-        header: 'Mã sản phẩm',
+        field: 'size',
+        header: 'Size',
       },
       {
-        field: 'name',
-        header: 'Tên sản phẩm',
-      },
-      {
-        field: 'producType',
-        header: 'Loại sản phẩm',
-      },
-      {
-        field: 'priceSell',
-        header: 'Giá bán',
-      },
-      {
-        field: 'priceImport',
-        header: 'Giá nhập',
+        field: 'quantity',
+        header: 'Số lượng',
       },
       {
         field: 'description',
         header: 'Mô tả',
       },
-      {
-        field: 'status',
-        header: 'Trạng thái',
-      },
+     
     ];
   }
   show(id?) {
     if(id){
-        
+      this.productServices.detailProduct(id).subscribe((data) => {
+        console.log("data", data.productDetails);
+        this.productDetail = data;
+        this.rows = data.productDetails;
+        console.log("productDetail", this.rows);
+      });
     }
     this.modal.show();
     this.active = true;
@@ -91,4 +83,5 @@ export class AppAdminViewDetailProductComponent {
       this.close();
     });
   }
+
 }

@@ -1,6 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { Observable } from 'rxjs';
+import { Observable } from 'rxjs/internal/Observable';
 
 @Injectable({
   providedIn: 'root',
@@ -24,7 +24,7 @@ export class ProductService {
       return this.http.post(this.baseUrl + 'add', product);
     }
   }
-  detailProduct(id:number) {
+  detailProduct(id:number): Observable<any>{
     return this.http.get(this.baseUrl + 'detail/' + id);
   }
   addDetailProduct(product:any){

@@ -1,6 +1,7 @@
 ﻿using AutoMapper;
 using Microsoft.AspNetCore.Mvc;
 using MOMShop.Dto.Product;
+using MOMShop.Dto.ProductDetail;
 using MOMShop.Entites;
 using MOMShop.MomShopDbContext;
 using MOMShop.Services.Interfaces;
@@ -82,7 +83,10 @@ namespace MOMShop.Services.Implements
             {
                 throw new System.Exception("Không tìm thấy sản phẩm");
             }
-            return _mapper.Map<ProductDto>(product);
+            var result = _mapper.Map<ProductDto>(product);
+            var productDetail = _dbContext.ProductDetails.Where(e => e.ProductId == product.Id);
+            result.ProductDetails = _mapper.Map<List<ProductDetailDto>>(productDetail);
+            return result;
         }
 
         public Paging<ProductDto> GetProducts(FilterProductDto input)
