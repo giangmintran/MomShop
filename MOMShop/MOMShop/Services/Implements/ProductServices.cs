@@ -99,7 +99,7 @@ namespace MOMShop.Services.Implements
             }
             result.TotalItems = result.Items.Count;
 
-            result.Items = result.Items.Skip(input.Skip).Take(input.PageSize).ToList();
+            //result.Items = result.Items.Skip(input.Skip).Take(input.PageSize).ToList();
             return result;
         }
 

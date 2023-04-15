@@ -3,6 +3,7 @@ import { Component, ViewChild } from '@angular/core';
 import { ToastrService } from 'ngx-toastr';
 import { Product } from 'src/models/product';
 import { ProductService } from 'src/services/product.service';
+import { AppAdminViewDetailProductComponent } from './app-admin-view-detail-product/app-admin-view-detail-product.component';
 
 @Component({
   selector: 'app-app-admin-management-product',
@@ -10,8 +11,9 @@ import { ProductService } from 'src/services/product.service';
   styleUrls: ['./app-admin-management-product.component.scss']
 })
 export class AppAdminManagementProductComponent {
-  @ViewChild('createUser', { static: true })
+  //@ViewChild('createUser', { static: true })
   //modalUser: CreateOrEditProductComponent;
+  @ViewChild('viewDetail', { static: true }) viewDetail : AppAdminViewDetailProductComponent
   product: Product;
   cols;
   tableData;
@@ -76,5 +78,8 @@ export class AppAdminManagementProductComponent {
         this.getProductData();
       })
     });
+  }
+  viewDetailProduct(){
+    this.viewDetail.show();
   }
 }

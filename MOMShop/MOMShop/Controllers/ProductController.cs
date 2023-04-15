@@ -91,7 +91,7 @@ namespace MOMShop.Controllers
             }
         }
 
-        [HttpPost("add-detail")]
+        [HttpPost(" ")]
         public ProductDetailDto AddProductDetails([FromBody] ProductDetailDto input)
         {
             try
