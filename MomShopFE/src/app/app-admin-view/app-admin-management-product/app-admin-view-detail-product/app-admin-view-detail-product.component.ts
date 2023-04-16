@@ -21,8 +21,9 @@ export class AppAdminViewDetailProductComponent {
   category
   quantity;
   tableData: any;
-  productDetail: Product = new Product;
-  cols
+  productDetail: any;
+  cols;
+  colDetails
   selectedProduct
   @ViewChild('createOrEditModal', { static: true }) modal: ModalDirective;
   @Output() modalSave: EventEmitter<any> = new EventEmitter<any>();
@@ -33,8 +34,8 @@ export class AppAdminViewDetailProductComponent {
       { name: 'London', code: 'LDN' },
       { name: 'Istanbul', code: 'IST' },
       { name: 'Paris', code: 'PRS' }
-  ];
-   this.cols = [
+    ];
+    this.cols = [
       {
         field: 'id',
         header: 'STT',

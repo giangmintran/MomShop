@@ -2,40 +2,73 @@
     aria-labelledby="createOrEditModal" aria-hidden="true">
     <div class="modal-dialog modal-lg">
         <div class="modal-content">
-                <div class="modal-body modal-body-master">
-                    <div class="form-group form-group-master form-md-line-input form-md-floating-label no-hint input-bottom-form">
-                        <div class="row mb-2">
-                            <div class="col-4">
-                                <label class="label-text" for="name">Mã sản phẩm</label>
-                                <input type="text" class="input-text" pInputText [(ngModel)]="product.code" />
-                            </div>
-                            <div class="col-4">
-                                <label class="label-text" for="category">Tên sản phẩm</label>
-                                <input type="text" class="input-text" pInputText [(ngModel)]="product.name" />
-                            </div>
-                            <div class="col-md-4 d-flex">
-                                    <p-dropdown [options]="listTypeProduct" [(ngModel)]="product.status" placeholder="Trạng thái" [style]="{'height':'29px','width':'100%'}" optionLabel="name" optionValue="value"></p-dropdown>
-                            </div>
-                        </div>
-                        <div class="row">
-                            <div class="col-md-4 d-flex">
-                                <p-dropdown [options]="listTypeProduct" [(ngModel)]="product.status" placeholder="Loại sản phẩm" [style]="{'height':'29px','width':'100%'}" optionLabel="name" optionValue="value"></p-dropdown>
+            <div class="modal-body modal-body-master">
+                <h4 class="ml-2">
+                    Thông tin chi tiết
+                </h4>  
+                <div class="form-group form-group-master form-md-line-input form-md-floating-label no-hint input-bottom-form">
+                    <div class="row mb-2">
+                        <div class="col-4">
+                            <label class="label-text" for="name">Mã sản phẩm</label>
+                            <input type="text" class="input-text" pInputText [(ngModel)]="productFind.code" />
                         </div>
                         <div class="col-4">
-                            <label class="label-text" for="category">Giá</label>
-                            <input type="number" class="input-text" pInputText [(ngModel)]="product.price" />
+                            <label class="label-text" for="category">Tên sản phẩm</label>
+                            <input type="text" class="input-text" pInputText [(ngModel)]="productFind.name" />
                         </div>
-                        <div class="col-4">
-                            <label class="label-text" for="category">Mô tả</label>
-                            <input type="text" class="input-text" pInputText [(ngModel)]="product.description" />
+                        <div class="col-md-4 d-flex">
+                                <p-dropdown [options]="listStatus" [(ngModel)]="productFind.status" placeholder="Trạng thái" [style]="{'height':'29px','width':'100%'}" optionLabel="name" optionValue="value"></p-dropdown>
                         </div>
-                        </div>
-                </div>
-                <div class="modal-footer modal-footer-master">
-                    <button [disabled]="saving" type="button" class="btn btn-default" (click)="close()">Huỷ</button>
-                    <button type="button" (click)="save()" class="btn btn-primary">Lưu</button>
-                </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-4 d-flex">
+                            <p-dropdown [options]="listTypeProduct" [(ngModel)]="productFind.productType" placeholder="Loại sản phẩm" [style]="{'height':'29px','width':'100%'}" optionLabel="name" optionValue="value"></p-dropdown>
+                    </div>
+                    <div class="col-4">
+                        <label class="label-text" for="category">Giá</label>
+                        <input type="number" class="input-text" pInputText [(ngModel)]="productFind.price" />
+                    </div>
+                    <div class="col-4">
+                        <label class="label-text" for="category">Mô tả</label>
+                        <input type="text" class="input-text" pInputText [(ngModel)]="productFind.description" />
+                    </div>
+                   
+                    <div *ngIf="productFind.id">
+                        <hr class="mt-4">   
+                        <h5 class="ml-2">
+                            Thông tin size
+                        </h5>  
+                    </div>
+
+                    <div class="div" *ngIf="productFind.id">
+                        <p-table [value]="productFind.productDetails" [paginator]="false" [rows]="10"
+                            [rowsPerPageOptions]="[5,10,15,20]" (onLazyLoad)="getProductData()"
+                            [tableStyle]="{'width': '100%'}" paginatorPosition="bottom" [columns]="colDetails"
+                            selectionMode="single" [(selection)]="selectedProduct" [rows]="2">
+                            <ng-template pTemplate="header" let-columns>
+                                <tr>
+                                    <th *ngFor="let cols of columns">
+                                        {{cols.header}}
+                                    </th>
+                                </tr>
+                            </ng-template>
+    
+                            <ng-template pTemplate="body" let-productDetail let-columns="columns">
+                                <tr [pSelectableRow]="productFind.productDetails">
+                                    <td *ngFor="let cols of columns">
+                                        {{productDetail[cols.field]}}
+                                    </td>
+                                </tr>
+                            </ng-template>
+                        </p-table>
+                    </div>
             </div>
+                
+            <div class="modal-footer modal-footer-master">
+                <button [disabled]="saving" type="button" class="btn btn-default" (click)="close()">Huỷ</button>
+                <button type="button" (click)="save()" class="btn btn-primary">Lưu</button>
+            </div>
+        </div>
     </div>
 </div>
 </div>
