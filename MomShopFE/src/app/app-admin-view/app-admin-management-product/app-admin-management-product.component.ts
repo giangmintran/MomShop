@@ -75,11 +75,11 @@ export class AppAdminManagementProductComponent {
   createUsers() {
     this.modalCreateOrEdit.show();
   }
-  editUser() {
-    //this.modalUser.show(this.selectedProduct.id);
+  editUser(row) {
+    this.modalCreateOrEdit.show(row.id);
   }
-  deleteUser() {
-    this.productServices.deleteProduct(this.selectedProduct.id).subscribe((data)=>{
+  deleteUser(row) {
+    this.productServices.deleteProduct(row.id).subscribe((data)=>{
       this.toastr.success('Xoá thành công','Thông báo',{timeOut: 1000});
       this.productServices.getAllProduct().subscribe(()=>{
         this.getProductData();

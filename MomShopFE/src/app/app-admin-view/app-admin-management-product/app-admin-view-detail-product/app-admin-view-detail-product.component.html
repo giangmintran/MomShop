@@ -3,15 +3,24 @@
     <div class="modal-dialog modal-lg">
         <div class="modal-content">
             <div class="modal-body modal-body-master">
-                <div
-                    class="form-group form-group-master form-md-line-input form-md-floating-label no-hint input-bottom-form">
-                    <div class="">
-                        <div class="field mb-1">
-                            <label htmlFor="code" style="margin-right: 20px">Mã sản phẩm</label>
-                            <input 
-                                [(ngModel)]="productDetail.code" class= "input-text" type="text" id="code" name="code" pInputText maxlength="256" 
-                            />
+                <div class="form-group form-group-master form-md-line-input form-md-floating-label no-hint input-bottom-form">
+                    <div class="row mb-2">
+                        <!-- <div class="col-6">
+                            <div class="field mb-1">
+                                <label htmlFor="code" style="margin-right: 20px">Mã sản phẩm</label>
+                                <input 
+                                    [(ngModel)]="productDetail.code" class= "input-text" type="text" id="code" name="code" pInputText maxlength="256" 
+                                />
+                            </div>
                         </div>
+                        <div class="col-6">
+                            <div class="field mb-1">
+                                <label htmlFor="name" style="margin-right: 20px">Tên sản phẩm</label>
+                                <input 
+                                    [(ngModel)]="productDetail.name" class= "input-text" type="text" id="name" name="name" pInputText maxlength="256" 
+                                />
+                            </div>
+                        </div> -->
                     </div>
 
                     <p-table [value]="rows" [paginator]="false" [rows]="10"
