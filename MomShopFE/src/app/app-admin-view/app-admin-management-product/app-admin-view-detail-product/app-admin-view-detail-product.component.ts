@@ -1,6 +1,7 @@
 import { Component, EventEmitter, Output, ViewChild } from '@angular/core';
 import { ModalDirective } from 'ngx-bootstrap/modal';
 import { ToastrService } from 'ngx-toastr';
+import { Product } from 'src/models/product';
 import { UpdateProductDto } from 'src/models/updateProduct';
 import { ProductService } from 'src/services/product.service';
 
@@ -20,7 +21,7 @@ export class AppAdminViewDetailProductComponent {
   category
   quantity;
   tableData: any;
-  productDetail: any;
+  productDetail: Product = new Product;
   cols
   selectedProduct
   @ViewChild('createOrEditModal', { static: true }) modal: ModalDirective;

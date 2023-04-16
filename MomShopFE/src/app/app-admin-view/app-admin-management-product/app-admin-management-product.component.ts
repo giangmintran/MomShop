@@ -19,6 +19,7 @@ export class AppAdminManagementProductComponent {
   rows: any[] = [];
   product: Product;
   cols;
+  filter
   tableData: any;
   selectedProduct;
   selectedDetailProduct
@@ -89,5 +90,8 @@ export class AppAdminManagementProductComponent {
   viewDetailProduct(data){
     console.log("abc",data);
     this.viewDetail.show(data.id);
+  }
+  onFilterChange(){
+    this.filter = !this.filter;
   }
 }

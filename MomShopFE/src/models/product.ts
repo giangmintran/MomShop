@@ -1,4 +1,4 @@
-export interface Product {
+export class Product {
   productName: string;
   productCode: string
   productType:number;

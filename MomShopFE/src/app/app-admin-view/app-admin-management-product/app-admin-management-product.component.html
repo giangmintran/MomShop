@@ -1,17 +1,20 @@
 <div class="container1">
     <div class="block-button mb-3">
         <!-- <button class="btn btn-filter mr-2 btn-outline-primary"  (click)="viewDetailProduct()">Xem chi tiết</button> -->
+		<button *ngIf="!filter" class="btn btn-filter mr-2 btn-outline-primary"  (click)="onFilterChange()">Hiện bộ lọc</button>
+        <button *ngIf="filter"class="btn btn-filter mr-2 btn-outline-primary"  (click)="onFilterChange()">Ẩn bộ lọc</button>
         <button class="btn btn-add mr-2 btn-outline-primary"  (click)="createUsers()">Thêm</button>
         <button class="btn btn-add ml-2 btn-outline-primary" [disabled]="!selectedProduct" (click)="editUser()">Sửa</button>
         <button class="btn btn-add ml-2 btn-delete btn-outline-danger" [disabled]="!selectedProduct" (click)="deleteUser()">Xoá</button>
     </div>
     <div class="user">							
-		<div class="row mb-3">
-			<div class="col-md-3">
+		<div class="row mb-2" *ngIf="filter">
+			<div class="col-md-2">
 				<p-dropdown [options]="listStatus" [showClear]="true" [(ngModel)]="status" placeholder="Trạng thái" [style]="{'height':'29px','width':'100%'}" (onChange)="getProductData()" optionLabel="code" optionValue="value"></p-dropdown>
 			</div>
 		</div>
-		<h3 class="mb-3">Danh sách sản phẩm</h3>
+		<hr class="line">
+		<h4 class="mb-3">Danh sách sản phẩm</h4>
         <p-table [value]="rows"  [paginator]="true" [rows]="10" [rowsPerPageOptions]="[5,10,15,20]"
 		(onLazyLoad)="getProductData()" [tableStyle]="{'width': '100% -280px'}" paginatorPosition="bottom"
   [columns]="cols" selectionMode="single" [(selection)]="selectedProduct" (selectionChange)="onSelectionChange($event)"
