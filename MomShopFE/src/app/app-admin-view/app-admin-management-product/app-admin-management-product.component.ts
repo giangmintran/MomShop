@@ -20,6 +20,7 @@ export class AppAdminManagementProductComponent {
   product: Product;
   cols;
   filter
+  filterStatus = null;
   tableData: any;
   selectedProduct;
   selectedDetailProduct
@@ -66,7 +67,7 @@ export class AppAdminManagementProductComponent {
     this.getProductData();
   }
   getProductData(): void {
-    this.productServices.getAllProduct().subscribe((data) => {
+    this.productServices.getAllProduct(this.filterStatus).subscribe((data) => {
       this.rows = data?.items;
       console.log(this.tableData);
       this.selectedProduct = undefined

@@ -135,16 +135,21 @@ export class CreateOrEditProductComponent implements OnInit, OnDestroy{
     this.modal.hide();
   }
   save() {
-    this.productServices.createOrEdit(this.productFind).subscribe(()=>{
-      this.active = false;
-      if(this.productFind == undefined){
-        this.toastr.success('Cập nhật thành công','Thông báo');
-      } else {
+    if (this.productFind.id == undefined) {
+      this.productServices.createOrEdit(this.productFind).subscribe(()=>{
+        this.active = false;
         this.toastr.success('Thêm thành công','Thông báo');
-      }
-      this.modalSave.emit(null);
-      this.close();
-    });
+        this.modalSave.emit(null);
+        this.close();
+      });
+    } else {
+      this.productServices.createOrEdit(this.productFind).subscribe(()=>{
+        this.active = false;
+        this.toastr.success('Cập nhật thành công','Thông báo');
+        this.modalSave.emit(null);
+        this.close();
+      });
+    }
   }
   getProductData(){
 
