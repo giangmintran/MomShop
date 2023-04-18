@@ -37,6 +37,6 @@ export class ProductService {
     return this.http.get(this.baseUrl + 'delete-detail/' + productDetailId);
   }
   getAllViewDetailProduct(productDetailId:number) : Observable<any> {
-    return this.http.get(this.baseUrl + 'product-detail/' + productDetailId);
+    return this.http.get(this.baseUrl + 'detail/' + productDetailId);
   }
 }

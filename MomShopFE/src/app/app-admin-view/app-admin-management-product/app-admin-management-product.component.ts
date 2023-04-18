@@ -99,14 +99,14 @@ export class AppAdminManagementProductComponent {
       this.selectedProduct = undefined
     });
   }
-  getDetailProductData(number):void {
-    this.productServices.getAllViewDetailProduct(number).subscribe((data)=>{
+  getDetailProductData():void {
+    this.productServices.getAllViewDetailProduct(this.selectedProduct.id).subscribe((data)=>{
       this.detailProduct = data;
       console.log(this.detailProduct)
     })
   }
   onSelectionChange() {
-   this.getDetailProductData(1)
+   this.getDetailProductData();
   }
   createProdcut() {
     this.modalCreateOrEdit.show();

@@ -235,13 +235,19 @@
      //background-color: rgb(85, 85, 185);
      color:white
 }
-.p-inputtext,.p-inputwrapper{
+.p-inputtext{
+    font-size: 0.8rem !important;
+}
+.p-inputwrapper{
     font-size: 0.8rem !important;
 }
 .title{
     font-size: 1rem;
     font-weight: 600;
     color:red
+}
+.p-dropdown-items{
+    font-size: 0.8rem !important;
 }
 .btn-delete{
     color:red;
