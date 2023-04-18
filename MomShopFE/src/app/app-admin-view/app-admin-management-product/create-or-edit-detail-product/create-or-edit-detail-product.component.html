@@ -1,0 +1,41 @@
+<div appBsModal #createOrEditModal="bs-modal" class="modal fade" tabindex="-1" role="dialog"
+    aria-labelledby="createOrEditModal" aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-body modal-body-master">
+                <h4 class="ml-2">
+                    Chi tiết
+                </h4>  
+                <div class="">
+                    <div class="row mb-2">
+                        <div class="col-md-3 d-flex flex-column">
+                            <label class="label-text" for="name">Mã sản phẩm</label>
+                            <input type="text" class="input-text disabled" disabled="true" pInputText [(ngModel)]="productFind.code" />
+                        </div>
+                        <div class="col-md-3 d-flex flex-column">
+                            <label class="label-text" for="category">Tên sản phẩm</label>
+                            <input type="text" class="input-text disabled" disabled="true" pInputText [(ngModel)]="productFind.name" />
+                        </div>
+                    </div>
+                    <div class="row mt-2">
+                        <div class="col-md-3 d-flex flex-column">
+                            <label class="label-text">Size</label>
+                            <input type="number" class="input-text" pInputText [(ngModel)]="productFind.price" />
+                        </div>
+                        <div class="col-md-3 d-flex flex-column">
+                            <label class="label-text">Số lượng</label>
+                            <input type="number" class="input-text" pInputText [(ngModel)]="productFind.price" />
+                        </div>
+                        <div class="col-md-3 d-flex flex-column">
+                            <label class="label-text">Mô tả</label>
+                            <input type="text" class="input-text" pInputText [(ngModel)]="productFind.description" />
+                        </div>
+                    </div>
+            <div class="modal-footer modal-footer-master">
+                <button [disabled]="saving" type="button" class="btn btn-default" (click)="close()">Huỷ</button>
+                <button type="button" (click)="save()" class="btn btn-primary">Lưu</button>
+            </div>
+        </div>
+    </div>
+</div>
+</div>

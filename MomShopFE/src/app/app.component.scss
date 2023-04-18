@@ -10,7 +10,15 @@
   .text-dark {
       color: black !important;
   }
-
+  .modal-footer{
+    border: none;
+}
+.p-inputtext{
+    width: 100%;
+}
+// .p-inputwrapper {
+//     width: 100%;
+// }
   .modal-header-master {
       border-bottom: 2px solid #c8102e;
       padding: 0.55rem;
@@ -165,6 +173,9 @@
 
 }
 :host ::ng-deep{
+    .disabled{
+        background-color: gainsboro;
+    }
     .input-text{
         height: 28px;
     }
@@ -217,18 +228,30 @@
     //z-index: 1;
     margin-left: 5px;
     right: 0;
+    font-size: 0.8rem;
     cursor: pointer;
 }
 .btn-add:hover{
      //background-color: rgb(85, 85, 185);
      color:white
 }
+.p-inputtext,.p-inputwrapper{
+    font-size: 0.8rem !important;
+}
+.title{
+    font-size: 1rem;
+    font-weight: 600;
+    color:red
+}
 .btn-delete{
     color:red;
 }
+.btn{
+    font-size: 0.8rem;
+}
 .btn-delete:hover {
-    background-color: transparent;
-    color:red
+    background-color: #dc3545;
+    color:white
 }
 .btn-filter{
     padding: 5px 10px;

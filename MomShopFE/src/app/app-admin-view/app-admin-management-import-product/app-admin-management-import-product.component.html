@@ -30,7 +30,7 @@
 </p-table> 
 <h2 class="mb-2 title-grid">Chi tiết đơn nhập hàng</h2>
         <p-table [value]="tableData"  [paginator]="true" [rows]="10" [rowsPerPageOptions]="[5,10,15,20]"
-		(onLazyLoad)="getProductData()" [tableStyle]="{'width': '100% -280px'}" paginatorPosition="bottom"
+		(onLazyLoad)="getProductData()" [tableStyle]="{'width': '100% -280px','font-size':'0.8rem'}" paginatorPosition="bottom"
   [columns]="cols" selectionMode="single" [(selection)]="selectedRow" (selectionChange)="onSelectionChange($event)"
    [rows]="2" >
 	<ng-template pTemplate="header" let-columns>

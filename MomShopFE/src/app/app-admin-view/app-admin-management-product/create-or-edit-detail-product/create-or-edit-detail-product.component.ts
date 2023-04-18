@@ -1,16 +1,15 @@
-import { Component, EventEmitter, OnDestroy, OnInit, Output, ViewChild } from '@angular/core';
+import { Component, EventEmitter, Output, ViewChild } from '@angular/core';
 import { ModalDirective } from 'ngx-bootstrap/modal';
 import { ToastrService } from 'ngx-toastr';
 import { UpdateProductDto } from 'src/models/updateProduct';
 import { ProductService } from 'src/services/product.service';
-import { CreateOrEditDetailProductComponent } from '../create-or-edit-detail-product/create-or-edit-detail-product.component';
 
 @Component({
-  selector: 'app-create-or-edit-product',
-  templateUrl: './create-or-edit-product.component.html',
-  styleUrls: ['./create-or-edit-product.component.scss']
+  selector: 'app-create-or-edit-detail-product',
+  templateUrl: './create-or-edit-detail-product.component.html',
+  styleUrls: ['./create-or-edit-detail-product.component.scss']
 })
-export class CreateOrEditProductComponent implements OnInit, OnDestroy{
+export class CreateOrEditDetailProductComponent {
   product: UpdateProductDto = new UpdateProductDto();
   productFind: any = {
     'name': null,
@@ -35,7 +34,6 @@ export class CreateOrEditProductComponent implements OnInit, OnDestroy{
   listStatus;
   selectedProduct
   @ViewChild('createOrEditModal', { static: true }) modal: ModalDirective;
-  @ViewChild('createOrEditDeatail', { static: true }) modalCreateOrEdit: CreateOrEditDetailProductComponent;
   @Output() modalSave: EventEmitter<any> = new EventEmitter<any>();
   constructor(public productServices: ProductService,public toastr: ToastrService) {
     
@@ -121,11 +119,8 @@ export class CreateOrEditProductComponent implements OnInit, OnDestroy{
   show(id?) {
     if(id){
       this.productServices.detailProduct(id).subscribe((data) => {
-        console.log("data", data.productDetails);
         this.productFind = data;
         this.productDetails = data.productDetails;
-        console.log("productDetail", this.productDetails);
-        console.log("product", this.productFind);
       });
     }
     this.modal.show();
@@ -153,10 +148,5 @@ export class CreateOrEditProductComponent implements OnInit, OnDestroy{
       });
     }
   }
-  getProductData(){
-
-  }
-  addDetailProduct(){
-    this.modalCreateOrEdit.show();
-  }
+  getProductData(){}
 }

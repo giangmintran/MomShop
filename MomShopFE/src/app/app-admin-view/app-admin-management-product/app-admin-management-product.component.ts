@@ -5,6 +5,8 @@ import { Product } from 'src/models/product';
 import { ProductService } from 'src/services/product.service';
 import { AppAdminViewDetailProductComponent } from './app-admin-view-detail-product/app-admin-view-detail-product.component';
 import { CreateOrEditProductComponent } from './create-or-edit-product/create-or-edit-product.component';
+import { CreateOrEditDetailProductComponent } from './create-or-edit-detail-product/create-or-edit-detail-product.component';
+import { ProductDetailDto } from 'src/models/productDetail';
 
 @Component({
   selector: 'app-app-admin-management-product',
@@ -16,9 +18,12 @@ export class AppAdminManagementProductComponent {
   //modalUser: CreateOrEditProductComponent;
   @ViewChild('viewDetail', { static: true }) viewDetail : AppAdminViewDetailProductComponent
   @ViewChild('createOrEdit', { static: true }) modalCreateOrEdit : CreateOrEditProductComponent
+  @ViewChild('createOrEditDeatail', { static: true }) modalAddDetailProduct: CreateOrEditDetailProductComponent;
+
   rows: any[] = [];
   product: Product;
-  cols;
+  colsProduct;
+  colsDetailProduct;
   filter
   filterStatus = null;
   tableData: any;
@@ -26,6 +31,7 @@ export class AppAdminManagementProductComponent {
   selectedDetailProduct
   totalRecords;
   status = undefined;
+  detailProduct :any;
   listStatus = [
     {code :'Tất cả',value:undefined},
     {code :'1',value:1},
@@ -34,7 +40,7 @@ export class AppAdminManagementProductComponent {
   ]
   ngOnInit(): void {}
   constructor(private http: HttpClient,public productServices : ProductService,public toastr: ToastrService) {
-    this.cols = [
+    this.colsProduct = [
       {
         field: 'id',
         header: 'STT',
@@ -64,7 +70,27 @@ export class AppAdminManagementProductComponent {
         header: 'Trạng thái',
       },
     ];
+    this.colsDetailProduct = [
+      {
+        field: 'id',
+        header: 'STT',
+      },
+      {
+        field: 'size',
+        header: 'Kích thước',
+      },
+      {
+        field: 'quantity',
+        header: 'Số lượng',
+      },
+      {
+        field: 'description',
+        header: 'Mô tả',
+      },
+    ];
     this.getProductData();
+    //this.selectedProduct.id = 1
+    //this.getDetailProductData(1);
   }
   getProductData(): void {
     this.productServices.getAllProduct(this.filterStatus).subscribe((data) => {
@@ -73,11 +99,19 @@ export class AppAdminManagementProductComponent {
       this.selectedProduct = undefined
     });
   }
-  onSelectionChange(event) {}
-  createUsers() {
+  getDetailProductData(number):void {
+    this.productServices.getAllViewDetailProduct(number).subscribe((data)=>{
+      this.detailProduct = data;
+      console.log(this.detailProduct)
+    })
+  }
+  onSelectionChange() {
+   this.getDetailProductData(1)
+  }
+  createProdcut() {
     this.modalCreateOrEdit.show();
   }
-  editUser(row) {
+  editProduct(row) {
     this.modalCreateOrEdit.show(row.id);
   }
   deleteUser(row) {
@@ -94,5 +128,11 @@ export class AppAdminManagementProductComponent {
   }
   onFilterChange(){
     this.filter = !this.filter;
+  }
+  addDetailProduct(){
+    this.modalAddDetailProduct.show()
+  }
+  editDetailProduct(row){
+    this.modalAddDetailProduct.show(row.id)
   }
 }

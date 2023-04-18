@@ -11,6 +11,7 @@ import { TableModule } from 'primeng/table';
 import { AppBsModalModule } from 'src/directive/app-bs-modal.module';
 import { AppAdminViewDetailProductComponent } from './app-admin-view-detail-product/app-admin-view-detail-product.component';
 import { CreateOrEditProductComponent } from './create-or-edit-product/create-or-edit-product.component';
+import { CreateOrEditDetailProductComponent } from './create-or-edit-detail-product/create-or-edit-detail-product.component';
 
 
 
@@ -18,7 +19,8 @@ import { CreateOrEditProductComponent } from './create-or-edit-product/create-or
   declarations: [
     AppAdminManagementProductComponent,
     AppAdminViewDetailProductComponent,
-    CreateOrEditProductComponent
+    CreateOrEditProductComponent,
+    CreateOrEditDetailProductComponent
   ],
   imports: [
     CommonModule,

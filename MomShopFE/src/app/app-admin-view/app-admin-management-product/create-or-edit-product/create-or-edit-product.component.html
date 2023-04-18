@@ -3,16 +3,17 @@
     <div class="modal-dialog modal-lg">
         <div class="modal-content">
             <div class="modal-body modal-body-master">
-                <h4 class="ml-2">
+                <!-- <button class="btn btn-primary" (click)="addDetailProduct()">Thêm chi tiết</button> -->
+                <!-- <h4 class="ml-2">
                     Thông tin chi tiết
-                </h4>  
-                <div class="form-group form-group-master form-md-line-input form-md-floating-label no-hint input-bottom-form">
+                </h4>   -->
+                <div>
                     <div class="row mb-2">
-                        <div class="col-4">
+                        <div class="col-md-4">
                             <label class="label-text" for="name">Mã sản phẩm</label>
                             <input type="text" class="input-text" pInputText [(ngModel)]="productFind.code" />
                         </div>
-                        <div class="col-4">
+                        <div class="col-md-4">
                             <label class="label-text" for="category">Tên sản phẩm</label>
                             <input type="text" class="input-text" pInputText [(ngModel)]="productFind.name" />
                         </div>
@@ -72,3 +73,4 @@
     </div>
 </div>
 </div>
+<app-create-or-edit-detail-product #createOrEditDeatail></app-create-or-edit-detail-product>
