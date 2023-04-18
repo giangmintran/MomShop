@@ -4,12 +4,14 @@ import { AppAdminFeedbackUserComponent } from './app-admin-view/app-admin-feedba
 import { AppAdminManagementProductComponent } from './app-admin-view/app-admin-management-product/app-admin-management-product.component';
 import { AppAdminMangementCustomerComponent } from './app-admin-view/app-admin-mangement-customer/app-admin-mangement-customer.component';
 import { AppAdminManagementImportProductComponent } from './app-admin-view/app-admin-management-import-product/app-admin-management-import-product.component';
+import { AppUserMainComponent } from './app-user-view/app-user-main/app-user-main.component';
 
 const routes: Routes = [
   { path: 'product', component: AppAdminManagementProductComponent },
   { path: 'customer', component: AppAdminMangementCustomerComponent },
   { path: 'feedback', component: AppAdminFeedbackUserComponent },
   { path: 'importProduct', component: AppAdminManagementImportProductComponent },
+  { path: 'view', component: AppUserMainComponent },
   //{ path: 'home', component: MainComponent },
 ];
 
