@@ -78,7 +78,21 @@ namespace MOMShop.Controllers
 
 
         [HttpGet("detail/{id}")]
-        public List<ProductDetailDto> FindById(int id)
+        public List<ProductDetailDto> ProductDetails(int id)
+        {
+            try
+            {
+                var result = _services.Details(id);
+                return result;
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(ex.Message);
+            }
+        }
+
+        [HttpGet("find-by-id/{id}")]
+        public ProductDto FindById(int id)
         {
             try
             {

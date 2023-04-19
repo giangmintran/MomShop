@@ -71,15 +71,25 @@ namespace MOMShop.Services.Implements
             {
                 throw new System.Exception("Không tìm thấy sản phẩm");
             }
+            var productDetail = _dbContext.ProductDetails.Where(e => e.ProductId == id);
+            if (productDetail.Any())
+            {
+                _dbContext.ProductDetails.RemoveRange(productDetail);
+            }
             _dbContext.Products.Remove(product);
             _dbContext.SaveChanges();
-
         }
 
-        public List<ProductDetailDto> FindById(int id)
+        public List<ProductDetailDto> Details(int id)
         {
             var productDetail = _dbContext.ProductDetails.Where(e => e.ProductId == id);
             return _mapper.Map<List<ProductDetailDto>>(productDetail);
+        }
+
+        public ProductDto FindById(int id)
+        {
+            var product = _dbContext.Products.FirstOrDefault(e => e.Id == id && !e.Deleted);
+            return _mapper.Map<ProductDto>(product);
         }
 
         public Paging<ProductDto> GetProducts(FilterProductDto input)
@@ -99,7 +109,5 @@ namespace MOMShop.Services.Implements
             //result.Items = result.Items.Skip(input.Skip).Take(input.PageSize).ToList();
             return result;
         }
-
-
     }
 }

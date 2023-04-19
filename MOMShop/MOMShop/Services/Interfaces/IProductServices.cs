@@ -10,7 +10,8 @@ namespace MOMShop.Services.Interfaces
     {
         Paging<ProductDto> GetProducts(FilterProductDto input);
         ProductDto AddProducts(UpdateProductDto input);
-        List<ProductDetailDto> FindById(int id);
+        List<ProductDetailDto> Details(int id);
+        ProductDto FindById(int id);
         ProductDto UpdateProducts(UpdateProductDto input);
         void DeleteProducts(int id);
 
