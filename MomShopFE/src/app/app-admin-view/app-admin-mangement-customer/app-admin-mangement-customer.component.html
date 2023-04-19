@@ -21,14 +21,18 @@
 	   [rows]="2" >
 		<ng-template pTemplate="header" let-columns>
 			<tr>
+				<th>STT</th>
 				<th *ngFor="let cols of columns">
 					{{cols.header}}
 				</th>
 			</tr>
 		</ng-template>
 	
-		<ng-template pTemplate="body" let-tableData="$implicit" let-columns="columns">
+		<ng-template pTemplate="body" let-tableData="$implicit" let-rowIndex="rowIndex" let-columns="columns">
 			<tr [pSelectableRow]="tableData">
+				<td>
+					{{rowIndex+1}}
+				</td>
 				<td *ngFor="let cols of columns">
 					{{tableData[cols.field]}}
 				</td>

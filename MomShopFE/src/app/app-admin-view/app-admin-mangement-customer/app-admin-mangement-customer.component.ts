@@ -31,10 +31,6 @@ export class AppAdminMangementCustomerComponent {
       //   header: '#Id',
       // },
       {
-        field: 'STT',
-        header: 'Id',
-      },
-      {
         field: 'firstName',
         header: 'Họ',
       },

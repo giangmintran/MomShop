@@ -6,7 +6,6 @@ import { ProductService } from 'src/services/product.service';
 import { AppAdminViewDetailProductComponent } from './app-admin-view-detail-product/app-admin-view-detail-product.component';
 import { CreateOrEditProductComponent } from './create-or-edit-product/create-or-edit-product.component';
 import { CreateOrEditDetailProductComponent } from './create-or-edit-detail-product/create-or-edit-detail-product.component';
-import { ProductDetailDto } from 'src/models/productDetail';
 
 @Component({
   selector: 'app-app-admin-management-product',
@@ -41,10 +40,6 @@ export class AppAdminManagementProductComponent {
   ngOnInit(): void {}
   constructor(private http: HttpClient,public productServices : ProductService,public toastr: ToastrService) {
     this.colsProduct = [
-      {
-        field: 'id',
-        header: 'STT',
-      },
       {
         field: 'code',
         header: 'Mã sản phẩm',

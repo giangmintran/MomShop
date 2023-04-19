@@ -1,7 +1,7 @@
 <div class="container1">
     <div class="block-button mb-3">
         <!-- <button class="btn btn-filter mr-2 btn-outline-primary"  (click)="viewDetailProduct()">Xem chi tiết</button> -->
-		<button class="btn ml-2 btn-primary text-white"  (click)="createProdcut()">Thêm sản phẩm</button>
+		<button class="btn btn-add mr-2 btn-outline-primary"  (click)="createProdcut()">Thêm</button>
 		<button *ngIf="!filter" class="btn btn-filter mr-2 btn-outline-primary"  (click)="onFilterChange()">Hiện bộ lọc</button>
         <button *ngIf="filter"class="btn btn-filter mr-2 btn-outline-primary"  (click)="onFilterChange()">Ẩn bộ lọc</button>
         <!-- <button class="btn btn-add mr-2 btn-outline-primary"  (click)="createUsers()">Thêm</button> -->
@@ -21,6 +21,7 @@
 			>
 			<ng-template pTemplate="header" let-columns>
 				<tr>
+					<th>STT</th>
 					<th *ngFor="let cols of columns">
 						{{cols.header}}
 					</th>
@@ -28,19 +29,23 @@
 				</tr>
 			</ng-template>
 
-			<ng-template pTemplate="body" let-rows let-columns="columns">
+			<ng-template pTemplate="body" let-rows let-rowIndex="rowIndex" let-columns="columns">
 				<tr [pSelectableRow]="rows">
+					<td>
+						{{rowIndex+1}}
+					</td>
 					<td *ngFor="let cols of columns">
 						{{rows[cols.field]}}
 					</td>
 					<td> 
-						<button class="btn btn-add ml-2 btn-primary text-white"  (click)="editProduct(rows)">Sửa</button>
-						<button class="btn btn-add ml-2 btn-delete btn-danger text-white" (click)="deleteUser(rows)">Xoá</button>
+						<button class="btn btn-add ml-2 btn-outline-primary"  (click)="editProduct(rows)">Sửa</button>
+						<button class="btn btn-add ml-2 btn-delete btn-outline-danger" (click)="deleteUser(rows)">Xoá</button>
 					</td>
 				</tr>
 			</ng-template>
 		</p-table> 
 		<p class="mb-3 title">Chi tiết sản phẩm</p>
+		
         <p-table [value]="detailProduct"  [paginator]="true" [rowsPerPageOptions]="[5,10,15,20]"
 					 [tableStyle]="{'width': '100% -280px','font-size':'0.8rem'}" paginatorPosition="bottom"
 			[columns]="colsDetailProduct" selectionMode="single" [(selection)]="selectedDetailProduct"
@@ -60,13 +65,15 @@
 						{{detailProduct[cols.field]}}
 					</td>
 					<td>
-						<button class="btn ml-2 btn-primary text-white"  (click)="addDetailProduct()">Thêm</button>
-						<button class="btn btn-add ml-2 btn-primary text-white"  (click)="editDetailProduct(detailProduct)">Sửa</button>
-						<button class="btn btn-add ml-2 btn-delete btn-danger text-white" (click)="deleteUser(detailProduct)">Xoá</button>
+						<button class="btn btn-add ml-2 btn-outline-primary"  (click)="editDetailProduct(detailProduct)">Sửa</button>
+						<button class="btn ml-2 btn-delete btn-outline-danger" (click)="deleteUser(detailProduct)">Xoá</button>
 					</td>
 				</tr>
 			</ng-template>
 		</p-table> 
+		<div class="btn_add_detail_product d-flex justify-content-end mr-2">
+			<button class="btn btn-add mr-2 btn-outline-primary"  (click)="addDetailProduct()">Thêm</button>
+		</div>
 </div>
 <!-- <td>{{detailProduct}}</td> -->
 <app-admin-view-detail-product #viewDetail></app-admin-view-detail-product>

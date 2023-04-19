@@ -22,10 +22,6 @@ export class AppAdminManagementImportProductComponent {
   constructor(private http: HttpClient,public productServices : ProductService,public toastr: ToastrService) {
     this.cols = [
       {
-        field: 'id',
-        header: 'STT',
-      },
-      {
         field: 'code',
         header: 'Code',
       },

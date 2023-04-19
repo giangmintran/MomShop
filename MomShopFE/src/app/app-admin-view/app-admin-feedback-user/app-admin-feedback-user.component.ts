@@ -28,14 +28,6 @@ export class AppAdminFeedbackUserComponent implements OnInit {
   ngOnInit(): void {}
   constructor(private http: HttpClient,public productServices : ProductService,public toastr: ToastrService) {
     this.cols = [
-      // {
-      //   field: 'id',
-      //   header: '#Id',
-      // },
-      {
-        field: 'id',
-        header: 'STT',
-      },
       {
         field: 'orderCode',
         header: 'Mã đơn hàng',
