@@ -6,4 +6,6 @@ export class ProductDto {
   price:number;
   status:number;
   description:string;
+  productTypeName:string;
+  productStatusName:string
 }

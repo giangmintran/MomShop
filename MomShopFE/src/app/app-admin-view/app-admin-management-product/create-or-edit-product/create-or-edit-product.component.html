@@ -12,24 +12,24 @@
                 <div>
                     <div class="row mb-4">
                         <div class="col-md-4">
-                            <input type="text" class="input-text" pInputText [(ngModel)]="productFind.code" placeholder="Mã sản phẩm" />
+                            <input type="text" class="input-text" pInputText [(ngModel)]="product.code" placeholder="Mã sản phẩm" />
                         </div>
                         <div class="col-md-4">
-                            <input type="text" class="input-text" pInputText [(ngModel)]="productFind.name" placeholder="Tên sản phẩm"/>
+                            <input type="text" class="input-text" pInputText [(ngModel)]="product.name" placeholder="Tên sản phẩm"/>
                         </div>
                         <div class="col-md-4">
-                                <p-dropdown [options]="listStatus" [(ngModel)]="productFind.status" placeholder="Trạng thái" [style]="{'height':'29px','width':'100%'}" optionLabel="name" optionValue="value"></p-dropdown>
+                                <p-dropdown [options]="listStatus" [(ngModel)]="product.status" placeholder="Trạng thái" [style]="{'height':'29px','width':'100%'}" optionLabel="name" optionValue="value"></p-dropdown>
                         </div>
                     </div>
                     <div class="row">
                         <div class="col-md-4">
-                            <p-dropdown [options]="listTypeProduct" [(ngModel)]="productFind.productType" placeholder="Loại sản phẩm" [style]="{'height':'29px','width':'100%'}" optionLabel="name" optionValue="value"></p-dropdown>
+                            <p-dropdown [options]="listTypeProduct" [(ngModel)]="product.productType" placeholder="Loại sản phẩm" [style]="{'height':'29px','width':'100%'}" optionLabel="name" optionValue="value"></p-dropdown>
                     </div>
                     <div class="col-4">
-                        <input type="number" class="input-text" pInputText [(ngModel)]="productFind.price" placeholder="Giá"/>
+                        <input type="number" class="input-text" pInputText [(ngModel)]="product.price" placeholder="Giá"/>
                     </div>
                     <div class="col-4">
-                        <input type="text" class="input-text" pInputText [(ngModel)]="productFind.description" placeholder="Mô tả"/>
+                        <input type="text" class="input-text" pInputText [(ngModel)]="product.description" placeholder="Mô tả"/>
                     </div>
                    
                     <!-- <div *ngIf="productFind.id">

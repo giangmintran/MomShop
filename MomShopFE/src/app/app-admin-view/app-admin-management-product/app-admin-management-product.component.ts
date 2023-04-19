@@ -19,7 +19,7 @@ export class AppAdminManagementProductComponent {
   @ViewChild('createOrEdit', { static: true }) modalCreateOrEdit : CreateOrEditProductComponent
   @ViewChild('createOrEditDeatail', { static: true }) modalAddDetailProduct: CreateOrEditDetailProductComponent;
 
-  rows: any[] = [];
+  rows: ProductDto[] = [];
   product: ProductDto;
   colsProduct;
   colsDetailProduct;
@@ -31,11 +31,18 @@ export class AppAdminManagementProductComponent {
   totalRecords;
   status = undefined;
   detailProduct :any;
+  listTypeProduct = [
+    { name: "Áo thun", value: 1 },
+    { name: "Áo sơ mi", value: 2 },
+    { name: "Áo khoác", value: 3 },
+    { name: "Quần", value: 4 },
+    { name: "Phụ kiện", value: 5 },
+  ];
   listStatus = [
     {code :'Tất cả',value:undefined},
-    {code :'1',value:1},
-    {code :'2',value:2},
-    {code :'3',value:3},
+    {code :'Đang bán',value:1},
+    {code :'Chưa mở bán',value:2},
+    {code :'Khoá',value:3},
   ]
   ngOnInit(): void {}
   constructor(private http: HttpClient,public productServices : ProductService,public toastr: ToastrService) {
@@ -49,7 +56,7 @@ export class AppAdminManagementProductComponent {
         header: 'Tên sản phẩm',
       },
       {
-        field: 'productType',
+        field: 'productTypeName',
         header: 'Loại sản phẩm',
       },
       {
@@ -61,15 +68,11 @@ export class AppAdminManagementProductComponent {
         header: 'Mô tả',
       },
       {
-        field: 'status',
+        field: 'productStatusName',
         header: 'Trạng thái',
       },
     ];
     this.colsDetailProduct = [
-      {
-        field: 'id',
-        header: 'STT',
-      },
       {
         field: 'size',
         header: 'Kích thước',
@@ -90,6 +93,21 @@ export class AppAdminManagementProductComponent {
   getProductData(): void {
     this.productServices.getAllProduct(this.filterStatus).subscribe((data) => {
       this.rows = data?.items;
+      this.rows.forEach(element => {
+        var productTypeName = this.listTypeProduct.find( e=> e.value == element.productType).name
+        var productStatusName = this.listStatus.find( e=> e.value == element.status).code
+        if(productTypeName)
+        {
+          element.productTypeName = productTypeName
+        }
+        if(productStatusName){
+          element.productStatusName = productStatusName
+        }
+      });
+      // this.rows.forEach(element => {
+      //   var productType = this.colsProduct.find(e =>e.field == 'productType')
+      //   this.rows[productType.field] = this.listStatus.find(e=>e.value == element.productType).code
+      // });
       console.log(this.tableData);
       this.selectedProduct = undefined
     });
@@ -124,10 +142,18 @@ export class AppAdminManagementProductComponent {
   onFilterChange(){
     this.filter = !this.filter;
   }
-  addDetailProduct(){
-    this.modalAddDetailProduct.show(null,this.selectedProduct.code,this.selectedProduct.name)
+  addDetailProduct(row){
+    this.modalAddDetailProduct.show(row.id,this.selectedProduct.code,this.selectedProduct.name)
   }
   editDetailProduct(row){
     this.modalAddDetailProduct.show(row.id,this.selectedProduct.code,this.selectedProduct.name)
+  }
+  deleteDetailProduct(row){
+    this.productServices.deleteDetailProduct(row.id).subscribe(()=>{
+      this.toastr.success('Xoá thành công','Thông báo',{timeOut: 1000});
+      this.productServices.getAllProduct().subscribe(()=>{
+        this.getDetailProductData();
+      })
+    });
   }
 }

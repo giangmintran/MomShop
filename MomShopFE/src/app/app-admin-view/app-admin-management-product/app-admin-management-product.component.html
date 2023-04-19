@@ -46,7 +46,7 @@
 		</p-table> 
 		<div class="btn_add_detail_product d-flex justify-content-between mt-4 mb-2">
 			<p class="mb-3 title">Chi tiết sản phẩm</p>
-			<button class="btn btn-add mr-2 btn-outline-primary" [disabled]="!selectedProduct?.id"  (click)="addDetailProduct()">Thêm</button>
+			<button class="btn btn-add mr-2 btn-outline-primary" *ngIf="selectedProduct?.id"  (click)="addDetailProduct(selectedProduct)">Thêm</button>
 		</div>
         <p-table [value]="detailProduct"  [paginator]="true" [rowsPerPageOptions]="[5,10,15,20]"
 					 [tableStyle]="{'width': '100% -280px','font-size':'0.8rem'}" paginatorPosition="bottom"
@@ -54,6 +54,7 @@
 			[rows]="5" >
 			<ng-template pTemplate="header" let-columns>
 				<tr>
+					<th>STT</th>
 					<th *ngFor="let cols of columns">
 						{{cols.header}}
 					</th>
@@ -61,14 +62,17 @@
 				</tr>
 			</ng-template>
 
-			<ng-template pTemplate="body" let-detailProduct let-columns="columns">
+			<ng-template pTemplate="body" let-detailProduct let-columns="columns" let-rowIndex="rowIndex">
 				<tr [pSelectableRow]="detailProduct">
+					<td>
+						{{rowIndex+1}}
+					</td>
 					<td *ngFor="let cols of columns">
 						{{detailProduct[cols.field]}}
 					</td>
 					<td>
 						<button class="btn btn-add ml-2 btn-outline-primary"  (click)="editDetailProduct(detailProduct)">Sửa</button>
-						<button class="btn btn-add ml-2 btn-delete btn-outline-danger" (click)="deleteUser(detailProduct)">Xoá</button>
+						<button class="btn btn-add ml-2 btn-delete btn-outline-danger" (click)="deleteDetailProduct(detailProduct)">Xoá</button>
 					</td>
 				</tr>
 			</ng-template>
@@ -77,4 +81,4 @@
 <!-- <td>{{detailProduct}}</td> -->
 <app-admin-view-detail-product #viewDetail></app-admin-view-detail-product>
 <app-create-or-edit-product #createOrEdit (modalSave)="getProductData()"></app-create-or-edit-product>
-<app-create-or-edit-detail-product #createOrEditDeatail></app-create-or-edit-detail-product>
+<app-create-or-edit-detail-product #createOrEditDeatail (modalSave)="getDetailProductData()"></app-create-or-edit-detail-product>

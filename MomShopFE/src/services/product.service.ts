@@ -24,20 +24,22 @@ export class ProductService {
       return this.http.post(this.baseUrl + 'add', product);
     }
   }
-  // detailProduct(id:number): Observable<any>{
-  //   return this.http.get(this.baseUrl + 'detail/' + id);
-  // }
-  addDetailProduct(product:any){
-    return this.http.post(this.baseUrl+ 'add-detail',product)
-  }
   getforEditProduct(id) : Observable<any>{
-    return this.http.get(this.baseUrl+ 'find-by-id/',id)
+    return this.http.get(this.baseUrl+ 'find-by-id/' + id)
   }
-  updateDetailProduct(product:any){
-    return this.http.put(this.baseUrl+ 'add-detail',product)
+
+  getforEditProductDetail(id) : Observable<any>{
+    return this.http.get(this.baseUrl+ 'product-detail/' + id)
+  }
+  createOrEditDetailProduct(productDetail:any,){
+    if (productDetail.id) {
+      return this.http.put(this.baseUrl + 'update-detail', productDetail);
+    } else {
+      return this.http.post(this.baseUrl + 'add-detail', productDetail);
+    }
   }
   deleteDetailProduct(productDetailId:number) {
-    return this.http.get(this.baseUrl + 'delete-detail/' + productDetailId);
+    return this.http.delete(this.baseUrl + 'delete-detail/' + productDetailId);
   }
   getAllViewDetailProduct(productDetailId:number) : Observable<any> {
     return this.http.get(this.baseUrl + 'detail/' + productDetailId);

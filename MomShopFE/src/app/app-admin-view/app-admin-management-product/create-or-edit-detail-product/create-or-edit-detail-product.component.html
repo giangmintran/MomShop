@@ -10,22 +10,22 @@
                     <div class="row mb-4">
                         <div class="col-md-4 d-flex flex-column">
                             <label class="label-text mb-1" for="name">Mã sản phẩm</label>
-                            <input type="text" class="input-text disabled" disabled="true" pInputText [(ngModel)]="productFind.code" />
+                            <input type="text" class="input-text disabled" disabled="true" pInputText [(ngModel)]="productName" />
                         </div>
                         <div class="col-md-4 d-flex flex-column">
                             <label class="label-text mb-1" for="category">Tên sản phẩm</label>
-                            <input type="text" class="input-text disabled" disabled="true" pInputText [(ngModel)]="productFind.name" />
+                            <input type="text" class="input-text disabled" disabled="true" pInputText [(ngModel)]="productCode" />
                         </div>
                     </div>
                     <div class="row mt-4 mb-3">
                         <div class="col-md-4">
-                            <input type="number" class="input-text" pInputText [(ngModel)]="productFind.price" placeholder="Size"/>
+                            <input type="text" class="input-text" pInputText [(ngModel)]="productDetail.size" placeholder="Size"/>
                         </div>
                         <div class="col-md-4">
-                            <input type="number" class="input-text" pInputText [(ngModel)]="productFind.quantity" placeholder="Số lượng"/>
+                            <input type="number" class="input-text" pInputText [(ngModel)]="productDetail.quantity" placeholder="Số lượng"/>
                         </div>
                         <div class="col-md-4 d-flex flex-column">
-                            <input type="text" class="input-text" pInputText [(ngModel)]="productFind.description" placeholder="Mô tả"/>
+                            <input type="text" class="input-text" pInputText [(ngModel)]="productDetail.description" placeholder="Mô tả"/>
                         </div>
                     </div>
             <div class="modal-footer modal-footer-master">

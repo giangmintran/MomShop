@@ -1,6 +1,7 @@
 import { Component, EventEmitter, Output, ViewChild } from '@angular/core';
 import { ModalDirective } from 'ngx-bootstrap/modal';
 import { ToastrService } from 'ngx-toastr';
+import { ProductDetailDto } from 'src/models/productDetail';
 import { UpdateProductDto } from 'src/models/updateProduct';
 import { ProductService } from 'src/services/product.service';
 
@@ -10,17 +11,11 @@ import { ProductService } from 'src/services/product.service';
   styleUrls: ['./create-or-edit-detail-product.component.scss']
 })
 export class CreateOrEditDetailProductComponent {
-  product: UpdateProductDto = new UpdateProductDto();
-  productFind: any = {
-    'name': null,
-    'price': null,
-    'description': null,
-    'status': null,
-    'productType': null,
-  };
-  productDetails: any[] = [];
-  
+  productDetail : ProductDetailDto = new ProductDetailDto();
   saving = false;
+  productDetailId
+  productName;
+  productCode;
   active;
   cities;
   name:string;
@@ -37,9 +32,6 @@ export class CreateOrEditDetailProductComponent {
   @Output() modalSave: EventEmitter<any> = new EventEmitter<any>();
   constructor(public productServices: ProductService,public toastr: ToastrService) {
     
-  }
-  ngOnDestroy(): void {
-    this.productFind = null;
   }
   ngOnInit(): void {
     this.listTypeProduct = [
@@ -106,25 +98,18 @@ export class CreateOrEditDetailProductComponent {
   }
 
   clearData() {
-    this.productFind.code = null;
-    this.productFind.name = null;
-    this.productFind.price = null;
-    this.productFind.description = null;
-    this.productFind.status = null;
-    this.productFind.productType = null;
-    this.productFind.id = null;
-    this.productFind.productDetails = null;
+   
   }
 
   show(id?:number,name?:any,code?:string) {
+    this.productName = name;
+    this.productCode = code;
     if(id){
-      this.productServices.getAllViewDetailProduct(id).subscribe((data) => {
-        this.productFind = data;
-        this.productDetails = data.productDetails;
+      this.productServices.getforEditProductDetail(id).subscribe((data) => {
+       this.productDetail = data;
       });
     }
-    this.productFind.name = name;
-    this.productFind.code = code;
+    this.productDetail.productId = id;
     this.modal.show();
     this.active = true;
   }
@@ -134,21 +119,19 @@ export class CreateOrEditDetailProductComponent {
     this.modal.hide();
   }
   save() {
-    if (this.productFind.id == undefined) {
-      this.productServices.createOrEdit(this.productFind).subscribe(()=>{
+      this.productServices.createOrEditDetailProduct(this.productDetail).subscribe(()=>{
         this.active = false;
-        this.toastr.success('Thêm thành công','Thông báo');
+        if(this.productDetail.id == undefined){
+          this.toastr.success('Thêm thành công','Thông báo',{timeOut: 1000});
+        }
+        else 
+        {
+          this.toastr.success('Cập nhật thành công','Thông báo',{timeOut: 1000});
+
+        }
         this.modalSave.emit(null);
         this.close();
-      });
-    } else {
-      this.productServices.createOrEdit(this.productFind).subscribe(()=>{
-        this.active = false;
-        this.toastr.success('Cập nhật thành công','Thông báo');
-        this.modalSave.emit(null);
-        this.close();
+        this.productDetail = new ProductDetailDto();
       });
     }
-  }
-  getProductData(){}
 }

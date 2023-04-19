@@ -1,42 +1,47 @@
-import { Component, EventEmitter, OnDestroy, OnInit, Output, ViewChild } from '@angular/core';
-import { ModalDirective } from 'ngx-bootstrap/modal';
-import { ToastrService } from 'ngx-toastr';
-import { UpdateProductDto } from 'src/models/updateProduct';
-import { ProductService } from 'src/services/product.service';
-import { CreateOrEditDetailProductComponent } from '../create-or-edit-detail-product/create-or-edit-detail-product.component';
-import { ProductDto } from 'src/models/product';
+import {
+  Component,
+  EventEmitter,
+  OnDestroy,
+  OnInit,
+  Output,
+  ViewChild,
+} from "@angular/core";
+import { ModalDirective } from "ngx-bootstrap/modal";
+import { ToastrService } from "ngx-toastr";
+import { UpdateProductDto } from "src/models/updateProduct";
+import { ProductService } from "src/services/product.service";
+import { CreateOrEditDetailProductComponent } from "../create-or-edit-detail-product/create-or-edit-detail-product.component";
+import { ProductDto } from "src/models/product";
 
 @Component({
-  selector: 'app-create-or-edit-product',
-  templateUrl: './create-or-edit-product.component.html',
-  styleUrls: ['./create-or-edit-product.component.scss']
+  selector: "app-create-or-edit-product",
+  templateUrl: "./create-or-edit-product.component.html",
+  styleUrls: ["./create-or-edit-product.component.scss"],
 })
-export class CreateOrEditProductComponent implements OnInit, OnDestroy{
-  product: UpdateProductDto = new UpdateProductDto();
-  productFind: ProductDto = new ProductDto()
+export class CreateOrEditProductComponent implements OnInit {
+  product: ProductDto = new ProductDto();
   saving = false;
   productId;
   active;
   cities;
-  name:string;
+  name: string;
   test;
-  category
+  category;
   quantity;
   tableData;
   cols;
   colDetails;
   listTypeProduct;
   listStatus;
-  selectedProduct
-  @ViewChild('createOrEditModal', { static: true }) modal: ModalDirective;
-  @ViewChild('createOrEditDeatail', { static: true }) modalCreateOrEdit: CreateOrEditDetailProductComponent;
+  selectedProduct;
+  @ViewChild("createOrEditModal", { static: true }) modal: ModalDirective;
+  @ViewChild("createOrEditDeatail", { static: true })
+  modalCreateOrEdit: CreateOrEditDetailProductComponent;
   @Output() modalSave: EventEmitter<any> = new EventEmitter<any>();
-  constructor(public productServices: ProductService,public toastr: ToastrService) {
-    
-  }
-  ngOnDestroy(): void {
-    this.productFind = null;
-  }
+  constructor(
+    public productServices: ProductService,
+    public toastr: ToastrService
+  ) {}
   ngOnInit(): void {
     this.listTypeProduct = [
       { name: "Áo thun", value: 1 },
@@ -52,64 +57,59 @@ export class CreateOrEditProductComponent implements OnInit, OnDestroy{
     ];
     this.colDetails = [
       {
-        field: 'id',
-        header: 'STT',
+        field: "size",
+        header: "Size",
       },
       {
-        field: 'size',
-        header: 'Size',
+        field: "quantity",
+        header: "Số lượng",
       },
       {
-        field: 'quantity',
-        header: 'Số lượng',
+        field: "description",
+        header: "Mô tả",
       },
-      {
-        field: 'description',
-        header: 'Mô tả',
-      },
-     
     ];
-   this.cols = [
+    this.cols = [
       {
-        field: 'id',
-        header: 'STT',
+        field: "id",
+        header: "STT",
       },
       {
-        field: 'code',
-        header: 'Mã sản phẩm',
+        field: "code",
+        header: "Mã sản phẩm",
       },
       {
-        field: 'name',
-        header: 'Tên sản phẩm',
+        field: "name",
+        header: "Tên sản phẩm",
       },
       {
-        field: 'producType',
-        header: 'Loại sản phẩm',
+        field: "producType",
+        header: "Loại sản phẩm",
       },
       {
-        field: 'price',
-        header: 'Giá bán',
+        field: "price",
+        header: "Giá bán",
       },
       {
-        field: 'description',
-        header: 'Mô tả',
+        field: "description",
+        header: "Mô tả",
       },
       {
-        field: 'status',
-        header: 'Trạng thái',
+        field: "status",
+        header: "Trạng thái",
       },
     ];
   }
 
   clearData() {
-    this.productFind = undefined
+    this.product = new ProductDto();
   }
 
   show(id?) {
-    this.productId = id;
-    if(id){
+    this.product.id = id;
+    if (id) {
       this.productServices.getforEditProduct(id).subscribe((data) => {
-        this.productFind = data;
+        this.product = data;
       });
     }
     this.modal.show();
@@ -121,23 +121,17 @@ export class CreateOrEditProductComponent implements OnInit, OnDestroy{
     this.modal.hide();
   }
   save() {
-    if (this.productFind.id == undefined) {
-      this.productServices.createOrEdit(this.productFind).subscribe(()=>{
-        this.active = false;
-        this.toastr.success('Thêm thành công','Thông báo',{timeOut: 1000});
-        this.modalSave.emit(null);
-        this.close();
-      });
-    } else {
-      this.productServices.createOrEdit(this.productFind).subscribe(()=>{
-        this.active = false;
-        this.toastr.success('Cập nhật thành công','Thông báo',{timeOut: 1000});
-        this.modalSave.emit(null);
-        this.close();
-      });
-    }
-  }
-  getProductData(){
-
+    this.productServices.createOrEdit(this.product).subscribe(() => {
+      this.active = false;
+      if (this.product.id) {
+        this.toastr.success("Thêm thành công", "Thông báo", { timeOut: 1000 });
+      } else {
+        this.toastr.success("Cập nhật thành công", "Thông báo", {
+          timeOut: 1000,
+        });
+      }
+      this.modalSave.emit(null);
+      this.close();
+    });
   }
 }
