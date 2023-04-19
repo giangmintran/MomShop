@@ -1,4 +1,5 @@
 ﻿using AutoMapper;
+using Microsoft.EntityFrameworkCore;
 using MOMShop.Dto.ReceiveOrder;
 using MOMShop.Dto.ReceiveOrderDetail;
 using MOMShop.Entites;
@@ -38,6 +39,8 @@ namespace MOMShop.Services.Implements
             {
                 throw new Exception("Không tìm thấy sản phẩm");
             }
+            var orderDetail = _dbContext.ReceiveOrderDetails.Where(e => e.ReceiveOrderId == id);
+            _dbContext.ReceiveOrderDetails.RemoveRange(orderDetail);
             receiveOrder.Deleted = true;
             _dbContext.SaveChanges();
         }
