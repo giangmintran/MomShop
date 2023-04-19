@@ -25,9 +25,9 @@
       background: rgba(217, 217, 217, 0.5);
       margin-bottom: 0% !important;
   }
-.p-inputwrapper {
-    width: 100%;
-}
+// .p-inputwrapper {
+//     width: 100%;
+// }
   .input-bottom-form {
       margin-bottom: 20px !important;
   }
@@ -176,7 +176,15 @@
 }
 :host ::ng-deep{
     .disabled{
-        background-color: gainsboro;
+        background-color: #fff9f9;
+        color:black;
+    }
+    .btn-default{
+        border: 1px solid gainsboro;
+    }
+    .btn-default:hover{
+        background-color: red;
+        color:white;
     }
     .input-text{
         height: 28px;

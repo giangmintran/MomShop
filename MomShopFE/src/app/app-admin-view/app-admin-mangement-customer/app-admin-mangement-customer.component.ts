@@ -1,7 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Component, ViewChild } from '@angular/core';
 import { ToastrService } from 'ngx-toastr';
-import { Product } from 'src/models/product';
+import { ProductDto } from 'src/models/product';
 import { ProductService } from 'src/services/product.service';
 import { CreateOrEditCustomerComponent } from './create-or-edit-customer/create-or-edit-customer.component';
 
@@ -13,7 +13,7 @@ import { CreateOrEditCustomerComponent } from './create-or-edit-customer/create-
 export class AppAdminMangementCustomerComponent {
   @ViewChild('createCustomer', { static: true })
   modalUser: CreateOrEditCustomerComponent;
-  product: Product;
+  product: ProductDto = new ProductDto;
   //filter
   name;
   phone;

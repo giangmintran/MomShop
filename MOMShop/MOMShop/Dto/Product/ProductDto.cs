@@ -16,6 +16,6 @@ namespace MOMShop.Dto.Product
         public string Description { get; set; }
         public int Status { get; set; }
         public bool Deleted { get; set; }
-        public List<ProductDetailDto> ProductDetails { get; set; }
+        //public List<ProductDetailDto> ProductDetails { get; set; }
     }
 }

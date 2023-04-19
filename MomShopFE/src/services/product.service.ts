@@ -24,11 +24,14 @@ export class ProductService {
       return this.http.post(this.baseUrl + 'add', product);
     }
   }
-  detailProduct(id:number): Observable<any>{
-    return this.http.get(this.baseUrl + 'detail/' + id);
-  }
+  // detailProduct(id:number): Observable<any>{
+  //   return this.http.get(this.baseUrl + 'detail/' + id);
+  // }
   addDetailProduct(product:any){
     return this.http.post(this.baseUrl+ 'add-detail',product)
+  }
+  getforEditProduct(id) : Observable<any>{
+    return this.http.get(this.baseUrl+ 'find-by-id/',id)
   }
   updateDetailProduct(product:any){
     return this.http.put(this.baseUrl+ 'add-detail',product)

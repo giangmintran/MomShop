@@ -116,13 +116,15 @@ export class CreateOrEditDetailProductComponent {
     this.productFind.productDetails = null;
   }
 
-  show(id?) {
+  show(id?:number,name?:any,code?:string) {
     if(id){
-      this.productServices.detailProduct(id).subscribe((data) => {
+      this.productServices.getAllViewDetailProduct(id).subscribe((data) => {
         this.productFind = data;
         this.productDetails = data.productDetails;
       });
     }
+    this.productFind.name = name;
+    this.productFind.code = code;
     this.modal.show();
     this.active = true;
   }

@@ -1,7 +1,6 @@
 import { Component, EventEmitter, Output, ViewChild } from '@angular/core';
 import { ModalDirective } from 'ngx-bootstrap/modal';
 import { ToastrService } from 'ngx-toastr';
-import { Product } from 'src/models/product';
 import { UpdateProductDto } from 'src/models/updateProduct';
 import { ProductService } from 'src/services/product.service';
 
@@ -57,7 +56,7 @@ export class AppAdminViewDetailProductComponent {
   }
   show(id?) {
     if(id){
-      this.productServices.detailProduct(id).subscribe((data) => {
+      this.productServices.getAllViewDetailProduct(id).subscribe((data) => {
         console.log("data", data.productDetails);
         this.productDetail = data;
         this.rows = data.productDetails;

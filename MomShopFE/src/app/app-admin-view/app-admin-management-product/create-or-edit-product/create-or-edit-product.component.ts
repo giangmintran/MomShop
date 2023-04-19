@@ -4,6 +4,7 @@ import { ToastrService } from 'ngx-toastr';
 import { UpdateProductDto } from 'src/models/updateProduct';
 import { ProductService } from 'src/services/product.service';
 import { CreateOrEditDetailProductComponent } from '../create-or-edit-detail-product/create-or-edit-detail-product.component';
+import { ProductDto } from 'src/models/product';
 
 @Component({
   selector: 'app-create-or-edit-product',
@@ -12,16 +13,9 @@ import { CreateOrEditDetailProductComponent } from '../create-or-edit-detail-pro
 })
 export class CreateOrEditProductComponent implements OnInit, OnDestroy{
   product: UpdateProductDto = new UpdateProductDto();
-  productFind: any = {
-    'name': null,
-    'price': null,
-    'description': null,
-    'status': null,
-    'productType': null,
-  };
-  productDetails: any[] = [];
-  
+  productFind: ProductDto = new ProductDto()
   saving = false;
+  productId;
   active;
   cities;
   name:string;
@@ -108,24 +102,14 @@ export class CreateOrEditProductComponent implements OnInit, OnDestroy{
   }
 
   clearData() {
-    this.productFind.code = null;
-    this.productFind.name = null;
-    this.productFind.price = null;
-    this.productFind.description = null;
-    this.productFind.status = null;
-    this.productFind.productType = null;
-    this.productFind.id = null;
-    this.productFind.productDetails = null;
+    this.productFind = undefined
   }
 
   show(id?) {
+    this.productId = id;
     if(id){
-      this.productServices.detailProduct(id).subscribe((data) => {
-        console.log("data", data.productDetails);
+      this.productServices.getforEditProduct(id).subscribe((data) => {
         this.productFind = data;
-        this.productDetails = data.productDetails;
-        console.log("productDetail", this.productDetails);
-        console.log("product", this.productFind);
       });
     }
     this.modal.show();
@@ -140,14 +124,14 @@ export class CreateOrEditProductComponent implements OnInit, OnDestroy{
     if (this.productFind.id == undefined) {
       this.productServices.createOrEdit(this.productFind).subscribe(()=>{
         this.active = false;
-        this.toastr.success('Thêm thành công','Thông báo');
+        this.toastr.success('Thêm thành công','Thông báo',{timeOut: 1000});
         this.modalSave.emit(null);
         this.close();
       });
     } else {
       this.productServices.createOrEdit(this.productFind).subscribe(()=>{
         this.active = false;
-        this.toastr.success('Cập nhật thành công','Thông báo');
+        this.toastr.success('Cập nhật thành công','Thông báo',{timeOut: 1000});
         this.modalSave.emit(null);
         this.close();
       });
@@ -155,8 +139,5 @@ export class CreateOrEditProductComponent implements OnInit, OnDestroy{
   }
   getProductData(){
 
-  }
-  addDetailProduct(){
-    this.modalCreateOrEdit.show();
   }
 }

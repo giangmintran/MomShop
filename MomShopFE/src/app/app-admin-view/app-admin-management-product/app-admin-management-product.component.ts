@@ -1,7 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Component, ViewChild } from '@angular/core';
 import { ToastrService } from 'ngx-toastr';
-import { Product } from 'src/models/product';
+import { ProductDto } from 'src/models/product';
 import { ProductService } from 'src/services/product.service';
 import { AppAdminViewDetailProductComponent } from './app-admin-view-detail-product/app-admin-view-detail-product.component';
 import { CreateOrEditProductComponent } from './create-or-edit-product/create-or-edit-product.component';
@@ -20,7 +20,7 @@ export class AppAdminManagementProductComponent {
   @ViewChild('createOrEditDeatail', { static: true }) modalAddDetailProduct: CreateOrEditDetailProductComponent;
 
   rows: any[] = [];
-  product: Product;
+  product: ProductDto;
   colsProduct;
   colsDetailProduct;
   filter
@@ -103,7 +103,7 @@ export class AppAdminManagementProductComponent {
   onSelectionChange() {
    this.getDetailProductData();
   }
-  createProdcut() {
+  createProduct() {
     this.modalCreateOrEdit.show();
   }
   editProduct(row) {
@@ -125,9 +125,9 @@ export class AppAdminManagementProductComponent {
     this.filter = !this.filter;
   }
   addDetailProduct(){
-    this.modalAddDetailProduct.show()
+    this.modalAddDetailProduct.show(null,this.selectedProduct.code,this.selectedProduct.name)
   }
   editDetailProduct(row){
-    this.modalAddDetailProduct.show(row.id)
+    this.modalAddDetailProduct.show(row.id,this.selectedProduct.code,this.selectedProduct.name)
   }
 }

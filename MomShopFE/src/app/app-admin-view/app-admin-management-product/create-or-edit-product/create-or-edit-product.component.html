@@ -7,31 +7,29 @@
                 <!-- <h4 class="ml-2">
                     Thông tin chi tiết
                 </h4>   -->
+                <p *ngIf="productId" class="title mb-4">Sửa sản phẩm</p>
+                <p *ngIf="!productId" class="title mb-4">Thêm sản phẩm</p>
                 <div>
-                    <div class="row mb-2">
+                    <div class="row mb-4">
                         <div class="col-md-4">
-                            <label class="label-text" for="name">Mã sản phẩm</label>
-                            <input type="text" class="input-text" pInputText [(ngModel)]="productFind.code" />
+                            <input type="text" class="input-text" pInputText [(ngModel)]="productFind.code" placeholder="Mã sản phẩm" />
                         </div>
                         <div class="col-md-4">
-                            <label class="label-text" for="category">Tên sản phẩm</label>
-                            <input type="text" class="input-text" pInputText [(ngModel)]="productFind.name" />
+                            <input type="text" class="input-text" pInputText [(ngModel)]="productFind.name" placeholder="Tên sản phẩm"/>
                         </div>
-                        <div class="col-md-4 d-flex">
+                        <div class="col-md-4">
                                 <p-dropdown [options]="listStatus" [(ngModel)]="productFind.status" placeholder="Trạng thái" [style]="{'height':'29px','width':'100%'}" optionLabel="name" optionValue="value"></p-dropdown>
                         </div>
                     </div>
                     <div class="row">
-                        <div class="col-md-4 d-flex">
+                        <div class="col-md-4">
                             <p-dropdown [options]="listTypeProduct" [(ngModel)]="productFind.productType" placeholder="Loại sản phẩm" [style]="{'height':'29px','width':'100%'}" optionLabel="name" optionValue="value"></p-dropdown>
                     </div>
                     <div class="col-4">
-                        <label class="label-text" for="category">Giá</label>
-                        <input type="number" class="input-text" pInputText [(ngModel)]="productFind.price" />
+                        <input type="number" class="input-text" pInputText [(ngModel)]="productFind.price" placeholder="Giá"/>
                     </div>
                     <div class="col-4">
-                        <label class="label-text" for="category">Mô tả</label>
-                        <input type="text" class="input-text" pInputText [(ngModel)]="productFind.description" />
+                        <input type="text" class="input-text" pInputText [(ngModel)]="productFind.description" placeholder="Mô tả"/>
                     </div>
                    
                     <!-- <div *ngIf="productFind.id">
@@ -66,7 +64,7 @@
             </div>
                 
             <div class="modal-footer modal-footer-master">
-                <button [disabled]="saving" type="button" class="btn btn-default" (click)="close()">Huỷ</button>
+                <button [disabled]="saving" type="button" class="btn btn-default" (click)="close()">Hủy</button>
                 <button type="button" (click)="save()" class="btn btn-primary">Lưu</button>
             </div>
         </div>
