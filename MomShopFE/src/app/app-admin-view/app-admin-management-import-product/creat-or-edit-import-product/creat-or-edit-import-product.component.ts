@@ -1,8 +1,8 @@
 import { Component, EventEmitter, Output, ViewChild } from "@angular/core";
 import { ModalDirective } from "ngx-bootstrap/modal";
 import { ToastrService } from "ngx-toastr";
-import { UpdateProductDto } from "src/models/updateProduct";
-import { ProductService } from "src/services/product.service";
+import { ReceiveOrderDto } from "src/models/receiverOrder";
+import { ReceiveOrder } from "src/services/receiveOrder.service";
 
 @Component({
   selector: "app-creat-or-edit-import-product",
@@ -10,28 +10,22 @@ import { ProductService } from "src/services/product.service";
   styleUrls: ["./creat-or-edit-import-product.component.scss"],
 })
 export class CreatOrEditImportProductComponent {
-  product: UpdateProductDto = new UpdateProductDto();
+  receiveOrder: ReceiveOrderDto = new ReceiveOrderDto();
   saving = false;
   active;
   cities;
   name: string;
   test;
+  listStatus;
   listTypeProduct;
   category;
   quantity;
   @ViewChild("createOrEditModal", { static: true }) modal: ModalDirective;
   @Output() modalSave: EventEmitter<any> = new EventEmitter<any>();
   constructor(
-    public productServices: ProductService,
+    public receiveOrders: ReceiveOrder,
     public toastr: ToastrService
   ) {
-    this.cities = [
-      { name: "New York", code: "NY" },
-      { name: "Rome", code: "RM" },
-      { name: "London", code: "LDN" },
-      { name: "Istanbul", code: "IST" },
-      { name: "Paris", code: "PRS" },
-    ];
     this.listTypeProduct = [
       { name: "Áo thun", value: 1 },
       { name: "Áo sơ mi", value: 2 },
@@ -39,9 +33,19 @@ export class CreatOrEditImportProductComponent {
       { name: "Quần", value: 4 },
       { name: "Phụ kiện", value: 5 },
     ];
+    this.listStatus = [
+      { code: 'Tất cả', value: undefined },
+      { code: 'Chưa thanh toán', value: 1 },
+      { code: 'Đã thanh toán', value: 2 },
+      { code: 'Đã hoàn thành', value: 3 },
+    ]
   }
   show(id?) {
     if (id) {
+      this.receiveOrders.getReceiveOrderById(id).subscribe((data) => {
+        this.receiveOrder = data;
+        this.receiveOrder.id = id;
+      })
     }
     this.modal.show();
     this.active = true;
@@ -51,7 +55,7 @@ export class CreatOrEditImportProductComponent {
     this.modal.hide();
   }
   save() {
-    this.productServices.createOrEdit(this.product).subscribe(() => {
+    this.receiveOrders.createOrEditReceiveOrder(this.receiveOrder).subscribe(() => {
       this.active = false;
       this.toastr.success("Thêm thành công", "Toartr fun!");
       this.modalSave.emit(null);

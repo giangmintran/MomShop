@@ -1,6 +1,0 @@
-export class CustomerFavourite{
-    id:number;
-    customerId:number;
-    productId:number;
-    size:string;
-}

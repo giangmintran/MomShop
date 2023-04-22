@@ -10,8 +10,8 @@
     </div>
     <div class="user">							
 		<div class="row mb-2" *ngIf="filter">
-			<div class="col-md-2">
-				<p-dropdown [options]="listStatus" [showClear]="true" [(ngModel)]="filterStatus" placeholder="Trạng thái" [style]="{'height':'29px','width':'100%'}" (onChange)="getProductData()" optionLabel="code" optionValue="value"></p-dropdown>
+			<div class="col-md-3">
+				<p-dropdown [options]="listStatus"  [(ngModel)]="filterStatus" placeholder="Trạng thái" [style]="{'height':'29px','width':'100%'}" (onChange)="getProductData()" optionLabel="code" optionValue="value"></p-dropdown>
 			</div>
 		</div>
 			<p class="mb-3 title">Danh sách sản phẩm</p>

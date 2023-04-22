@@ -10,23 +10,26 @@ import { DropdownModule } from 'primeng/dropdown';
 import { InputTextModule } from 'primeng/inputtext';
 import { TableModule } from 'primeng/table';
 import { AppBsModalModule } from 'src/directive/app-bs-modal.module';
-
+import { CreateOrEditDetailImportProductComponent } from './create-or-edit-detail-import-product/create-or-edit-detail-import-product.component';
+import { CalendarModule } from 'primeng/calendar';
 
 
 @NgModule({
   declarations: [
     AppAdminManagementImportProductComponent,
-    CreatOrEditImportProductComponent
+    CreatOrEditImportProductComponent,
+    CreateOrEditDetailImportProductComponent
   ],
   imports: [
     CommonModule,
     TableModule,
     BrowserAnimationsModule,
-    AppBsModalModule,FormsModule,
+    AppBsModalModule, FormsModule,
     DropdownModule,
     InputTextModule,
     ButtonModule,
     ToastrModule,
+    CalendarModule
   ]
 })
 export class AppAdminManagementImportProductModule { }

@@ -8,29 +8,31 @@
                     <div class="row mb-4">
                         <div class="col-4">
                             <label class="label-text" for="name">Mã sản phẩm</label>
-                            <input type="text" class="input-text" pInputText [(ngModel)]="receiveOrder.code" placeholder="Mã sản phẩm"/>
+                            <input type="text" class="input-text" pInputText [(ngModel)]="product.name" />
                         </div>
                         <div class="col-4">
-                            <label class="label-text" for="name">Nhà cung cấp</label>
-                            <input type="text" class="input-text" pInputText [(ngModel)]="receiveOrder.supplier" placeholder="Nhà cung cấp"/>
+                            <label class="label-text" for="name">Tên sản phẩm</label>
+                            <input type="text" class="input-text" pInputText [(ngModel)]="product.name" />
                         </div>
                         <div class="col-md-4">
-                            <label class="label-text">Ngày nhận đơn</label>
-                            <p-calendar value="receiveOrder.receiveDate" [(ngModel)]="receiveOrder.receiveDate" [showIcon]="true" ></p-calendar>
+                            <label class="label-text">Loại sản phẩm</label>
+                            <p-dropdown [options]="listTypeProduct" [(ngModel)]="product.productType"
+                                [style]="{'height':'29px','width':'100%'}" optionLabel="name"
+                                optionValue="value"></p-dropdown>
                         </div>
                     </div>
                     <div class="row">
                         <div class="col-4">
-                            <label class="label-text">Người nhận</label>
-                            <input type="text" class="input-text" pInputText [(ngModel)]="receiveOrder.receiver" placeholder="Người nhận"/>
+                            <label class="label-text">Giá</label>
+                            <input type="number" class="input-text" pInputText [(ngModel)]="product.price" />
                         </div>
                         <div class="col-4">
                             <label class="label-text">Mô tả</label>
-                            <input type="text" class="input-text" pInputText [(ngModel)]="receiveOrder.description" placeholder="Mô tả"/>
+                            <input type="text" class="input-text" pInputText [(ngModel)]="product.description" />
                         </div>
                         <div class="col-md-4">
                             <label class="label-text">Trạng thái</label>
-                            <p-dropdown [options]="listStatus" [(ngModel)]="receiveOrder.status"
+                            <p-dropdown [options]="listStatus" [(ngModel)]="product.status"
                                 [style]="{'height':'29px','width':'100%'}" optionLabel="code"
                                 optionValue="value"></p-dropdown>
                         </div>

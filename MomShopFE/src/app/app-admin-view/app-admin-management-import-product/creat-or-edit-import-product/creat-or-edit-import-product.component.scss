@@ -1,10 +1,13 @@
 .pInputText{
-    height: 20px;
+    height: 28px;
 }
 .input-text{
     height: 28px;
 }
 :host ::ng-deep{
+    .p-calendar-w-btn .p-inputtext{
+        height: 28px !important;
+    }
     p-dropdown{
        display: flex;
         align-items: flex-end;

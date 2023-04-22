@@ -1,9 +1,11 @@
 import { HttpClient } from '@angular/common/http';
 import { Component, ViewChild } from '@angular/core';
 import { ToastrService } from 'ngx-toastr';
-import {ProductDto } from 'src/models/product';
+import { ProductDto } from 'src/models/product';
 import { ProductService } from 'src/services/product.service';
 import { CreatOrEditImportProductComponent } from './creat-or-edit-import-product/creat-or-edit-import-product.component';
+import { CreateOrEditDetailImportProductComponent } from './create-or-edit-detail-import-product/create-or-edit-detail-import-product.component';
+import { ReceiveOrder } from 'src/services/receiveOrder.service';
 
 @Component({
   selector: 'app-app-admin-management-import-product',
@@ -11,62 +13,79 @@ import { CreatOrEditImportProductComponent } from './creat-or-edit-import-produc
   styleUrls: ['./app-admin-management-import-product.component.scss']
 })
 export class AppAdminManagementImportProductComponent {
-  @ViewChild('createUser', { static: true })
-  modalUser: CreatOrEditImportProductComponent;
+  @ViewChild('productImport', { static: true })
+  modalproductImport: CreatOrEditImportProductComponent;
+  @ViewChild('productDetailImport', { static: true })
+  modalDetailProductImport: CreateOrEditDetailImportProductComponent;
   product: ProductDto = new ProductDto;
   cols;
-  tableData;
+  receiveOrderDetailData;
+  receiveOrderData;
   selectedRow;
   totalRecords;
-  ngOnInit(): void {}
-  constructor(private http: HttpClient,public productServices : ProductService,public toastr: ToastrService) {
+  ngOnInit(): void { }
+  constructor(private http: HttpClient, public receiveOrder: ReceiveOrder, public toastr: ToastrService) {
     this.cols = [
       {
         field: 'code',
-        header: 'Code',
+        header: 'Mã sản phẩm',
       },
       {
-        field: 'name',
-        header: 'Name',
+        field: 'createdDate',
+        header: 'Ngày tạo đơn hàng',
       },
       {
-        field: 'type',
-        header: 'Loại sản phẩm',
+        field: 'receivedDate',
+        header: 'Ngày nhận đơn hàng',
       },
       {
-        field: 'price',
-        header: 'Giá nhập',
+        field: 'supplier',
+        header: 'Tên nhà cung cấp',
       },
       {
-        field: 'status',
-        header: 'Trạng thái',
+        field: 'receiver',
+        header: 'Tên người nhận',
       },
       {
         field: 'description',
         header: 'Mô tả',
       },
+      {
+        field: 'status',
+        header: 'Trạng thái',
+      },
     ];
-    this.getProductData();
+    this.getReceiveOrderData();
   }
-  getProductData(): void {
-    this.productServices.getAllProduct().subscribe((data)=>{
-      this.tableData = data;
-      this.totalRecords = this.tableData
+  getReceiveOrderData(): void {
+    this.receiveOrder.getAllReceiveOrder().subscribe((data) => {
+      this.receiveOrderData = data;
+      //this.totalRecords = this.receiveOrderData
     });
   }
-  onSelectionChange(event) {}
-  createUsers() {
-    this.modalUser.show();
-  }
-  editUser() {
-    this.modalUser.show(this.selectedRow.id);
-  }
-  deleteUser() {
-    this.productServices.deleteProduct(this.selectedRow.id).subscribe((data)=>{
-      this.toastr.success('Xoá thành công','Thông báo',{timeOut: 1000});
-      this.productServices.getAllProduct().subscribe(()=>{
-        this.getProductData();
-      })
+  getReceiveOrderDetailData(): void {
+    this.receiveOrder.getDetailReceiveOrder(this.selectedRow.id).subscribe((data) => {
+      this.receiveOrderDetailData = data;
+      //this.totalRecords = this.receiveOrderData
     });
+  }
+  onSelectionChange(event) {
+    this.getReceiveOrderDetailData();
+   }
+  createReceiveOrder() {
+    this.modalproductImport.show();
+  }
+  editReceiveOrder() {
+    this.modalproductImport.show(this.selectedRow.id);
+  }
+  deleteReceiveOrder() {
+    this.receiveOrder.deleteReceiveOrder(this.selectedRow.id).subscribe(() => {
+      this.toastr.success('Xoá thành công', 'Thông báo', { timeOut: 1000 });
+        this.getReceiveOrderData();
+    });
+  }
+  //add Detail ReceiveOrder
+  addDetailReceiveOrder() {
+    this.modalDetailProductImport.show(this.selectedRow.id)
   }
 }

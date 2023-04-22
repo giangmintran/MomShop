@@ -20,6 +20,7 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppUserMainComponent } from './app-user-view/app-user-main/app-user-main.component';
 import { AppComponent } from './app.component';
 import { PTableCustomComponent } from './p-table-custom/p-table-custom.component';
+import { CalendarModule } from 'primeng/calendar';
 @NgModule({
   declarations: [
     AppComponent,
@@ -44,6 +45,7 @@ import { PTableCustomComponent } from './p-table-custom/p-table-custom.component
     InputTextModule,
     ButtonModule,
     FormsModule,
+    CalendarModule,
     ToastrModule.forRoot({
       positionClass :'toast-top-right',
     }),

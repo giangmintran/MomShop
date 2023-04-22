@@ -12,5 +12,6 @@ namespace MOMShop.Dto.ReceiveOrder
         public string Receiver { get; set; }
         public string Description { get; set; }
         public int Status { get; set; }
+        public string StatusName { get; set; }
     }
 }

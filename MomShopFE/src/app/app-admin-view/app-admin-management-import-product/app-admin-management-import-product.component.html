@@ -2,14 +2,14 @@
 <div class="container1">
     <div class="block-button mb-3">
 		<!-- <p-button label="Submit"></p-button> -->
-        <button class="btn btn-add mr-2 btn-outline-primary"  (click)="createUsers()">Thêm</button>
-        <button class="btn btn-add ml-2 btn-outline-primary" [disabled]="!selectedRow" (click)="editUser()">Sửa</button>
-        <button class="btn btn-add ml-2 btn-delete btn-outline-danger" [disabled]="!selectedRow" (click)="deleteUser()">Xoá</button>
+        <button class="btn btn-add mr-2 btn-outline-primary"  (click)="createReceiveOrder()">Thêm</button>
+        <button class="btn btn-add ml-2 btn-outline-primary" [disabled]="!selectedRow" (click)="editReceiveOrder()">Sửa</button>
+        <button class="btn btn-add ml-2 btn-delete btn-outline-danger" [disabled]="!selectedRow" (click)="deleteReceiveOrder()">Xoá</button>
     </div>
     <div class="user">
 		<p class="mb-2 title">Đơn nhập hàng</p>
-        <p-table [value]="tableData"  [paginator]="true" [rows]="10" [rowsPerPageOptions]="[5,10,15,20]"
-		(onLazyLoad)="getProductData()" [tableStyle]="{'width': '100% -280px','font-size':'0.8rem'}" paginatorPosition="bottom"
+        <p-table [value]="receiveOrderData"  [paginator]="true" [rows]="10" [rowsPerPageOptions]="[5,10,15,20]"
+		(onLazyLoad)="getReceiveOrderData()" [tableStyle]="{'width': '100% -280px','font-size':'0.8rem'}" paginatorPosition="bottom"
   [columns]="cols" selectionMode="single" [(selection)]="selectedRow" (selectionChange)="onSelectionChange($event)"
    [rows]="2" >
 	<ng-template pTemplate="header" let-columns>
@@ -28,9 +28,12 @@
 		</tr>
 	</ng-template>
 </p-table> 
-<p class="mb-2 title">Chi tiết đơn nhập hàng</p>
-        <p-table [value]="tableData"  [paginator]="true" [rows]="10" [rowsPerPageOptions]="[5,10,15,20]"
-		(onLazyLoad)="getProductData()" [tableStyle]="{'width': '100% -280px','font-size':'0.8rem'}" paginatorPosition="bottom"
+<div class="btn_add_detail_product d-flex justify-content-between mt-4 mb-2">
+	<p class="mb-3 title">Chi tiết đơn nhập hàng</p>
+	<button class="btn btn-add mr-2 btn-outline-primary" *ngIf="selectedRow?.id"  (click)="addDetailReceiveOrder()">Thêm</button>
+</div>
+        <p-table [value]="receiveOrderDetailData"  [paginator]="true" [rows]="10" [rowsPerPageOptions]="[5,10,15,20]"
+		(onLazyLoad)="getReceiveOrderDetailData()" [tableStyle]="{'width': '100% -280px','font-size':'0.8rem'}" paginatorPosition="bottom"
   [columns]="cols" selectionMode="single" [(selection)]="selectedRow" (selectionChange)="onSelectionChange($event)"
    [rows]="2" >
 	<ng-template pTemplate="header" let-columns>
@@ -55,4 +58,5 @@
 </p-table> 
     </div>
 </div>
-<app-creat-or-edit-import-product #createUser (modalSave)="getProductData()"></app-creat-or-edit-import-product>
+<app-creat-or-edit-import-product #productImport (modalSave)="getReceiveOrderData()"></app-creat-or-edit-import-product>
+<app-create-or-edit-detail-import-product #productDetailImport></app-create-or-edit-detail-import-product>

@@ -19,15 +19,16 @@
                     </div>
                     <div class="row mt-4 mb-3">
                         <div class="col-md-4">
-                            <label>Size</label>
-                            <input type="text" class="input-text" pInputText [(ngModel)]="productDetail.size" placeholder="Size"/>
+                            <label class="label-text">Size</label>
+                            <input type="text" class="input-text" pInputText [(ngModel)]="productDetail.size" />
                         </div>
                         <div class="col-md-4">
-                            <label>Số lượng</label>
-                            <input type="number" class="input-text" pInputText [(ngModel)]="productDetail.quantity" placeholder="Số lượng"/>
+                            <label class="label-text">Số lượng</label>
+                            <input type="number" class="input-text" pInputText [(ngModel)]="productDetail.quantity" />
                         </div>
-                        <div class="col-md-4 d-flex flex-column">
-                            <input type="text" class="input-text" pInputText [(ngModel)]="productDetail.description" placeholder="Mô tả"/>
+                        <div class="col-md-4">
+                            <label class="label-text">Mô tả</label>
+                            <input type="text" class="input-text" pInputText [(ngModel)]="productDetail.description"/>
                         </div>
                     </div>
             <div class="modal-footer modal-footer-master">

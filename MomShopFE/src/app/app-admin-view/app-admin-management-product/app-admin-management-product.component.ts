@@ -23,7 +23,7 @@ export class AppAdminManagementProductComponent {
   product: ProductDto;
   colsProduct;
   colsDetailProduct;
-  filter
+  filter = true;
   filterStatus = null;
   tableData: any;
   selectedProduct;
