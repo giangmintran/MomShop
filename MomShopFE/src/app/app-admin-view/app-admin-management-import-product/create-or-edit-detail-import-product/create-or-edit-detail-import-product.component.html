@@ -3,46 +3,45 @@
     <div class="modal-dialog modal-lg">
         <div class="modal-content">
             <div class="modal-body modal-body-master">
-                <div
-                    class="form-group form-group-master form-md-line-input form-md-floating-label no-hint input-bottom-form">
-                    <div class="row mb-4">
-                        <div class="col-4">
-                            <label class="label-text" for="name">Mã sản phẩm</label>
-                            <input type="text" class="input-text" pInputText [(ngModel)]="product.name" />
+                <p class="ml-2 mb-4 title">
+                    Chi tiết sản phẩm
+                </p>  
+                <div class="">
+                    <div class="row mb-4" >
+                        <div class="col-md-6 d-flex flex-column">
+                            <label class="label-text mb-1" for="name">Mã sản phẩm</label>
+                            <input type="text" class="input-text disabled" disabled="true" pInputText [(ngModel)]="product" />
                         </div>
-                        <div class="col-4">
-                            <label class="label-text" for="name">Tên sản phẩm</label>
-                            <input type="text" class="input-text" pInputText [(ngModel)]="product.name" />
-                        </div>
-                        <div class="col-md-4">
-                            <label class="label-text">Loại sản phẩm</label>
-                            <p-dropdown [options]="listTypeProduct" [(ngModel)]="product.productType"
-                                [style]="{'height':'29px','width':'100%'}" optionLabel="name"
-                                optionValue="value"></p-dropdown>
+                        <div class="col-md-6 d-flex flex-column">
+                            <label class="label-text mb-1" for="category">Tên sản phẩm</label>
+                            <input type="text" class="input-text disabled" disabled="true" pInputText [(ngModel)]="product" />
                         </div>
                     </div>
-                    <div class="row">
-                        <div class="col-4">
-                            <label class="label-text">Giá</label>
-                            <input type="number" class="input-text" pInputText [(ngModel)]="product.price" />
+                    <div class="row mt-4 mb-3 d-flex justify-content-between">
+                        <div class="col-md-6">
+                            <label class="label-text">Size</label>
+                            <input type="number" class="input-text" pInputText />
                         </div>
-                        <div class="col-4">
+                        <div class="col-md-6">
+                            <label class="label-text">Số lượng</label>
+                            <input type="number" class="input-text" pInputText />
+                        </div>
+                    </div>
+                    <div class="row d-flex justify-content-between">
+                        <div class="col-md-6">
+                            <label class="label-text">Đơn giá</label>
+                            <input type="number" class="input-text" pInputText/>
+                        </div>
+                        <div class="col-md-6">
                             <label class="label-text">Mô tả</label>
-                            <input type="text" class="input-text" pInputText [(ngModel)]="product.description" />
-                        </div>
-                        <div class="col-md-4">
-                            <label class="label-text">Trạng thái</label>
-                            <p-dropdown [options]="listStatus" [(ngModel)]="product.status"
-                                [style]="{'height':'29px','width':'100%'}" optionLabel="code"
-                                optionValue="value"></p-dropdown>
+                            <input type="text" class="input-text" pInputText/>
                         </div>
                     </div>
-                </div>
-                <div class="modal-footer modal-footer-master">
-                    <button [disabled]="saving" type="button" class="btn btn-default" (click)="close()">Huỷ</button>
-                    <button type="button" (click)="save()" class="btn btn-primary">Lưu</button>
-                </div>
+            <div class="modal-footer modal-footer-master">
+                <button [disabled]="saving" type="button" class="btn btn-default" (click)="close()">Hủy</button>
+                <button type="button" (click)="save()" class="btn btn-primary">Lưu</button>
             </div>
         </div>
     </div>
+</div>
 </div>

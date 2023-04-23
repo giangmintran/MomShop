@@ -1,8 +1,10 @@
 import { Component, EventEmitter, Output, ViewChild } from '@angular/core';
 import { ModalDirective } from 'ngx-bootstrap/modal';
 import { ToastrService } from 'ngx-toastr';
+import { ReceivedOrderDetailDto } from 'src/models/receivedDetailOrder';
 import { UpdateProductDto } from 'src/models/updateProduct';
 import { ProductService } from 'src/services/product.service';
+import { ReceiveOrder } from 'src/services/receiveOrder.service';
 
 @Component({
   selector: 'app-create-or-edit-detail-import-product',
@@ -10,7 +12,7 @@ import { ProductService } from 'src/services/product.service';
   styleUrls: ['./create-or-edit-detail-import-product.component.scss']
 })
 export class CreateOrEditDetailImportProductComponent {
-  product: UpdateProductDto = new UpdateProductDto();
+  product: ReceivedOrderDetailDto[] = [] ;
   saving = false;
   active;
   cities;
@@ -23,7 +25,7 @@ export class CreateOrEditDetailImportProductComponent {
   @ViewChild("createOrEditModal", { static: true }) modal: ModalDirective;
   @Output() modalSave: EventEmitter<any> = new EventEmitter<any>();
   constructor(
-    public productServices: ProductService,
+    public receiveOrderDetail: ReceiveOrder,
     public toastr: ToastrService
   ) {
     this.listTypeProduct = [
@@ -42,6 +44,11 @@ export class CreateOrEditDetailImportProductComponent {
   }
   show(id?) {
     if (id) {
+      this.receiveOrderDetail.getDetailReceiveOrderById(id).subscribe((data) => {
+        //this.product = data;
+        //this.product .receivedDate = moment( this.product .receivedDate).format('DD/MM/YYYY')
+        //this.product.id = id;
+      })
     }
     this.modal.show();
     this.active = true;
@@ -51,7 +58,7 @@ export class CreateOrEditDetailImportProductComponent {
     this.modal.hide();
   }
   save() {
-    this.productServices.createOrEdit(this.product).subscribe(() => {
+    this.receiveOrderDetail.createOrEditDetailReceiveOrder(this.product).subscribe(() => {
       this.active = false;
       this.toastr.success("Thêm thành công", "Toartr fun!");
       this.modalSave.emit(null);

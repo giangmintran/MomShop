@@ -3,7 +3,7 @@ import { ModalDirective } from "ngx-bootstrap/modal";
 import { ToastrService } from "ngx-toastr";
 import { ReceiveOrderDto } from "src/models/receiverOrder";
 import { ReceiveOrder } from "src/services/receiveOrder.service";
-
+import * as moment from 'moment';
 @Component({
   selector: "app-creat-or-edit-import-product",
   templateUrl: "./creat-or-edit-import-product.component.html",
@@ -34,7 +34,6 @@ export class CreatOrEditImportProductComponent {
       { name: "Phụ kiện", value: 5 },
     ];
     this.listStatus = [
-      { code: 'Tất cả', value: undefined },
       { code: 'Chưa thanh toán', value: 1 },
       { code: 'Đã thanh toán', value: 2 },
       { code: 'Đã hoàn thành', value: 3 },
@@ -44,6 +43,7 @@ export class CreatOrEditImportProductComponent {
     if (id) {
       this.receiveOrders.getReceiveOrderById(id).subscribe((data) => {
         this.receiveOrder = data;
+        this.receiveOrder .receivedDate = moment( this.receiveOrder .receivedDate).format('DD/MM/YYYY')
         this.receiveOrder.id = id;
       })
     }
@@ -55,6 +55,7 @@ export class CreatOrEditImportProductComponent {
     this.modal.hide();
   }
   save() {
+    //this.receiveOrder.receivedDate = moment( this.receiveOrder.receivedDate).format('DD/MM/YYYY')
     this.receiveOrders.createOrEditReceiveOrder(this.receiveOrder).subscribe(() => {
       this.active = false;
       this.toastr.success("Thêm thành công", "Toartr fun!");

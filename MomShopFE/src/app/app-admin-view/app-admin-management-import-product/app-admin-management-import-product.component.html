@@ -8,20 +8,24 @@
     </div>
     <div class="user">
 		<p class="mb-2 title">Đơn nhập hàng</p>
-        <p-table [value]="receiveOrderData"  [paginator]="true" [rows]="10" [rowsPerPageOptions]="[5,10,15,20]"
+        <p-table [value]="receiveOrderData"  [paginator]="true" [rows]="10" [rowsPerPageOptions]="[5,10,15,20]" scrollHeight="250px" [scrollable]="true"
 		(onLazyLoad)="getReceiveOrderData()" [tableStyle]="{'width': '100% -280px','font-size':'0.8rem'}" paginatorPosition="bottom"
-  [columns]="cols" selectionMode="single" [(selection)]="selectedRow" (selectionChange)="onSelectionChange($event)"
-   [rows]="2" >
+		[columns]="cols" selectionMode="single" [(selection)]="selectedRow" (selectionChange)="onSelectionChange($event)"
+		 >
 	<ng-template pTemplate="header" let-columns>
 		<tr>
+			<th>STT</th>
 			<th *ngFor="let cols of columns">
 				{{cols.header}}
 			</th>
 		</tr>
 	</ng-template>
 
-	<ng-template pTemplate="body" let-tableData let-columns="columns">
+	<ng-template pTemplate="body" let-tableData let-columns="columns" let-rowIndex="rowIndex">
 		<tr [pSelectableRow]="tableData">
+			<td>
+				{{rowIndex+1}}
+			</td>
 			<td *ngFor="let cols of columns">
 				{{tableData[cols.field]}}
 			</td>

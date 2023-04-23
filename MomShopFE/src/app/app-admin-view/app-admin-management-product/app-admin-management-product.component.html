@@ -71,8 +71,8 @@
 						{{detailProduct[cols.field]}}
 					</td>
 					<td>
-						<button class="btn btn-add ml-2 btn-outline-primary"  (click)="editDetailProduct(detailProduct)">Sửa</button>
-						<button class="btn btn-add ml-2 btn-delete btn-outline-danger" (click)="deleteDetailProduct(detailProduct)">Xoá</button>
+						<button class="btn btn-add ml-2 btn-outline-primary" [disabled]="!selectedProduct"  (click)="editDetailProduct(detailProduct)">Sửa</button>
+						<button class="btn btn-add ml-2 btn-delete btn-outline-danger" [disabled]="!selectedProduct" (click)="deleteDetailProduct(detailProduct)">Xoá</button>
 					</td>
 				</tr>
 			</ng-template>

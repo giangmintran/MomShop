@@ -29,10 +29,10 @@ export class ReceiveOrder {
     }
     //xóa thông tin đơn hàng
     deleteReceiveOrder(id: number) {
-        return this.http.delete(this.baseUrl + 'delete' + id)
+        return this.http.delete(this.baseUrl + 'delete/' + id)
     }
     /// chi tiết đơn hàng
-    getDetailReceiveOrder(id: number) {
+    getDetailReceiveOrderById(id: number) {
         return this.http.get(this.baseUrl + 'details/' + id)
     }
     //thêm thông tin chi tiết đơn hàng
@@ -44,7 +44,7 @@ export class ReceiveOrder {
             return this.http.post(this.baseUrl + "add-detail", order);
         }
     }
-    deleteDetailReceiveOrder(){
-
+    deleteDetailReceiveOrder(id:number){
+        return this.http.delete(this.baseUrl + 'delete-detail/' + id)
     }
 }

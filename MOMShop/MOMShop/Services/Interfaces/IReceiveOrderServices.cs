@@ -9,7 +9,7 @@ namespace MOMShop.Services.Interfaces
         ReceiveOrderDto Add(CreateReceiveOrderDto input);
         ReceiveOrderDto Update(CreateReceiveOrderDto input);
         void Delete(int id);
-        ReceiveOrderDto FindById(int id);
+        List<ReceiveOrderDto> FindById(int id);
         List<ReceiveOrderDto> GetReceiveOrders(FilterReceiveOrderDto input);
     }
 }

@@ -37,7 +37,7 @@ namespace MOMShop.Controllers
         }
 
         [HttpGet("find-by-id/{id}")]
-        public ReceiveOrderDto FindById(int id)
+        public List<ReceiveOrderDto> FindById(int id)
         {
             try
             {

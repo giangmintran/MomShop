@@ -6,6 +6,8 @@ import { ProductService } from 'src/services/product.service';
 import { CreatOrEditImportProductComponent } from './creat-or-edit-import-product/creat-or-edit-import-product.component';
 import { CreateOrEditDetailImportProductComponent } from './create-or-edit-detail-import-product/create-or-edit-detail-import-product.component';
 import { ReceiveOrder } from 'src/services/receiveOrder.service';
+import * as moment from 'moment';
+import { ReceiveOrderDto } from 'src/models/receiverOrder';
 
 @Component({
   selector: 'app-app-admin-management-import-product',
@@ -20,15 +22,33 @@ export class AppAdminManagementImportProductComponent {
   product: ProductDto = new ProductDto;
   cols;
   receiveOrderDetailData;
-  receiveOrderData;
+  receiveOrderData: ReceiveOrderDto[] = [];
   selectedRow;
   totalRecords;
+  listStatus = [
+    { code: 'Tất cả', value: undefined },
+    { code: 'Đang bán', value: 1 },
+    { code: 'Chưa mở bán', value: 2 },
+    { code: 'Khoá', value: 3 },
+  ]
   ngOnInit(): void { }
   constructor(private http: HttpClient, public receiveOrder: ReceiveOrder, public toastr: ToastrService) {
     this.cols = [
       {
         field: 'code',
         header: 'Mã sản phẩm',
+      },
+      {
+        field: 'supplier',
+        header: 'Nhà cung cấp',
+      },
+      {
+        field: 'receiver',
+        header: 'Người tiếp nhận',
+      },
+      {
+        field: 'description',
+        header: 'Mô tả',
       },
       {
         field: 'createdDate',
@@ -39,19 +59,7 @@ export class AppAdminManagementImportProductComponent {
         header: 'Ngày nhận đơn hàng',
       },
       {
-        field: 'supplier',
-        header: 'Tên nhà cung cấp',
-      },
-      {
-        field: 'receiver',
-        header: 'Tên người nhận',
-      },
-      {
-        field: 'description',
-        header: 'Mô tả',
-      },
-      {
-        field: 'status',
+        field: 'statusName',
         header: 'Trạng thái',
       },
     ];
@@ -59,19 +67,27 @@ export class AppAdminManagementImportProductComponent {
   }
   getReceiveOrderData(): void {
     this.receiveOrder.getAllReceiveOrder().subscribe((data) => {
+      data.forEach(element => {
+        element.receivedDate = moment(element.receivedDate).format('DD/MM/YYYY')
+        element.createdDate = moment(element.createdDate).format('DD/MM/YYYY')
+        this.listStatus.forEach((e) => {
+          if (e.value == element.status) {
+            element.statusName == e.code;
+          }
+        }
+        )
+      });
       this.receiveOrderData = data;
-      //this.totalRecords = this.receiveOrderData
     });
   }
   getReceiveOrderDetailData(): void {
-    this.receiveOrder.getDetailReceiveOrder(this.selectedRow.id).subscribe((data) => {
+    this.receiveOrder.getDetailReceiveOrderById(this.selectedRow.id).subscribe((data) => {
       this.receiveOrderDetailData = data;
-      //this.totalRecords = this.receiveOrderData
     });
   }
   onSelectionChange(event) {
     this.getReceiveOrderDetailData();
-   }
+  }
   createReceiveOrder() {
     this.modalproductImport.show();
   }
@@ -81,7 +97,7 @@ export class AppAdminManagementImportProductComponent {
   deleteReceiveOrder() {
     this.receiveOrder.deleteReceiveOrder(this.selectedRow.id).subscribe(() => {
       this.toastr.success('Xoá thành công', 'Thông báo', { timeOut: 1000 });
-        this.getReceiveOrderData();
+      this.getReceiveOrderData();
     });
   }
   //add Detail ReceiveOrder

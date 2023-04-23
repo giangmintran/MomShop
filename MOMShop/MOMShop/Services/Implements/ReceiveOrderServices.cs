@@ -45,14 +45,14 @@ namespace MOMShop.Services.Implements
             _dbContext.SaveChanges();
         }
 
-        public ReceiveOrderDto FindById(int id)
+        public List<ReceiveOrderDto> FindById(int id)
         {
             var receiveOrder = _dbContext.ReceiveOrders.FirstOrDefault(e => e.Id == id);
             if (receiveOrder == null)
             {
                 throw new Exception("Không tìm thấy sản phẩm");
             }
-            return _mapper.Map<ReceiveOrderDto>(receiveOrder);
+            return _mapper.Map<List<ReceiveOrderDto>>(receiveOrder);
         }
 
         public List<ReceiveOrderDto> GetReceiveOrders(FilterReceiveOrderDto input)

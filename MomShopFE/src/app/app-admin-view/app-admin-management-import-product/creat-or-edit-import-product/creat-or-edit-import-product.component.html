@@ -7,7 +7,7 @@
                     class="form-group form-group-master form-md-line-input form-md-floating-label no-hint input-bottom-form">
                     <div class="row mb-4">
                         <div class="col-4">
-                            <label class="label-text" for="name">Mã sản phẩm</label>
+                            <label class="label-text" for="name">Mã hóa đơn</label>
                             <input type="text" class="input-text" pInputText [(ngModel)]="receiveOrder.code" placeholder="Mã sản phẩm"/>
                         </div>
                         <div class="col-4">
@@ -16,7 +16,7 @@
                         </div>
                         <div class="col-md-4">
                             <label class="label-text">Ngày nhận đơn</label>
-                            <p-calendar value="receiveOrder.receiveDate" [(ngModel)]="receiveOrder.receiveDate" [showIcon]="true" ></p-calendar>
+                            <p-calendar value="receiveOrder.receivedDate" [(ngModel)]="receiveOrder.receivedDate" [showIcon]="true" ></p-calendar>
                         </div>
                     </div>
                     <div class="row">

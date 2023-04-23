@@ -19,7 +19,7 @@ import { CalendarModule } from 'primeng/calendar';
   declarations: [AppAdminMenuComponent],
   imports: [
     AppRoutingModule,
-    DropdownModule,
+    DropdownModule, 
     InputTextModule,
     ButtonModule,
     ToastrModule,

@@ -101,7 +101,7 @@ export class CreateOrEditDetailProductComponent {
    
   }
 
-  show(id?:number,name?:any,code?:string) {
+  show(productId?:number,name?:any,code?:string,id?:number) {
     this.productName = name;
     this.productCode = code;
     if(id){
@@ -109,7 +109,7 @@ export class CreateOrEditDetailProductComponent {
        this.productDetail = data;
       });
     }
-    this.productDetail.productId = id;
+    this.productDetail.productId = productId;
     this.modal.show();
     this.active = true;
   }
@@ -129,9 +129,9 @@ export class CreateOrEditDetailProductComponent {
           this.toastr.success('Cập nhật thành công','Thông báo',{timeOut: 1000});
 
         }
+        this.productDetail = new ProductDetailDto();
         this.modalSave.emit(null);
         this.close();
-        this.productDetail = new ProductDetailDto();
       });
     }
 }
