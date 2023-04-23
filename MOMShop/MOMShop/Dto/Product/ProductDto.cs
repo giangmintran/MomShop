@@ -18,6 +18,6 @@ namespace MOMShop.Dto.Product
         public int Status { get; set; }
         public string ProductStatusName { get; set; }
         public bool Deleted { get; set; }
-        //public List<ProductDetailDto> ProductDetails { get; set; }
+        public List<ProductDetailDto> ProductDetails { get; set; }
     }
 }

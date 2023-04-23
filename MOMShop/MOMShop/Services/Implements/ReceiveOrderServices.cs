@@ -55,9 +55,8 @@ namespace MOMShop.Services.Implements
             return _mapper.Map<ReceiveOrderDto>(receiveOrder);
         }
 
-        public Paging<ReceiveOrderDto> GetReceiveOrders(FilterReceiveOrderDto input)
+        public List<ReceiveOrderDto> GetReceiveOrders(FilterReceiveOrderDto input)
         {
-            var result = new Paging<ReceiveOrderDto>();
             var resultItem = new List<ReceiveOrderDto>();
             var receiveOrders = _dbContext.ReceiveOrders.Where(e => !e.Deleted && (input.Status == null || e.Status == input.Status)).OrderByDescending(e => e.Id).ToList();
             resultItem = _mapper.Map<List<ReceiveOrderDto>>(receiveOrders);
@@ -66,10 +65,7 @@ namespace MOMShop.Services.Implements
                 var orderDetail = _dbContext.ReceiveOrderDetails.Where(e => e.ReceiveOrderId == item.Id).OrderByDescending(e => e.Id).ToList();
                 item.Details = _mapper.Map<List<ReceiveOrderDetailDto>>(orderDetail);
             }
-            result.TotalItems = resultItem.Count;
-            result.Items = resultItem;
-            result.Items = result.Items.Skip(input.Skip).Take(input.PageSize).ToList();
-            return result;
+            return resultItem;
         }
 
         public ReceiveOrderDto Update(CreateReceiveOrderDto input)

@@ -102,6 +102,8 @@ namespace MOMShop.Services.Implements
             foreach (var product in products)
             {
                 var item = _mapper.Map<ProductDto>(product);
+                var productDetails = _dbContext.ProductDetails.Where(e => e.ProductId == product.Id).ToList();
+                item.ProductDetails = _mapper.Map<List<ProductDetailDto>>(productDetails);
                 result.Items.Add(item);
             }
             result.TotalItems = result.Items.Count;

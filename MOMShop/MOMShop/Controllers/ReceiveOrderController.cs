@@ -23,7 +23,7 @@ namespace MOMShop.Controllers
         }
 
         [HttpGet("find-all")]
-        public Paging<ReceiveOrderDto> FindAll([FromQuery] FilterReceiveOrderDto input)
+        public List<ReceiveOrderDto> FindAll([FromQuery] FilterReceiveOrderDto input)
         {
             try
             {

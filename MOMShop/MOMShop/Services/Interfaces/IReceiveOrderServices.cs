@@ -1,5 +1,6 @@
 ﻿using MOMShop.Dto.ReceiveOrder;
 using MOMShop.Utils;
+using System.Collections.Generic;
 
 namespace MOMShop.Services.Interfaces
 {
@@ -9,6 +10,6 @@ namespace MOMShop.Services.Interfaces
         ReceiveOrderDto Update(CreateReceiveOrderDto input);
         void Delete(int id);
         ReceiveOrderDto FindById(int id);
-        Paging<ReceiveOrderDto> GetReceiveOrders(FilterReceiveOrderDto input);
+        List<ReceiveOrderDto> GetReceiveOrders(FilterReceiveOrderDto input);
     }
 }
