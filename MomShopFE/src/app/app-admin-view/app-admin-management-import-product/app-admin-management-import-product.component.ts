@@ -80,7 +80,7 @@ export class AppAdminManagementImportProductComponent {
   }
   deleteReceiveOrder() {
     this.receiveOrder.deleteReceiveOrder(this.selectedRow.id).subscribe(() => {
-      this.toastr.success('Xoá thành công', 'Thông báo', { timeOut: 1000 });
+      this.toastr.success('Xoá thành công', 'Thông báo', { timeOut: 3000 });
         this.getReceiveOrderData();
     });
   }

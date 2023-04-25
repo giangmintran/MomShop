@@ -28,12 +28,35 @@ namespace MOMShop.Services.Implements
 
         public ProductDto AddProducts(UpdateProductDto input)
         {
-            var productCode = input.Name.ToLower();
-            productCode = System.Text.RegularExpressions.Regex.Replace(productCode, @"\p{IsCombiningDiacriticalMarks}+", string.Empty);
+            //var productCode = input.Name.ToLower();
+            //productCode = System.Text.RegularExpressions.Regex.Replace(productCode, @"\p{IsCombiningDiacriticalMarks}+", string.Empty);
             var insert = _mapper.Map<Product>(input);
-            insert.Code = productCode;
+            //insert.Code = productCode;
             var result = _dbContext.Products.Add(insert);
             _dbContext.SaveChanges();
+            if (input.ImageUrl != null)
+            {
+                string folderPath = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, $"Images/{input.Name}");
+                string fileName = input.ImageUrl.FileName;
+                string filePath = Path.Combine(folderPath, fileName);
+
+                if (!Directory.Exists(folderPath))
+                {
+                    Directory.CreateDirectory(folderPath);
+                }
+
+                using (var stream = new FileStream(filePath, FileMode.Create))
+                {
+                    input.ImageUrl.CopyToAsync(stream);
+                }
+
+                _dbContext.ProductImages.Add(new ProductImage()
+                {
+                    ProductId = result.Entity.Id,
+                    ImageUrl = filePath
+                });
+            }
+          
             return _mapper.Map<ProductDto>(result.Entity);
         }
 
@@ -88,8 +111,12 @@ namespace MOMShop.Services.Implements
 
         public ProductDto FindById(int id)
         {
+            var result = new ProductDto();
             var product = _dbContext.Products.FirstOrDefault(e => e.Id == id && !e.Deleted);
-            return _mapper.Map<ProductDto>(product);
+            var productDetails = _dbContext.ProductDetails.Where(e => e.ProductId == product.Id).ToList();
+            result = _mapper.Map<ProductDto>(product);
+            result.ProductDetails = _mapper.Map<List<ProductDetailDto>>(productDetails);
+            return result;
         }
 
         public Paging<ProductDto> GetProducts(FilterProductDto input)
@@ -97,7 +124,7 @@ namespace MOMShop.Services.Implements
             var result = new Paging<ProductDto>();
             result.Items = new List<ProductDto>();
 
-            var products = _dbContext.Products.Where(e => !e.Deleted && (input.Status == null || e.Status == input.Status)).ToList();
+            var products = _dbContext.Products.Where(e => !e.Deleted && (input.Status == null || e.Status == input.Status)).OrderByDescending(e => e.Id).ToList();
 
             foreach (var product in products)
             {

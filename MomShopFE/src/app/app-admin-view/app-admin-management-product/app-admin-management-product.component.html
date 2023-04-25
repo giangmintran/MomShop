@@ -1,9 +1,11 @@
+<p-toast></p-toast>
+<p-confirmDialog [style]="{width: '50vw'}"></p-confirmDialog>
 <div class="container1">
     <div class="block-button mb-3">
         <!-- <button class="btn btn-filter mr-2 btn-outline-primary"  (click)="viewDetailProduct()">Xem chi tiết</button> -->
-		<button class="btn btn-add mr-2 btn-outline-primary"  (click)="createProduct()">Thêm</button>
-		<button *ngIf="!filter" class="btn btn-filter mr-2 btn-outline-primary"  (click)="onFilterChange()">Hiện bộ lọc</button>
-        <button *ngIf="filter"class="btn btn-filter mr-2 btn-outline-primary"  (click)="onFilterChange()">Ẩn bộ lọc</button>
+		<button class="btn btn-add btn-primary text-white"  (click)="createProduct()"> <i class="pi pi-plus" style="font-size: 0.7rem; color: 'var(--primary-color)'"></i> Thêm</button>
+		<button *ngIf="!filter" class="btn btn-filter mr-2 btn-primary text-white"  (click)="onFilterChange()">Hiện bộ lọc</button>
+        <button *ngIf="filter"class="btn btn-filter mr-2 btn-primary text-white"  (click)="onFilterChange()">Ẩn bộ lọc</button>
         <!-- <button class="btn btn-add mr-2 btn-outline-primary"  (click)="createUsers()">Thêm</button> -->
         <!-- <button class="btn btn-add ml-2 btn-outline-primary" [disabled]="!selectedProduct" (click)="editUser()">Sửa</button> -->
         <!-- <button class="btn btn-add ml-2 btn-delete btn-outline-danger" [disabled]="!selectedProduct" (click)="deleteUser()">Xoá</button> -->
@@ -11,21 +13,21 @@
     <div class="user">							
 		<div class="row mb-2" *ngIf="filter">
 			<div class="col-md-3">
-				<p-dropdown [options]="listStatus"  [(ngModel)]="filterStatus" placeholder="Trạng thái" [style]="{'height':'29px','width':'100%'}" (onChange)="getProductData()" optionLabel="code" optionValue="value"></p-dropdown>
+				<p-dropdown [options]="listStatus"  [(ngModel)]="filterStatus" placeholder="Trạng thái" [style]="{'height':'40px','width':'100%'}" (onChange)="getProductData()" optionLabel="code" optionValue="value"></p-dropdown>
 			</div>
 		</div>
-			<p class="mb-3 title">Danh sách sản phẩm</p>
-        <p-table [value]="rows" scrollHeight="250px"  [paginator]="true" [rows]="10" [rowsPerPageOptions]="[5,10,15,20]" [scrollable]="true"
-					(onLazyLoad)="getProductData()" [tableStyle]="{'width': '100% -280px','font-size':'0.8rem'}" paginatorPosition="bottom"
-			[columns]="colsProduct" selectionMode="single" [(selection)]="selectedProduct" (selectionChange)="onSelectionChange()"
+		<p class="mb-3 title" style="color: #3e3f40; font-size: 20px;">Danh sách sản phẩm</p>
+        <p-table [value]="rows" scrollHeight="1000px"  [paginator]="true" [rows]="20" [rowsPerPageOptions]="[5,10,15,20]" [scrollable]="true"
+					(onLazyLoad)="getProductData()" [tableStyle]="{'min-width': '100%','font-size':'1rem'}" paginatorPosition="bottom"
+			[columns]="colsProduct" selectionMode="multiple" [(selection)]="selectedProduct" [metaKeySelection]="metaKeySelection" [scrollHeight]="getTableHeight(70)"
 			>
 			<ng-template pTemplate="header" let-columns>
 				<tr>
-					<th>STT</th>
-					<th *ngFor="let cols of columns">
+					<th style="min-width: 1rem; max-width: 1rem;">STT</th>
+					<th *ngFor="let cols of columns" [ngStyle]="{'width': cols.width}">
 						{{cols.header}}
 					</th>
-					<th> Thao tác</th>
+					<th style="min-width: 1rem; max-width: 1rem;"><i class="pi pi-cog" style="font-size: 1rem"></i></th>
 				</tr>
 			</ng-template>
 
@@ -37,48 +39,21 @@
 					<td *ngFor="let cols of columns">
 						{{rows[cols.field]}}
 					</td>
-					<td> 
-						<button class="btn btn-add ml-2 btn-outline-primary"  (click)="editProduct(rows)">Sửa</button>
-						<button class="btn btn-add ml-2 btn-delete btn-outline-danger" (click)="deleteUser(rows)">Xoá</button>
-					</td>
-				</tr>
-			</ng-template>
-		</p-table> 
-		<div class="btn_add_detail_product d-flex justify-content-between mt-4 mb-2">
-			<p class="mb-3 title">Chi tiết sản phẩm</p>
-			<button class="btn btn-add mr-2 btn-outline-primary" *ngIf="selectedProduct?.id"  (click)="addDetailProduct(selectedProduct)">Thêm</button>
-		</div>
-        <p-table [value]="detailProduct"  [paginator]="true" [rowsPerPageOptions]="[5,10,15,20]"
-					 [tableStyle]="{'width': '100% -280px','font-size':'0.8rem'}" paginatorPosition="bottom"
-			[columns]="colsDetailProduct" selectionMode="single" [(selection)]="selectedDetailProduct"
-			[rows]="5" >
-			<ng-template pTemplate="header" let-columns>
-				<tr>
-					<th>STT</th>
-					<th *ngFor="let cols of columns">
-						{{cols.header}}
-					</th>
-					<th> Thao tác</th>
-				</tr>
-			</ng-template>
-
-			<ng-template pTemplate="body" let-detailProduct let-columns="columns" let-rowIndex="rowIndex">
-				<tr [pSelectableRow]="detailProduct">
-					<td>
-						{{rowIndex+1}}
-					</td>
-					<td *ngFor="let cols of columns">
-						{{detailProduct[cols.field]}}
-					</td>
-					<td>
-						<button class="btn btn-add ml-2 btn-outline-primary"  (click)="editDetailProduct(detailProduct)">Sửa</button>
-						<button class="btn btn-add ml-2 btn-delete btn-outline-danger" (click)="deleteDetailProduct(detailProduct)">Xoá</button>
+					<!-- <td> 
+						<p-button icon="pi pi-pencil" styleClass="p-button-rounded p-button-sm p-button-help p-button-text" (click)="editProduct(rows)"></p-button>
+						<p-button icon="pi pi-trash" styleClass="p-button-rounded p-button-sm p-button-help p-button-text" (click)="deleteUser(rows)"></p-button>
+					</td> -->
+					<td style="max-width: 3rem; min-width: 3rem; justify-content: center;" pFrozenColumn alignFrozen="right" [frozen]="true" class=" b-border-frozen-right b-table-actions">
+						<ng-template [ngIf]="true">
+							<i class="pi pi-bars" style="padding-left: 20px; padding-right: 20px" (click)="menu.toggle($event)"></i>
+							<p-menu #menu [popup]="true" appendTo="body" [model]="listAction[rowIndex]"></p-menu>
+						</ng-template>
 					</td>
 				</tr>
 			</ng-template>
 		</p-table> 
 </div>
 <!-- <td>{{detailProduct}}</td> -->
-<app-admin-view-detail-product #viewDetail></app-admin-view-detail-product>
+<!-- <app-admin-view-detail-product #viewDetail></app-admin-view-detail-product>
 <app-create-or-edit-product #createOrEdit (modalSave)="getProductData()"></app-create-or-edit-product>
-<app-create-or-edit-detail-product #createOrEditDeatail (modalSave)="getDetailProductData()"></app-create-or-edit-detail-product>
+<app-create-or-edit-detail-product #createOrEditDeatail (modalSave)="getDetailProductData()"></app-create-or-edit-detail-product> -->

@@ -21,6 +21,11 @@ import { AppUserMainComponent } from './app-user-view/app-user-main/app-user-mai
 import { AppComponent } from './app.component';
 import { PTableCustomComponent } from './p-table-custom/p-table-custom.component';
 import { CalendarModule } from 'primeng/calendar';
+import { MenuModule } from 'primeng/menu';
+import { FileUploadModule } from 'primeng/fileupload';
+import { CreateOrEditProductDetailTestComponent } from './app-admin-view/app-admin-management-product/create-or-edit-product-detail-test/create-or-edit-product-detail-test.component';
+import { CreateOrEditProductTestComponent } from './app-admin-view/app-admin-management-product/create-or-edit-product-test/create-or-edit-product-test.component';
+import { ConfirmationService } from 'primeng/api';
 @NgModule({
   declarations: [
     AppComponent,
@@ -30,6 +35,7 @@ import { CalendarModule } from 'primeng/calendar';
     AppUserMainComponent,
     AppAdminMainComponent,
     CreateOrEditWeatherComponent,
+
     //AppAdminMenuComponent
   ],
   imports: [
@@ -46,6 +52,8 @@ import { CalendarModule } from 'primeng/calendar';
     ButtonModule,
     FormsModule,
     CalendarModule,
+		MenuModule,
+    FileUploadModule,
     ToastrModule.forRoot({
       positionClass :'toast-top-right',
     }),

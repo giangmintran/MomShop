@@ -1,4 +1,6 @@
-﻿namespace MOMShop.Dto.Product
+﻿using Microsoft.AspNetCore.Http;
+
+namespace MOMShop.Dto.Product
 {
     public class CreateProductDto
     {
@@ -8,5 +10,6 @@
         public int ProductType { get; set; }
         public float Price { get; set; }
         public string Description { get; set; }
+        public IFormFile ImageUrl { get; set; }
     }
 }

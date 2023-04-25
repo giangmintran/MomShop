@@ -8,4 +8,6 @@ export class ProductDto {
   description:string;
   productTypeName:string;
   productStatusName:string
+  imageUrl: string
+  productDetails: [];
 }
