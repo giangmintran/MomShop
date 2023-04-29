@@ -26,6 +26,7 @@ import { FileUploadModule } from 'primeng/fileupload';
 import { CreateOrEditProductDetailTestComponent } from './app-admin-view/app-admin-management-product/create-or-edit-product-detail-test/create-or-edit-product-detail-test.component';
 import { CreateOrEditProductTestComponent } from './app-admin-view/app-admin-management-product/create-or-edit-product-test/create-or-edit-product-test.component';
 import { ConfirmationService } from 'primeng/api';
+import { NgImageSliderModule } from 'ng-image-slider';
 @NgModule({
   declarations: [
     AppComponent,

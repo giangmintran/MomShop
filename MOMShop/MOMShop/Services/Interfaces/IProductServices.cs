@@ -1,4 +1,5 @@
-﻿using MOMShop.Dto.Product;
+﻿using Microsoft.AspNetCore.Http;
+using MOMShop.Dto.Product;
 using MOMShop.Dto.ProductDetail;
 using MOMShop.Entites;
 using MOMShop.Utils;
@@ -14,6 +15,8 @@ namespace MOMShop.Services.Interfaces
         ProductDto FindById(int id);
         ProductDto UpdateProducts(UpdateProductDto input);
         void DeleteProducts(int id);
+
+        void AddProductImage(IFormFile input, int productId);
 
     }
 }
