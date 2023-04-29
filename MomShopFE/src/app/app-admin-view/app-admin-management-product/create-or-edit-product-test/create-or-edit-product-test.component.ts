@@ -9,15 +9,23 @@ import { ProductDto } from 'src/models/product';
 import { ProductConst } from 'src/shared/AppConst';
 import { FileHandle } from 'src/shared/dragDrop.directive';
 import { ProductDetailDto } from 'src/models/productDetail';
+import { ImageService } from 'src/services/image.Service';
+
+class ImageSnippet {
+  pending: boolean = false;
+  status: string = 'init';
+
+  constructor(public src: string, public file: File) {}
+}
 
 @Component({
   selector: 'app-create-or-edit-product-test',
   templateUrl: './create-or-edit-product-test.component.html',
   styleUrls: ['./create-or-edit-product-test.component.scss'],
-  providers: [DialogService, MessageService]
+  providers: [DialogService, MessageService, ImageService]
 })
 export class CreateOrEditProductTestComponent implements OnInit {
-
+  selectedFile: ImageSnippet; 
   product: ProductDto = new ProductDto();
   types = ProductConst.productType;
   statuses = ProductConst.productStatus;
@@ -29,6 +37,8 @@ export class CreateOrEditProductTestComponent implements OnInit {
   selectedProductDetail;
   imageUrl;
   metaKeySelectionDetail: boolean = true;
+  imageObject;
+  baseUrl = 'http://localhost:5001';
 
   constructor(private http: HttpClient,
     public dialogService: DialogService, 
@@ -37,6 +47,7 @@ export class CreateOrEditProductTestComponent implements OnInit {
     public productServices: ProductService,
     public toastr: ToastrService,
     public ref: DynamicDialogRef,
+    public imageService: ImageService
     ) {}
   ngOnInit(): void {
     console.log("ầv", this.configDialog?.data.product);
@@ -46,6 +57,7 @@ export class CreateOrEditProductTestComponent implements OnInit {
         (response) => {
           console.log("res: ", response);
           this.product = response;
+          this.imageObject = this.baseUrl + response.imageUrl;
           this.genlistAction(this.product.productDetails);
         },
         (err) => {
@@ -54,7 +66,30 @@ export class CreateOrEditProductTestComponent implements OnInit {
       );
     }
   }
+  private onSuccess() {
+    this.selectedFile.pending = false;
+    this.selectedFile.status = 'ok';
+  }
 
+  private onError() {
+    this.selectedFile.pending = false;
+    this.selectedFile.status = 'fail';
+    this.selectedFile.src = '';
+  }
+
+  processFile(imageInput: any) {
+    const file: File = imageInput.files[0];
+    const reader = new FileReader();
+
+    reader.addEventListener('load', (event: any) => {
+
+      this.selectedFile = new ImageSnippet(event.target.result, file);
+      console.log("src", this.selectedFile.file);
+    });
+
+    reader.readAsDataURL(file);
+  }
+  
   addDetail() {
     // this.modalCreateOrEdit.show();
     const ref = this.dialogService.open(CreateOrEditProductDetailTestComponent, { 
@@ -109,8 +144,22 @@ export class CreateOrEditProductTestComponent implements OnInit {
 
   save() {
     if(this.validate()){
-      this.productServices.createOrEdit(this.product).subscribe((data) => {
-        this.imageUrl = "áds";
+      console.log("res1", this.product);
+      this.productServices.createOrEdit(this.product).subscribe((data: any) => {
+        console.log("res", data);
+        if(this.selectedFile){
+          const formData = new FormData();
+          formData.append('input', this.selectedFile.file);
+          formData.append('productId', data.id);
+          console.log(formData);
+          this.imageService.uploadImage(formData,data.id).subscribe(
+          (res) => {
+            this.onSuccess();
+          },
+          (err) => {
+            this.onError();
+          })
+        }
         this.ref.close(true);
       });
     } else {

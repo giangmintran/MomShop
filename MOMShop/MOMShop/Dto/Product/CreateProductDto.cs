@@ -10,6 +10,5 @@ namespace MOMShop.Dto.Product
         public int ProductType { get; set; }
         public float Price { get; set; }
         public string Description { get; set; }
-        public IFormFile ImageUrl { get; set; }
     }
 }

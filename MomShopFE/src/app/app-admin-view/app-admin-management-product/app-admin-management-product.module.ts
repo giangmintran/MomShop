@@ -18,6 +18,7 @@ import { CreateOrEditProductDetailTestComponent } from './create-or-edit-product
 import { FileUploadModule } from 'primeng/fileupload';
 import { ToastModule } from 'primeng/toast';
 import { ConfirmDialogModule } from 'primeng/confirmdialog';
+import { TagModule } from 'primeng/tag';
 
 @NgModule({
   declarations: [
@@ -40,7 +41,8 @@ import { ConfirmDialogModule } from 'primeng/confirmdialog';
     MenuModule,
     DynamicDialogModule,
     FileUploadModule,
-    ConfirmDialogModule
+    ConfirmDialogModule,
+    TagModule,
   ],
 })
 export class AppAdminManagementProductModule { }
