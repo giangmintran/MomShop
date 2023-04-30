@@ -11,7 +11,7 @@ const routes: Routes = [
   { path: 'customer', component: AppAdminMangementCustomerComponent },
   { path: 'feedback', component: AppAdminFeedbackUserComponent },
   { path: 'importProduct', component: AppAdminManagementImportProductComponent },
-  { path: 'view', component: AppUserMainComponent },
+  { path: 'view', component: AppUserMainComponent, pathMatch: 'full'},
   //{ path: 'home', component: MainComponent },
 ];
 

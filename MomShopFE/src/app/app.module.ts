@@ -26,6 +26,7 @@ import { FileUploadModule } from 'primeng/fileupload';
 import { CreateOrEditProductDetailTestComponent } from './app-admin-view/app-admin-management-product/create-or-edit-product-detail-test/create-or-edit-product-detail-test.component';
 import { CreateOrEditProductTestComponent } from './app-admin-view/app-admin-management-product/create-or-edit-product-test/create-or-edit-product-test.component';
 import { ConfirmationService } from 'primeng/api';
+import { LoginComponent } from './app-login/login/login.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -35,6 +36,7 @@ import { ConfirmationService } from 'primeng/api';
     AppUserMainComponent,
     AppAdminMainComponent,
     CreateOrEditWeatherComponent,
+    LoginComponent,
 
     //AppAdminMenuComponent
   ],
