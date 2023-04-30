@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Mvc;
 using MOMShop.Dto.Product;
 using MOMShop.Dto.ProductDetail;
 using MOMShop.Entites;
@@ -42,6 +43,19 @@ namespace MOMShop.Controllers
             {
                 var result = _services.AddProducts(input);
                 return result;
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(ex.Message);
+            }
+        }
+
+        [HttpPost("upload-image")]
+        public void AddProductImage(int productId, IFormFile input)
+        {
+            try
+            {
+                _services.AddProductImage(input, productId);
             }
             catch (Exception ex)
             {

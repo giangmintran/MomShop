@@ -60,8 +60,25 @@
                 </div>
             </div>
         </div>
-        <div class="mt-2">
-            <p-fileUpload name="imageUrl" url="http://localhost:5001/api/product/add" (onUpload)="handleUpload($event)" [auto]="true" mode="basic" chooseLabel="Choose"></p-fileUpload>
+
+        <div>
+            <label for="file-input">
+            </label>
+            <br>
+            <input #imageInput
+            type="file"
+            accept="image/*"
+            (change)="processFile(imageInput)" id="file-input">
+            <br>
+            <br>
+            <div *ngIf="selectedFile" class="img-preview-container">
+                <div class="img-preview{{selectedFile.status === 'fail' ? '-error' : ''}}"
+                        [ngStyle]="{'background-image': 'url('+ selectedFile.src + ')'}">
+                </div>
+            </div>
+        </div>
+        <div *ngIf="product.id" class="card center" style="width: 50%; height: auto;">
+            <img src="{{baseUrl}}/{{ product.imageUrl}}">
         </div>
         <br>
     </ng-container>

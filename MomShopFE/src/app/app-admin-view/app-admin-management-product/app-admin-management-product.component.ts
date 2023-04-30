@@ -10,6 +10,7 @@ import { ConfirmEventType, ConfirmationService, MenuItem, MessageService } from 
 import { DialogService, DynamicDialogRef } from 'primeng/dynamicdialog';
 import { CreateOrEditProductTestComponent } from './create-or-edit-product-test/create-or-edit-product-test.component';
 import { Base } from 'src/shared/Base';
+import { ProductStatus } from 'src/shared/AppConst';
 
 @Component({
   selector: 'app-app-admin-management-product',
@@ -18,8 +19,7 @@ import { Base } from 'src/shared/Base';
   providers: [DialogService,ConfirmationService, MessageService]
 })
 export class AppAdminManagementProductComponent{
-  //@ViewChild('createUser', { static: true })
-  //modalUser: CreateOrEditProductComponent;
+  baseUrl = 'http://localhost:5001';
   ref: DynamicDialogRef;
   rows: ProductDto[] = [];
   rowsAfter: ProductDto[] = [];
@@ -38,7 +38,7 @@ export class AppAdminManagementProductComponent{
   listAction: any[] = [];
   screenHeight: number = window.innerHeight;
   metaKeySelection: boolean = true;
-
+  ProductStatus = ProductStatus
   listTypeProduct = [
     { name: "Áo thun", value: 1 },
     { name: "Áo sơ mi", value: 2 },
@@ -64,12 +64,7 @@ export class AppAdminManagementProductComponent{
       {
         field: 'code',
         header: 'Mã sản phẩm',
-        width: '10rem'
-      },
-      {
-        field: 'imageUrl',
-        header: 'Ảnh',
-        width: '20rem'
+        width: '15rem'
       },
       {
         field: 'name',
@@ -110,6 +105,7 @@ export class AppAdminManagementProductComponent{
   }
   getProductData(): void {
     this.productServices.getAllProduct(this.filterStatus).subscribe((data) => {
+      console.log("data", data?.items);
       this.rows = data?.items;
       this.genlistAction(this.rows);
       this.rows.forEach(element => {
@@ -122,6 +118,7 @@ export class AppAdminManagementProductComponent{
         if(productStatusName){
           element.productStatusName = productStatusName
         }
+        element.imageUrl = element.imageUrl;
       });
       console.log(this.tableData);
     });
@@ -147,7 +144,7 @@ export class AppAdminManagementProductComponent{
       console.log("Data thêm", data);
       if(data){
         this.messageService.add({ severity: 'success', summary: 'Thông báo', detail: 'Thêm thành công', life: 3000 });
-        this.getProductData();
+        window.location.reload();
       }
     });
   }
