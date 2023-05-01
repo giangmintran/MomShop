@@ -163,7 +163,7 @@ export class AppAdminManagementProductComponent{
     ref.onClose.subscribe((data) => {
       if (data){
         this.messageService.add({ severity: 'success', summary: 'Thông báo', detail: 'Thêm thành công', life: 3000 });
-        this.getProductData();
+        window.location.reload();
       }
     });
   }

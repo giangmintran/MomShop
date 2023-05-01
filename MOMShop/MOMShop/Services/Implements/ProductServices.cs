@@ -83,6 +83,27 @@ namespace MOMShop.Services.Implements
             {
                 _dbContext.ProductDetails.RemoveRange(productDetail);
             }
+            var productImages = _dbContext.ProductImages.Where(e => e.ProductId == id);
+            if (productImages.Any())
+            {
+                var baseDir = Directory.GetParent(Directory.GetParent(_hostEnvironment.ContentRootPath).FullName).FullName;
+                foreach (var item in productImages)
+                {
+                    string folderPath = Path.Combine(baseDir + $"\\MOMShop\\images\\{product.Code}");
+                    if (Directory.Exists(folderPath))
+                    {
+                        string url = item.ImageUrl;
+                        int startIndex = url.LastIndexOf("=") + 1;
+                        string fileName = url.Substring(startIndex);
+                        string filePath = Path.Combine(folderPath, fileName);
+                        if (File.Exists(filePath))
+                        {
+                            File.Delete(filePath);
+                            _dbContext.ProductImages.Remove(item);
+                        }
+                    }
+                }
+            }
             _dbContext.Products.Remove(product);
             _dbContext.SaveChanges();
         }
@@ -138,10 +159,23 @@ namespace MOMShop.Services.Implements
             var product = _dbContext.Products.FirstOrDefault(e => e.Id == productId);
             if(product != null)
             {
+                var baseDir = Directory.GetParent(Directory.GetParent(_hostEnvironment.ContentRootPath).FullName).FullName;
                 var productImage = _dbContext.ProductImages.Where(e => e.ProductId == product.Id);
                 foreach (var item in productImage)
                 {
-
+                    string folderPath = Path.Combine(baseDir + $"\\MOMShop\\images\\{product.Code}");
+                    if (Directory.Exists(folderPath))
+                    {
+                        string url = item.ImageUrl;
+                        int startIndex = url.LastIndexOf("=") + 1;
+                        string fileName = url.Substring(startIndex);
+                        string filePath = Path.Combine(folderPath, fileName);
+                        if (File.Exists(filePath))
+                        {
+                            File.Delete(filePath);
+                            _dbContext.ProductImages.Remove(item);
+                        }
+                    }
                 }
             }
 

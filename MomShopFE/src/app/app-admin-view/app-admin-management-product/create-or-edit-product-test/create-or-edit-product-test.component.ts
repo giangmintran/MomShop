@@ -151,7 +151,6 @@ export class CreateOrEditProductTestComponent implements OnInit {
           const formData = new FormData();
           formData.append('input', this.selectedFile.file);
           formData.append('productId', data.id);
-          console.log(formData);
           this.imageService.uploadImage(formData,data.id).subscribe(
           (res) => {
             this.onSuccess();

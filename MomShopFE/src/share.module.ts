@@ -15,6 +15,7 @@ import { AppAdminMangementCustomerModule } from "./app/app-admin-view/app-admin-
 import { AppAdminFeedbackUserModule } from "./app/app-admin-view/app-admin-feedback-user/app-admin-feedback-user.module";
 import { AppAdminManagementImportProductModule } from "./app/app-admin-view/app-admin-management-import-product/app-admin-management-import-product.module";
 import { CalendarModule } from 'primeng/calendar';
+import { AdminManagementCollectionModule } from "./app/app-admin-view/admin-management-collection/admin-managment-collection.module";
 @NgModule({
   declarations: [AppAdminMenuComponent],
   imports: [
@@ -32,7 +33,8 @@ import { CalendarModule } from 'primeng/calendar';
     CalendarModule,
     AppAdminMangementCustomerModule,
     AppAdminFeedbackUserModule,
-    AppAdminManagementImportProductModule
+    AppAdminManagementImportProductModule,
+    AdminManagementCollectionModule
   ],
   exports: [AppAdminMenuComponent],
 }) 
