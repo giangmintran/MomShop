@@ -9,10 +9,18 @@ import { InputTextModule } from 'primeng/inputtext';
 import { TableModule } from 'primeng/table';
 import { AppBsModalModule } from 'src/directive/app-bs-modal.module';
 import { CalendarModule } from 'primeng/calendar';
+import { ToastModule } from 'primeng/toast';
+import { DynamicDialogModule } from 'primeng/dynamicdialog';
+import { ConfirmDialogModule } from 'primeng/confirmdialog';
+import { AdminManagementCollectionComponent } from './admin-management-collection.component';
+import { MenuModule } from 'primeng/menu';
+import { CreateOrEditCollectionComponent } from './create-or-edit-collection/create-or-edit-collection.component';
 
 
 @NgModule({
   declarations: [
+    AdminManagementCollectionComponent,
+    CreateOrEditCollectionComponent
   ],
   imports: [
     CommonModule,
@@ -23,7 +31,11 @@ import { CalendarModule } from 'primeng/calendar';
     InputTextModule,
     ButtonModule,
     ToastrModule,
-    CalendarModule
+    CalendarModule,
+    ToastModule,
+    DynamicDialogModule,
+    ConfirmDialogModule,
+    MenuModule
   ]
 })
 export class AdminManagementCollectionModule { }

@@ -22,7 +22,7 @@ namespace MOMShop.Controllers
             _services = services;
         }
 
-        [HttpGet("get-all")]
+        [HttpGet("find-all")]
         public List<CollectionDto> GetAll()
         {
             try

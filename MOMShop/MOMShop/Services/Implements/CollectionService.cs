@@ -66,6 +66,7 @@ namespace MOMShop.Services.Implements
             collection.Name = input.Name;
             collection.Description = input.Description;
             collection.Status = input.Status;
+            _dbContext.SaveChanges();
             return _mapper.Map<CollectionDto>(collection);
         }
     }
