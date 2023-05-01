@@ -1,38 +1,31 @@
-import { HttpClient } from '@angular/common/http';
-import { Component, OnInit } from '@angular/core';
+import { HttpClient } from "@angular/common/http";
+import { Component, OnInit } from "@angular/core";
 interface User {
   Id: number;
   type: number;
 }
 @Component({
-  selector: 'app-root',
-  templateUrl: './app.component.html',
-  styleUrls: ['./app.component.scss']
+  selector: "app-root",
+  templateUrl: "./app.component.html",
+  styleUrls: ["./app.component.scss"],
 })
 export class AppComponent implements OnInit {
-  title = 'MomShopFE';
+  title = "MomShopFE";
   user: User;
   dataUser: any;
   isAdmin: boolean = false;
   sidebarExpanded = true;
-  constructor(private http: HttpClient) { }
+  visableCart : boolean = false;
+  visiableLogin : boolean = true;
+  constructor(private http: HttpClient) {}
 
-  ngOnInit(): void {
-    this.user = this.getProductData();
+  ngOnInit(): void {}
+  clickLogin() {
+    this.visiableLogin = false;
+    this.visableCart = false;
   }
-  getProductData(): User {
-    const url = 'http://localhost:5001/api/user/find-all';
-    this.http.get<User>(url).subscribe(
-      data => {
-        this.user = data;
-        console.log(this.user);
-      },
-      error => {
-        console.error(error);
-      }
-    );
-    return this.user;
+  clickCart(){
+    this.visiableLogin = false;
+    this.visableCart = true;
   }
 }
-
-

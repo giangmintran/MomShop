@@ -28,6 +28,9 @@ import { CreateOrEditProductTestComponent } from './app-admin-view/app-admin-man
 import { ConfirmationService } from 'primeng/api';
 import { NgImageSliderModule } from 'ng-image-slider';
 import { LoginComponent } from './app-login/login/login.component';
+import { AppHeaderComponent } from './app-user-view/app-header/app-header.component';
+import { AppFooterComponent } from './app-user-view/app-footer/app-footer.component';
+import { AppUserCartComponent } from './app-user-view/app-user-cart/app-user-cart.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -38,6 +41,9 @@ import { LoginComponent } from './app-login/login/login.component';
     AppAdminMainComponent,
     CreateOrEditWeatherComponent,
     LoginComponent,
+    AppHeaderComponent,
+    AppFooterComponent,
+    AppUserCartComponent,
 
     //AppAdminMenuComponent
   ],
