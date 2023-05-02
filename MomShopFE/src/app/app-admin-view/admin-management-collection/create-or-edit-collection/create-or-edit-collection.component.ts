@@ -7,6 +7,7 @@ import { Collection } from 'src/models/collection';
 import { CollectionService } from 'src/services/collection.service';
 import { ProductConst } from 'src/shared/AppConst';
 import { CreateOrEditProductCollectionComponent } from '../create-or-edit-product-collection/create-or-edit-product-collection.component';
+import { ProductService } from 'src/services/product.service';
 
 @Component({
   selector: 'app-create-or-edit-collection',
@@ -18,17 +19,25 @@ export class CreateOrEditCollectionComponent implements OnInit {
   collection = new Collection();
   statuses = ProductConst.productStatus;
   collectionId;
-
+  colProducts: any[] = [];
+  products: any[] = [];
+  selectedProduct: any[] = []
   constructor(private http: HttpClient,
     public dialogService: DialogService, 
     public messageService: MessageService,  
     public configDialog: DynamicDialogConfig,
     public collectionService: CollectionService,
+    public productService: ProductService,
     public toastr: ToastrService,
     public ref: DynamicDialogRef,
     ) {}
 
   ngOnInit(): void {
+    this.colProducts = [
+      { field: 'id', header: '#ID' },
+      { field: 'name', header: 'Tên sản phẩm' },
+      { field: 'productType', header: 'Loại' }
+    ];
     console.log("ầv", this.configDialog?.data.product);
     if(this.configDialog?.data.collection) {
       this.collectionId = this.configDialog?.data.collection[0].id
@@ -41,7 +50,18 @@ export class CreateOrEditCollectionComponent implements OnInit {
           console.log("err----", err);
         }
       );
+      this.productService.getAllProduct().subscribe(
+        (response) => {
+          console.log("products: ", response.items);
+          this.products = response?.items;
+        },
+        (err) => {
+          console.log("err----", err);
+        }
+      );
     }
+
+    
   }
 
   save() {
