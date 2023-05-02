@@ -38,14 +38,6 @@
 					<td *ngFor="let cols of columns">
 						{{rows[cols.field]}}
 					</td>
-					<td>
-						<img src="/src/assets/IMG_2095.JPG" alt="">
-					</td>
-					<!-- <td> 
-						<p-button icon="pi pi-pencil" styleClass="p-button-rounded p-button-sm p-button-help p-button-text" (click)="editProduct(rows)"></p-button>
-						<p-button icon="pi pi-trash" styleClass="p-button-rounded p-button-sm p-button-help p-button-text" (click)="deleteUser(rows)"></p-button>
-					</td> -->
-					<td pFrozenColumn alignFrozen="right" [frozen]="true" class=" b-border-frozen-right b-table-actions">
 					<td style="max-width: 3rem; min-width: 3rem; justify-content: center;" pFrozenColumn alignFrozen="right" [frozen]="true" class=" b-border-frozen-right b-table-actions">
 						<ng-template [ngIf]="true">
 							<i class="pi pi-ellipsis-v" style="padding: 50px" (click)="menu.toggle($event)"></i>

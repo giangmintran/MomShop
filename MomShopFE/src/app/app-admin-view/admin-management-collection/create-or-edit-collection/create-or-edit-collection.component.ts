@@ -6,6 +6,7 @@ import { DialogService, DynamicDialogConfig, DynamicDialogRef } from 'primeng/dy
 import { Collection } from 'src/models/collection';
 import { CollectionService } from 'src/services/collection.service';
 import { ProductConst } from 'src/shared/AppConst';
+import { CreateOrEditProductCollectionComponent } from '../create-or-edit-product-collection/create-or-edit-product-collection.component';
 
 @Component({
   selector: 'app-create-or-edit-collection',
@@ -90,5 +91,23 @@ export class CreateOrEditCollectionComponent implements OnInit {
     //     });
     //   return actions;
     // });
+  }
+
+  addProductCollection(){
+    this.ref = this.dialogService.open(CreateOrEditProductCollectionComponent, { 
+      data: {
+      },
+      header: 'Thêm sản phẩm',
+      width: '70%',
+      contentStyle: { "max-height": "1900px", overflow: "auto"},
+      baseZIndex: 10000,
+    });
+    this.ref.onClose.subscribe((data) => {
+      console.log("Data thêm", data);
+      if(data){
+        this.messageService.add({ severity: 'success', summary: 'Thông báo', detail: 'Thêm thành công', life: 3000 });
+        window.location.reload();
+      }
+    });
   }
 }

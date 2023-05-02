@@ -116,15 +116,14 @@ export class AdminManagementCollectionComponent implements OnInit {
       this.rows = data;
       this.genlistAction(this.rows);
       this.rows.forEach(element => {
-        var statusDisplayName = this.listStatus.find( e=> e.value == element.status).code
-        if(statusDisplayName)
+        var statusDisplay = this.listStatus.find( e=> e.value == element.status).code
+        if(statusDisplay)
         {
-          element.statusDisplayName = statusDisplayName
+          element.statusDisplay = statusDisplay
         }
-        if(statusDisplayName){
-          element.statusDisplayName = statusDisplayName
+        if(statusDisplay){
+          element.statusDisplay = statusDisplay
         }
-        element.imageUrl = element.imageUrl;
       });
       console.log(this.tableData);
     });
