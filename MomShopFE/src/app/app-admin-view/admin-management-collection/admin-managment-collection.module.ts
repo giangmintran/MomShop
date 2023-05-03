@@ -15,12 +15,14 @@ import { ConfirmDialogModule } from 'primeng/confirmdialog';
 import { AdminManagementCollectionComponent } from './admin-management-collection.component';
 import { MenuModule } from 'primeng/menu';
 import { CreateOrEditCollectionComponent } from './create-or-edit-collection/create-or-edit-collection.component';
-
+import { CreateOrEditProductCollectionComponent } from './create-or-edit-product-collection/create-or-edit-product-collection.component';
+import { TreeTableModule } from 'primeng/treetable';
 
 @NgModule({
   declarations: [
     AdminManagementCollectionComponent,
-    CreateOrEditCollectionComponent
+    CreateOrEditCollectionComponent,
+    CreateOrEditProductCollectionComponent
   ],
   imports: [
     CommonModule,
@@ -35,7 +37,8 @@ import { CreateOrEditCollectionComponent } from './create-or-edit-collection/cre
     ToastModule,
     DynamicDialogModule,
     ConfirmDialogModule,
-    MenuModule
+    MenuModule,
+    TreeTableModule
   ]
 })
 export class AdminManagementCollectionModule { }

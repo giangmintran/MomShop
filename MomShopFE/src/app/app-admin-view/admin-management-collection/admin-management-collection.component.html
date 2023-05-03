@@ -3,9 +3,12 @@
 <div class="container1">
     <div class="block-button mb-3">
         <!-- <button class="btn btn-filter mr-2 btn-outline-primary"  (click)="viewDetailProduct()">Xem chi tiết</button> -->
-		<button class="btn btn-add btn-primary text-white"  (click)="createCollection()"> <i class="pi pi-plus" style="font-size: 0.7rem; color: 'var(--primary-color)'"></i> Thêm</button>
-		<button *ngIf="!filter" class="btn btn-filter mr-2 btn-primary text-white"  (click)="onFilterChange()">Hiện bộ lọc</button>
-        <button *ngIf="filter"class="btn btn-filter mr-2 btn-primary text-white"  (click)="onFilterChange()">Ẩn bộ lọc</button>
+        <button class="btn btn-add btn-primary text-white" (click)="createCollection()"> <i class="pi pi-plus"
+                style="font-size: 0.7rem; color: 'var(--primary-color)'"></i> Thêm</button>
+        <button *ngIf="!filter" class="btn btn-filter mr-2 btn-primary text-white" (click)="onFilterChange()">Hiện bộ
+            lọc</button>
+        <button *ngIf="filter" class="btn btn-filter mr-2 btn-primary text-white" (click)="onFilterChange()">Ẩn bộ
+            lọc</button>
         <!-- <button class="btn btn-add mr-2 btn-outline-primary"  (click)="createUsers()">Thêm</button> -->
         <!-- <button class="btn btn-add ml-2 btn-outline-primary" [disabled]="!selectedProduct" (click)="editUser()">Sửa</button> -->
         <!-- <button class="btn btn-add ml-2 btn-delete btn-outline-danger" [disabled]="!selectedProduct" (click)="deleteUser()">Xoá</button> -->

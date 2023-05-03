@@ -1,7 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { ToastrService } from 'ngx-toastr';
-import { ConfirmationService, MessageService } from 'primeng/api';
+import { ConfirmEventType, ConfirmationService, MessageService } from 'primeng/api';
 import { DialogService, DynamicDialogRef } from 'primeng/dynamicdialog';
 import { CollectionService } from 'src/services/collection.service';
 import { CreateOrEditCollectionComponent } from './create-or-edit-collection/create-or-edit-collection.component';
@@ -104,7 +104,7 @@ export class AdminManagementCollectionComponent implements OnInit {
           label: "Xoá",
           icon: "pi pi-trash",
           command: ($event) => {
-            //this.deleteProduct($event.item.data);
+            this.deleteCollection($event.item.data);
           },
         });
       return actions;
@@ -116,15 +116,14 @@ export class AdminManagementCollectionComponent implements OnInit {
       this.rows = data;
       this.genlistAction(this.rows);
       this.rows.forEach(element => {
-        var statusDisplayName = this.listStatus.find( e=> e.value == element.status).code
-        if(statusDisplayName)
+        var statusDisplay = this.listStatus.find( e=> e.value == element.status).code
+        if(statusDisplay)
         {
-          element.statusDisplayName = statusDisplayName
+          element.statusDisplay = statusDisplay
         }
-        if(statusDisplayName){
-          element.statusDisplayName = statusDisplayName
+        if(statusDisplay){
+          element.statusDisplay = statusDisplay
         }
-        element.imageUrl = element.imageUrl;
       });
       console.log(this.tableData);
     });
@@ -146,5 +145,37 @@ export class AdminManagementCollectionComponent implements OnInit {
         window.location.reload();
       }
     });
+  }
+
+  deleteCollection(row) {
+    this.confirmationService.confirm({
+      message: 'Bạn có chắc chắn muốn xóa?',
+      header: 'Xác nhận',
+      icon: 'pi pi-info-circle',
+      accept: () => {
+          this.collectionService.deleteCollection(row.id).subscribe((data)=>{
+          this.collectionService.getAllCollection().subscribe(()=>{
+            this.messageService.add({ severity: 'success', summary: 'Thông báo', detail: 'Xóa thành công', life: 3000 });
+            this.getData();
+          })
+    });
+      },
+      reject: (type) => {
+          switch (type) {
+              case ConfirmEventType.REJECT:
+                  break;
+              case ConfirmEventType.CANCEL:
+                  break;
+          }
+      }
+    });
+    // this.productServices.deleteProduct(row.id).subscribe((data)=>{
+    //   console.log("Data thêm", data);
+      
+    //   this.productServices.getAllProduct().subscribe(()=>{
+    //     this.messageService.add({ severity: 'success', summary: 'Thông báo', detail: 'Xóa thành công', life: 3000 });
+    //     this.getProductData();
+    //   })
+    // });
   }
 }

@@ -39,55 +39,27 @@
             </div>
         </div>
 
-        <br>
-    </ng-container>
-    <!-- <div class="col-12 md;col-12" *ngIf="product.id">
-        <div class="col-12 md:col-12">
-            <p-table #policyDetailTempalteTable [value]="product.productDetails" dataKey="id" [scrollable]="true"
-                styleClass="custom-table-border-none" isLoading="isLoading" scrollHeight="40vh"
-                selectionMode="single" [(selection)]="selectedProductDetail"
-                >
-                <ng-template pTemplate="caption">
-                    <div class="">
-                        <div class="">
-                            <button pButton pRipple
-                                label="Thêm" icon="pi pi-plus" class="p-button-success p-button-sm"
-                                (click)="addDetail()"
-                                ></button>
-                        </div>
-                    </div>
-                </ng-template>
-                <ng-template pTemplate="header">
-                    <tr>
-                        <th style="min-width: 3rem; max-width: 3rem;">#ID</th>
-                        <th style="min-width: 12rem; max-width: 12rem;">Size</th>
-                        <th style="min-width: 12rem; max-width: 12rem;">Số lượng</th>
-                        <th style="min-width: 12rem;">Mô tả</th>
-                        <th style="min-width: 7rem; max-width: 7rem;"><i class="pi pi-cog" style="font-size: 1rem"></i></th>
-                    </tr>
-                </ng-template>
-                <ng-template pTemplate="body" let-productDetail let-index="rowIndex">
-                    <tr>
-                        <td style="min-width: 3rem; max-width: 3rem;">{{ productDetail.id }}</td>
-                        <td style="min-width: 12rem; max-width: 12rem;">{{ productDetail.size }}</td>
-
-                        <td style="min-width: 12rem; max-width: 12rem;">
-                            {{ productDetail.quantity }}
-                        </td>
-                        <td style="min-width: 6rem;" >{{ productDetail.description }}</td>
-
-                        <td style="max-width: 3rem; min-width: 3rem; justify-content: center;" pFrozenColumn alignFrozen="right" [frozen]="true" class=" b-border-frozen-right b-table-actions">
-							<ng-template [ngIf]="true">
-								<i class="pi pi-bars" style="padding-left: 20px; padding-right: 20px" (click)="menu.toggle($event)"></i>
-								<p-menu #menu [popup]="true" appendTo="body" [model]="listAction[index]"></p-menu>
-							</ng-template>
+        <div *ngIf="collection.id">
+            <h5>Danh sách sản phẩm</h5>
+			<p-treeTable [value]="products" [columns]="colProducts" selectionMode="checkbox" [(selection)]="selectedProduct">
+				<ng-template pTemplate="header" let-columns>
+					<tr>
+						<th *ngFor="let col of columns">
+							{{col.header}}
+						</th>
+					</tr>
+				</ng-template>
+				<ng-template pTemplate="body" let-rowNode let-rowData="rowData" let-columns="columns">
+					<tr>
+						<td *ngFor="let col of columns; let i = index">
+							<p-treeTableCheckbox [value]="rowNode" *ngIf="i === 0"></p-treeTableCheckbox>
+							{{rowData[col.field]}}
 						</td>
-                    </tr>
-                </ng-template>
-            </p-table>
+					</tr>
+				</ng-template>
+			</p-treeTable>
         </div>
-    </div> -->
-   
+    </ng-container>
 </div>
 
 <div class="p-dialog-footer mt-4" style="width: 100%; position: fixed; left: 0; bottom: 0;">
