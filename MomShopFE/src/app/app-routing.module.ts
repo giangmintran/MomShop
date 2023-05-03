@@ -8,6 +8,7 @@ import { AppUserMainComponent } from './app-user-view/app-user-main/app-user-mai
 import { AdminManagementCollectionComponent } from './app-admin-view/admin-management-collection/admin-management-collection.component';
 import { AppUserCartComponent } from './app-user-view/app-user-cart/app-user-cart.component';
 import { LoginComponent } from './app-login/login/login.component';
+import { AppUserRegisterComponent } from './app-user-view/app-user-register/app-user-register.component';
 
 const routes: Routes = [
   { path: 'product', component: AppAdminManagementProductComponent },
@@ -17,6 +18,7 @@ const routes: Routes = [
   { path: 'collection', component: AdminManagementCollectionComponent },
   { path: 'view', component: AppUserMainComponent, pathMatch: 'full'},
   { path: 'cart', component: AppUserCartComponent, pathMatch: 'full'},
+  { path: 'register', component: AppUserRegisterComponent},
   //{ path: 'home', component: MainComponent },
 ];
 @NgModule({

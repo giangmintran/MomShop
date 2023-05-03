@@ -17,6 +17,7 @@ export class AppComponent implements OnInit {
   sidebarExpanded = true;
   visableCart : boolean = false;
   visiableLogin : boolean = true;
+  visiableRegister :boolean = false;
   constructor(private http: HttpClient) {}
 
   ngOnInit(): void {}

@@ -21,4 +21,7 @@ export class LoginComponent {
   routerPage() {
     this.modalSave.emit(null);
   }
+  routerRegister(){
+    //this.router.navigate["/register"]
+  }
 }

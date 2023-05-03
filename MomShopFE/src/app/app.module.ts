@@ -31,6 +31,7 @@ import { LoginComponent } from './app-login/login/login.component';
 import { AppHeaderComponent } from './app-user-view/app-header/app-header.component';
 import { AppFooterComponent } from './app-user-view/app-footer/app-footer.component';
 import { AppUserCartComponent } from './app-user-view/app-user-cart/app-user-cart.component';
+import { AppUserRegisterComponent } from './app-user-view/app-user-register/app-user-register.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -44,6 +45,7 @@ import { AppUserCartComponent } from './app-user-view/app-user-cart/app-user-car
     AppHeaderComponent,
     AppFooterComponent,
     AppUserCartComponent,
+    AppUserRegisterComponent,
 
     //AppAdminMenuComponent
   ],
