@@ -20,8 +20,6 @@ export class CreateOrEditDetailImportProductComponent {
   listTypeProduct;
   category;
   quantity;
-  @ViewChild("createOrEditModal", { static: true }) modal: ModalDirective;
-  @Output() modalSave: EventEmitter<any> = new EventEmitter<any>();
   constructor(
     public productServices: ProductService,
     public toastr: ToastrService
@@ -43,18 +41,18 @@ export class CreateOrEditDetailImportProductComponent {
   show(id?) {
     if (id) {
     }
-    this.modal.show();
+    //this.modal.show();
     this.active = true;
   }
   close() {
     this.active = false;
-    this.modal.hide();
+    //this.modal.hide();
   }
   save() {
     this.productServices.createOrEdit(this.product).subscribe(() => {
       this.active = false;
       this.toastr.success("Thêm thành công", "Toartr fun!");
-      this.modalSave.emit(null);
+      //this.modalSave.emit(null);
       this.close();
     });
   }

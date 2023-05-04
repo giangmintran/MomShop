@@ -7,7 +7,7 @@ import { Observable } from "rxjs";
     providedIn: 'root',
 })
 
-export class ReceiveOrder {
+export class ReceiveOrderService {
     baseUrl = 'http://localhost:5001/api/receive-order/';
     constructor(private http: HttpClient) { }
     //xem thông tin đơn hàng

@@ -1,46 +1,60 @@
-<div appBsModal #createOrEditModal="bs-modal" class="modal fade" tabindex="-1" role="dialog"
-    aria-labelledby="createOrEditModal" aria-hidden="true">
-    <div class="modal-dialog modal-lg">
-        <div class="modal-content">
-            <div class="modal-body modal-body-master">
-                <div
-                    class="form-group form-group-master form-md-line-input form-md-floating-label no-hint input-bottom-form">
-                    <div class="row mb-4">
-                        <div class="col-4">
-                            <label class="label-text" for="name">Mã sản phẩm</label>
-                            <input type="text" class="input-text" pInputText [(ngModel)]="receiveOrder.code" placeholder="Mã sản phẩm"/>
-                        </div>
-                        <div class="col-4">
-                            <label class="label-text" for="name">Nhà cung cấp</label>
-                            <input type="text" class="input-text" pInputText [(ngModel)]="receiveOrder.supplier" placeholder="Nhà cung cấp"/>
-                        </div>
-                        <div class="col-md-4">
-                            <label class="label-text">Ngày nhận đơn</label>
-                            <p-calendar value="receiveOrder.receiveDate" [(ngModel)]="receiveOrder.receiveDate" [showIcon]="true" ></p-calendar>
-                        </div>
+<div>
+    <div>
+        <div>
+            <div class="form-group">
+                <div class="row mb-4">
+                    <div class="col-4">
+                        <label class="label-text" for="name">Mã hóa đơn</label>
+                        <input type="text" class="input-text" pInputText [(ngModel)]="receiveOrder.code"
+                            placeholder="Mã hóa đơn" />
                     </div>
-                    <div class="row">
-                        <div class="col-4">
-                            <label class="label-text">Người nhận</label>
-                            <input type="text" class="input-text" pInputText [(ngModel)]="receiveOrder.receiver" placeholder="Người nhận"/>
-                        </div>
-                        <div class="col-4">
-                            <label class="label-text">Mô tả</label>
-                            <input type="text" class="input-text" pInputText [(ngModel)]="receiveOrder.description" placeholder="Mô tả"/>
-                        </div>
-                        <div class="col-md-4">
-                            <label class="label-text">Trạng thái</label>
-                            <p-dropdown [options]="listStatus" [(ngModel)]="receiveOrder.status"
-                                [style]="{'height':'29px','width':'100%'}" optionLabel="code"
-                                optionValue="value"></p-dropdown>
-                        </div>
+                    <div class="col-8">
+                        <label class="label-text" for="name">Nhà cung cấp</label>
+                        <input type="text" class="input-text" pInputText [(ngModel)]="receiveOrder.supplier"
+                            placeholder="Nhà cung cấp" />
                     </div>
                 </div>
-                <div class="modal-footer modal-footer-master">
-                    <button [disabled]="saving" type="button" class="btn btn-default" (click)="close()">Huỷ</button>
-                    <button type="button" (click)="save()" class="btn btn-primary">Lưu</button>
+                <div class="row">
+                    <div class="col-4">
+                        <div class="field">
+                            <label class="label-text">Ngày nhận đơn</label>
+                            <p-calendar value="receiveOrder.receiveDate" [(ngModel)]="receiveOrder.receiveDate"
+                                [showIcon]="true" [style]="{'width':'100%'}" [showButtonBar]="true"></p-calendar>
+                        </div>
+                    </div>
+                    <div class="col-4">
+                        <label class="label-text">Người nhận</label>
+                        <input type="text" class="input-text" pInputText [(ngModel)]="receiveOrder.receiver"
+                            placeholder="Người nhận" />
+                    </div>
+                   
+                    <div class="col-4">
+                        <div class="field">
+                            <label htmlFor="status">Trạng thái<span class="required-field"> * </span> </label>
+                            <p-dropdown 
+                                appendTo="body" optionValue="code" name="status" optionLabel="name"
+                                [(ngModel)]="receiveOrder.status" [options]="listStatus"
+                                [style]="{'width':'100%'}"
+                                placeholder="Trạng thái">
+                            </p-dropdown>
+                        </div>
+                    </div>
+
+
+                </div>
+                <div class="row">
+                    <div class="col-12">
+                        <label class="label-text">Mô tả</label>
+                        <textarea style="width: 100%; max-width: 100%;" rows="5" pInputTextarea [(ngModel)]="receiveOrder.description" name="description"></textarea>
+                    </div>
                 </div>
             </div>
         </div>
     </div>
+</div>
+<div class="p-dialog-footer mt-4" style="width: 100%; position: fixed; left: 0; bottom: 0;">
+    <button pButton pRipple label="Hủy" icon="pi pi-times" class="p-button-text p-button-sm p-confirm-dialog-reject mt-4"
+        (click)="close()"></button>
+    <button pButton pRipple [label]="'Lưu'" icon="pi pi-check"
+        class="p-button-text p-button-success p-button-sm p-confirm-dialog-approve mt-4"  (click)="save()"></button>
 </div>

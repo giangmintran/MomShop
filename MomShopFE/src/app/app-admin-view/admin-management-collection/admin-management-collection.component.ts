@@ -74,7 +74,7 @@ export class AdminManagementCollectionComponent implements OnInit {
       contentStyle: { "max-height": "800px", overflow: "auto", "margin-bottom": "40px", },
       baseZIndex: 10000,
       data: {
-        collection: this.selectedCollection,
+        collection: row,
       },
     });
     //

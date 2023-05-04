@@ -1,34 +1,36 @@
 import { HttpClient } from '@angular/common/http';
-import { Component, ViewChild } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { ToastrService } from 'ngx-toastr';
 import { ProductDto } from 'src/models/product';
-import { ProductService } from 'src/services/product.service';
 import { CreatOrEditImportProductComponent } from './creat-or-edit-import-product/creat-or-edit-import-product.component';
-import { CreateOrEditDetailImportProductComponent } from './create-or-edit-detail-import-product/create-or-edit-detail-import-product.component';
-import { ReceiveOrder } from 'src/services/receiveOrder.service';
+import { ReceiveOrderService } from 'src/services/receiveOrder.service';
+import { DialogService, DynamicDialogConfig, DynamicDialogRef } from 'primeng/dynamicdialog';
+import { ConfirmationService, MessageService } from 'primeng/api';
 
 @Component({
   selector: 'app-app-admin-management-import-product',
   templateUrl: './app-admin-management-import-product.component.html',
-  styleUrls: ['./app-admin-management-import-product.component.scss']
+  styleUrls: ['./app-admin-management-import-product.component.scss'],
+  providers: [DialogService,ConfirmationService, MessageService]
 })
-export class AppAdminManagementImportProductComponent {
-  @ViewChild('productImport', { static: true })
-  modalproductImport: CreatOrEditImportProductComponent;
-  @ViewChild('productDetailImport', { static: true })
-  modalDetailProductImport: CreateOrEditDetailImportProductComponent;
+export class AppAdminManagementImportProductComponent implements OnInit{
+  public ref: DynamicDialogRef;
   product: ProductDto = new ProductDto;
   cols;
   receiveOrderDetailData;
   receiveOrderData;
   selectedRow;
   totalRecords;
-  ngOnInit(): void { }
-  constructor(private http: HttpClient, public receiveOrder: ReceiveOrder, public toastr: ToastrService) {
+  constructor(private http: HttpClient, 
+    public receiveOrder: ReceiveOrderService, 
+    public toastr: ToastrService, 
+    public dialogService: DialogService, 
+    public messageService: MessageService,
+    ) {
     this.cols = [
       {
         field: 'code',
-        header: 'Mã sản phẩm',
+        header: 'Mã hóa đơn',
       },
       {
         field: 'createdDate',
@@ -57,35 +59,51 @@ export class AppAdminManagementImportProductComponent {
     ];
     this.getReceiveOrderData();
   }
+  ngOnInit(): void {
+  }
   getReceiveOrderData(): void {
     this.receiveOrder.getAllReceiveOrder().subscribe((data) => {
       this.receiveOrderData = data;
-      //this.totalRecords = this.receiveOrderData
     });
   }
   getReceiveOrderDetailData(): void {
     this.receiveOrder.getDetailReceiveOrder(this.selectedRow.id).subscribe((data) => {
       this.receiveOrderDetailData = data;
-      //this.totalRecords = this.receiveOrderData
     });
   }
   onSelectionChange(event) {
     this.getReceiveOrderDetailData();
-   }
+  }
   createReceiveOrder() {
-    this.modalproductImport.show();
+    this.ref = this.dialogService.open(CreatOrEditImportProductComponent, {
+      data: {
+        "id": 1234
+      },
+      header: 'Thêm mới',
+      width: '70%',
+      height: '90%',
+      contentStyle: { "max-height": "1900px", overflow: "auto", "margin-bottom": "40px" },
+      baseZIndex: 10000,
+    });
+    this.ref.onClose.subscribe((data) => {
+      console.log("Data thêm", data);
+      if (data) {
+        this.messageService.add({ severity: 'success', summary: 'Thông báo', detail: 'Thêm thành công', life: 3000 });
+        window.location.reload();
+      }
+    });
   }
   editReceiveOrder() {
-    this.modalproductImport.show(this.selectedRow.id);
+    //this.modalproductImport.show(this.selectedRow.id);
   }
   deleteReceiveOrder() {
     this.receiveOrder.deleteReceiveOrder(this.selectedRow.id).subscribe(() => {
       this.toastr.success('Xoá thành công', 'Thông báo', { timeOut: 3000 });
-        this.getReceiveOrderData();
+      this.getReceiveOrderData();
     });
   }
   //add Detail ReceiveOrder
   addDetailReceiveOrder() {
-    this.modalDetailProductImport.show(this.selectedRow.id)
+    //this.modalDetailProductImport.show(this.selectedRow.id)
   }
 }

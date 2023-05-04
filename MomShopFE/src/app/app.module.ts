@@ -31,6 +31,7 @@ import { AppHeaderComponent } from './app-user-view/app-header/app-header.compon
 import { AppFooterComponent } from './app-user-view/app-footer/app-footer.component';
 import { AppUserCartComponent } from './app-user-view/app-user-cart/app-user-cart.component';
 import { AppUserRegisterComponent } from './app-user-view/app-user-register/app-user-register.component';
+import { DynamicDialogModule } from 'primeng/dynamicdialog';
 @NgModule({
   declarations: [
     AppComponent,
@@ -63,6 +64,7 @@ import { AppUserRegisterComponent } from './app-user-view/app-user-register/app-
     CalendarModule,
 		MenuModule,
     FileUploadModule,
+    DynamicDialogModule,
     ToastrModule.forRoot({
       positionClass :'toast-top-right',
     }),

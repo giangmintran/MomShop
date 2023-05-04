@@ -16,7 +16,7 @@ namespace MOMShop.Controllers
         {
             _services = services;
         }
-        [HttpGet("login")]
+        [HttpPost("login")]
         public UserDto Login(LoginDto input)
         {
             try

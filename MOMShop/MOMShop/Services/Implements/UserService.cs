@@ -21,7 +21,7 @@ namespace MOMShop.Services.Implements
 
         public UserDto Login(LoginDto input)
         {
-            var user = _dbContext.Users.FirstOrDefault(e => e.Username == input.Username && e.Password == input.Password);
+            var user = _dbContext.Users.FirstOrDefault(e => e.Email == input.Email && e.Password == input.Password);
             if (user == null)
             {
                 return null;
