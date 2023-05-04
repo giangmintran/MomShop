@@ -16,12 +16,13 @@ import { Observable } from "rxjs";
 export class LoginComponent {
   constructor(private router: Router) {}
   @Output() modalSave: EventEmitter<any> = new EventEmitter<any>();
+  @Output() openFormRegister: EventEmitter<any> = new EventEmitter<any>();
   passlogin: boolean = true;
   checkLogin = false;
   routerPage() {
     this.modalSave.emit(null);
   }
   routerRegister(){
-    //this.router.navigate["/register"]
+    this.openFormRegister.emit(null);
   }
 }

@@ -1,4 +1,4 @@
-import { Component } from "@angular/core";
+import { Component, EventEmitter, Output } from "@angular/core";
 
 @Component({
   selector: "app-user-cart",
@@ -6,6 +6,7 @@ import { Component } from "@angular/core";
   styleUrls: ["./app-user-cart.component.scss"],
 })
 export class AppUserCartComponent {
+  @Output() backGoHome: EventEmitter<any> = new EventEmitter<any>();
   cart;
   quantityProduct = 1;
   minusQuantityProduct() {
@@ -22,6 +23,9 @@ export class AppUserCartComponent {
     quantity.textContent = this.quantityProduct.toString();
   }
   deleteProduct(){
-    document.getElementsByClassName("fa-trash")[0].parentElement.parentElement.remove();
+    document.getElementsByClassName("fa-trash")[0].parentElement.parentElement.parentElement.remove();
+  }
+  backHome(){
+    this.backGoHome.emit(null);
   }
 }

@@ -11,40 +11,39 @@
         <div class="list-detail-product">
             <table>
                 <tr class="header-table">
-                    <th style="width:60%;padding-right:200px">SẢN PHẨM</th>
+                    <th style="width:60%;padding-left:100px">SẢN PHẨM</th>
                     <th style="width:20%">SỐ LƯỢNG</th>
-                    <th style="width:20%">GIÁ</th>
+                    <th style="width:20%;text-align: center;">GIÁ</th>
                 </tr>
                 <tr>
-                    <th>
-                        <img class="image-product" src="/src/assets/cat-1045782__340.jpg" width="100" height="100"/>
-                        <p class="size-product"></p>
-                    </th>
-                    <th class="d-flex justify-content-center">
+                    <td class="d-flex justify-content-center align-items-center">
+                        <img class="image-product" src="assets/cat-1045782__340.jpg" width="100" height="100"/>
+                        <p class="size-product">Bad OPS VEST Size M</p>
+                    </td>
+                    <td >
                         <div class="quantity-product">
                             <i class="fa-solid fa-plus" (click)="addQuantityProduct()"></i>
                             <p class="text-quantity">1</p>
                             <i class="fa-solid fa-minus" (click)="minusQuantityProduct()"></i>
                         </div>
-                    </th>
-                    <th>
+                    </td>
+                    <td>
                         <div class="block-price">
                             <p class="text-price">543534</p>
                             <i class="fa-solid fa-trash" (click)="deleteProduct()"></i>
                         </div>
-                    </th>
+                    </td>
                 </tr>
+                    <hr class="line-sperate">
             </table>
         </div>
         <div class="payment">
             <h3 class="title-payment">TỔNG HOÁ ĐƠN</h3>
             <h3 class="price-total mb-5">760000.0000000</h3>
              <button type="button" class="button mb-5">THANH TOÁN</button>
-             <button type="button" class="button keep-shopping">TIẾP TỤC MUA SẮM</button>
+             <button type="button" (click)="backHome()" class="button keep-shopping">TIẾP TỤC MUA SẮM</button>
         </div>
      </div>
-     <img class="image-product" src="/src/app/image/cat-1045782__340.jpg" width="100" height="100"/>
 </div>
-<div class="image-product"></div>
 
 <!-- <app-app-footer></app-app-footer> -->

@@ -29,4 +29,14 @@ export class AppComponent implements OnInit {
     this.visiableLogin = false;
     this.visableCart = true;
   }
+  openRegister(){
+    this.visiableRegister = true;
+    this.visiableLogin = false;
+    this.visableCart = false; 
+  }
+  backHome(){
+    this.visiableRegister = false ;
+    this.visiableLogin = false;
+    this.visableCart = false; 
+  }
 }

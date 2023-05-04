@@ -68,5 +68,24 @@ table{
     vertical-align: middle;
 }
 .image-product{
-    background-image: url("/src/assets/cat-1045782__340.jpg");
+    margin-right: 60px;
+    margin-top: 10px;
+}
+table tr{
+    margin-top: 10px;
+    width: 100%;
+}
+.size-product{
+    margin-bottom: 0;
+    width: 26%;
+}
+.line-sperate{
+    width: 150%;
+    height: 3px;
+    margin-left: 50px;
+    margin-top: 50px;
+   border-top: 1px solid rgba(0,0,0,.1);
+    // border-color: #000;
+    background: #000;
+
 }

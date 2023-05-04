@@ -19,7 +19,6 @@ import { AppAdminManagementProductModule } from './app-admin-view/app-admin-mana
 import { AppRoutingModule } from './app-routing.module';
 import { AppUserMainComponent } from './app-user-view/app-user-main/app-user-main.component';
 import { AppComponent } from './app.component';
-import { PTableCustomComponent } from './p-table-custom/p-table-custom.component';
 import { CalendarModule } from 'primeng/calendar';
 import { MenuModule } from 'primeng/menu';
 import { FileUploadModule } from 'primeng/fileupload';
@@ -37,7 +36,6 @@ import { AppUserRegisterComponent } from './app-user-view/app-user-register/app-
     AppComponent,
     WeatherComponent,
     SidebarComponent,
-    PTableCustomComponent,
     AppUserMainComponent,
     AppAdminMainComponent,
     CreateOrEditWeatherComponent,
