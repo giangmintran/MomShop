@@ -15,14 +15,13 @@ import { ProductService } from 'src/services/product.service';
   styleUrls: ['./create-or-edit-collection.component.scss']
 })
 export class CreateOrEditCollectionComponent implements OnInit {
-
   collection = new Collection();
   statuses = ProductConst.productStatus;
   collectionId;
   colProducts: any[] = [];
   products: any[] = [];
   selectedProduct: any[] = []
-  constructor(private http: HttpClient,
+  constructor(private http: HttpClient, 
     public dialogService: DialogService, 
     public messageService: MessageService,  
     public configDialog: DynamicDialogConfig,
@@ -33,23 +32,9 @@ export class CreateOrEditCollectionComponent implements OnInit {
     ) {}
 
   ngOnInit(): void {
-    this.colProducts = [
-      { field: 'id', header: '#ID' },
-      { field: 'name', header: 'Tên sản phẩm' },
-      { field: 'productType', header: 'Loại' }
-    ];
-    console.log("ầv", this.configDialog?.data.product);
+    console.log("vào đây", this.configDialog?.data);
     if(this.configDialog?.data.collection) {
-      this.collectionId = this.configDialog?.data.collection[0].id
-      this.collectionService.getforEditCollection(this.configDialog.data?.collection[0].id).subscribe(
-        (response) => {
-          console.log("res: ", response);
-          this.collection = response;
-        },
-        (err) => {
-          console.log("err----", err);
-        }
-      );
+      this.collection = this.configDialog?.data.collection;
       this.productService.getAllProduct().subscribe(
         (response) => {
           console.log("products: ", response.items);
@@ -60,15 +45,11 @@ export class CreateOrEditCollectionComponent implements OnInit {
         }
       );
     }
-
-    
   }
 
   save() {
     if(this.validate()){
-      console.log("res1", this.collection);
       this.collectionService.createOrEdit(this.collection).subscribe((data: any) => {
-        console.log("res", data);
         this.ref.close(true);
       });
     } else {

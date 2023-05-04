@@ -12,13 +12,16 @@ import { TableModule } from 'primeng/table';
 import { AppBsModalModule } from 'src/directive/app-bs-modal.module';
 import { CreateOrEditDetailImportProductComponent } from './create-or-edit-detail-import-product/create-or-edit-detail-import-product.component';
 import { CalendarModule } from 'primeng/calendar';
-
+import { DynamicDialogModule } from 'primeng/dynamicdialog';
+import { ToastModule } from 'primeng/toast';
+import { ConfirmDialogModule } from 'primeng/confirmdialog';
+import { MenuModule } from 'primeng/menu';
 
 @NgModule({
   declarations: [
     AppAdminManagementImportProductComponent,
     CreatOrEditImportProductComponent,
-    CreateOrEditDetailImportProductComponent
+    CreateOrEditDetailImportProductComponent,
   ],
   imports: [
     CommonModule,
@@ -29,7 +32,12 @@ import { CalendarModule } from 'primeng/calendar';
     InputTextModule,
     ButtonModule,
     ToastrModule,
-    CalendarModule
+    CalendarModule,
+    ToastModule,
+    DynamicDialogModule,
+    ConfirmDialogModule,
+    MenuModule,
   ]
 })
 export class AppAdminManagementImportProductModule { }
+

@@ -1,15 +1,18 @@
-import { Component, EventEmitter, Output, ViewChild } from "@angular/core";
+import { Component, EventEmitter, OnInit, Output, ViewChild } from "@angular/core";
 import { ModalDirective } from "ngx-bootstrap/modal";
 import { ToastrService } from "ngx-toastr";
+import { MessageService } from "primeng/api";
+import { DialogService, DynamicDialogConfig, DynamicDialogRef } from "primeng/dynamicdialog";
 import { ReceiveOrderDto } from "src/models/receiverOrder";
-import { ReceiveOrder } from "src/services/receiveOrder.service";
+import { ReceiveOrderService } from "src/services/receiveOrder.service";
 
 @Component({
   selector: "app-creat-or-edit-import-product",
   templateUrl: "./creat-or-edit-import-product.component.html",
   styleUrls: ["./creat-or-edit-import-product.component.scss"],
 })
-export class CreatOrEditImportProductComponent {
+export class CreatOrEditImportProductComponent implements OnInit {
+  ref: DynamicDialogRef;
   receiveOrder: ReceiveOrderDto = new ReceiveOrderDto();
   saving = false;
   active;
@@ -20,12 +23,15 @@ export class CreatOrEditImportProductComponent {
   listTypeProduct;
   category;
   quantity;
-  @ViewChild("createOrEditModal", { static: true }) modal: ModalDirective;
-  @Output() modalSave: EventEmitter<any> = new EventEmitter<any>();
   constructor(
-    public receiveOrders: ReceiveOrder,
-    public toastr: ToastrService
-  ) {
+    public dialogService: DialogService, 
+    public messageService: MessageService,  
+   // public configDialog: DynamicDialogConfig,
+    public receivedOrderService: ReceiveOrderService,
+    public toastr: ToastrService,
+    //public ref: DynamicDialogRef,
+  ) {}
+  ngOnInit(): void {
     this.listTypeProduct = [
       { name: "Áo thun", value: 1 },
       { name: "Áo sơ mi", value: 2 },
@@ -39,27 +45,25 @@ export class CreatOrEditImportProductComponent {
       { code: 'Đã thanh toán', value: 2 },
       { code: 'Đã hoàn thành', value: 3 },
     ]
+    //console.log("ầv", this.configDialog?.data);
   }
   show(id?) {
     if (id) {
-      this.receiveOrders.getReceiveOrderById(id).subscribe((data) => {
+      this.receivedOrderService.getReceiveOrderById(id).subscribe((data) => {
         this.receiveOrder = data;
         this.receiveOrder.id = id;
       })
     }
-    this.modal.show();
+    //this.modal.show();
     this.active = true;
   }
   close() {
     this.active = false;
-    this.modal.hide();
+    //this.modal.hide();
   }
   save() {
-    this.receiveOrders.createOrEditReceiveOrder(this.receiveOrder).subscribe(() => {
-      this.active = false;
-      this.toastr.success("Thêm thành công", "Toartr fun!");
-      this.modalSave.emit(null);
-      this.close();
+    this.receivedOrderService.createOrEditReceiveOrder(this.receiveOrder).subscribe(() => {
+      this.ref.close(true);
     });
   }
 }

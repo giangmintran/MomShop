@@ -3,13 +3,9 @@ import { Component, ViewChild } from '@angular/core';
 import { ToastrService } from 'ngx-toastr';
 import { ProductDto } from 'src/models/product';
 import { ProductService } from 'src/services/product.service';
-import { AppAdminViewDetailProductComponent } from './app-admin-view-detail-product/app-admin-view-detail-product.component';
-import { CreateOrEditProductComponent } from './create-or-edit-product/create-or-edit-product.component';
-import { CreateOrEditDetailProductComponent } from './create-or-edit-detail-product/create-or-edit-detail-product.component';
 import { ConfirmEventType, ConfirmationService, MenuItem, MessageService } from 'primeng/api';
 import { DialogService, DynamicDialogRef } from 'primeng/dynamicdialog';
 import { CreateOrEditProductTestComponent } from './create-or-edit-product-test/create-or-edit-product-test.component';
-import { Base } from 'src/shared/Base';
 import { ProductStatus } from 'src/shared/AppConst';
 
 @Component({
@@ -189,14 +185,6 @@ export class AppAdminManagementProductComponent{
           }
       }
     });
-    // this.productServices.deleteProduct(row.id).subscribe((data)=>{
-    //   console.log("Data thêm", data);
-      
-    //   this.productServices.getAllProduct().subscribe(()=>{
-    //     this.messageService.add({ severity: 'success', summary: 'Thông báo', detail: 'Xóa thành công', life: 3000 });
-    //     this.getProductData();
-    //   })
-    // });
   }
   viewDetailProduct(data){
     console.log("abc",data);
@@ -204,12 +192,6 @@ export class AppAdminManagementProductComponent{
   }
   onFilterChange(){
     this.filter = !this.filter;
-  }
-  addDetailProduct(row){
-    //this.modalAddDetailProduct.show(row.id,this.selectedProduct.code,this.selectedProduct.name)
-  }
-  editDetailProduct(row){
-    //this.modalAddDetailProduct.show(row.id,this.selectedProduct.code,this.selectedProduct.name)
   }
   deleteDetailProduct(row){
     this.productServices.deleteDetailProduct(row.id).subscribe(()=>{
