@@ -1,4 +1,4 @@
-export class User {
-  id: number;
-  type: number;
+export class UserDto {
+  email: number;
+  password: number;
 }

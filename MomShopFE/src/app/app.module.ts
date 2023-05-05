@@ -32,6 +32,7 @@ import { AppFooterComponent } from './app-user-view/app-footer/app-footer.compon
 import { AppUserCartComponent } from './app-user-view/app-user-cart/app-user-cart.component';
 import { AppUserRegisterComponent } from './app-user-view/app-user-register/app-user-register.component';
 import { DynamicDialogModule } from 'primeng/dynamicdialog';
+import { AppUserHomeComponent } from './app-user-view/app-user-home/app-user-home.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -45,6 +46,7 @@ import { DynamicDialogModule } from 'primeng/dynamicdialog';
     AppFooterComponent,
     AppUserCartComponent,
     AppUserRegisterComponent,
+    AppUserHomeComponent,
 
     //AppAdminMenuComponent
   ],

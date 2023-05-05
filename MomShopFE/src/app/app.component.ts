@@ -15,28 +15,33 @@ export class AppComponent implements OnInit {
   dataUser: any;
   isAdmin: boolean = false;
   sidebarExpanded = true;
-  visableCart : boolean = false;
-  visiableLogin : boolean = true;
-  visiableRegister :boolean = false;
+  visableCart: boolean = false;
+  visiableLogin: boolean = true;
+  visiableRegister: boolean = false;
+  visableHome: boolean = false;
   constructor(private http: HttpClient) {}
 
   ngOnInit(): void {}
   clickLogin() {
     this.visiableLogin = false;
     this.visableCart = false;
+    this.visableHome = true;
   }
-  clickCart(){
+  clickCart() {
     this.visiableLogin = false;
     this.visableCart = true;
+    this.visiableRegister = false;
+    this.visableHome = false;
   }
-  openRegister(){
+  openRegister() {
     this.visiableRegister = true;
     this.visiableLogin = false;
-    this.visableCart = false; 
+    this.visableCart = false;
   }
-  backHome(){
-    this.visiableRegister = false ;
+  backHome() {
+    this.visiableRegister = false;
     this.visiableLogin = false;
-    this.visableCart = false; 
+    this.visableCart = false;
+    this.visableHome = true;
   }
 }

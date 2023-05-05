@@ -5,9 +5,10 @@
         <!-- <router-outlet></router-outlet>  -->
     <!-- </div> -->
 
-    <app-app-header (modalSaves)="clickCart()"></app-app-header> 
+    <app-app-header (modalSaves)="clickCart()" (backHome)="backHome()"></app-app-header> 
     <app-login *ngIf="visiableLogin" (modalSave)="clickLogin()" (openFormRegister)="openRegister()"></app-login>
     <app-user-register *ngIf="visiableRegister"></app-user-register>
     <app-user-cart *ngIf="visableCart" (backGoHome)="backHome()"></app-user-cart>
+    <app-user-home *ngIf="visableHome"></app-user-home>
     <app-app-footer></app-app-footer>
 

@@ -8,9 +8,13 @@ import { Router } from "@angular/router";
 })
 export class AppHeaderComponent {
   @Output() modalSaves: EventEmitter<any> = new EventEmitter<any>();
+  @Output() backHome: EventEmitter<any> = new EventEmitter<any>();
 
   constructor(private router: Router) {}
   routerToCart() {
     this.modalSaves.emit(null);
+  }
+  backToHome() {
+    this.backHome.emit(null);
   }
 }
