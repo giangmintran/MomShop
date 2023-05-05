@@ -11,6 +11,7 @@ import { TableModule } from 'primeng/table';
 import { AppBsModalModule } from 'src/directive/app-bs-modal.module';
 import { CreateOrEditCustomerComponent } from './create-or-edit-customer/create-or-edit-customer.component';
 import { SharedModule } from 'src/share.module';
+import { AppAdminMenuComponent } from '../app-admin-menu/app-admin-menu.component';
 
 
 

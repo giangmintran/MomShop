@@ -1,3 +1,4 @@
+<app-app-header></app-app-header> 
 <div *ngIf="passlogin" class="form-login mb-5 mt-5">
     <h2 class="title-form text-center mb-5">ĐĂNG NHẬP</h2>
     <div class="form-input">
@@ -8,8 +9,8 @@
         This site is protected by reCAPTCHA and the Google Privacy Policy and Terms of Service apply.
     </p>
     <div class="form-footer">
-        <button class="btn-login" (click)="routerPage()">Đăng nhập</button>
-        <div class="text-footer">
+        <button class="btn-login" routerLink="register" (click)="routerPage()">Đăng nhập</button>
+        <div class="text-footer"> 
             <p class="text-forgot-password">
                 Quên mật khẩu?
             </p>
@@ -20,4 +21,5 @@
         </div>
     </div>
 </div>
+<app-app-footer></app-app-footer>
 <!-- <router-outlet *ngIf="checkLogin"></router-outlet>      -->

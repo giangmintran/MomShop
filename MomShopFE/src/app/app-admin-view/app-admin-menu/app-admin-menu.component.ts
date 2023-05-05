@@ -13,9 +13,9 @@ export class AppAdminMenuComponent {
   ClickMenu(){
     var menuItem = document.querySelectorAll(".item");
     var menuActive = document.getElementsByClassName("active")[0];
-    menuActive.classList.remove("active");
-    menuItem.forEach((item)=>{
-       item.addEventListener("click",function(){
+    menuActive?.classList.remove("active");
+    menuItem?.forEach((item)=>{
+       item?.addEventListener("click",function(){
          item.classList.add("active");
        })
     })

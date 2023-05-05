@@ -22,10 +22,6 @@ import { AppComponent } from './app.component';
 import { CalendarModule } from 'primeng/calendar';
 import { MenuModule } from 'primeng/menu';
 import { FileUploadModule } from 'primeng/fileupload';
-import { CreateOrEditProductDetailTestComponent } from './app-admin-view/app-admin-management-product/create-or-edit-product-detail-test/create-or-edit-product-detail-test.component';
-import { CreateOrEditProductTestComponent } from './app-admin-view/app-admin-management-product/create-or-edit-product-test/create-or-edit-product-test.component';
-import { ConfirmationService } from 'primeng/api';
-import { NgImageSliderModule } from 'ng-image-slider';
 import { LoginComponent } from './app-login/login/login.component';
 import { AppHeaderComponent } from './app-user-view/app-header/app-header.component';
 import { AppFooterComponent } from './app-user-view/app-footer/app-footer.component';
@@ -33,6 +29,7 @@ import { AppUserCartComponent } from './app-user-view/app-user-cart/app-user-car
 import { AppUserRegisterComponent } from './app-user-view/app-user-register/app-user-register.component';
 import { DynamicDialogModule } from 'primeng/dynamicdialog';
 import { AppUserHomeComponent } from './app-user-view/app-user-home/app-user-home.component';
+import { AppNavComponent } from './app-user-view/app-nav/app-nav.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -47,6 +44,7 @@ import { AppUserHomeComponent } from './app-user-view/app-user-home/app-user-hom
     AppUserCartComponent,
     AppUserRegisterComponent,
     AppUserHomeComponent,
+    AppNavComponent,
 
     //AppAdminMenuComponent
   ],

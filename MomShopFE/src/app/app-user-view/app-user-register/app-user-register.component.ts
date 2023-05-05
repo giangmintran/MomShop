@@ -6,5 +6,7 @@ import { Component } from '@angular/core';
   styleUrls: ['./app-user-register.component.scss']
 })
 export class AppUserRegisterComponent {
-         
+       constructor(){
+        console.log("register")
+       }  
 }

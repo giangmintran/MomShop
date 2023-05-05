@@ -9,16 +9,22 @@ import { AdminManagementCollectionComponent } from './app-admin-view/admin-manag
 import { AppUserCartComponent } from './app-user-view/app-user-cart/app-user-cart.component';
 import { LoginComponent } from './app-login/login/login.component';
 import { AppUserRegisterComponent } from './app-user-view/app-user-register/app-user-register.component';
+import { AppAdminMenuComponent } from './app-admin-view/app-admin-menu/app-admin-menu.component';
 
 const routes: Routes = [
-  { path: 'product', component: AppAdminManagementProductComponent },
-  { path: 'customer', component: AppAdminMangementCustomerComponent },
-  { path: 'feedback', component: AppAdminFeedbackUserComponent },
-  { path: 'importProduct', component: AppAdminManagementImportProductComponent },
-  { path: 'collection', component: AdminManagementCollectionComponent },
-  { path: 'view', component: AppUserMainComponent, pathMatch: 'full'},
-  { path: 'cart', component: AppUserCartComponent, pathMatch: 'full'},
+  //{ path: '',redirectTo:'/login',pathMatch: 'full' },
+  { path: 'admin/product', component: AppAdminManagementProductComponent },
+  //{ path: 'login', component: LoginComponent },
+  { path: 'admin/customer', component: AppAdminMangementCustomerComponent },
+  { path: 'admin/feedback', component: AppAdminFeedbackUserComponent },
+  { path: 'admin/importProduct', component: AppAdminManagementImportProductComponent },
+  { path: 'admin/collection', component: AdminManagementCollectionComponent },
+  { path: 'home', component: AppUserMainComponent},
+  { path: 'cart', component: AppUserCartComponent},
   { path: 'register', component: AppUserRegisterComponent},
+  { path: 'admin', component: AppAdminMenuComponent},
+ //{ path: '**',redirectTo:'/login',pathMatch: 'full' },
+  // { path: '/',redirectTo:'/login',pathMatch: 'full' },
   //{ path: 'home', component: MainComponent },
 ];
 @NgModule({
