@@ -24,6 +24,7 @@ export class LoginComponent {
     private _user: UserService,
     public toastr: ToastrService
   ) { }
+  @Output() register: EventEmitter<any> = new EventEmitter<any>();
   @Output() goPage: EventEmitter<any> = new EventEmitter<any>();
   @Output() openFormRegister: EventEmitter<any> = new EventEmitter<any>();
   passlogin: boolean = true;
@@ -38,8 +39,8 @@ export class LoginComponent {
           "Thông báo",
           { timeOut: 3000 }
         );
-        this.router.navigateByUrl('admin')
-        this.goPage.emit(null);
+        //this.router.navigateByUrl('admin')
+        //this.goPage.emit(null);
         return;
       } else {
         //this.router.navigateByUrl('register')
@@ -48,11 +49,12 @@ export class LoginComponent {
           "Thông báo",
           { timeOut: 3000 }
         );
-        //this.router.navigateByUrl('home')
+        this.router.navigateByUrl('home')
       }
     });
   }
   routerRegister() {
-    this.openFormRegister.emit(null);
+    this.router.navigateByUrl('register');
+    this.register.emit(null);
   }
 }

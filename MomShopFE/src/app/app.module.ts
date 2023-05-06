@@ -30,6 +30,8 @@ import { AppUserRegisterComponent } from './app-user-view/app-user-register/app-
 import { AppUserHomeComponent } from './app-user-view/app-user-home/app-user-home.component';
 import { AppNavComponent } from './app-user-view/app-nav/app-nav.component';
 import { DialogService, DynamicDialogModule } from 'primeng/dynamicdialog';
+import { ExchangePolicyComponent } from './app-user-view/app-user-policy/exchange-policy/exchange-policy.component';
+import { GeneralTradingTermsComponent } from './app-user-view/app-user-policy/general-trading-terms/general-trading-terms.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -45,6 +47,8 @@ import { DialogService, DynamicDialogModule } from 'primeng/dynamicdialog';
     AppUserRegisterComponent,
     AppUserHomeComponent,
     AppNavComponent,
+    ExchangePolicyComponent,
+    GeneralTradingTermsComponent,
 
     //AppAdminMenuComponent
   ],

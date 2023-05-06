@@ -10,21 +10,26 @@ import { AppUserCartComponent } from './app-user-view/app-user-cart/app-user-car
 import { LoginComponent } from './app-login/login/login.component';
 import { AppUserRegisterComponent } from './app-user-view/app-user-register/app-user-register.component';
 import { AppAdminMenuComponent } from './app-admin-view/app-admin-menu/app-admin-menu.component';
+import { ExchangePolicyComponent } from './app-user-view/app-user-policy/exchange-policy/exchange-policy.component';
+import { GeneralTradingTermsComponent } from './app-user-view/app-user-policy/general-trading-terms/general-trading-terms.component';
+import { AppUserHomeComponent } from './app-user-view/app-user-home/app-user-home.component';
 
 const routes: Routes = [
-  //{ path: '',redirectTo:'/login',pathMatch: 'full' },
+  { path: '',redirectTo:'/login',pathMatch: 'full' },
   { path: 'admin/product', component: AppAdminManagementProductComponent },
-  //{ path: 'login', component: LoginComponent },
+  { path: 'login', component: LoginComponent },
   { path: 'admin/customer', component: AppAdminMangementCustomerComponent },
   { path: 'admin/feedback', component: AppAdminFeedbackUserComponent },
   { path: 'admin/importProduct', component: AppAdminManagementImportProductComponent },
   { path: 'admin/collection', component: AdminManagementCollectionComponent },
-  { path: 'home', component: AppUserMainComponent},
+  { path: 'home', component: AppUserHomeComponent},
   { path: 'cart', component: AppUserCartComponent},
   { path: 'register', component: AppUserRegisterComponent},
   { path: 'admin', component: AppAdminMenuComponent},
+  { path: 'exchange-policy', component: ExchangePolicyComponent},
+  { path: 'general-trading-terms', component: GeneralTradingTermsComponent},
  //{ path: '**',redirectTo:'/login',pathMatch: 'full' },
-  // { path: '/',redirectTo:'/login',pathMatch: 'full' },
+   //{ path: '/',redirectTo:'/login',pathMatch: 'full' },
   //{ path: 'home', component: MainComponent },
 ];
 @NgModule({

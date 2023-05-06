@@ -17,7 +17,7 @@ export class AppComponent implements OnInit {
   isAdmin: boolean = false;
   sidebarExpanded = true;
   visableCart: boolean = false;
-  visiableLogin: boolean = true;
+  visiableLogin: boolean = false;
  
   constructor(private http: HttpClient) {}
 
@@ -25,6 +25,10 @@ export class AppComponent implements OnInit {
  
   backHome() {
     this.visiableMain = true;
+    this.visiableLogin = false;
+  }
+  redirectFormRegister(){
+    this.visiableMain = false;
     this.visiableLogin = false;
   }
 }
