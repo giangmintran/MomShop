@@ -12,16 +12,21 @@ import { UserService } from 'src/services/user.service';
 export class AppUserRegisterComponent {
   inputRegister: RegisterDto = new RegisterDto
   constructor(private _user: UserService,
-    public toastr: ToastrService,private router:Router) {
+    public toastr: ToastrService, private router: Router) {
   }
   register() {
     console.log(this.inputRegister);
     this._user.register(this.inputRegister).subscribe(user => {
-      if (user != null) {
+      if (user === "success") {
         this.toastr.success("Đăng ký thành công",
           "Thông báo",
           { timeOut: 2000 });
-          this.router.navigateByUrl('/login');
+        this.router.navigateByUrl('/login');
+      }
+      if (user === "duplicate") {
+        this.toastr.warning("Tài khoản đã tồn tại",
+          "Thông báo",
+          { timeOut: 2000 });
       }
     })
   }

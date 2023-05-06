@@ -1,5 +1,6 @@
 import { HttpClient } from "@angular/common/http";
 import { Injectable } from "@angular/core";
+import { Observable } from "rxjs";
 import { LoginDto } from "src/models/login";
 import { RegisterDto } from "src/models/register";
 
@@ -12,7 +13,7 @@ export class UserService{
     login(input:LoginDto){
         return this.http.post(this.baseUrl + 'login',input)
     }
-    register(input:RegisterDto){
+    register(input:RegisterDto) : Observable<any>{
         return this.http.post(this.baseUrl+'register',input)
     }
 }
