@@ -31,7 +31,7 @@ namespace MOMShop.Controllers
         }
 
         [HttpPost("register")]
-        public UserDto Register([FromBody] RegisterDto input)
+        public string Register([FromBody] RegisterDto input)
         {
             try
             {

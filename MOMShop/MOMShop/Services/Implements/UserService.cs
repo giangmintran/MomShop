@@ -29,12 +29,18 @@ namespace MOMShop.Services.Implements
             return _mapper.Map<UserDto>(user);
         }
 
-        public UserDto Register(RegisterDto input)
+        public string Register(RegisterDto input)
         {
-           var insert = _mapper.Map<Users>(input);
+            var insert = _mapper.Map<Users>(input);
+
+            var user = _dbContext.Users.FirstOrDefault(e => e.Email == input.Email && !e.Deleted);
+            if (user != null)
+            {
+                return "duplicate";
+            }
             _dbContext.Users.Add(insert);
             _dbContext.SaveChanges();
-            return _mapper.Map<UserDto>(insert);
+            return "success";
         }
     }
 }
