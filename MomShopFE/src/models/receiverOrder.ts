@@ -7,5 +7,5 @@ export class ReceiveOrderDto {
     receiver: string;
     description: string;
     status: number;
-    details: []
+    details: [];
 }

@@ -1,6 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
-import { MenuItem, MessageService } from 'primeng/api';
+import { ConfirmEventType, ConfirmationService, MenuItem, MessageService } from 'primeng/api';
 import { DialogService, DynamicDialogConfig, DynamicDialogRef } from 'primeng/dynamicdialog';
 import { CreateOrEditProductDetailTestComponent } from '../create-or-edit-product-detail-test/create-or-edit-product-detail-test.component';
 import { ProductService } from 'src/services/product.service';
@@ -45,10 +45,15 @@ export class CreateOrEditProductTestComponent implements OnInit {
     public productServices: ProductService,
     public toastr: ToastrService,
     public ref: DynamicDialogRef,
-    public imageService: ImageService
+    public imageService: ImageService,
+    private confirmationService: ConfirmationService,
     ) {}
   ngOnInit(): void {
     console.log("ầv", this.configDialog?.data.product);
+    this.getData();
+  }
+
+  getData(){
     if(this.configDialog?.data.product) {
       this.productId = this.configDialog?.data.product[0].id
       this.productServices.getforEditProduct(this.configDialog.data?.product[0].id).subscribe(
@@ -140,6 +145,27 @@ export class CreateOrEditProductTestComponent implements OnInit {
     });
   }
 
+  deleteDetail(row){
+    this.confirmationService.confirm({
+      message: 'Bạn có chắc chắn muốn xóa?',
+      header: 'Xác nhận',
+      icon: 'pi pi-info-circle',
+      accept: () => {
+          this.productServices.deleteDetailProduct(row.id).subscribe((data)=>{
+            this.messageService.add({ severity: 'success', summary: 'Thông báo', detail: 'Xóa thành công', life: 3000 });
+            this.getData();
+    });
+      },
+      reject: (type) => {
+          switch (type) {
+              case ConfirmEventType.REJECT:
+                  break;
+              case ConfirmEventType.CANCEL:
+                  break;
+          }
+      }
+    });
+  }
   save() {
     if(this.validate()){
       console.log("res1", this.product);
@@ -194,7 +220,6 @@ export class CreateOrEditProductTestComponent implements OnInit {
           label: "Sửa",
           icon: "pi pi-pencil",
           command: ($event) => {
-            console.log("$22222222222", productDetail);
             this.editDetail(productDetail);
           },
         });
@@ -205,7 +230,7 @@ export class CreateOrEditProductTestComponent implements OnInit {
           label: "Xoá",
           icon: "pi pi-trash",
           command: ($event) => {
-            //this.detailProduct($event.item.data, $event.item.index);
+            this.deleteDetail($event.item.data);
           },
         });
       return actions;

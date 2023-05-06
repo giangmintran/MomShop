@@ -145,5 +145,19 @@ namespace MOMShop.Controllers
                 throw new Exception(ex.Message);
             }
         }
+
+        [HttpGet("detail/find/{id}")]
+        public ReceiveOrderDetailDto FinDetail(int id)
+        {
+            try
+            {
+                var result = _detailServices.FindById(id);
+                return result;
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(ex.Message);
+            }
+        }
     }
 }

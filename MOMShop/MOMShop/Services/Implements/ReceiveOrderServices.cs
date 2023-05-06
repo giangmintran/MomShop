@@ -52,7 +52,15 @@ namespace MOMShop.Services.Implements
             {
                 throw new Exception("Không tìm thấy sản phẩm");
             }
-            return _mapper.Map<ReceiveOrderDto>(receiveOrder);
+
+            var details = _dbContext.ReceiveOrderDetails.Where(e => e.ReceiveOrderId == id);
+            var result = _mapper.Map<ReceiveOrderDto>(receiveOrder);
+
+            if (details.Any())
+            {
+                result.Details = _mapper.Map<List<ReceiveOrderDetailDto>>(details);
+            }
+            return result;
         }
 
         public List<ReceiveOrderDto> GetReceiveOrders(FilterReceiveOrderDto input)

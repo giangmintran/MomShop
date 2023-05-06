@@ -38,6 +38,10 @@ export class ReceiveOrderService {
     getDetailReceiveOrder(id: number) {
         return this.http.get(this.baseUrl + 'details/' + id)
     }
+    /// chi tiết đơn hàng
+    getDetai(id: number) {
+        return this.http.get(this.baseUrl + 'detail/find/' + id)
+    }
     //thêm thông tin chi tiết đơn hàng
     createOrEditDetailReceiveOrder(order: any) {
         if (order.id) {
@@ -47,7 +51,7 @@ export class ReceiveOrderService {
             return this.http.post(this.baseUrl + "add-detail", order);
         }
     }
-    deleteDetailReceiveOrder(){
-
+    deleteDetailReceiveOrder(id: number){
+        return this.http.delete(this.baseUrl + 'delete-detail/' + id)
     }
 }
