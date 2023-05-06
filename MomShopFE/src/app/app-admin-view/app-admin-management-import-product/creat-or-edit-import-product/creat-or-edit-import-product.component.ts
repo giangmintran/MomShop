@@ -59,7 +59,7 @@ export class CreatOrEditImportProductComponent implements OnInit {
         if(this.receiveOrder.details){
           this.genlistAction(this.receiveOrder.details);
         }
-      });
+      }); 
     }
   }
   show(id?) {
