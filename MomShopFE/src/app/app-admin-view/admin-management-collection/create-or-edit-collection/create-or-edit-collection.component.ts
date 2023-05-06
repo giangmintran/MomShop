@@ -10,7 +10,7 @@ import { CreateOrEditProductCollectionComponent } from '../create-or-edit-produc
 import { ProductService } from 'src/services/product.service';
 
 @Component({
-  selector: 'app-create-or-edit-collection',
+  selector: 'app-create-or-edit-received-order',
   templateUrl: './create-or-edit-collection.component.html',
   styleUrls: ['./create-or-edit-collection.component.scss']
 })

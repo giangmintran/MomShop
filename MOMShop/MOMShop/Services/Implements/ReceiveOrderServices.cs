@@ -76,7 +76,6 @@ namespace MOMShop.Services.Implements
                 throw new Exception("Không tìm thấy sản phẩm");
             }
             receiveOrder.Code = input.Code;
-            receiveOrder.CreatedDate = input.CreatedDate;
             receiveOrder.ReceivedDate = input.ReceivedDate;
             receiveOrder.Supplier = input.Supplier;
             receiveOrder.Receiver = input.Receiver;

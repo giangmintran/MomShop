@@ -10,7 +10,7 @@ import { TableModule } from 'primeng/table';
 import { AppBsModalModule } from 'src/directive/app-bs-modal.module';
 import { CalendarModule } from 'primeng/calendar';
 import { ToastModule } from 'primeng/toast';
-import { DynamicDialogModule } from 'primeng/dynamicdialog';
+import { DialogService, DynamicDialogModule } from 'primeng/dynamicdialog';
 import { ConfirmDialogModule } from 'primeng/confirmdialog';
 import { AdminManagementCollectionComponent } from './admin-management-collection.component';
 import { MenuModule } from 'primeng/menu';

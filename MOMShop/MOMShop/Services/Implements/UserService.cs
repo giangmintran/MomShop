@@ -33,6 +33,7 @@ namespace MOMShop.Services.Implements
         {
            var insert = _mapper.Map<Users>(input);
             _dbContext.Users.Add(insert);
+            _dbContext.SaveChanges();
             return _mapper.Map<UserDto>(insert);
         }
     }

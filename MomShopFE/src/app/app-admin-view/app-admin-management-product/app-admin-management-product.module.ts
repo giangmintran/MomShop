@@ -19,6 +19,7 @@ import { FileUploadModule } from 'primeng/fileupload';
 import { ToastModule } from 'primeng/toast';
 import { ConfirmDialogModule } from 'primeng/confirmdialog';
 import { TagModule } from 'primeng/tag';
+import { ToastrModule } from 'ngx-toastr';
 
 @NgModule({
   declarations: [
@@ -38,6 +39,7 @@ import { TagModule } from 'primeng/tag';
     InputTextModule,
     ButtonModule,
     ToastModule,
+    ToastrModule,
     MenuModule,
     DynamicDialogModule,
     FileUploadModule,

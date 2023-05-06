@@ -1,60 +1,156 @@
 <div>
     <div>
-        <div>
-            <div class="form-group">
-                <div class="row mb-4">
-                    <div class="col-4">
-                        <label class="label-text" for="name">Mã hóa đơn</label>
-                        <input type="text" class="input-text" pInputText [(ngModel)]="receiveOrder.code"
-                            placeholder="Mã hóa đơn" />
-                    </div>
-                    <div class="col-8">
-                        <label class="label-text" for="name">Nhà cung cấp</label>
-                        <input type="text" class="input-text" pInputText [(ngModel)]="receiveOrder.supplier"
-                            placeholder="Nhà cung cấp" />
+        <div class="form-group">
+            <div class="row mb-4">
+                <div class="col-4">
+                    <label class="label-text" for="name">Mã hóa đơn</label>
+                    <input type="text" class="input-text" pInputText [(ngModel)]="receiveOrder.code"
+                        placeholder="Mã hóa đơn" />
+                </div>
+                <div class="col-8">
+                    <label class="label-text" for="name">Nhà cung cấp</label>
+                    <input type="text" class="input-text" pInputText [(ngModel)]="receiveOrder.supplier"
+                        placeholder="Nhà cung cấp" />
+                </div>
+            </div>
+
+            <div class="row mb-4" *ngIf="receiveOrder.id">
+                <div class="col-6">
+                    <div class="field">
+                        <label class="label-text">Ngày nhận đơn</label>
+                        <p-calendar name="receiveOrder.receivedDate" value="receiveOrder.receivedDate"
+                            [(ngModel)]="receiveOrder.receivedDate" dateFormat="dd/mm/yy" [showIcon]="false"
+                            [style]="{'width':'100%'}" [showButtonBar]="true"></p-calendar>
                     </div>
                 </div>
-                <div class="row">
-                    <div class="col-4">
-                        <div class="field">
-                            <label class="label-text">Ngày nhận đơn</label>
-                            <p-calendar value="receiveOrder.receiveDate" [(ngModel)]="receiveOrder.receiveDate"
-                                [showIcon]="true" [style]="{'width':'100%'}" [showButtonBar]="true"></p-calendar>
-                        </div>
+                <div class="col-6">
+                    <div class="field">
+                        <label class="label-text">Ngày tạo đơn</label>
+                        <p-calendar name="receiveOrder.createdDate" value="receiveOrder.createdDate"
+                            [(ngModel)]="receiveOrder.createdDate" dateFormat="dd/mm/yy" [showIcon]="false"
+                            [style]="{'width':'100%'}" [showButtonBar]="true" [readonlyInput]="true"
+                            [disabled]="true"></p-calendar>
                     </div>
-                    <div class="col-4">
-                        <label class="label-text">Người nhận</label>
-                        <input type="text" class="input-text" pInputText [(ngModel)]="receiveOrder.receiver"
-                            placeholder="Người nhận" />
-                    </div>
-                   
-                    <div class="col-4">
-                        <div class="field">
-                            <label htmlFor="status">Trạng thái<span class="required-field"> * </span> </label>
-                            <p-dropdown 
-                                appendTo="body" optionValue="code" name="status" optionLabel="name"
-                                [(ngModel)]="receiveOrder.status" [options]="listStatus"
-                                [style]="{'width':'100%'}"
-                                placeholder="Trạng thái">
-                            </p-dropdown>
-                        </div>
-                    </div>
-
-
                 </div>
-                <div class="row">
-                    <div class="col-12">
-                        <label class="label-text">Mô tả</label>
-                        <textarea style="width: 100%; max-width: 100%;" rows="5" pInputTextarea [(ngModel)]="receiveOrder.description" name="description"></textarea>
+            </div>
+
+            <div class="row mb-4" *ngIf="receiveOrder.id">
+                <div class="col-6">
+                    <label class="label-text">Người nhận</label>
+                    <input type="text" class="input-text" pInputText [(ngModel)]="receiveOrder.receiver"
+                        placeholder="Người nhận" />
+                </div>
+
+                <div class="col-6">
+                    <div class="field">
+                        <label htmlFor="status">Trạng thái<span class="required-field"> * </span> </label>
+                        <p-dropdown appendTo="body" optionValue="code" name="status" optionLabel="name"
+                            [(ngModel)]="receiveOrder.status" [options]="listStatus" [style]="{'width':'100%'}"
+                            placeholder="Trạng thái">
+                        </p-dropdown>
                     </div>
+                </div>
+            </div>
+            <div class="row" *ngIf="!receiveOrder.id">
+                <div class="col-4">
+                    <div class="field">
+                        <label class="label-text">Ngày nhận đơn</label>
+                        <p-calendar value="receiveOrder.receivedDate" [(ngModel)]="receiveOrder.receivedDate"
+                            [showIcon]="false" [style]="{'width':'100%'}" [showButtonBar]="true"></p-calendar>
+                    </div>
+                </div>
+                <div class="col-4">
+                    <label class="label-text">Người nhận</label>
+                    <input type="text" class="input-text" pInputText [(ngModel)]="receiveOrder.receiver"
+                        placeholder="Người nhận" />
+                </div>
+
+                <div class="col-4">
+                    <div class="field">
+                        <label htmlFor="status">Trạng thái<span class="required-field"> * </span> </label>
+                        <p-dropdown appendTo="body" optionValue="code" name="status" optionLabel="name"
+                            [(ngModel)]="receiveOrder.status" [options]="listStatus" [style]="{'width':'100%'}"
+                            placeholder="Trạng thái">
+                        </p-dropdown>
+                    </div>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-12">
+                    <label class="label-text mb-2">Mô tả</label>
+                    <textarea style="width: 100%; max-width: 100%;" rows="5" pInputTextarea
+                        [(ngModel)]="receiveOrder.description" name="description"></textarea>
                 </div>
             </div>
         </div>
     </div>
+    <!-- receivedOrderDetail -->
+    <div *ngIf="receiveOrder.id">
+        <hr class="mt-4">
+        <h5 class="ml-2">
+            Thông tin chi tiết
+        </h5>
+    </div>
+
+    <div class="div" *ngIf="receiveOrder.id">
+        <p-table [value]="receiveOrder.details" dataKey="id" [scrollable]="true" styleClass="custom-table-border-none"
+            isLoading="isLoading" scrollHeight="40vh" selectionMode="single" [(selection)]="selectedRow"
+            [columns]="colDetails">
+            <ng-template pTemplate="caption">
+                <div class="">
+                    <div class="">
+                        <button pButton pRipple label="Thêm" icon="pi pi-plus"
+                            class="p-button-success p-button-sm"></button>
+                    </div>
+                </div>
+            </ng-template>
+            <ng-template pTemplate="header">
+                <tr>
+                    <th style="min-width: 3rem; max-width: 3rem;">#ID</th>
+                    <th style="min-width: 12rem; max-width: 12rem;">Mã sản phẩm</th>
+                    <th style="min-width: 12rem; max-width: 12rem;">Tên sản phẩm</th>
+                    <th style="min-width: 12rem;">Loại</th>
+                    <th style="min-width: 12rem;">Size</th>
+                    <th style="min-width: 12rem;">Số lượng</th>
+                    <th style="min-width: 12rem;">Đơn giá</th>
+                    <th style="min-width: 7rem; max-width: 7rem;"><i class="pi pi-cog" style="font-size: 1rem"></i></th>
+                </tr>
+            </ng-template>
+            <ng-template pTemplate="body" let-productDetail let-index="rowIndex" *ngIf="receiveOrder.details">
+                <tr>
+                    <td style="min-width: 3rem; max-width: 3rem;">{{ productDetail.id }}</td>
+                    <td style="min-width: 12rem; max-width: 12rem;">{{ productDetail.size }}</td>
+
+                    <td style="min-width: 12rem; max-width: 12rem;">
+                        {{ productDetail.quantity }}
+                    </td>
+                    <td style="min-width: 12rem; max-width: 12rem;">
+                        {{ productDetail.quantity }}
+                    </td>
+                    <td style="min-width: 12rem; max-width: 12rem;">
+                        {{ productDetail.quantity }}
+                    </td>
+                    <td style="min-width: 6rem;">{{ productDetail.description }}</td>
+                    <td style="min-width: 6rem;">{{ productDetail.description }}</td>
+
+                    <td style="max-width: 3rem; min-width: 3rem; justify-content: center;" pFrozenColumn
+                        alignFrozen="right" [frozen]="true" class=" b-border-frozen-right b-table-actions">
+                        <ng-template [ngIf]="true">
+                            <i class="pi pi-bars" style="padding-left: 20px; padding-right: 20px"
+                                (click)="menu.toggle($event)"></i>
+                            <p-menu #menu [popup]="true" appendTo="body" [model]="listAction[index]"></p-menu>
+                        </ng-template>
+                    </td>
+                </tr>
+            </ng-template>
+        </p-table>
+    </div>
+
 </div>
 <div class="p-dialog-footer mt-4" style="width: 100%; position: fixed; left: 0; bottom: 0;">
-    <button pButton pRipple label="Hủy" icon="pi pi-times" class="p-button-text p-button-sm p-confirm-dialog-reject mt-4"
-        (click)="close()"></button>
+    <button pButton pRipple label="Hủy" icon="pi pi-times"
+        class="p-button-text p-button-sm p-confirm-dialog-reject mt-4" (click)="close()"></button>
     <button pButton pRipple [label]="'Lưu'" icon="pi pi-check"
-        class="p-button-text p-button-success p-button-sm p-confirm-dialog-approve mt-4"  (click)="save()"></button>
+        class="p-button-text p-button-success p-button-sm p-confirm-dialog-approve mt-4" (click)="save()"></button>
 </div>

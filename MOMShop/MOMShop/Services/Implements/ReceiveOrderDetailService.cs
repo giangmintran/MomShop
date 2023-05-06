@@ -26,7 +26,7 @@ namespace MOMShop.Services.Implements
 
         public ReceiveOrderDetailDto Add(ReceiveOrderDetailDto input)
         {
-            var insert = _mapper.Map<ReceiveOrderDetailDto>(input);
+            var insert = _mapper.Map<ReceiveOrderDetail>(input);
             _dbContext.Add(insert);
             _dbContext.SaveChanges();
             return input;

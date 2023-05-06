@@ -7,10 +7,6 @@ namespace MOMShop.Entites
     {
         [Key]
         public int Id { get; set; }
-        /// <summary>
-        /// Tên đăng nhập
-        /// </summary>
-        public string Username { get; set; }
 
         /// <summary>
         /// Mật khẩu

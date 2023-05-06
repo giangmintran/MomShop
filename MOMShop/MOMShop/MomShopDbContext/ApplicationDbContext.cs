@@ -75,6 +75,7 @@ namespace MOMShop.MomShopDbContext
             #region ReceiveOrder
             modelBuilder.Entity<ReceiveOrder>(entity =>
             {
+                entity.Property(e => e.CreatedDate).HasDefaultValueSql("getdate()");
                 entity.Property(e => e.Deleted).HasDefaultValue(false);
             });
             #endregion

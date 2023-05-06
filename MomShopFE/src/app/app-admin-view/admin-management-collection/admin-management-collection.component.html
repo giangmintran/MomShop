@@ -39,7 +39,7 @@
 					</td>
 					<td style="max-width: 3rem; min-width: 3rem; justify-content: center;" pFrozenColumn alignFrozen="right" [frozen]="true" class=" b-border-frozen-right b-table-actions">
 						<ng-template [ngIf]="true">
-							<i class="pi pi-ellipsis-v" style="padding: 0px 20px" (click)="menu.toggle($event)"></i>
+							<i class="pi pi-ellipsis-v" style="padding: 10px 20px" (click)="menu.toggle($event)"></i>
 							<p-menu #menu [popup]="true" appendTo="body" [model]="listAction[rowIndex]"></p-menu>
 						</ng-template>
 					</td>

@@ -14,7 +14,6 @@ import { ImageService } from 'src/services/image.Service';
 class ImageSnippet {
   pending: boolean = false;
   status: string = 'init';
-
   constructor(public src: string, public file: File) {}
 }
 
@@ -22,7 +21,6 @@ class ImageSnippet {
   selector: 'app-create-or-edit-product-test',
   templateUrl: './create-or-edit-product-test.component.html',
   styleUrls: ['./create-or-edit-product-test.component.scss'],
-  providers: [DialogService, MessageService, ImageService]
 })
 export class CreateOrEditProductTestComponent implements OnInit {
   selectedFile: ImageSnippet; 
@@ -181,8 +179,8 @@ export class CreateOrEditProductTestComponent implements OnInit {
   }
 
   validate(): boolean {
-    console.log("product", this.product.code);
-    if (this.product.code == null || this.product.name == null || this.product.price == null){
+    console.log("product", this.product);
+    if (this.product.code == undefined || this.product.name == undefined || this.product.price == undefined){
       return false;
     }
     return true;

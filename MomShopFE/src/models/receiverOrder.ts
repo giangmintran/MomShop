@@ -1,10 +1,11 @@
 export class ReceiveOrderDto {
     id: number;
     code: string;
-    createDate: Date;
-    receiveDate: Date;
+    createdDate: Date;
+    receivedDate: Date;
     supplier: string;
     receiver: string;
     description: string;
     status: number;
+    details: []
 }

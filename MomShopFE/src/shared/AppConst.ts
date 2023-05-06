@@ -76,19 +76,22 @@ export class ReceivedOrderConst {
 
     public static receiveStatus = [
         {
-            name: 'Đang bán',
+            name: 'Tất cả',
+            code: undefined
+        },
+        {
+            name: 'Chưa thanh toán',
             code: 1
         },
         {
-            name: 'Chưa mở bán',
+            name: 'Đã thanh toán',
             code: 2
         },
         {
-            name: 'Khóa',
+            name: 'Đã hoàn thành',
             code: 3
         },
     ]
-
     public static getStatus(code){
         const result = this.receiveStatus.find(item => 
             item.code == code

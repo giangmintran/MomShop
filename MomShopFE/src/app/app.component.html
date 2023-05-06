@@ -1,9 +1,12 @@
-  <div class="main" *ngIf="visiableMain"> 
+  <!-- <div class="main" *ngIf="visiableMain"> 
          <app-admin-menu>
         </app-admin-menu> 
-    </div> 
-
-    <app-login *ngIf="visiableLogin" (goPage)="backHome()"></app-login>
+    </div>  -->
+    <div class="main"> 
+        <app-admin-menu>
+       </app-admin-menu> 
+   </div> 
+    <!-- <app-login *ngIf="visiableLogin" (goPage)="backHome()"></app-login> -->
     <router-outlet></router-outlet> 
     <!-- <app-user-register></app-user-register> -->
     <!-- <app-user-cart *ngIf="visableCart" (backGoHome)="backHome()"></app-user-cart>

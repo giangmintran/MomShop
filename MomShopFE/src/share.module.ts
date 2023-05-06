@@ -34,7 +34,7 @@ import { AdminManagementCollectionModule } from "./app/app-admin-view/admin-mana
     AppAdminMangementCustomerModule,
     AppAdminFeedbackUserModule,
     AppAdminManagementImportProductModule,
-    AdminManagementCollectionModule
+    AdminManagementCollectionModule,
   ],
   exports: [AppAdminMenuComponent],
 }) 

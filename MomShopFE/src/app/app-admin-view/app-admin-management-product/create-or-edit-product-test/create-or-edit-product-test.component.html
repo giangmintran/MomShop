@@ -1,5 +1,4 @@
 <div>
-    <p-toast></p-toast>
     <ng-container>
         <div class="row">
             <div class="col-6">
@@ -84,7 +83,7 @@
     </ng-container>
     <div class="col-12 md;col-12" *ngIf="product.id">
         <div class="col-12 md:col-12">
-            <p-table #policyDetailTempalteTable [value]="product.productDetails" dataKey="id" [scrollable]="true"
+            <p-table [value]="product.productDetails" dataKey="id" [scrollable]="true"
                 styleClass="custom-table-border-none" isLoading="isLoading" scrollHeight="40vh"
                 selectionMode="single" [(selection)]="selectedProductDetail"
                 >

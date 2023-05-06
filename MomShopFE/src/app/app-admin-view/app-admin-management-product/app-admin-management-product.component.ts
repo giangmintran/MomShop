@@ -137,7 +137,6 @@ export class AppAdminManagementProductComponent{
       baseZIndex: 10000,
     });
     this.ref.onClose.subscribe((data) => {
-      console.log("Data thêm", data);
       if(data){
         this.messageService.add({ severity: 'success', summary: 'Thông báo', detail: 'Thêm thành công', life: 3000 });
         window.location.reload();

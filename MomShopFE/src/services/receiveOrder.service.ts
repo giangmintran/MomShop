@@ -11,8 +11,11 @@ export class ReceiveOrderService {
     baseUrl = 'http://localhost:5001/api/receive-order/';
     constructor(private http: HttpClient) { }
     //xem thông tin đơn hàng
-    getAllReceiveOrder(): Observable<any> {
-        return this.http.get(this.baseUrl + 'find-all');
+    getAllReceiveOrder(status?): Observable<any> {
+        if(status == undefined){
+            return this.http.get(this.baseUrl + 'find-all');
+        }
+        return this.http.get(this.baseUrl + 'find-all' +'?status=' + status);
     }
     //xem thông tin đơn hàng theo id
     getReceiveOrderById(id: number): Observable<any> {
@@ -29,7 +32,7 @@ export class ReceiveOrderService {
     }
     //xóa thông tin đơn hàng
     deleteReceiveOrder(id: number) {
-        return this.http.delete(this.baseUrl + 'delete' + id)
+        return this.http.delete(this.baseUrl + 'delete/' + id)
     }
     /// chi tiết đơn hàng
     getDetailReceiveOrder(id: number) {
