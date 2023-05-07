@@ -17,6 +17,8 @@ export class UserCollectionComponent {
 
   page = 0;
 
+  visible: boolean;
+
   constructor() { }
 
   ngOnInit() {
@@ -411,5 +413,13 @@ export class UserCollectionComponent {
     this.page = event.page;
     this.productsPagination = this.products.slice(this.first, (this.page + 1) * this.rows);
   }
+
+  detailProduct(param){
+    console.log(param);
+  }
+
+  showDialog(params) {
+    this.visible = true;
+}
 
 }

@@ -9,6 +9,7 @@ import { UserIntroComponent } from './app-user-view/user-intro/user-intro.compon
 import { LogInComponent } from './app-user-view/log-in/log-in.component';
 import { UserCollectionComponent } from './app-user-view/user-collection/user-collection.component';
 import { PolicyGuideComponent } from './app-user-view/policy-guide/policy-guide.component';
+import { CartComponent } from './app-user-view/cart/cart.component';
 
 const routes: Routes = [
   { path: 'product', component: AppAdminManagementProductComponent },
@@ -22,6 +23,7 @@ const routes: Routes = [
       {path: 'collection', component: UserCollectionComponent},
       {path: 'policy-guide', component: PolicyGuideComponent},
       {path: 'log-in', component: LogInComponent},
+      {path: 'cart', component: CartComponent},
 
     ]
   },

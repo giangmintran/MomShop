@@ -19,7 +19,9 @@ import { DataViewModule } from 'primeng/dataview';
 import { TagModule } from 'primeng/tag';
 import { RatingModule } from 'primeng/rating';
 import { PaginatorModule } from 'primeng/paginator';
-
+import { CartComponent } from '../cart/cart.component';
+import { FieldsetModule } from 'primeng/fieldset';
+import { DialogModule } from 'primeng/dialog';
 
 @NgModule({
   declarations: [
@@ -27,7 +29,8 @@ import { PaginatorModule } from 'primeng/paginator';
     UserCollectionComponent,
     UserIntroComponent,
     LogInComponent,
-    PolicyGuideComponent
+    PolicyGuideComponent,
+    CartComponent,
     
   ],
   imports: [
@@ -45,7 +48,9 @@ import { PaginatorModule } from 'primeng/paginator';
     DataViewModule, 
     TagModule,
     RatingModule,
-    PaginatorModule
+    PaginatorModule,
+    FieldsetModule,
+    DialogModule 
   ],
 })
 export class AppUserViewModule { }

@@ -17,16 +17,12 @@ import { WeatherComponent } from './admin-layout/weather/weather.component';
 import { AppAdminMainComponent } from './app-admin-view/app-admin-main/app-admin-main.component';
 import { AppAdminManagementProductModule } from './app-admin-view/app-admin-management-product/app-admin-management-product.module';
 import { AppRoutingModule } from './app-routing.module';
-import { AppUserMainComponent } from './app-user-view/app-user-main/app-user-main.component';
 import { AppComponent } from './app.component';
 import { PTableCustomComponent } from './p-table-custom/p-table-custom.component';
 import { CalendarModule } from 'primeng/calendar';
-import { UserIntroComponent } from './app-user-view/user-intro/user-intro.component';
-import { UserCollectionComponent } from './app-user-view/user-collection/user-collection.component';
-import { PolicyGuideComponent } from './app-user-view/policy-guide/policy-guide.component';
-import { LogInComponent } from './app-user-view/log-in/log-in.component';
 import { AppUserViewModule } from './app-user-view/app-user-main/app-user-main.module';
 import { RouterModule } from '@angular/router';
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -35,7 +31,6 @@ import { RouterModule } from '@angular/router';
     PTableCustomComponent,
     AppAdminMainComponent,
     CreateOrEditWeatherComponent,
-    
     //AppAdminMenuComponent
   ],
   imports: [
