@@ -1,0 +1,70 @@
+<div class="collection--wrap bg-left">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="d-none d-lg-block d-xl-block col-xl-2 col-lg-3 sidebar-collection">
+                <ul class="sidebar-menu" style="list-style: none;background: #F47916;height:1350px">
+                    <li class="">
+                        <a class=" current" href="/collections/best-seller" title="BEST SELLER" target="_self">
+                            <span class="">BEST SELLER</span>
+                        </a>
+                    </li>
+                    <li class="">
+                        <a class="" href="/collections/basic-collection" title="BASIC LINE" target="_self">
+                            <span class="">BASIC LINE</span>
+                        </a>
+                    </li>
+                    <li class="">
+                        <a class="" href="/collections/hot-products" title="TẤT CẢ SẢN PHẨM" target="_self">
+                            <span class="">TẤT CẢ SẢN PHẨM</span>
+                        </a>
+                    </li>
+                    <li class="">
+                        <a class="" href="/collections/tshirt" title="ÁO THUN" target="_self">
+                            <span class="">ÁO THUN</span>
+                        </a>
+                    </li>
+                    <li class="">
+                        <a class="" href="/collections/shirt" title="ÁO SƠMI" target="_self">
+                            <span class="">ÁO SƠMI</span>
+                        </a>
+                    </li>
+                    <li class="">
+                        <a class="" href="/collections/outerwear" title="ÁO KHOÁC" target="_self">
+                            <span class="">ÁO KHOÁC</span>
+                        </a>
+                    </li>
+                    <li class="">
+                        <a class="" href="/collections/short-pants-habits" title="QUẦN" target="_self">
+                            <span class="">QUẦN</span>
+                        </a>
+                    </li>
+                    <li class="">
+                        <a class="" href="/collections/accessories" title="PHỤ KIỆN" target="_self">
+                            <span class="">PHỤ KIỆN</span>
+                        </a>
+                    </li>
+                </ul>
+            </div>
+            <div class="col-xl-10 col-lg-9 col-md-12 col-12 content-collection">
+                <div class="content-product-list product-list filter row">
+                    <div class="col-lg-3 col-md-6 col-6" *ngFor="let product of productsPagination" style="margin-bottom: 15px;text-align: center;">
+                        <p-card header="{{ product.name }}" [style]="{ width: '300px' }" >
+                            <ng-template pTemplate="header">
+                                <img alt="Card"
+                                    [src]="'https://primefaces.org/cdn/primeng/images/demo/product/' + product.image" />
+                            </ng-template>
+                            <p>
+                                {{ product.price + ' VND' }}
+                            </p>
+                            <ng-template pTemplate="footer">
+                                <p-button label="Detail" icon="pi pi-shopping-cart" styleClass="p-button"
+                                    [style]="{ 'margin-left': '.5em' }"></p-button>
+                            </ng-template>
+                        </p-card>
+                    </div>
+                </div>
+<p-paginator (onPageChange)="onPageChange($event)" [first]="first" [rows]="rows" [totalRecords]="products.length"></p-paginator>
+            </div>
+        </div>
+    </div>
+</div>

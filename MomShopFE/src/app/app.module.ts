@@ -21,15 +21,21 @@ import { AppUserMainComponent } from './app-user-view/app-user-main/app-user-mai
 import { AppComponent } from './app.component';
 import { PTableCustomComponent } from './p-table-custom/p-table-custom.component';
 import { CalendarModule } from 'primeng/calendar';
+import { UserIntroComponent } from './app-user-view/user-intro/user-intro.component';
+import { UserCollectionComponent } from './app-user-view/user-collection/user-collection.component';
+import { PolicyGuideComponent } from './app-user-view/policy-guide/policy-guide.component';
+import { LogInComponent } from './app-user-view/log-in/log-in.component';
+import { AppUserViewModule } from './app-user-view/app-user-main/app-user-main.module';
+import { RouterModule } from '@angular/router';
 @NgModule({
   declarations: [
     AppComponent,
     WeatherComponent,
     SidebarComponent,
     PTableCustomComponent,
-    AppUserMainComponent,
     AppAdminMainComponent,
     CreateOrEditWeatherComponent,
+    
     //AppAdminMenuComponent
   ],
   imports: [
@@ -49,7 +55,9 @@ import { CalendarModule } from 'primeng/calendar';
     ToastrModule.forRoot({
       positionClass :'toast-top-right',
     }),
-    AppAdminManagementProductModule
+    AppAdminManagementProductModule,
+    AppUserViewModule,
+    RouterModule
     //BsModalService,
     //ModalModule
   ],
