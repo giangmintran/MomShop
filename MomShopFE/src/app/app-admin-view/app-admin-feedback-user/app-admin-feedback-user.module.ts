@@ -10,8 +10,6 @@ import { TableModule } from 'primeng/table';
 import { AppBsModalModule } from 'src/directive/app-bs-modal.module';
 import { AppAdminFeedbackUserComponent } from './app-admin-feedback-user.component';
 
-
-
 @NgModule({
   declarations: [AppAdminFeedbackUserComponent],
   imports: [

@@ -38,7 +38,7 @@ import { TreeTableModule } from 'primeng/treetable';
     DynamicDialogModule,
     ConfirmDialogModule,
     MenuModule,
-    TreeTableModule
+    TreeTableModule,
   ]
 })
 export class AdminManagementCollectionModule { }

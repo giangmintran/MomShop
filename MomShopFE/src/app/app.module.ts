@@ -31,6 +31,8 @@ import { ExchangePolicyComponent } from './app-user-view/app-user-policy/exchang
 import { GeneralTradingTermsComponent } from './app-user-view/app-user-policy/general-trading-terms/general-trading-terms.component';
 import { AppUserRegisterComponent } from './app-user-view/app-user-register/app-user-register.component';
 import { AppComponent } from './app.component';
+import { AppAdminMenuComponent } from './app-admin-view/app-admin-menu/app-admin-menu.component';
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -48,7 +50,6 @@ import { AppComponent } from './app.component';
     AppNavComponent,
     ExchangePolicyComponent,
     GeneralTradingTermsComponent,
-    //AppAdminMenuComponent
   ],
   imports: [
     BrowserModule,

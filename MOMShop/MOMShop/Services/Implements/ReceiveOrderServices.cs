@@ -66,7 +66,11 @@ namespace MOMShop.Services.Implements
         public List<ReceiveOrderDto> GetReceiveOrders(FilterReceiveOrderDto input)
         {
             var resultItem = new List<ReceiveOrderDto>();
-            var receiveOrders = _dbContext.ReceiveOrders.Where(e => !e.Deleted && (input.Status == null || e.Status == input.Status)).OrderByDescending(e => e.Id).ToList();
+            var receiveOrders = _dbContext.ReceiveOrders.Where(e => !e.Deleted && (input.Status == null || e.Status == input.Status) && (input.Keyword == null 
+            || e.Code.Contains(input.Keyword)
+            || e.Supplier.Contains(input.Keyword)
+            || e.Receiver.Contains(input.Keyword)
+            )).OrderByDescending(e => e.Id).ToList();
             resultItem = _mapper.Map<List<ReceiveOrderDto>>(receiveOrders);
             foreach (var item in resultItem)
             {

@@ -69,7 +69,7 @@ export class AdminManagementCollectionComponent implements OnInit {
   editProduct(row) {
     const ref = this.dialogService.open(CreateOrEditCollectionComponent, {
       header: "Cập nhật thông tin",
-      width: "1000px",
+      width: "1400px",
       height: "800px",
       contentStyle: { "max-height": "800px", overflow: "auto", "margin-bottom": "40px", },
       baseZIndex: 10000,

@@ -22,6 +22,7 @@ class ImageSnippet {
   templateUrl: './create-or-edit-product-test.component.html',
   styleUrls: ['./create-or-edit-product-test.component.scss'],
 })
+
 export class CreateOrEditProductTestComponent implements OnInit {
   selectedFile: ImageSnippet; 
   product: ProductDto = new ProductDto();

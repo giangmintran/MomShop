@@ -21,6 +21,10 @@ export class CreateOrEditCollectionComponent implements OnInit {
   colProducts: any[] = [];
   products: any[] = [];
   selectedProduct: any[] = []
+  sourceProducts: [];
+
+  targetProducts: [];
+
   constructor(private http: HttpClient, 
     public dialogService: DialogService, 
     public messageService: MessageService,  
