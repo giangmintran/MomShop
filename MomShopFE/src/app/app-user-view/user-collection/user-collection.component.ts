@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-user-collection',
@@ -17,7 +18,7 @@ export class UserCollectionComponent {
 
   page = 0;
 
-  constructor() { }
+  constructor(private router: Router) { }
 
   ngOnInit() {
     this.products = [
@@ -409,6 +410,21 @@ export class UserCollectionComponent {
     this.first = event.first;
     this.rows = event.rows;
     this.page = event.page;
+    this.productsPagination = this.products.slice(this.first, (this.page + 1) * this.rows);
+  }
+
+  showDetail(param){
+    this.router.navigateByUrl('/collection-detail');  
+  }
+
+  getProduct(param){
+
+    this.resetPage();
+  }
+
+  resetPage(){
+    this.first = 0;
+    this.page = 0;
     this.productsPagination = this.products.slice(this.first, (this.page + 1) * this.rows);
   }
 

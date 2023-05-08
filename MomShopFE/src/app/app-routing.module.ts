@@ -15,6 +15,7 @@ import { GeneralTradingTermsComponent } from './app-user-view/app-user-policy/ge
 import { AppUserHomeComponent } from './app-user-view/app-user-home/app-user-home.component';
 import { UserCollectionComponent } from './app-user-view/user-collection/user-collection.component';
 import { CartComponent } from './app-user-view/cart/cart.component';
+import { UserCollectionDetailComponent } from './app-user-view/user-collection-detail/user-collection-detail.component';
 
 const routes: Routes = [
   { path: '',redirectTo:'/login',pathMatch: 'full' },
@@ -31,9 +32,10 @@ const routes: Routes = [
   { path: 'general-trading-terms', component: GeneralTradingTermsComponent},
  //{ path: '**',redirectTo:'/login',pathMatch: 'full' },
    //{ path: '/',redirectTo:'/login',pathMatch: 'full' },
-  //{ path: 'home', component: MainComponent },
+ // { path: 'home', component: AppUserHomeComponent },
   { path: 'view', component: AppUserMainComponent },
   {path: 'collection', component: UserCollectionComponent},
+  {path: 'collection-detail', component: UserCollectionDetailComponent},
   {path: 'cart', component: CartComponent},
   {path: 'check-out', component: UserCollectionComponent},
 ];

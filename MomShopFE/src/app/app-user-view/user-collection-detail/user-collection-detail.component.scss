@@ -1,0 +1,24 @@
+align-items-center{
+    display: flex;
+  align-items: center;
+}
+* {
+    font-family: "Cousine Regular", sans-serif !important;
+}
+
+.dialog{
+    cursor: pointer;
+}
+
+
+::ng-deep {
+.p-radiobutton .p-radiobutton-box.p-highlight {
+    border-color: #000000!important;
+    background: #000000!important;
+}
+
+.p-button-icon.pi.pi-shopping-cart{
+    margin-right: 10px;
+}
+}
+

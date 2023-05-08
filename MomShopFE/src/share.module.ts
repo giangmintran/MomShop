@@ -25,6 +25,7 @@ import { RatingModule } from 'primeng/rating';
 import { PaginatorModule } from 'primeng/paginator';
 import { FieldsetModule } from 'primeng/fieldset';
 import { DialogModule } from 'primeng/dialog';
+import { RadioButtonModule  } from 'primeng/radiobutton';
 
 @NgModule({
   declarations: [AppAdminMenuComponent],
@@ -51,7 +52,8 @@ import { DialogModule } from 'primeng/dialog';
     DataViewModule, 
     TagModule,
     RatingModule,
-    PaginatorModule
+    PaginatorModule,
+    RadioButtonModule 
   ],
   exports: [AppAdminMenuComponent,
     CardModule,
@@ -61,6 +63,7 @@ import { DialogModule } from 'primeng/dialog';
     RatingModule,
     PaginatorModule,
     FieldsetModule,
-    DialogModule ],
+    DialogModule,
+    RadioButtonModule  ],
 }) 
 export class SharedModule {}

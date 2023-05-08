@@ -1,46 +1,47 @@
 <app-header></app-header>
+<!-- <app-nav></app-nav> -->
 <div class="collection--wrap bg-left">
     <div class="container-fluid">
         <div class="row">
             <div class="d-none d-lg-block d-xl-block col-xl-2 col-lg-3 sidebar-collection">
                 <ul class="sidebar-menu" style="list-style: none;background: #F47916;height:1350px">
                     <li class="">
-                        <a class=" current" href="/collections/best-seller" title="BEST SELLER" target="_self">
+                        <a title="BEST SELLER" target="_self" (click)="getProduct(1)">
                             <span class="">BEST SELLER</span>
                         </a>
                     </li>
                     <li class="">
-                        <a class="" href="/collections/basic-collection" title="BASIC LINE" target="_self">
+                        <a title="BASIC LINE" target="_self" (click)="getProduct(2)">
                             <span class="">BASIC LINE</span>
                         </a>
                     </li>
                     <li class="">
-                        <a class="" href="/collections/hot-products" title="TẤT CẢ SẢN PHẨM" target="_self">
+                        <a title="TẤT CẢ SẢN PHẨM" target="_self" (click)="getProduct(3)">
                             <span class="">TẤT CẢ SẢN PHẨM</span>
                         </a>
                     </li>
                     <li class="">
-                        <a class="" href="/collections/tshirt" title="ÁO THUN" target="_self">
+                        <a title="ÁO THUN" target="_self" (click)="getProduct(4)">
                             <span class="">ÁO THUN</span>
                         </a>
                     </li>
                     <li class="">
-                        <a class="" href="/collections/shirt" title="ÁO SƠMI" target="_self">
+                        <a title="ÁO SƠMI" target="_self" (click)="getProduct(5)">
                             <span class="">ÁO SƠMI</span>
                         </a>
                     </li>
                     <li class="">
-                        <a class="" href="/collections/outerwear" title="ÁO KHOÁC" target="_self">
+                        <a title="ÁO KHOÁC" target="_self" (click)="getProduct(6)">
                             <span class="">ÁO KHOÁC</span>
                         </a>
                     </li>
                     <li class="">
-                        <a class="" href="/collections/short-pants-habits" title="QUẦN" target="_self">
+                        <a title="QUẦN" target="_self" (click)="getProduct(7)">
                             <span class="">QUẦN</span>
                         </a>
                     </li>
                     <li class="">
-                        <a class="" href="/collections/accessories" title="PHỤ KIỆN" target="_self">
+                        <a title="PHỤ KIỆN" target="_self" (click)="getProduct(8)">
                             <span class="">PHỤ KIỆN</span>
                         </a>
                     </li>
@@ -58,7 +59,7 @@
                                 {{ product.price + ' VND' }}
                             </p>
                             <ng-template pTemplate="footer">
-                                <p-button label="Detail" icon="pi pi-shopping-cart" styleClass="p-button"
+                                <p-button label="Detail" icon="pi pi-shopping-cart" styleClass="p-button" (click)="showDetail(product)"
                                     [style]="{ 'margin-left': '.5em' }"></p-button>
                             </ng-template>
                         </p-card>

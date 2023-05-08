@@ -35,6 +35,7 @@ import { AppAdminMenuComponent } from './app-admin-view/app-admin-menu/app-admin
 import { UserCollectionComponent } from './app-user-view/user-collection/user-collection.component';
 import { CartComponent } from './app-user-view/cart/cart.component';
 import { CheckOutComponent } from './app-user-view/check-out/check-out.component';
+import { UserCollectionDetailComponent } from './app-user-view/user-collection-detail/user-collection-detail.component';
 
 @NgModule({
   declarations: [
@@ -56,6 +57,7 @@ import { CheckOutComponent } from './app-user-view/check-out/check-out.component
     UserCollectionComponent,
     CartComponent,
     CheckOutComponent,
+    UserCollectionDetailComponent,
   ],
   imports: [
     BrowserModule,
