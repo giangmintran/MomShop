@@ -1,4 +1,6 @@
-﻿namespace MOMShop.Dto.Product
+﻿using Microsoft.AspNetCore.Http;
+
+namespace MOMShop.Dto.Product
 {
     public class CreateProductDto
     {

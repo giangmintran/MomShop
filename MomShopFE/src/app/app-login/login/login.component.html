@@ -1,0 +1,23 @@
+<div *ngIf="passlogin" class="form-login mb-5 mt-5">
+    <h2 class="title-form text-center mb-5">ĐĂNG NHẬP</h2>
+    <div class="form-input">
+        <input type="text" class="input mb-4" placeholder="Email">
+        <input type="text" class="input" placeholder="Mật khẩu">
+    </div>
+    <p class="note-footer">
+        This site is protected by reCAPTCHA and the Google Privacy Policy and Terms of Service apply.
+    </p>
+    <div class="form-footer">
+        <button class="btn-login" (click)="routerPage()">Đăng nhập</button>
+        <div class="text-footer">
+            <p class="text-forgot-password">
+                Quên mật khẩu?
+            </p>
+            <a class="text-register">
+                <span class="text-gray">hoặc</span>
+                Đăng kí
+            </a>
+        </div>
+    </div>
+</div>
+<!-- <router-outlet *ngIf="checkLogin"></router-outlet>      -->

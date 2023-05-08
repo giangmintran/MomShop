@@ -47,6 +47,6 @@ namespace MOMShop.Entites
         /// </summary>
         public string Avatar { get; set; }
         public string CreatedBy { get; set; }
-        public string Deleted { get; set; }
+        public bool Deleted { get; set; }
     }
 }

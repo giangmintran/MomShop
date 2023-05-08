@@ -78,6 +78,13 @@ namespace MOMShop.MomShopDbContext
                 entity.Property(e => e.Deleted).HasDefaultValue(false);
             });
             #endregion
+
+            #region User
+            modelBuilder.Entity<Users>(entity =>
+            {
+                entity.Property(e => e.Deleted).HasDefaultValue(false);
+            });
+            #endregion
         }
     }
 }

@@ -124,7 +124,7 @@ export class CreateOrEditProductComponent implements OnInit {
     this.productServices.createOrEdit(this.product).subscribe(() => {
       this.active = false;
       if (this.product.id) {
-        this.toastr.success("Thêm thành công", "Thông báo", { timeOut: 1000 });
+        this.toastr.success("Thêm thành công", "Thông báo", { timeOut: 3000 });
       } else {
         this.toastr.success("Cập nhật thành công", "Thông báo", {
           timeOut: 1000,

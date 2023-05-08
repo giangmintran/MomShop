@@ -122,11 +122,11 @@ export class CreateOrEditDetailProductComponent {
       this.productServices.createOrEditDetailProduct(this.productDetail).subscribe(()=>{
         this.active = false;
         if(this.productDetail.id == undefined){
-          this.toastr.success('Thêm thành công','Thông báo',{timeOut: 1000});
+          this.toastr.success('Thêm thành công','Thông báo',{timeOut: 3000});
         }
         else 
         {
-          this.toastr.success('Cập nhật thành công','Thông báo',{timeOut: 1000});
+          this.toastr.success('Cập nhật thành công','Thông báo',{timeOut: 3000});
 
         }
         this.productDetail = new ProductDetailDto();

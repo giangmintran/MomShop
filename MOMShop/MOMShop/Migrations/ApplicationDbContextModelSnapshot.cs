@@ -194,6 +194,9 @@ namespace MOMShop.Migrations
                     b.Property<string>("OrderCode")
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<float>("Rating")
+                        .HasColumnType("real");
+
                     b.HasKey("Id");
 
                     b.ToTable("Feedbacks");
@@ -477,8 +480,10 @@ namespace MOMShop.Migrations
                     b.Property<string>("CreatedBy")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("Deleted")
-                        .HasColumnType("nvarchar(max)");
+                    b.Property<bool>("Deleted")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("bit")
+                        .HasDefaultValue(false);
 
                     b.Property<string>("Email")
                         .HasColumnType("nvarchar(max)");

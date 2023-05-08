@@ -1,66 +1,64 @@
-
 <div class="container1">
-    <div class="block-button mb-3">
+	<div class="block-button mb-3">
 		<!-- <p-button label="Submit"></p-button> -->
-        <button class="btn btn-add mr-2 btn-outline-primary"  (click)="createReceiveOrder()">Thêm</button>
-        <button class="btn btn-add ml-2 btn-outline-primary" [disabled]="!selectedRow" (click)="editReceiveOrder()">Sửa</button>
-        <button class="btn btn-add ml-2 btn-delete btn-outline-danger" [disabled]="!selectedRow" (click)="deleteReceiveOrder()">Xoá</button>
-    </div>
-    <div class="user">
+		<button class="btn btn-add mr-2 btn-outline-primary" (click)="createReceiveOrder()">Thêm</button>
+		<button class="btn btn-add ml-2 btn-outline-primary" [disabled]="!selectedRow"
+			(click)="editReceiveOrder()">Sửa</button>
+		<button class="btn btn-add ml-2 btn-delete btn-outline-danger" [disabled]="!selectedRow"
+			(click)="deleteReceiveOrder()">Xoá</button>
+	</div>
+	<div class="user">
 		<p class="mb-2 title">Đơn nhập hàng</p>
-        <p-table [value]="receiveOrderData"  [paginator]="true" [rows]="10" [rowsPerPageOptions]="[5,10,15,20]" scrollHeight="250px" [scrollable]="true"
-		(onLazyLoad)="getReceiveOrderData()" [tableStyle]="{'width': '100% -280px','font-size':'0.8rem'}" paginatorPosition="bottom"
-		[columns]="cols" selectionMode="single" [(selection)]="selectedRow" (selectionChange)="onSelectionChange($event)"
-		 >
-	<ng-template pTemplate="header" let-columns>
-		<tr>
-			<th>STT</th>
-			<th *ngFor="let cols of columns">
-				{{cols.header}}
-			</th>
-		</tr>
-	</ng-template>
+		<p-table [value]="receiveOrderData" [paginator]="true" [rows]="10" [rowsPerPageOptions]="[5,10,15,20]"
+			(onLazyLoad)="getReceiveOrderData()" [tableStyle]="{'width': '100% -280px','font-size':'0.8rem'}"
+			paginatorPosition="bottom" [columns]="cols" selectionMode="single" [(selection)]="selectedRow"
+			(selectionChange)="onSelectionChange($event)" [rows]="2">
+			<ng-template pTemplate="header" let-columns>
+				<tr>
+					<th *ngFor="let cols of columns">
+						{{cols.header}}
+					</th>
+				</tr>
+			</ng-template>
 
-	<ng-template pTemplate="body" let-tableData let-columns="columns" let-rowIndex="rowIndex">
-		<tr [pSelectableRow]="tableData">
-			<td>
-				{{rowIndex+1}}
-			</td>
-			<td *ngFor="let cols of columns">
-				{{tableData[cols.field]}}
-			</td>
-		</tr>
-	</ng-template>
-</p-table> 
-<div class="btn_add_detail_product d-flex justify-content-between mt-4 mb-2">
-	<p class="mb-3 title">Chi tiết đơn nhập hàng</p>
-	<button class="btn btn-add mr-2 btn-outline-primary" *ngIf="selectedRow?.id"  (click)="addDetailReceiveOrder()">Thêm</button>
-</div>
-        <p-table [value]="receiveOrderDetailData"  [paginator]="true" [rows]="10" [rowsPerPageOptions]="[5,10,15,20]"
-		(onLazyLoad)="getReceiveOrderDetailData()" [tableStyle]="{'width': '100% -280px','font-size':'0.8rem'}" paginatorPosition="bottom"
-  [columns]="cols" selectionMode="single" [(selection)]="selectedRow" (selectionChange)="onSelectionChange($event)"
-   [rows]="2" >
-	<ng-template pTemplate="header" let-columns>
-		<tr>
-			<th>STT</th>
-			<th *ngFor="let cols of columns">
-				{{cols.header}}
-			</th>
-		</tr>
-	</ng-template>
+			<ng-template pTemplate="body" let-tableData let-columns="columns">
+				<tr [pSelectableRow]="tableData">
+					<td *ngFor="let cols of columns">
+						{{tableData[cols.field]}}
+					</td>
+				</tr>
+			</ng-template>
+		</p-table>
+		<div class="btn_add_detail_product d-flex justify-content-between mt-4 mb-2">
+			<p class="mb-3 title">Chi tiết đơn nhập hàng</p>
+			<button class="btn btn-add mr-2 btn-outline-primary" *ngIf="selectedRow?.id"
+				(click)="addDetailReceiveOrder()">Thêm</button>
+		</div>
+		<p-table [value]="receiveOrderDetailData" [paginator]="true" [rows]="10" [rowsPerPageOptions]="[5,10,15,20]"
+			(onLazyLoad)="getReceiveOrderDetailData()" [tableStyle]="{'width': '100% -280px','font-size':'0.8rem'}"
+			paginatorPosition="bottom" [columns]="cols" selectionMode="single" [(selection)]="selectedRow"
+			(selectionChange)="onSelectionChange($event)" [rows]="2">
+			<ng-template pTemplate="header" let-columns>
+				<tr>
+					<th>STT</th>
+					<th *ngFor="let cols of columns">
+						{{cols.header}}
+					</th>
+				</tr>
+			</ng-template>
 
-	<ng-template pTemplate="body" let-tableData let-columns="columns" let-rowIndex="rowIndex">
-		<tr [pSelectableRow]="tableData">
-			<td>
-				{{rowIndex+1}}
-			</td>
-			<td *ngFor="let cols of columns">
-				{{tableData[cols.field]}}
-			</td>
-		</tr>
-	</ng-template>
-</p-table> 
-    </div>
+			<ng-template pTemplate="body" let-tableData let-columns="columns" let-rowIndex="rowIndex">
+				<tr [pSelectableRow]="tableData">
+					<td>
+						{{rowIndex+1}}
+					</td>
+					<td *ngFor="let cols of columns">
+						{{tableData[cols.field]}}
+					</td>
+				</tr>
+			</ng-template>
+		</p-table>
+	</div>
 </div>
 <app-creat-or-edit-import-product #productImport (modalSave)="getReceiveOrderData()"></app-creat-or-edit-import-product>
 <app-create-or-edit-detail-import-product #productDetailImport></app-create-or-edit-detail-import-product>

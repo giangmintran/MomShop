@@ -1,9 +1,11 @@
 ﻿using AutoMapper;
+using MOMShop.Dto.Collection;
 using MOMShop.Dto.Order;
 using MOMShop.Dto.Product;
 using MOMShop.Dto.ProductDetail;
 using MOMShop.Dto.ReceiveOrder;
 using MOMShop.Dto.ReceiveOrderDetail;
+using MOMShop.Dto.Users;
 using MOMShop.Entites;
 
 namespace MOMShop.MomShopMapperProfile
@@ -26,6 +28,16 @@ namespace MOMShop.MomShopMapperProfile
             #endregion
             #region ReceiveOrderDetail
             CreateMap<ReceiveOrderDetailDto, ReceiveOrderDetail>().ReverseMap();
+            #endregion
+
+            #region Collection
+            CreateMap<CollectionDto, Collection>().ReverseMap();
+            #endregion
+
+            #region Users
+            CreateMap<UserDto, Users>().ReverseMap();
+            CreateMap<RegisterDto, Users>().ReverseMap();
+            CreateMap<LoginDto, Users>().ReverseMap();
             #endregion
         }
     }

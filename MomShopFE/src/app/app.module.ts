@@ -23,6 +23,13 @@ import { CalendarModule } from 'primeng/calendar';
 import { AppUserViewModule } from './app-user-view/app-user-main/app-user-main.module';
 import { RouterModule } from '@angular/router';
 
+import { MenuModule } from 'primeng/menu';
+import { FileUploadModule } from 'primeng/fileupload';
+import { NgImageSliderModule } from 'ng-image-slider';
+import { LoginComponent } from './app-login/login/login.component';
+import { AppHeaderComponent } from './app-user-view/app-header/app-header.component';
+import { AppFooterComponent } from './app-user-view/app-footer/app-footer.component';
+import { AppUserCartComponent } from './app-user-view/app-user-cart/app-user-cart.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -31,6 +38,11 @@ import { RouterModule } from '@angular/router';
     PTableCustomComponent,
     AppAdminMainComponent,
     CreateOrEditWeatherComponent,
+    LoginComponent,
+    AppHeaderComponent,
+    AppFooterComponent,
+    AppUserCartComponent,
+
     //AppAdminMenuComponent
   ],
   imports: [
@@ -47,17 +59,15 @@ import { RouterModule } from '@angular/router';
     ButtonModule,
     FormsModule,
     CalendarModule,
+		MenuModule,
+    FileUploadModule,
     ToastrModule.forRoot({
       positionClass :'toast-top-right',
     }),
     AppAdminManagementProductModule,
     AppUserViewModule,
-    RouterModule
     //BsModalService,
     //ModalModule
-  ],
-  providers: [
-    ToastrService
   ],
   bootstrap: [AppComponent]
 })

@@ -1,0 +1,70 @@
+<div>
+    <p-toast></p-toast>
+    <ng-container>
+        <div class="row">
+            <div class="col-4">
+                <div class="field mb-">
+                    <label class="mb-2" htmlFor="code">Mã bộ sưu tập<span class="required-field"> * </span> </label>
+                    <input 
+                        [(ngModel)]="collection.code" type="text" id="code" name="code" pInputText maxlength="256" 
+                    />
+                </div>
+            </div>
+            <div class="col-4">
+                <div class="field mb-1">
+                    <label class="mb-2" htmlFor="name">Tên bộ sưu tập<span class="required-field"> * </span> </label>
+                    <input 
+                        [(ngModel)]="collection.name" type="text" id="name" name="name" pInputText maxlength="256" 
+                    />
+                </div>
+            </div>
+            <div class="col-4">
+                <div class="field mb-1">
+                    <label class="mb-2" htmlFor="status">Trạng thái<span class="required-field"> * </span> </label>
+                    <p-dropdown 
+                        appendTo="body" optionValue="code" name="status" optionLabel="name"
+                        [(ngModel)]="collection.status" [options]="statuses"
+                        [style]="{'width':'100%'}">
+                    </p-dropdown>
+                </div>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-12">
+                <div class="field mb-1">
+                    <label class="mb-2" htmlFor="description">Mô tả</label>
+                    <textarea style="width: 100%; max-width: 100%;" rows="3" pInputTextarea [(ngModel)]="collection.description" name="description"></textarea>
+                </div>
+            </div>
+        </div>
+
+        <div *ngIf="collection.id">
+            <h5>Danh sách sản phẩm</h5>
+			<p-treeTable [value]="products" [columns]="colProducts" selectionMode="checkbox" [(selection)]="selectedProduct">
+				<ng-template pTemplate="header" let-columns>
+					<tr>
+						<th *ngFor="let col of columns">
+							{{col.header}}
+						</th>
+					</tr>
+				</ng-template>
+				<ng-template pTemplate="body" let-rowNode let-rowData="rowData" let-columns="columns">
+					<tr>
+						<td *ngFor="let col of columns; let i = index">
+							<p-treeTableCheckbox [value]="rowNode" *ngIf="i === 0"></p-treeTableCheckbox>
+							{{rowData[col.field]}}
+						</td>
+					</tr>
+				</ng-template>
+			</p-treeTable>
+        </div>
+    </ng-container>
+</div>
+
+<div class="p-dialog-footer mt-4" style="width: 100%; position: fixed; left: 0; bottom: 0;">
+    <button pButton pRipple label="Hủy" icon="pi pi-times" class="p-button-text p-button-sm p-confirm-dialog-reject mt-4"
+        (click)="close()"></button>
+    <button pButton pRipple [label]="'Lưu'" icon="pi pi-check"
+        class="p-button-text p-button-success p-button-sm p-confirm-dialog-approve mt-4"  (click)="save()"></button>
+</div>

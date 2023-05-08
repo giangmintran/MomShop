@@ -43,7 +43,10 @@
   .modal-footer-master {
       padding: 9px 10px 9px 0px !important;
   }
-
+.container{
+    max-width: 1300px;
+    margin: 0 auto;
+}
   .form-group-master {
       margin-bottom: 5px;
   }
@@ -198,7 +201,7 @@
         font-size:14px !important
     }
     .p-table{
-        min-height: 400px;
+        min-height: 600px;
     }
     
     .main{
@@ -218,8 +221,7 @@
     width: calc(100% - 280px);
     display: flex;
     flex-direction: column;
-    height: 600px;
-    //align-items: flex-end;
+    height: 1000px;
 }
     p-dropdown{
        display: flex;
@@ -229,7 +231,6 @@
     display: flex;
     justify-content: space-between;
     width: 100vw;
-    height: 100vh;
     position: relative;
     overflow: hidden
 }

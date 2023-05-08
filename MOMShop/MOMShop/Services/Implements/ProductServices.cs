@@ -1,4 +1,6 @@
 ﻿using AutoMapper;
+using Microsoft.AspNetCore.Hosting;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using MOMShop.Dto.Product;
 using MOMShop.Dto.ProductDetail;
@@ -11,6 +13,10 @@ using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
+using System.Net;
+using System.Reflection;
+using System.Runtime.InteropServices;
+using System.Web;
 
 namespace MOMShop.Services.Implements
 {
@@ -18,20 +24,21 @@ namespace MOMShop.Services.Implements
     {
         private readonly ApplicationDbContext _dbContext;
         private readonly IMapper _mapper;
+        private readonly IWebHostEnvironment _hostEnvironment;
 
-        public ProductServices(ApplicationDbContext dbContext, IMapper mapper)
+        public ProductServices(ApplicationDbContext dbContext, IMapper mapper, IWebHostEnvironment hostEnvironment)
         {
             _dbContext = dbContext;
             _mapper = mapper;
-
+            _hostEnvironment = hostEnvironment;
         }
 
         public ProductDto AddProducts(UpdateProductDto input)
         {
-            var productCode = input.Name.ToLower();
-            productCode = System.Text.RegularExpressions.Regex.Replace(productCode, @"\p{IsCombiningDiacriticalMarks}+", string.Empty);
+            //var productCode = input.Name.ToLower();
+            //productCode = System.Text.RegularExpressions.Regex.Replace(productCode, @"\p{IsCombiningDiacriticalMarks}+", string.Empty);
             var insert = _mapper.Map<Product>(input);
-            insert.Code = productCode;
+            //insert.Code = productCode;
             var result = _dbContext.Products.Add(insert);
             _dbContext.SaveChanges();
             return _mapper.Map<ProductDto>(result.Entity);
@@ -40,7 +47,7 @@ namespace MOMShop.Services.Implements
         public ProductDto UpdateProducts(UpdateProductDto input)
         {
             var product = _dbContext.Products.FirstOrDefault(e => e.Id == input.Id);
-            if(product == null)
+            if (product == null)
             {
                 throw new System.Exception("Không tìm thấy sản phẩm");
             }
@@ -76,6 +83,27 @@ namespace MOMShop.Services.Implements
             {
                 _dbContext.ProductDetails.RemoveRange(productDetail);
             }
+            var productImages = _dbContext.ProductImages.Where(e => e.ProductId == id);
+            if (productImages.Any())
+            {
+                var baseDir = Directory.GetParent(Directory.GetParent(_hostEnvironment.ContentRootPath).FullName).FullName;
+                foreach (var item in productImages)
+                {
+                    string folderPath = Path.Combine(baseDir + $"\\MOMShop\\images\\{product.Code}");
+                    if (Directory.Exists(folderPath))
+                    {
+                        string url = item.ImageUrl;
+                        int startIndex = url.LastIndexOf("=") + 1;
+                        string fileName = url.Substring(startIndex);
+                        string filePath = Path.Combine(folderPath, fileName);
+                        if (File.Exists(filePath))
+                        {
+                            File.Delete(filePath);
+                            _dbContext.ProductImages.Remove(item);
+                        }
+                    }
+                }
+            }
             _dbContext.Products.Remove(product);
             _dbContext.SaveChanges();
         }
@@ -88,8 +116,17 @@ namespace MOMShop.Services.Implements
 
         public ProductDto FindById(int id)
         {
+            var result = new ProductDto();
             var product = _dbContext.Products.FirstOrDefault(e => e.Id == id && !e.Deleted);
-            return _mapper.Map<ProductDto>(product);
+            var productDetails = _dbContext.ProductDetails.Where(e => e.ProductId == product.Id).ToList();
+            result = _mapper.Map<ProductDto>(product);
+            result.ProductDetails = _mapper.Map<List<ProductDetailDto>>(productDetails);
+            var image = _dbContext.ProductImages.FirstOrDefault(e => e.ProductId == id);
+            if (image != null)
+            {
+                result.ImageUrl = image.ImageUrl;
+            }
+            return result;
         }
 
         public Paging<ProductDto> GetProducts(FilterProductDto input)
@@ -97,7 +134,7 @@ namespace MOMShop.Services.Implements
             var result = new Paging<ProductDto>();
             result.Items = new List<ProductDto>();
 
-            var products = _dbContext.Products.Where(e => !e.Deleted && (input.Status == null || e.Status == input.Status)).ToList();
+            var products = _dbContext.Products.Where(e => !e.Deleted && (input.Status == null || e.Status == input.Status)).OrderByDescending(e => e.Id).ToList();
 
             foreach (var product in products)
             {
@@ -105,11 +142,71 @@ namespace MOMShop.Services.Implements
                 var productDetails = _dbContext.ProductDetails.Where(e => e.ProductId == product.Id).ToList();
                 item.ProductDetails = _mapper.Map<List<ProductDetailDto>>(productDetails);
                 result.Items.Add(item);
+                var image = _dbContext.ProductImages.FirstOrDefault(e => e.ProductId == item.Id);
+                if(image != null)
+                {
+                    item.ImageUrl = image.ImageUrl;
+                }
             }
             result.TotalItems = result.Items.Count;
 
             //result.Items = result.Items.Skip(input.Skip).Take(input.PageSize).ToList();
             return result;
+        }
+
+        public void AddProductImage(IFormFile input, int productId)
+        {
+            var product = _dbContext.Products.FirstOrDefault(e => e.Id == productId);
+            if(product != null)
+            {
+                var baseDir = Directory.GetParent(Directory.GetParent(_hostEnvironment.ContentRootPath).FullName).FullName;
+                var productImage = _dbContext.ProductImages.Where(e => e.ProductId == product.Id);
+                foreach (var item in productImage)
+                {
+                    string folderPath = Path.Combine(baseDir + $"\\MOMShop\\images\\{product.Code}");
+                    if (Directory.Exists(folderPath))
+                    {
+                        string url = item.ImageUrl;
+                        int startIndex = url.LastIndexOf("=") + 1;
+                        string fileName = url.Substring(startIndex);
+                        string filePath = Path.Combine(folderPath, fileName);
+                        if (File.Exists(filePath))
+                        {
+                            File.Delete(filePath);
+                            _dbContext.ProductImages.Remove(item);
+                        }
+                    }
+                }
+            }
+
+            if (input != null)
+            {
+                var baseDir = Directory.GetParent(Directory.GetParent(_hostEnvironment.ContentRootPath).FullName).FullName;
+                string folderPath = Path.Combine(baseDir + $"\\MOMShop\\images\\{product.Code}");
+                if (!Directory.Exists(folderPath))
+                {
+                    Directory.CreateDirectory(folderPath);
+                }
+                string fileName = input.FileName;
+
+                string filePath = Path.Combine(baseDir + $"\\MOMShop\\images\\{product.Code}", fileName);
+
+                var endpoint = $"api/file/get?folder={product.Code}&fileName={fileName}";
+
+                using (var filestream = new FileStream(filePath, FileMode.Create, FileAccess.Write, FileShare.None))
+                {
+                    input.CopyTo(filestream);
+                }
+
+                var data = new ProductImage()
+                {
+                    ProductId = productId,
+                    ImageUrl = endpoint
+                };
+
+                _dbContext.ProductImages.Add(data);
+                _dbContext.SaveChanges();
+            }
         }
     }
 }

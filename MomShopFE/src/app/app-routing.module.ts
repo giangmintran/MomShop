@@ -10,6 +10,9 @@ import { LogInComponent } from './app-user-view/log-in/log-in.component';
 import { UserCollectionComponent } from './app-user-view/user-collection/user-collection.component';
 import { PolicyGuideComponent } from './app-user-view/policy-guide/policy-guide.component';
 import { CartComponent } from './app-user-view/cart/cart.component';
+import { AdminManagementCollectionComponent } from './app-admin-view/admin-management-collection/admin-management-collection.component';
+import { AppUserCartComponent } from './app-user-view/app-user-cart/app-user-cart.component';
+import { LoginComponent } from './app-login/login/login.component';
 
 const routes: Routes = [
   { path: 'product', component: AppAdminManagementProductComponent },
@@ -17,8 +20,7 @@ const routes: Routes = [
   { path: 'feedback', component: AppAdminFeedbackUserComponent },
   { path: 'importProduct', component: AppAdminManagementImportProductComponent },
   { path: 'view', 
-    component: AppUserMainComponent ,
-    children: [
+    component: AppUserMainComponent,
       {path: '', component: UserIntroComponent},
       {path: 'collection', component: UserCollectionComponent},
       {path: 'policy-guide', component: PolicyGuideComponent},
@@ -27,10 +29,9 @@ const routes: Routes = [
 
     ]
   },
+  { path: 'collection', component: AdminManagementCollectionComponent },
   //{ path: 'home', component: MainComponent },
 ];
-
-@NgModule({
   imports: [RouterModule.forRoot(routes)],
   exports: [RouterModule]
 })
