@@ -17,6 +17,15 @@ import { AdminManagementCollectionModule } from "./app/app-admin-view/admin-mana
 import { BrowserModule } from "@angular/platform-browser";
 import { BrowserAnimationsModule } from "@angular/platform-browser/animations";
 import { AppAdminManagementProductModule } from "./app/app-admin-view/app-admin-management-product/app-admin-management-product.module";
+import { CardModule } from 'primeng/card';
+import { RouterModule } from '@angular/router';
+import { DataViewModule } from 'primeng/dataview';
+import { TagModule } from 'primeng/tag';
+import { RatingModule } from 'primeng/rating';
+import { PaginatorModule } from 'primeng/paginator';
+import { FieldsetModule } from 'primeng/fieldset';
+import { DialogModule } from 'primeng/dialog';
+
 @NgModule({
   declarations: [AppAdminMenuComponent],
   imports: [
@@ -36,8 +45,22 @@ import { AppAdminManagementProductModule } from "./app/app-admin-view/app-admin-
     AppAdminFeedbackUserModule,
     AppAdminManagementImportProductModule,
     AdminManagementCollectionModule,
-    AppAdminManagementProductModule
+    AppAdminManagementProductModule,
+    CardModule,
+    RouterModule,
+    DataViewModule, 
+    TagModule,
+    RatingModule,
+    PaginatorModule
   ],
-  exports: [AppAdminMenuComponent],
+  exports: [AppAdminMenuComponent,
+    CardModule,
+    RouterModule,
+    DataViewModule, 
+    TagModule,
+    RatingModule,
+    PaginatorModule,
+    FieldsetModule,
+    DialogModule ],
 }) 
 export class SharedModule {}

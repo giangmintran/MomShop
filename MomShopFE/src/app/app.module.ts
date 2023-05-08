@@ -32,6 +32,9 @@ import { GeneralTradingTermsComponent } from './app-user-view/app-user-policy/ge
 import { AppUserRegisterComponent } from './app-user-view/app-user-register/app-user-register.component';
 import { AppComponent } from './app.component';
 import { AppAdminMenuComponent } from './app-admin-view/app-admin-menu/app-admin-menu.component';
+import { UserCollectionComponent } from './app-user-view/user-collection/user-collection.component';
+import { CartComponent } from './app-user-view/cart/cart.component';
+import { CheckOutComponent } from './app-user-view/check-out/check-out.component';
 
 @NgModule({
   declarations: [
@@ -50,6 +53,9 @@ import { AppAdminMenuComponent } from './app-admin-view/app-admin-menu/app-admin
     AppNavComponent,
     ExchangePolicyComponent,
     GeneralTradingTermsComponent,
+    UserCollectionComponent,
+    CartComponent,
+    CheckOutComponent,
   ],
   imports: [
     BrowserModule,
