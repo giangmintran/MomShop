@@ -1,0 +1,126 @@
+.check-out{
+    display: flex;
+    //padding-top: 100px !important;
+    display: flex;
+    justify-content: space-between;
+    //height: 100vw;
+}
+.user-information{
+    width: 50%;
+    padding-top: 90px;
+    padding-bottom: 100px;
+}
+.order-information{
+    width: 50%;
+}
+.container{
+    max-width: 1190px;
+    margin: 0 auto;
+}
+.title-page{
+    font-weight: 550;
+    color:#000000;
+    font-size: 20px;
+}
+.nav-page{
+    display: flex;
+    align-items: baseline;
+    justify-content: space-between;
+    width: 42%;
+    font-size: 13px;
+}
+.title-delivery{
+    font-weight: 500;
+    color:#000000;
+}
+.text-cart{
+    color:#338dbc
+}
+.text-login{
+    color:#338dbc !important;
+}
+.sub-title,.text-delivery{
+    color:#737373;
+    font-size: 15px;
+}
+.input{
+    border: 1px solid #d9d9d9;
+    border-radius: 4px;
+    padding-left: 15px;
+    padding-top:7px;
+    padding-bottom: 7px;
+    font-size: 15px;
+}
+.email-input{
+    width: 70%;
+}
+.phone-input{
+    width: 28%;
+}
+.national-input,.province-input,.district-input,.ward-input{
+    width: 49%;
+}
+.delivery-method{
+    align-items: center;
+    justify-content: space-between;
+    border:1px solid #d9d9d9;
+    padding-left: 15px;
+    border-radius: 4px;
+    width: 100%;
+    padding: 8px;
+}
+.block-delivery{
+    width: 32%;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+}
+.icon-delivery{
+    color:rgb(165, 165, 247)
+}
+.payment-method{
+    align-items: center;
+    justify-content: space-between;
+    width: 48%;
+}
+.payment{
+    width:100%;
+    border:1px solid #d9d9d9;
+    padding-left: 15px;
+    border-radius: 4px;
+    padding: 10px;
+}
+.btn-completed{
+    background-color: #338dbc;
+    padding:12px 10px;
+    border:none;
+    border-radius: 3px;
+    color:white;
+    float: right;
+}
+.footer-form{
+    margin-top: 30px;
+}
+.order-information{
+    background-color: #fafafa;
+    // padding-left: 30px;
+    width: 50%;
+    border-left:1px solid #d9d9d9;
+    padding: 100px 0;
+}
+.product{
+    display: flex;
+    justify-content: space-between;
+}
+.detail-product{
+    display: flex;
+}
+.input-sale-off{
+    width: 65%;
+}
+.buttton-use{
+    width: 26%;
+}
+.price-product{
+
+}

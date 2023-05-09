@@ -16,6 +16,7 @@ import { AppUserHomeComponent } from './app-user-view/app-user-home/app-user-hom
 import { UserCollectionComponent } from './app-user-view/user-collection/user-collection.component';
 import { CartComponent } from './app-user-view/cart/cart.component';
 import { UserCollectionDetailComponent } from './app-user-view/user-collection-detail/user-collection-detail.component';
+import { CheckOutComponent } from './app-user-view/check-out/check-out.component';
 
 const routes: Routes = [
   { path: '',redirectTo:'/login',pathMatch: 'full' },
@@ -37,7 +38,7 @@ const routes: Routes = [
   {path: 'collection', component: UserCollectionComponent},
   {path: 'collection-detail', component: UserCollectionDetailComponent},
   {path: 'cart', component: CartComponent},
-  {path: 'check-out', component: UserCollectionComponent},
+  {path: 'check-out', component: CheckOutComponent},
 ];
 @NgModule({
   imports: [RouterModule.forRoot(routes)],

@@ -6,10 +6,13 @@ import { CreateOrEditProductDetailTestComponent } from '../create-or-edit-produc
 import { ProductService } from 'src/services/product.service';
 import { ToastrService } from 'ngx-toastr';
 import { ProductDto } from 'src/models/product';
-import { ProductConst } from 'src/shared/AppConst';
-import { FileHandle } from 'src/shared/dragDrop.directive';
+// import { ProductConst } from 'src/shared/AppConst';
+// import { FileHandle } from 'src/shared/dragDrop.directive';
 import { ProductDetailDto } from 'src/models/productDetail';
 import { ImageService } from 'src/services/image.Service';
+import { FileHandle } from 'src/shared/dragDrop.directive';
+import { ProductConst } from 'src/shared/AppConst';
+// import { ImageService } from 'src/services/image.Service';
 
 class ImageSnippet {
   pending: boolean = false;
