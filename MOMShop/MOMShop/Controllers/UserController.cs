@@ -9,7 +9,7 @@ namespace MOMShop.Controllers
 {
     [Route("api/user")]
     [ApiController]
-    public class UserController : Controller
+    public class UserController : ControllerBase
     {
         private IUserServices _services;
         public UserController(IUserServices services)

@@ -7,5 +7,6 @@ namespace MOMShop.Dto.Product
     {
         [FromQuery(Name = "status")]
         public int? Status { get; set; }
+        public int? ProductType { get; set; }
     }
 }

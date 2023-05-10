@@ -8,7 +8,9 @@ using Microsoft.OpenApi.Models;
 using MOMShop.MomShopDbContext;
 using MOMShop.MomShopMapperProfile;
 using MOMShop.Services.Implements;
+using MOMShop.Services.Implements.UserProductService;
 using MOMShop.Services.Interfaces;
+using MOMShop.Services.Interfaces.UserService;
 
 namespace MOMShop
 {
@@ -50,6 +52,7 @@ namespace MOMShop
             services.AddScoped<IReceiveOrderDetailService, ReceiveOrderDetailService>();
             services.AddScoped<ICollectionService, CollectionService>();
             services.AddScoped<IUserServices, UserService>();
+            services.AddScoped<IUserProductService, UserProductService>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
