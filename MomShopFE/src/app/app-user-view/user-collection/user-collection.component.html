@@ -6,42 +6,42 @@
             <div class="d-none d-lg-block d-xl-block col-xl-2 col-lg-3 sidebar-collection">
                 <ul class="sidebar-menu" style="list-style: none;background: #F47916;height:1350px">
                     <li class="">
-                        <a title="BEST SELLER" target="_self" (click)="getProduct(1)">
+                        <a title="BEST SELLER" target="_self" (click)="getProduct('')">
                             <span class="">BEST SELLER</span>
                         </a>
                     </li>
                     <li class="">
-                        <a title="BASIC LINE" target="_self" (click)="getProduct(2)">
+                        <a title="BASIC LINE" target="_self" (click)="getProduct('')">
                             <span class="">BASIC LINE</span>
                         </a>
                     </li>
                     <li class="">
-                        <a title="TẤT CẢ SẢN PHẨM" target="_self" (click)="getProduct(3)">
+                        <a title="TẤT CẢ SẢN PHẨM" target="_self" (click)="getProduct('')">
                             <span class="">TẤT CẢ SẢN PHẨM</span>
                         </a>
                     </li>
                     <li class="">
-                        <a title="ÁO THUN" target="_self" (click)="getProduct(4)">
+                        <a title="ÁO THUN" target="_self" (click)="getProduct('t-shirt')">
                             <span class="">ÁO THUN</span>
                         </a>
                     </li>
                     <li class="">
-                        <a title="ÁO SƠMI" target="_self" (click)="getProduct(5)">
+                        <a title="ÁO SƠMI" target="_self" (click)="getProduct('shirt')">
                             <span class="">ÁO SƠMI</span>
                         </a>
                     </li>
                     <li class="">
-                        <a title="ÁO KHOÁC" target="_self" (click)="getProduct(6)">
+                        <a title="ÁO KHOÁC" target="_self" (click)="getProduct('jacket')">
                             <span class="">ÁO KHOÁC</span>
                         </a>
                     </li>
                     <li class="">
-                        <a title="QUẦN" target="_self" (click)="getProduct(7)">
+                        <a title="QUẦN" target="_self" (click)="getProduct('short')">
                             <span class="">QUẦN</span>
                         </a>
                     </li>
                     <li class="">
-                        <a title="PHỤ KIỆN" target="_self" (click)="getProduct(8)">
+                        <a title="PHỤ KIỆN" target="_self" (click)="getProduct('accessory')">
                             <span class="">PHỤ KIỆN</span>
                         </a>
                     </li>
@@ -53,7 +53,7 @@
                         <p-card header="{{ product.name }}" [style]="{ width: '300px' }" >
                             <ng-template pTemplate="header">
                                 <img alt="Card"
-                                    [src]="'https://primefaces.org/cdn/primeng/images/demo/product/' + product.image" />
+                                src="{{baseUrl}}/{{ product.imageUrl}}" />
                             </ng-template>
                             <p>
                                 {{ product.price + ' VND' }}

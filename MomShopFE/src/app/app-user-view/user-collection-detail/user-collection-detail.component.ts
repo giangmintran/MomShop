@@ -20,7 +20,7 @@ export class UserCollectionDetailComponent {
         { size: 'XL', value: 3 },
     ];
 
-    constructor(private router: Router) { }
+  constructor(private router: Router) { }
 
   plusQuantity(param){
     param.quantity++;
