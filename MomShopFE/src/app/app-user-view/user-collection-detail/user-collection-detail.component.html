@@ -2,10 +2,10 @@
 <div id="container" class="row"  style="margin-top:50px;margin-bottom:50px">
     <div class="row col-lg-5 col-md-12 col-sm-12 col-12" style="position: relative;">
         <div class="col-lg-12 col-md-12 col-sm-12 col-12" style="height: 469px;display: flex;">
-            <img alt="Card" [src]="'https://primefaces.org/cdn/primeng/images/demo/product/yoga-set.jpg'"
+            <img alt="Card" src="{{baseUrl}}/{{ product.imageUrl}}"
                 style="width: 95%;" />
         </div>
-        <div class="col-lg-12 col-md-12 col-sm-12 col-12">
+        <!-- <div class="col-lg-12 col-md-12 col-sm-12 col-12">
             <div class="p-inputgroup" style="position: absolute;left:30%;width: 40%;">
                 <button type="button" pButton icon="pi pi-plus" styleClass="p-button-secondary"
                     style="background: black;" (click)="plusQuantity(this.product)"></button>
@@ -13,7 +13,7 @@
                 <button type="button" pButton icon="pi pi-minus" styleClass="p-button-secondary"
                     style="background: black;"></button>
             </div>
-        </div>
+        </div> -->
     </div>
     <div class="col-lg-6 col-md-12 col-sm-12 col-12" style="margin-left: 30px;">
         <div class="product-info">
@@ -22,12 +22,12 @@
                 <h4 style="font-weight: bold;">{{product.price}} VND</h4>
             </div>
             <div class="product-desc" style="margin-bottom: 5px">
-                <h4><strong>OVERSIZED FIT</strong></h4>
-                <p><strong>Features:</strong></p>
-                <p>• Chất liệu: Cotton cao cấp</p>
+                <h4><strong>MÔ TẢ</strong></h4>
+                <p><strong>{{product.description}}</strong></p>
+                <!-- <p>• Chất liệu: Cotton cao cấp</p>
                 <p>• Graphic: In mặt trước và mặt sau</p>
                 <p>• Kỹ thuật: in lụa&nbsp;</p>
-                <p></p>
+                <p></p> -->
             </div>
 
             <div style="height: 4px;background: #000;margin: 20px 0 20px;"></div>

@@ -47,7 +47,7 @@ export class UserCollectionComponent {
   }
 
   showDetail(param){
-    this.router.navigateByUrl('/collection-detail');  
+    this.router.navigate(['/collection-detail'], {queryParams: {id: param.id}});  
   }
 
   getProduct(param){

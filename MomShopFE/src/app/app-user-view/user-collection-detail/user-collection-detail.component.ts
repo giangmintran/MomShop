@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
-import { Router } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
+import { ProductService } from 'src/services/product.service';
 
 @Component({
   selector: 'app-user-collection-detail',
@@ -7,6 +8,7 @@ import { Router } from '@angular/router';
   styleUrls: ['./user-collection-detail.component.scss']
 })
 export class UserCollectionDetailComponent {
+  baseUrl = 'http://localhost:5001';
   visible = false;
 
   product:any;
@@ -19,8 +21,17 @@ export class UserCollectionDetailComponent {
         { size: 'L', value: 3 },
         { size: 'XL', value: 3 },
     ];
-
-  constructor(private router: Router) { }
+    constructor(
+      private route: ActivatedRoute,
+      private router: Router,
+      private productService: ProductService  ) {}
+    
+    ngOnInit() {
+      const id = this.route.snapshot.queryParamMap.get('id');
+      this.productService.getforEditProduct(id).subscribe((res) => {
+        this.product = res;
+      })
+    }
 
   plusQuantity(param){
     param.quantity++;

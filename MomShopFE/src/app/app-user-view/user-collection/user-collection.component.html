@@ -16,7 +16,7 @@
                         </a>
                     </li>
                     <li class="">
-                        <a title="TẤT CẢ SẢN PHẨM" target="_self" (click)="getProduct('')">
+                        <a title="TẤT CẢ SẢN PHẨM" target="_self" (click)="getProduct('all')">
                             <span class="">TẤT CẢ SẢN PHẨM</span>
                         </a>
                     </li>
@@ -53,7 +53,7 @@
                         <p-card header="{{ product.name }}" [style]="{ width: '300px' }" >
                             <ng-template pTemplate="header">
                                 <img alt="Card"
-                                src="{{baseUrl}}/{{ product.imageUrl}}" />
+                                src="{{baseUrl}}/{{ product.imageUrl}}" height="200px" />
                             </ng-template>
                             <p>
                                 {{ product.price + ' VND' }}
