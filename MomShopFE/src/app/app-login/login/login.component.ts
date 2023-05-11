@@ -44,12 +44,13 @@ export class LoginComponent {
         return;
       } else {
         //this.router.navigateByUrl('register')
+        localStorage.setItem('user', JSON.stringify(result));
         this.toastr.success(
           "Đăng nhập thành công",
           "Thông báo",
           { timeOut: 3000 }
         );
-        this.router.navigateByUrl('home')
+        this.router.navigateByUrl('/view')
       }
     });
   }

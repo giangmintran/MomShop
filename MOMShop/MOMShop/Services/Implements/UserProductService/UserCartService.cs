@@ -23,7 +23,7 @@ namespace MOMShop.Services.Implements.UserProductService
             var insert = _mapper.Map<Cart>(input);
             var entity = _dbContext.Carts.Add(insert);
             _dbContext.SaveChanges();
-            return _mapper.Map<CartDto>(entity);
+            return _mapper.Map<CartDto>(entity.Entity);
         }
 
         public void Delete(int id)

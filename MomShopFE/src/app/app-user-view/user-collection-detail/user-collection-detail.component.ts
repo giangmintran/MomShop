@@ -1,5 +1,7 @@
 import { Component } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
+import { ToastrService } from 'ngx-toastr';
+import { UserCartService } from 'src/services/cartService.service';
 import { ProductService } from 'src/services/product.service';
 
 @Component({
@@ -12,19 +14,23 @@ export class UserCollectionDetailComponent {
   visible = false;
 
   product:any;
-  value: number;
+  value: string;
     
     productSize: any[] = [
-        { size: 'XS', value: 1 },
-        { size: 'S', value: 2 },
-        { size: 'M', value: 3 },
-        { size: 'L', value: 3 },
-        { size: 'XL', value: 3 },
+        { size: 'XS', value: 'XS' },
+        { size: 'S', value: 'S' },
+        { size: 'M', value: 'M' },
+        { size: 'L', value: 'L' },
+        { size: 'XL', value: 'XL' },
     ];
+
     constructor(
       private route: ActivatedRoute,
       private router: Router,
-      private productService: ProductService  ) {}
+      private productService: ProductService,
+      private cartService: UserCartService,
+      public toastr: ToastrService
+        ) {}
     
     ngOnInit() {
       const id = this.route.snapshot.queryParamMap.get('id');
@@ -33,17 +39,25 @@ export class UserCollectionDetailComponent {
       })
     }
 
-  plusQuantity(param){
-    param.quantity++;
-  }
+  // plusQuantity(param){
+  //   param.quantity++;
+  // }
 
-  minusQuantity(param){
-    param.quantity--;
-    param.quantity =  param.quantity < 0 ? 0 : param.quantity;
-  }
+  // minusQuantity(param){
+  //   param.quantity--;
+  //   param.quantity =  param.quantity < 0 ? 0 : param.quantity;
+  // }
 
   addToCart(param){
-    this.router.navigateByUrl('/cart');
+    const user = JSON.parse(localStorage.getItem('user'));
+    this.cartService.addToCart(this.product.id,user.id, this.value).subscribe((res) => {
+      this.toastr.success(
+        "Đã thêm vào giỏ hàng",
+        "Thông báo",
+        { timeOut: 3000 }
+      );
+      this.router.navigateByUrl('/cart');
+    });
   }
 
   showDialog() {
