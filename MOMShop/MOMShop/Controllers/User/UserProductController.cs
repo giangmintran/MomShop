@@ -95,5 +95,19 @@ namespace MOMShop.Controllers.User
                 throw new Exception(ex.Message);
             }
         }
+
+        [HttpGet("get-all")]
+        public List<ProductDto> GetAll([FromQuery] FilterProductDto input)
+        {
+            try
+            {
+                var result = _services.GetAllProductForUser(input);
+                return result;
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(ex.Message);
+            }
+        }
     }
 }
