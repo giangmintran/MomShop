@@ -1,4 +1,5 @@
 ﻿using AutoMapper;
+using MOMShop.Dto.Cart;
 using MOMShop.Dto.Collection;
 using MOMShop.Dto.Order;
 using MOMShop.Dto.Product;
@@ -38,6 +39,10 @@ namespace MOMShop.MomShopMapperProfile
             CreateMap<UserDto, Users>().ReverseMap();
             CreateMap<RegisterDto, Users>().ReverseMap();
             CreateMap<LoginDto, Users>().ReverseMap();
+            #endregion
+
+            #region Cart
+            CreateMap<CartDto, Cart>().ReverseMap();
             #endregion
         }
     }

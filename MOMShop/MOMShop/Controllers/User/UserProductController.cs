@@ -96,7 +96,7 @@ namespace MOMShop.Controllers.User
             }
         }
 
-        [HttpGet("get-all")]
+        [HttpGet("all")]
         public List<ProductDto> GetAll([FromQuery] FilterProductDto input)
         {
             try
