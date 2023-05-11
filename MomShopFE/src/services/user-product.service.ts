@@ -6,7 +6,7 @@ import { Observable } from 'rxjs';
   providedIn: 'root'
 })
 export class UserProductService {
-baseUrl = 'http://localhost:5001/api/product/';
+baseUrl = 'http://localhost:5001/api/user/product/';
   constructor(private http: HttpClient) {}
 
   getShirt(shirtName:string, status?): Observable<any> {
