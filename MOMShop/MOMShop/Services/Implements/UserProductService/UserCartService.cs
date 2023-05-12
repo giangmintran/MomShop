@@ -25,6 +25,7 @@ namespace MOMShop.Services.Implements.UserProductService
             if (productCart == null)
             {
                 var insert = _mapper.Map<Cart>(input);
+                insert.Quantity = 1;
                 var entity = _dbContext.Carts.Add(insert);
                 _dbContext.SaveChanges();
             }

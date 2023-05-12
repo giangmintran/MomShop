@@ -70,7 +70,7 @@
                                             <div class="item-qty" style="width:20%;position: relative;">
                                                 <div class="p-inputgroup" style="margin: 0;position: absolute;top: 50%;-ms-transform: translateY(-50%);transform: translateY(-50%);">
                                                     <button type="button" pButton icon="pi pi-plus" styleClass="p-button-secondary" style="background: black;" (click)="plusQuantity(this.product)"></button>
-                                                    <input type="text" pInputText placeholder="Số lượng" [(ngModel)]="product.quantity"/>
+                                                    <input type="text" pInputText placeholder="SL" [(ngModel)]="product.quantity" (ngModelChange)="priceChange()"/>
                                                     <button type="button" pButton icon="pi pi-minus"
                                                         styleClass="p-button-secondary" (click)="minusQuantity(product)"
                                                         style="background: black;"></button>
@@ -107,7 +107,7 @@
                             <div class="order-summary-block">
                                 <h4 class="font-weight-bold summary-title">TỔNG HOÁ ĐƠN</h4>
                                 <div class="summary-total">
-                                    <span style="font-weight: bold;font-size: -webkit-xxx-large;">500.000 VND</span>
+                                    <span style="font-weight: bold;font-size: -webkit-xxx-large;">{{totalPrice + 'VND'}}</span>
                                 </div>
                                 <div class="summary-action">
                                     <div class="summary-button" style="margin-bottom: 30px;margin-top: 30px;">
