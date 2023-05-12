@@ -11,6 +11,9 @@ namespace MOMShop.Entites
         public string OrderCode { get; set; }
         public string CustomerName { get; set; }
         public string Address { get; set; }
+        public string Province { get; set; }
+        public string District { get; set; }
+        public string Nation { get; set; }
         public string Email { get; set; }
         public string Phone { get; set; }
         /// <summary>
@@ -27,6 +30,8 @@ namespace MOMShop.Entites
         [Comment("1. Khoi tao, 2.Da nhan, 3. Da giao, 4. Da xoa")]
         public int OrderStatus { get; set; }
         public float TotalAmount { get; set; }
+        public float DeliveryCost { get; set; }
+        public string DiscountCode { get; set; }
         public bool Deleted { get; set; }
     }
 }

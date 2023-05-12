@@ -30,13 +30,13 @@
 
                     </p-fieldset>
                 </div> -->
-                <div class="row" *ngIf="!products">
+                <div class="row" *ngIf="products.length == 0">
                     <p class="title-cart-empty text-center mt-5">GIỎ HÀNG CỦA BẠN ĐANG TRỐNG</p>
                     <div class="cart">
                         <img style="width: 250px;" src="https://file.hstatic.net/1000351433/file/empty-cart_924e850940534647bace4fd790c132cf.svg">
                     </div>
                 </div>
-                <div class="row" *ngIf="products">
+                <div class="row" *ngIf="products.length != 0   ">
                     <div class="col-md-12 col-12 text-right" style="text-align: right;">
                         <div class="header-page">
                             <h1>Giỏ Hàng</h1>
@@ -106,7 +106,7 @@
                             </div>
                         </div>
                     </div>
-                    <div class="col-lg-4 col-md-12 col-sm-12 col-12 sidebarCart-sticky "  *ngIf="products">
+                    <div class="col-lg-4 col-md-12 col-sm-12 col-12 sidebarCart-sticky "  *ngIf="products.length > 0">
                         <div class="mainCart-sidebar wrap-order-summary">
                             <div class="order-summary-block">
                                 <h4 class="font-weight-bold summary-title">TỔNG HOÁ ĐƠN</h4>

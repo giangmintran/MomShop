@@ -54,6 +54,7 @@ namespace MOMShop
             services.AddScoped<IUserServices, UserService>();
             services.AddScoped<IUserProductService, UserProductService>();
             services.AddScoped<IUserCartService, UserCartService>();
+            services.AddScoped<IUserOrderService, UserOrderService>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

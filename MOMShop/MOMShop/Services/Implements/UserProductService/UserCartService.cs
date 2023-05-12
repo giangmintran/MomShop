@@ -20,10 +20,14 @@ namespace MOMShop.Services.Implements.UserProductService
         }
         public CartDto Create(CartDto input)
         {
-            var insert = _mapper.Map<Cart>(input);
-            var entity = _dbContext.Carts.Add(insert);
-            _dbContext.SaveChanges();
-            return _mapper.Map<CartDto>(entity.Entity);
+            var productCart = _dbContext.Carts.FirstOrDefault(e => e.ProductId == input.ProductId && e.CustomerId == input.CustomerId);
+            if (productCart == null)
+            {
+                var insert = _mapper.Map<Cart>(input);
+                var entity = _dbContext.Carts.Add(insert);
+                _dbContext.SaveChanges();
+            }
+            return _mapper.Map<CartDto>(input);
         }
 
         public void Delete(int id)
@@ -52,7 +56,7 @@ namespace MOMShop.Services.Implements.UserProductService
                     resultItem.Price = product.Price;
                     resultItem.ProductType = product.ProductType;
                     resultItem.Size = item.Size;
-                    resultItem.Quantity = 1;
+                    resultItem.Quantity = item.Quantity;
 
                     var productImage = _dbContext.ProductImages.FirstOrDefault(e => e.ProductId == item.ProductId);
                     if (productImage != null)

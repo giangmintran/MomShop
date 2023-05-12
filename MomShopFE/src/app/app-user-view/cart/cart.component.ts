@@ -10,7 +10,7 @@ import { UserCartService } from 'src/services/cartService.service';
 })
 export class CartComponent {
   baseUrl = 'http://localhost:5001';
-  products: any[];
+  products: any[] = null;
   value = '';
  // user;
 

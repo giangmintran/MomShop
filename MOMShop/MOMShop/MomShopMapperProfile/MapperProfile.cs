@@ -44,6 +44,11 @@ namespace MOMShop.MomShopMapperProfile
             #region Cart
             CreateMap<CartDto, Cart>().ReverseMap();
             #endregion
+
+            #region Order
+            CreateMap<OrderDto, Order>().ReverseMap();
+            CreateMap<CreateOrderDetailDto, OrderDetail>().ReverseMap();
+            #endregion
         }
     }
 }

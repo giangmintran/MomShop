@@ -33,8 +33,7 @@ export class UserCollectionComponent {
     }
 
   ngOnInit() {
-    this.getProduct('shirt');
-
+    this.getProduct('all');
     // this.productsPagination = this.products.slice(this.first, (this.page + 1) * this.rows);
   }
 

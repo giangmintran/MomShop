@@ -8,5 +8,6 @@ namespace MOMShop.Entites
         public int Id { get; set; }
         public int ProductId { get; set; }
         public string ImageUrl { get; set; }
+        public bool IsDefault { get; set; } = true;
     }
 }
