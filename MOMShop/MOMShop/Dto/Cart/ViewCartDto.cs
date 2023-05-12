@@ -11,5 +11,6 @@
         public float Price { get; set; }
         public int ProductType { get; set; }
         public int Status { get; set; }
+        public int Quantity { get; set; }
     }
 }

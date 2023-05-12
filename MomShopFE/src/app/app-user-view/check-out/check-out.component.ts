@@ -8,8 +8,10 @@ import { Router } from '@angular/router';
   styleUrls: ['./check-out.component.scss']
 })
 export class CheckOutComponent {
+  delivery = 'delivery';
   data;
   saleOffs: string;
+  payOption;
   constructor(private http: HttpClient, private router: Router) {
     this.http.get("https://dev-online-gateway.ghn.vn/shiip/public-api/master-data/province").subscribe(data => {
       console.log(data);

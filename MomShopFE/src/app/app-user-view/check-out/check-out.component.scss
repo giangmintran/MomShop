@@ -197,3 +197,10 @@
     // border:1px solid red;
     width: 85%;
 }
+
+::ng-deep {
+    .p-radiobutton .p-radiobutton-box.p-highlight {
+        border-color: rgb(165, 165, 247)!important;
+        background: rgb(165, 165, 247)!important;
+    }
+}

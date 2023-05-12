@@ -10,7 +10,7 @@ export class UserCartService {
   constructor(private http: HttpClient) {}
   getAllCart(): Observable<any> {
     const user = JSON.parse(localStorage.getItem('user'));
-    return this.http.get(this.baseUrl + 'find-all' +'?customerId=' + user.id);
+    return this.http.get(this.baseUrl + 'get-all' +'?customerId=' + user.id);
   } 
   deleteCart(id:number) {
     return this.http.delete(this.baseUrl + 'delete/' + id);

@@ -46,10 +46,13 @@ namespace MOMShop.Services.Implements.UserProductService
                 var product = _dbContext.Products.FirstOrDefault(e => e.Id == item.ProductId && !e.Deleted);
                 if (product != null)
                 {
+                    resultItem.Id = item.Id;
                     resultItem.ProductName = product.Name;
                     resultItem.Status = product.Status;
                     resultItem.Price = product.Price;
                     resultItem.ProductType = product.ProductType;
+                    resultItem.Size = item.Size;
+                    resultItem.Quantity = 1;
 
                     var productImage = _dbContext.ProductImages.FirstOrDefault(e => e.ProductId == item.ProductId);
                     if (productImage != null)

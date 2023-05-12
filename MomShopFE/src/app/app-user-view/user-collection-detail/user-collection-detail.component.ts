@@ -14,7 +14,7 @@ export class UserCollectionDetailComponent {
   visible = false;
 
   product:any;
-  value: string;
+  value: string = 'XS';
     
     productSize: any[] = [
         { size: 'XS', value: 'XS' },
@@ -50,14 +50,22 @@ export class UserCollectionDetailComponent {
 
   addToCart(param){
     const user = JSON.parse(localStorage.getItem('user'));
-    this.cartService.addToCart(this.product.id,user.id, this.value).subscribe((res) => {
-      this.toastr.success(
-        "Đã thêm vào giỏ hàng",
-        "Thông báo",
-        { timeOut: 3000 }
-      );
-      this.router.navigateByUrl('/cart');
-    });
+    if(!user) {  this.toastr.warning(
+      "Cần đăng nhập để thêm giỏ hàng",
+      "Thông báo",
+      { timeOut: 3000 }
+    );
+    }
+    else {
+      this.cartService.addToCart(this.product.id,user.id, this.value).subscribe((res) => {
+        this.toastr.success(
+          "Đã thêm vào giỏ hàng",
+          "Thông báo",
+          { timeOut: 3000 }
+          );
+          this.router.navigateByUrl('/cart');
+        });
+      }
   }
 
   showDialog() {

@@ -1,4 +1,7 @@
 import { Component } from '@angular/core';
+import { Router } from '@angular/router';
+import { ToastrService } from 'ngx-toastr';
+import { UserCartService } from 'src/services/cartService.service';
 
 @Component({
   selector: 'app-cart',
@@ -6,58 +9,42 @@ import { Component } from '@angular/core';
   styleUrls: ['./cart.component.scss']
 })
 export class CartComponent {
+  baseUrl = 'http://localhost:5001';
   products: any[];
   value = '';
+ // user;
 
-  constructor() { }
+  constructor(
+    private router: Router,
+    private cartService: UserCartService,
+    public toastr: ToastrService) { }
 
   ngOnInit() {
-    //this.products = [
-      // {
-      //   id: '1000',
-      //   code: 'f230fh0g3',
-      //   name: 'Bamboo Watch',
-      //   description: 'Product Description',
-      //   image: 'bamboo-watch.jpg',
-      //   price: 65,
-      //   category: 'Accessories',
-      //   quantity: 24,
-      //   inventoryStatus: 'INSTOCK',
-      //   rating: 5
-      // },
-      // {
-      //   id: '1001',
-      //   code: 'nvklal433',
-      //   name: 'Black Watch',
-      //   description: 'Product Description',
-      //   image: 'black-watch.jpg',
-      //   price: 72,
-      //   category: 'Accessories',
-      //   quantity: 61,
-      //   inventoryStatus: 'OUTOFSTOCK',
-      //   rating: 4
-      // },
-      // {
-      //   id: '1002',
-      //   code: 'zz21cz3c1',
-      //   name: 'Blue Band',
-      //   description: 'Product Description',
-      //   image: 'blue-band.jpg',
-      //   price: 79,
-      //   category: 'Fitness',
-      //   quantity: 2,
-      //   inventoryStatus: 'LOWSTOCK',
-      //   rating: 3
-      // },
-    //];
+   // this.user = JSON.parse(localStorage.getItem('user'));
+    this.getProducts();
   }
 
+  getProducts(){
+    this.cartService.getAllCart().subscribe((res) => {
+      this.products = res;
+    })
+
+  }
   plusQuantity(param){
     param.quantity++;
-    console.log(this.products);
+  }
+
+  minusQuantity(param){
+    param.quantity--;
+    if(param.quantity < 0 ) param.quantity = 0;
   }
 
   delete(param){
     this.products = this.products.filter(e => e.id != param.id);
+    this.cartService.deleteCart(param.id).subscribe();
+  }
+
+  checkout(){
+    this.router.navigateByUrl('/check-out');
   }
 }

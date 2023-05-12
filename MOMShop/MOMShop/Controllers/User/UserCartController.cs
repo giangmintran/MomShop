@@ -47,7 +47,7 @@ namespace MOMShop.Controllers.User
             }
         }
 
-        [HttpDelete("delete")]
+        [HttpDelete("delete/{id}")]
         public void Delete(int id)
         {
             try
