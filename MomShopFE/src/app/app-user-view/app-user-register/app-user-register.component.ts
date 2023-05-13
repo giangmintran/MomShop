@@ -15,15 +15,15 @@ export class AppUserRegisterComponent {
     public toastr: ToastrService, private router: Router) {
   }
   register() {
-    console.log(this.inputRegister);
-    this._user.register(this.inputRegister).subscribe(user => {
-      if (user === "success") {
+    this._user.register(this.inputRegister).subscribe(result => {
+      console.log(result);
+      if (result === "success") {
         this.toastr.success("Đăng ký thành công",
           "Thông báo",
           { timeOut: 2000 });
         this.router.navigateByUrl('/login');
       }
-      if (user === "duplicate") {
+      if (result === "duplicate") {
         this.toastr.warning("Tài khoản đã tồn tại",
           "Thông báo",
           { timeOut: 2000 });

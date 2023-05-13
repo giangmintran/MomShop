@@ -36,6 +36,7 @@ import { UserCollectionComponent } from './app-user-view/user-collection/user-co
 import { CartComponent } from './app-user-view/cart/cart.component';
 import { CheckOutComponent } from './app-user-view/check-out/check-out.component';
 import { UserCollectionDetailComponent } from './app-user-view/user-collection-detail/user-collection-detail.component';
+import { AppUserOrderComponent } from './app-user-view/app-user-order/app-user-order.component';
 
 @NgModule({
   declarations: [
@@ -58,6 +59,7 @@ import { UserCollectionDetailComponent } from './app-user-view/user-collection-d
     CartComponent,
     CheckOutComponent,
     UserCollectionDetailComponent,
+    AppUserOrderComponent,
   ],
   imports: [
     BrowserModule,

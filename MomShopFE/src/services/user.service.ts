@@ -13,7 +13,7 @@ export class UserService{
     login(input:LoginDto){
         return this.http.post(this.baseUrl + 'login',input)
     }
-    register(input:RegisterDto) : Observable<any>{
-        return this.http.post(this.baseUrl+'register',input)
+    register(input:RegisterDto){
+        return this.http.post(this.baseUrl+'register',input,{responseType: 'text'})
     }
 }

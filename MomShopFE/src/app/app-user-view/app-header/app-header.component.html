@@ -1,7 +1,7 @@
 <header id="header" class="">
     <div class="header-top-bar" style="display: flex; flex-direction: row;height: 100px;">
         <div class="header-main--left" style="max-width: 40%;width: fit-content;height: fit-content;">
-            <div class="header-logo"  routerLink="login" routerLinkActive="active">
+            <div class="header-logo" routerLink="login" routerLinkActive="active">
                 <a href="/view">
                     <img itemprop="logo" src="//theme.hstatic.net/1000351433/1000915382/14/logo.png?v=237"
                         alt="Bad Habits Official Store" style="max-width: 100%;" />
@@ -16,7 +16,8 @@
         <div class="header-main--right"
             style="width: 100%;height: 100%;; display:flex; flex-direction: row;justify-content:space-around;">
             <div style="display: inline;margin-top: 28px;">
-                <a href="/collection"><img src="https://file.hstatic.net/1000351433/file/loupe_9fd2a24ed9504b0c8d8fe6efb6654501.png"
+                <a href="/collection"><img
+                        src="https://file.hstatic.net/1000351433/file/loupe_9fd2a24ed9504b0c8d8fe6efb6654501.png"
                         width="40" height="40" /></a>
             </div>
             <div style="display: inline;margin-top: 28px;" (click)="routerToCart()">
@@ -31,15 +32,15 @@
                 <a href="/login"><img
                         src="https://file.hstatic.net/1000351433/file/user_bfb942d5edb24fc895104e6524135e07.png"
                         width="40" height="40" /></a>
-                    </div>
-                    <div class="block-option">
-                        <ul class="list-option">
-                            <li class="list-unstyled mb-2"><a class="item-option" href="/login">Đăng nhập</a></li>
-                            <li class="list-unstyled mb-2"><a class="item-option" (click)="logout()" >Đăng xuất</a></li>
-                            <li class="list-unstyled mb-2"><a class="item-option" href="/order">Đơn hàng</a></li>
-                            <li class="list-unstyled"><a class="item-option" href="/order">Thoát</a></li>
-                        </ul>
-                    </div>
+                        <div class="block-option">
+                            <ul class="list-option">
+                                <li class="list-unstyled mb-2" *ngIf="!isAccount"><a class="item-option" href="/login">Đăng nhập</a></li>
+                                <li class="list-unstyled mb-2" *ngIf="!isAccount"><a class="item-option" (click)="logout()">Đăng xuất</a></li>
+                                <li class="list-unstyled mb-2" *ngIf="isAccount"><a class="item-option" href="/order">Đơn hàng</a></li>
+                                <li class="list-unstyled"><a class="item-option" href="/view">Thoát</a></li>
+                            </ul>
+                        </div>
+            </div>
         </div>
     </div>
     <!-- <div class="header-banner" style="display: flex; width: fit-content; height: fit-content;">
