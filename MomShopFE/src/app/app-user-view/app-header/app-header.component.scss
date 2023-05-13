@@ -1,0 +1,35 @@
+.block-option{
+    display: none;
+    position: absolute;
+    top:11%;
+    right:2%;
+    //background-color: red;
+    background-color:rgb(237, 237, 243);
+    width: 10%;
+    border: 1px solid rgba(0,0,0,.15);
+}
+.item-option{
+    text-decoration: none;
+    list-style-type: none;
+    width: 100%;
+    text-align: center;
+    color:black
+}
+.list-option{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin:0;
+    padding:0
+}
+.user-option:hover .block-option{
+    display: inline-block;
+    z-index:1;
+}
+.list-option li{
+    width: 100%;
+    display: flex;justify-content: center;
+}
+.item-option:hover{
+    background-color: rgb(132, 159, 182);
+}

@@ -27,11 +27,19 @@
                     <span class="count">0</span>
                 </span> </a> -->
             </div>
-            <div style="display: inline;margin-top: 28px;">
+            <div style="display: inline;margin-top: 28px;" class="user-option">
                 <a href="/login"><img
                         src="https://file.hstatic.net/1000351433/file/user_bfb942d5edb24fc895104e6524135e07.png"
                         width="40" height="40" /></a>
-            </div>
+                    </div>
+                    <div class="block-option">
+                        <ul class="list-option">
+                            <li class="list-unstyled mb-2"><a class="item-option" href="/login">Đăng nhập</a></li>
+                            <li class="list-unstyled mb-2"><a class="item-option" (click)="logout()" >Đăng xuất</a></li>
+                            <li class="list-unstyled mb-2"><a class="item-option" href="/order">Đơn hàng</a></li>
+                            <li class="list-unstyled"><a class="item-option" href="/order">Thoát</a></li>
+                        </ul>
+                    </div>
         </div>
     </div>
     <!-- <div class="header-banner" style="display: flex; width: fit-content; height: fit-content;">
