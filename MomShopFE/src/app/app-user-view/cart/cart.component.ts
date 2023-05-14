@@ -39,12 +39,22 @@ export class CartComponent implements OnDestroy{
   plusQuantity(param){
     param.quantity++;
     this.priceChange();
+    const product = Object.assign({},{
+      "id": param.id ?? 0,
+      "quantity": param.quantity ?? 1
+    })
+    this.cartService.updateQuantity(product).subscribe();
   }
 
   minusQuantity(param){
     param.quantity--;
     if(param.quantity < 1 ) param.quantity = 1;
     this.priceChange();
+    const product = Object.assign({},{
+      "id": param.id ?? 0,
+      "quantity": param.quantity ?? 1
+    })
+    this.cartService.updateQuantity(product).subscribe();
   }
 
   delete(param){
