@@ -1,4 +1,6 @@
-﻿namespace MOMShop.Dto.Collection
+﻿using System.Collections.Generic;
+
+namespace MOMShop.Dto.Collection
 {
     public class CollectionDto
     {
@@ -10,5 +12,7 @@
         /// 1. Hoạt động, 2. Không hoạt động, 3.Khóa
         /// </summary>
         public int Status { get; set; }
+
+        public List<int> Products { get; set; }
     }
 }

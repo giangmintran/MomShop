@@ -17,6 +17,7 @@ import { UserCollectionComponent } from './app-user-view/user-collection/user-co
 import { CartComponent } from './app-user-view/cart/cart.component';
 import { UserCollectionDetailComponent } from './app-user-view/user-collection-detail/user-collection-detail.component';
 import { CheckOutComponent } from './app-user-view/check-out/check-out.component';
+import { CreateOrEditCollectionComponent } from './app-admin-view/admin-management-collection/create-or-edit-collection/create-or-edit-collection.component';
 
 const routes: Routes = [
   { path: '',redirectTo:'/login',pathMatch: 'full' },
@@ -25,15 +26,19 @@ const routes: Routes = [
   { path: 'admin/customer', component: AppAdminMangementCustomerComponent },
   { path: 'admin/feedback', component: AppAdminFeedbackUserComponent },
   { path: 'admin/importProduct', component: AppAdminManagementImportProductComponent },
-  { path: 'admin/collection', component: AdminManagementCollectionComponent },
+  {
+    path: "admin/collection-management",
+    children: [
+      { path: 'collection', component: AdminManagementCollectionComponent,},
+      { path: 'collection/create', component: CreateOrEditCollectionComponent},
+      { path: 'collection/detail', component: CreateOrEditCollectionComponent},
+    ] 
+  },
   { path: 'home', component: AppUserHomeComponent},
  // { path: 'cart', component: AppUserCartComponent},
   { path: 'register', component: AppUserRegisterComponent},
   { path: 'admin', component: AppAdminMenuComponent},
   { path: 'general-trading-terms', component: GeneralTradingTermsComponent},
- //{ path: '**',redirectTo:'/login',pathMatch: 'full' },
-   //{ path: '/',redirectTo:'/login',pathMatch: 'full' },
- // { path: 'home', component: AppUserHomeComponent },
   { path: 'view', component: AppUserMainComponent },
   {path: 'collection', component: UserCollectionComponent},
   {path: 'collection-detail', component: UserCollectionDetailComponent},

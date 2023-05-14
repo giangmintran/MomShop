@@ -19,7 +19,7 @@ export class UserCollectionComponent {
   first: number = 0;
 
   rows: number = 12;
-
+  total: number;
   page = 0;
 
   constructor(private router: Router,
@@ -53,8 +53,9 @@ export class UserCollectionComponent {
     this.productServices.getShirt(param, 1).pipe(finalize(() => {
       this.resetPage();
     })).subscribe((data) => {
-      //console.log("data", data?.items);
-      this.products = data ?? [];
+      this.products = data;
+      console.log("this", this.products);
+      this.total = this.products.length;
       // this.genlistAction(this.rows);
       // this.rows.forEach(element => {
       //   var productTypeName = this.listTypeProduct.find( e=> e.value == element.productType).name

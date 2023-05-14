@@ -1,5 +1,5 @@
 <app-header></app-header>
-<div id="layout-cart">
+<div id="layout-cart" style="margin-top: 30px">
     <div class="wrapper-mainCart">
         <div class="content-bodyCart">
             <div class="container">
@@ -36,12 +36,7 @@
                         <img style="width: 250px;" src="https://file.hstatic.net/1000351433/file/empty-cart_924e850940534647bace4fd790c132cf.svg">
                     </div>
                 </div>
-                <div class="row" *ngIf="products.length != 0   ">
-                    <div class="col-md-12 col-12 text-right" style="text-align: right;">
-                        <div class="header-page">
-                            <h1>Giỏ Hàng</h1>
-                        </div>
-                    </div>
+                <div class="row" *ngIf="products.length != 0">
                     <div class="col-lg-8 col-md-12 col-sm-12 col-12 contentCart-detail">
                         <div class="mainCart-detail">
                             <div class="list-pageform-cart">
@@ -49,16 +44,16 @@
                                     <div class="table-cart">
                                         <div class="media-line-item line-head"
                                             style="display: flex;border-style: solid;font-weight: bold;text-align: center;">
-                                            <div class="media-title" style="width:60%">SẢN PHẨM</div>
-                                            <div class="item-qty" style="width:20%">SỐ LƯỢNG</div>
+                                            <div class="media-title" style="width:30%">SẢN PHẨM</div>
+                                            <div class="item-qty" style="width:50%">SỐ LƯỢNG</div>
                                             <div class="item-total-price" style="width:20%">GIÁ</div>
                                         </div>
                                         <div style="display: flex;border-bottom-style: solid;margin-bottom: 40px;" *ngFor="let product of products">
-                                            <div class="media-title" style="display: flex;width:60%">
+                                            <div class="media-title" style="display: flex;width:60%; margin: 10px 0px;">
                                                 <div class="media-title" style="width:50%">
                                                     <div class="media-title" style="width:50%"></div>
                                                     <img
-                                                        src="{{baseUrl}}/{{ product.imageUrl}}" width="240px" height="240px">
+                                                        src="{{baseUrl}}/{{ product.imageUrl}}" width="240px" height="240px" style="object-fit: cover;">
                                                 </div>
                                                 <div class="media-title"
                                                     style="width:50%; font-weight: bold;position: relative;">
@@ -67,26 +62,27 @@
                                                             top: 50%;
                                                             -ms-transform: translateY(-50%);
                                                             transform: translateY(-50%);">
-                                                        <p>{{product.productName}}</p>
-                                                        <p>SIZE {{product.size}}</p>
+                                                        <p style="font-size: 24px">{{product.productName}}</p>
+                                                        <p>SIZE: {{product.size}}</p>
                                                     </div>
                                                 </div>
                                             </div>
                                             <div class="item-qty" style="width:20%;position: relative;">
                                                 <div class="p-inputgroup" style="margin: 0;position: absolute;top: 50%;-ms-transform: translateY(-50%);transform: translateY(-50%);">
                                                     <button type="button" pButton icon="pi pi-plus" styleClass="p-button-secondary" style="background: black;" (click)="plusQuantity(this.product)"></button>
-                                                    <input type="text" pInputText placeholder="SL" [(ngModel)]="product.quantity"/>
+                                                    <input type="text" pInputText placeholder="Số lượng" [(ngModel)]="product.quantity"/>
                                                     <button type="button" pButton icon="pi pi-minus"
                                                         styleClass="p-button-secondary" (click)="minusQuantity(product)"
                                                         style="background: black;"></button>
                                                 </div>
                                             </div>
-                                            <div class="item-total-price" style="width:20%;position: relative;">
+                                            <div class="item-total-price" style="width:20%;position: relative; ">
                                                 <div style="margin: 0;
                                                         position: absolute;
                                                         top: 50%;
                                                         -ms-transform: translateY(-50%);
-                                                        transform: translateY(-50%);right:2%">
+                                                        transform: translateY(-50%);right:2%;
+                                                        ">
                                                     {{(product.quantity*product.price)+' VND'}}
                                                     <button type="button" (click)="delete(product)"><i class="pi pi-trash" style="font-size: 1.2rem" ></i></button>
                                                 </div>

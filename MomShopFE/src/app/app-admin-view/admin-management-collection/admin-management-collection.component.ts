@@ -5,12 +5,13 @@ import { ConfirmEventType, ConfirmationService, MessageService } from 'primeng/a
 import { DialogService, DynamicDialogRef } from 'primeng/dynamicdialog';
 import { CollectionService } from 'src/services/collection.service';
 import { CreateOrEditCollectionComponent } from './create-or-edit-collection/create-or-edit-collection.component';
+import { NavigationExtras, Router } from '@angular/router';
 
 @Component({
   selector: 'app-admin-management-collection',
   templateUrl: './admin-management-collection.component.html',
   styleUrls: ['./admin-management-collection.component.scss'],
-  providers: [DialogService,ConfirmationService, MessageService]
+  providers: [ConfirmationService, MessageService]
 })
 export class AdminManagementCollectionComponent implements OnInit {
   ref: DynamicDialogRef;
@@ -33,9 +34,9 @@ export class AdminManagementCollectionComponent implements OnInit {
   constructor(private http: HttpClient,
     public collectionService : CollectionService,
     public toastr: ToastrService,
-    public dialogService: DialogService, 
     public messageService: MessageService,
     private confirmationService: ConfirmationService,
+    private router: Router,
     ) {}
   ngOnInit(): void {
     this.cols = [
@@ -66,24 +67,11 @@ export class AdminManagementCollectionComponent implements OnInit {
   onFilterChange(){
     this.filter = !this.filter;
   }
-  editProduct(row) {
-    const ref = this.dialogService.open(CreateOrEditCollectionComponent, {
-      header: "Cập nhật thông tin",
-      width: "1400px",
-      height: "800px",
-      contentStyle: { "max-height": "800px", overflow: "auto", "margin-bottom": "40px", },
-      baseZIndex: 10000,
-      data: {
-        collection: row,
-      },
-    });
-    //
-    ref.onClose.subscribe((data) => {
-      if (data){
-        this.messageService.add({ severity: 'success', summary: 'Thông báo', detail: 'Thêm thành công', life: 3000 });
-        this.getData();
-      }
-    });
+  editProduct(row: any) {
+    const navigationExtras: NavigationExtras = {
+      queryParams: { id: '2' }
+    };
+    this.router.navigate(['admin/collection-management/collection/detail'],navigationExtras);
   }
   genlistAction(data = []) {
     this.listAction = data.map((product, index) => {
@@ -130,21 +118,7 @@ export class AdminManagementCollectionComponent implements OnInit {
   }
 
   createCollection(){
-    this.ref = this.dialogService.open(CreateOrEditCollectionComponent, { 
-      data: {
-      },
-      header: 'Bộ sưu tập',
-      width: '70%',
-      contentStyle: { "max-height": "1900px", overflow: "auto", "margin-bottom": "40px"},
-      baseZIndex: 10000,
-    });
-    this.ref.onClose.subscribe((data) => {
-      console.log("Data thêm", data);
-      if(data){
-        this.messageService.add({ severity: 'success', summary: 'Thông báo', detail: 'Thêm thành công', life: 3000 });
-        window.location.reload();
-      }
-    });
+    this.router.navigate(['admin/collection-management/collection/create'], { queryParams : { isCreateNew: true }});
   }
 
   deleteCollection(row) {
@@ -169,13 +143,5 @@ export class AdminManagementCollectionComponent implements OnInit {
           }
       }
     });
-    // this.productServices.deleteProduct(row.id).subscribe((data)=>{
-    //   console.log("Data thêm", data);
-      
-    //   this.productServices.getAllProduct().subscribe(()=>{
-    //     this.messageService.add({ severity: 'success', summary: 'Thông báo', detail: 'Xóa thành công', life: 3000 });
-    //     this.getProductData();
-    //   })
-    // });
   }
 }

@@ -8,13 +8,16 @@ import { CollectionService } from 'src/services/collection.service';
 import { ProductConst } from 'src/shared/AppConst';
 import { CreateOrEditProductCollectionComponent } from '../create-or-edit-product-collection/create-or-edit-product-collection.component';
 import { ProductService } from 'src/services/product.service';
+import { ActivatedRoute, Router } from '@angular/router';
 
 @Component({
   selector: 'app-create-or-edit-received-order',
   templateUrl: './create-or-edit-collection.component.html',
-  styleUrls: ['./create-or-edit-collection.component.scss']
+  styleUrls: ['./create-or-edit-collection.component.scss'],
+  providers: [DialogService, MessageService]
 })
 export class CreateOrEditCollectionComponent implements OnInit {
+  baseUrl = 'http://localhost:5001';
   collection = new Collection();
   statuses = ProductConst.productStatus;
   collectionId;
@@ -22,47 +25,111 @@ export class CreateOrEditCollectionComponent implements OnInit {
   products: any[] = [];
   selectedProduct: any[] = []
   sourceProducts: [];
-
+  rows: any[] = [];
   targetProducts: [];
-
+  selectedItems: any[] = [];
+  productIds: any[] = [];
+  keyword;
+  listTypeProduct = [
+    { name: "Áo thun", value: 1 },
+    { name: "Áo sơ mi", value: 2 },
+    { name: "Áo khoác", value: 3 },
+    { name: "Quần", value: 4 },
+    { name: "Phụ kiện", value: 5 },
+  ];
+  screenHeight: number = window.innerHeight;
+  listStatus = [
+    {code :'Tất cả',value:undefined},
+    {code :'Đang bán',value:1},
+    {code :'Chưa mở bán',value:2},
+    {code :'Khoá',value:3},
+  ];
+  cols;
+  ref: DynamicDialogRef
   constructor(private http: HttpClient, 
-    public dialogService: DialogService, 
     public messageService: MessageService,  
-    public configDialog: DynamicDialogConfig,
     public collectionService: CollectionService,
     public productService: ProductService,
     public toastr: ToastrService,
-    public ref: DynamicDialogRef,
+    private router: Router,
+    private route: ActivatedRoute,
+    public dialogService: DialogService, 
+    
     ) {}
 
   ngOnInit(): void {
-    console.log("vào đây", this.configDialog?.data);
-    if(this.configDialog?.data.collection) {
-      this.collection = this.configDialog?.data.collection;
-      this.productService.getAllProduct().subscribe(
-        (response) => {
-          console.log("products: ", response.items);
-          this.products = response?.items;
-        },
-        (err) => {
-          console.log("err----", err);
-        }
-      );
-    }
+    this.route.queryParams.subscribe(params => {
+      const id = params['id'];
+      if (id){
+        this.find(id);
+      } else {
+        this.getProductData();
+      }
+    });
+    this.cols = [
+      {
+        field: 'code',
+        header: 'Mã sản phẩm',
+        width: '10rem'
+      },
+      {
+        field: 'name',
+        header: 'Tên sản phẩm',
+        width: '25rem'
+      },
+      {
+        field: 'productTypeName',
+        header: 'Loại',
+        width: '10rem'
+      },
+      {
+        field: 'price',
+        header: 'Giá bán',
+        width: '10rem'
+      },
+      {
+        field: 'productStatusName',
+        header: 'Trạng thái',
+        width: '10rem'
+      },
+    ];
+    
   }
 
   save() {
-    if(this.validate()){
-      this.collectionService.createOrEdit(this.collection).subscribe((data: any) => {
-        this.ref.close(true);
-      });
-    } else {
-      this.messageService.add({ severity: 'error', summary: 'Thông báo', detail: 'Vui lòng nhập đầy đủ thông tin', life: 3000 });
-    }
-  }
+    console.log("productCollection", this.selectedItems);
+    this.selectedItems.forEach((item) => {
+        this.productIds.push(item.id);
+    });
+    this.collection.products = this.productIds
+    console.log("Collection", this.collection);
 
+    this.collectionService.createOrEdit(this.collection).subscribe((data) => {
+      this.toastr.success(
+        "Thêm thành công",
+        "Thông báo",
+        { timeOut: 3000 }
+      );
+    })
+  }
+  getData(): void {
+    this.collectionService.getAllCollection().subscribe((data) => {
+      console.log("data", data);
+      this.rows = data;
+      this.genlistAction(this.rows);
+      this.rows.forEach(element => {
+        var statusDisplay = this.listStatus.find( e=> e.value == element.status).code
+        if(statusDisplay)
+        {
+          element.statusDisplay = statusDisplay
+        }
+        if(statusDisplay){
+          element.statusDisplay = statusDisplay
+        }
+      });
+    });
+  }
   close() {
-    this.ref.close(false);
   }
   validate(): boolean {
     console.log("product", this.collection.code);
@@ -99,19 +166,76 @@ export class CreateOrEditCollectionComponent implements OnInit {
   }
 
   addProductCollection(){
+    
+  }
+  getProductData(): void {
+    this.productService.getAllProduct().subscribe((data) => {
+      console.log("data", data?.items);
+      this.rows = data?.items;
+      this.genlistAction(this.rows);
+      this.rows.forEach(element => {
+        var productTypeName = this.listTypeProduct.find( e=> e.value == element.productType).name
+        var productStatusName = this.listStatus.find( e=> e.value == element.status).code
+        if(productTypeName)
+        {
+          element.productTypeName = productTypeName
+        }
+        if(productStatusName){
+          element.productStatusName = productStatusName
+        }
+        element.imageUrl = element.imageUrl;
+      });
+    });
+  }
+
+  find(id): void {
+    this.collectionService.getCollection(id).subscribe((data) => {
+      console.log("data", data?.items);
+      this.collection = data;
+      this.rows = data.products;
+      this.genlistAction(this.rows);
+      this.rows.forEach(element => {
+        var productTypeName = this.listTypeProduct.find( e=> e.value == element.productType).name
+        var productStatusName = this.listStatus.find( e=> e.value == element.status).code
+        if(productTypeName)
+        {
+          element.productTypeName = productTypeName
+        }
+        if(productStatusName){
+          element.productStatusName = productStatusName
+        }
+        element.imageUrl = element.imageUrl;
+      });
+    });
+  }
+
+  backToCollectionList(){
+    this.router.navigate(['admin/collection-management/collection'], { queryParams : { isCreateNew: true }});
+  }
+
+  updateProductCollection(){
     this.ref = this.dialogService.open(CreateOrEditProductCollectionComponent, { 
       data: {
+        collection: this.collection
       },
-      header: 'Thêm sản phẩm',
+      header: 'Chi tiết bộ sưu t',
       width: '70%',
-      contentStyle: { "max-height": "1900px", overflow: "auto"},
+      contentStyle: { "max-height": "1900px", overflow: "auto", "margin-bottom": "40px"},
       baseZIndex: 10000,
     });
     this.ref.onClose.subscribe((data) => {
-      console.log("Data thêm", data);
       if(data){
-        this.messageService.add({ severity: 'success', summary: 'Thông báo', detail: 'Thêm thành công', life: 3000 });
-        window.location.reload();
+        this.toastr.success(
+          "Cập nhật thành công",
+          "Thông báo",
+          { timeOut: 3000 }
+        );
+        this.route.queryParams.subscribe(params => {
+          const id = params['id'];
+          if (id){
+            this.find(id);
+          }
+        });
       }
     });
   }

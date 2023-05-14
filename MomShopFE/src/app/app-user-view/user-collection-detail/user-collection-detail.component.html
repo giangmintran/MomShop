@@ -1,9 +1,9 @@
 <app-header></app-header>
 <div id="container" class="row"  style="margin-top:50px;margin-bottom:50px">
     <div class="row col-lg-5 col-md-12 col-sm-12 col-12" style="position: relative;">
-        <div class="col-lg-12 col-md-12 col-sm-12 col-12" style="height: 469px;display: flex;">
+        <div class="col-lg-12 col-md-12 col-sm-12 col-12" style="height: auto;display: flex;">
             <img alt="Card" src="{{baseUrl}}/{{ product.imageUrl}}"
-                style="width: 95%;" />
+                style="width: 70%; object-fit: cover;" />
         </div>
         <!-- <div class="col-lg-12 col-md-12 col-sm-12 col-12">
             <div class="p-inputgroup" style="position: absolute;left:30%;width: 40%;">
@@ -38,7 +38,7 @@
                         <div class="flex flex-wrap gap-3"  style="display:flex">
                             <div class="flex align-items-center" *ngFor="let item of productSize">
                                 <p-radioButton name="pizza" value="{{item.size}}" [(ngModel)]="value" ></p-radioButton>
-                                <label style="margin-left: 5px">{{item.size}}</label>
+                                <label style="margin-left: 5px; font-size: 24px">{{item.size}}</label>
                             </div>
                         </div>
                 </div>
@@ -52,8 +52,7 @@
                         <a href="/general-trading-terms" style="color: black;"><h3>CHÍNH SÁCH ĐỔI TRẢ</h3></a>
                     </div>
                     <button type="button" pButton icon="pi pi-shopping-cart" styleClass="p-button-secondary"
-                    style="background: rgb(248, 103, 0);" (click)="addToCart(this.product)">THÊM VÀO GIỎ HÀNG</button>
-                    
+                    style="background: rgb(31, 14, 3);" (click)="addToCart(this.product)">THÊM VÀO GIỎ HÀNG</button>
                 </div>
             </div>
         </div>

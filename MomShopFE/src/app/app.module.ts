@@ -36,7 +36,7 @@ import { UserCollectionComponent } from './app-user-view/user-collection/user-co
 import { CartComponent } from './app-user-view/cart/cart.component';
 import { CheckOutComponent } from './app-user-view/check-out/check-out.component';
 import { UserCollectionDetailComponent } from './app-user-view/user-collection-detail/user-collection-detail.component';
-
+import { ToastModule } from 'primeng/toast';
 @NgModule({
   declarations: [
     AppComponent,

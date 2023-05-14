@@ -4,14 +4,14 @@
     <div class="container-fluid">
         <div class="row">
             <div class="d-none d-lg-block d-xl-block col-xl-2 col-lg-3 sidebar-collection">
-                <ul class="sidebar-menu" style="list-style: none;background: #F47916;height:1350px">
-                    <li class="">
-                        <a title="BEST SELLER" target="_self" (click)="getProduct('')">
+                <ul class="sidebar-menu" style="list-style: none;background: #F47916;height:1350px;">
+                    <li class="mt-4">
+                        <a title="BEST SELLER" target="_self" (click)="getProduct('all')">
                             <span class="">BEST SELLER</span>
                         </a>
                     </li>
                     <li class="">
-                        <a title="BASIC LINE" target="_self" (click)="getProduct('')">
+                        <a title="BASIC LINE" target="_self" (click)="getProduct('all')">
                             <span class="">BASIC LINE</span>
                         </a>
                     </li>
@@ -47,25 +47,28 @@
                     </li>
                 </ul>
             </div>
-            <div class="col-xl-10 col-lg-9 col-md-12 col-12 content-collection">
+            <div class="col-xl-10 col-lg-9 col-md-12 col-12 content-collection mt-4">
                 <div class="content-product-list product-list filter row">
-                    <div class="col-lg-3 col-md-6 col-6" *ngFor="let product of productsPagination" style="margin-bottom: 15px;text-align: center;">
-                        <p-card header="{{ product.name }}" [style]="{ width: '300px' }" >
+                    <div class="col-lg-3 col-md-6 col-6" *ngFor="let product of productsPagination"
+                        style="margin-bottom: 15px;text-align: center;">
+                        <p-card [style]="{ width: '400px', height: '550px'}">
                             <ng-template pTemplate="header">
-                                <img alt="Card"
-                                src="{{baseUrl}}/{{ product.imageUrl}}" height="200px" />
-                            </ng-template>
-                            <p>
-                                {{ product.price + ' VND' }}
-                            </p>
-                            <ng-template pTemplate="footer">
-                                <p-button label="Detail" icon="pi pi-shopping-cart" styleClass="p-button" (click)="showDetail(product)"
-                                    [style]="{ 'margin-left': '.5em' }"></p-button>
+                                <img alt="Card" src="{{baseUrl}}/{{ product.imageUrl}}" height="350px"
+                                    style="object-fit: cover;" />
+                                <p style="font-size: 24px;" class="mt-2" >
+                                    {{ product.name }}
+                                </p>
+                                <p style="font-size: 18px;">
+                                    {{ product.price + ' VND' }}
+                                </p>
+                                <p-button label="Detail" icon="pi pi-shopping-cart" styleClass="p-button"
+                                    (click)="showDetail(product)" [style]="{ 'margin-left': '.5em' }"></p-button>
                             </ng-template>
                         </p-card>
                     </div>
                 </div>
-<p-paginator (onPageChange)="onPageChange($event)" [first]="first" [rows]="rows" [totalRecords]="products.length"></p-paginator>
+                <p-paginator (onPageChange)="onPageChange($event)" [first]="first" [rows]="rows"
+                    [totalRecords]="total"></p-paginator>
             </div>
         </div>
     </div>
