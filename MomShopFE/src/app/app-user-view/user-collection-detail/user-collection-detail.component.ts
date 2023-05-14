@@ -58,12 +58,23 @@ export class UserCollectionDetailComponent {
     }
     else {
       this.cartService.addToCart(this.product.id,user.id, this.value).subscribe((res) => {
-        this.toastr.success(
-          "Đã thêm vào giỏ hàng",
-          "Thông báo",
-          { timeOut: 3000 }
-          );
-          this.router.navigateByUrl('/cart');
+        if(res == 'error')
+        {
+          this.toastr.warning(
+            "Giỏ hàng đã có sản phẩm",
+            "Thông báo",
+            { timeOut: 3000 }
+            );
+        }
+        else if(res == 'success')
+        {
+          this.toastr.success(
+            "Đã thêm vào giỏ hàng",
+            "Thông báo",
+            { timeOut: 3000 }
+            );
+            this.router.navigateByUrl('/cart');
+        }
         });
       }
   }

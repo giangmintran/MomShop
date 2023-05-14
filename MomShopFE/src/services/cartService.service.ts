@@ -21,7 +21,7 @@ export class UserCartService {
         "productId": productId,
         "customerId": customerId,
         "size": size
-      });
+      },{responseType: 'text'});
     }
 
   updateQuantity(product: any) {
