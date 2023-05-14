@@ -18,24 +18,38 @@ import { CartComponent } from './app-user-view/cart/cart.component';
 import { UserCollectionDetailComponent } from './app-user-view/user-collection-detail/user-collection-detail.component';
 import { CheckOutComponent } from './app-user-view/check-out/check-out.component';
 import { AppUserOrderComponent } from './app-user-view/app-user-order/app-user-order.component';
+import { CreateOrEditCollectionComponent } from './app-admin-view/admin-management-collection/create-or-edit-collection/create-or-edit-collection.component';
+import { CreateOrEditProductTestComponent } from './app-admin-view/app-admin-management-product/create-or-edit-product-test/create-or-edit-product-test.component';
 import { AppUserProfileComponent } from './app-user-view/app-user-profile/app-user-profile.component';
 
 const routes: Routes = [
-  { path: '', redirectTo: '/login', pathMatch: 'full' },
-  { path: 'admin/product', component: AppAdminManagementProductComponent },
+  { path: '',redirectTo:'/login',pathMatch: 'full' },
+  //{ path: 'admin/product', component: AppAdminManagementProductComponent },
+  {
+    path: "admin/product-management",
+    children: [
+      { path: 'product', component: AppAdminManagementProductComponent,},
+      { path: 'product/create', component: CreateOrEditProductTestComponent},
+      //{ path: 'product/detail', component: CreateOrEditCollectionComponent},
+    ] 
+  },
   { path: 'login', component: LoginComponent },
   { path: 'admin/customer', component: AppAdminMangementCustomerComponent },
   { path: 'admin/feedback', component: AppAdminFeedbackUserComponent },
   { path: 'admin/importProduct', component: AppAdminManagementImportProductComponent },
-  { path: 'admin/collection', component: AdminManagementCollectionComponent },
-  { path: 'home', component: AppUserHomeComponent },
-  // { path: 'cart', component: AppUserCartComponent},
-  { path: 'register', component: AppUserRegisterComponent },
-  { path: 'admin', component: AppAdminMenuComponent },
-  { path: 'general-trading-terms', component: GeneralTradingTermsComponent },
-  //{ path: '**',redirectTo:'/login',pathMatch: 'full' },
-  //{ path: '/',redirectTo:'/login',pathMatch: 'full' },
-  // { path: 'home', component: AppUserHomeComponent },
+  {
+    path: "admin/collection-management",
+    children: [
+      { path: 'collection', component: AdminManagementCollectionComponent,},
+      { path: 'collection/create', component: CreateOrEditCollectionComponent},
+      { path: 'collection/detail', component: CreateOrEditCollectionComponent},
+    ] 
+  },
+  { path: 'home', component: AppUserHomeComponent},
+ // { path: 'cart', component: AppUserCartComponent},
+  { path: 'register', component: AppUserRegisterComponent},
+  { path: 'admin', component: AppAdminMenuComponent},
+  { path: 'general-trading-terms', component: GeneralTradingTermsComponent},
   { path: 'view', component: AppUserMainComponent },
   { path: 'collection', component: UserCollectionComponent },
   { path: 'collection-detail', component: UserCollectionDetailComponent },

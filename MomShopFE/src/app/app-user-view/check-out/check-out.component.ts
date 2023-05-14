@@ -12,10 +12,14 @@ export class CheckOutComponent {
   data;
   saleOffs: string;
   payOption;
+  user;
   constructor(private http: HttpClient, private router: Router) {
     this.http.get("https://dev-online-gateway.ghn.vn/shiip/public-api/master-data/province").subscribe(data => {
       console.log(data);
     })
+    this.user = JSON.parse(localStorage.getItem('user'));
+    console.log(this.user);
+    
   }
   login() {
     this.router.navigateByUrl('/login')

@@ -4,4 +4,5 @@ export class Collection{
     name:string;
     description:string;
     status:number;
+    products: any[] = [];
 }

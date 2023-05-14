@@ -91,5 +91,19 @@ namespace MOMShop.Controllers
                 throw new Exception(ex.Message);
             }
         }
+
+        [HttpGet("find/{id}")]
+        public ViewCollectionDto Find(int id)
+        {
+            try
+            {
+                var result = _services.Find(id);
+                return result;
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(ex.Message);
+            }
+        }
     }
 }

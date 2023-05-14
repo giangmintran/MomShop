@@ -1,13 +1,12 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using MOMShop.Entites;
 using System;
-using System.ComponentModel.DataAnnotations;
+using System.Collections.Generic;
 
-namespace MOMShop.Entites
+namespace MOMShop.Dto.Order.User
 {
-    public class Order
+    public class ViewOrderDto
     {
-        [Key]
-        public int Id { get; set; }
+        public int? Id { get; set; }
         public string OrderCode { get; set; }
         public string CustomerName { get; set; }
         public string Address { get; set; }
@@ -16,23 +15,14 @@ namespace MOMShop.Entites
         public string Nation { get; set; }
         public string Email { get; set; }
         public string Phone { get; set; }
-        /// <summary>
-        /// Ngày đặt
-        /// </summary>
-        [Comment("Ngay tao don")]
         public DateTime CreatedDate { get; set; }
-        /// <summary>
-        /// Thời gian nhận hàng dự kiến
-        /// </summary>
-        [Comment("Thoi gian nhan hang du kien")]
         public DateTime IntendedTime { get; set; }
         public int PaymentType { get; set; }
-        [Comment("1. Khoi tao, 2.Da nhan, 3. Da giao, 4. Da xoa")]
         public int OrderStatus { get; set; }
-        public float TotalAmount { get; set; }
         public float DeliveryCost { get; set; }
         public string DiscountCode { get; set; }
-        public int? CreatedBy { get; set; }
-        public bool Deleted { get; set; }
+        public float TotalAmount { get; set; }
+        public float Description { get; set; }
+        public List<OrderDetail> Details { get; set; }
     }
 }

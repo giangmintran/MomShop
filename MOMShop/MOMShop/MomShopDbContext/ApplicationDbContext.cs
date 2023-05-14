@@ -24,6 +24,7 @@ namespace MOMShop.MomShopDbContext
         public DbSet<ReceiveOrderDetail> ReceiveOrderDetails { get; set; }
         public DbSet<Users> Users { get; set; }
         public DbSet<HistoryUpdate> HistoryUpdates { get; set; }
+        public DbSet<ProductCollection> ProductCollections { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {

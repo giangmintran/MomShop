@@ -9,6 +9,7 @@ namespace MOMShop.Services.Interfaces
         CollectionDto Update(CollectionDto input);
         void Delete(int id);
         CollectionDto FindById(int id);
+        ViewCollectionDto Find(int id);
         List<CollectionDto> FindAll();
     }
 }
