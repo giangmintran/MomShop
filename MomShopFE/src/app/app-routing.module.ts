@@ -18,29 +18,31 @@ import { CartComponent } from './app-user-view/cart/cart.component';
 import { UserCollectionDetailComponent } from './app-user-view/user-collection-detail/user-collection-detail.component';
 import { CheckOutComponent } from './app-user-view/check-out/check-out.component';
 import { AppUserOrderComponent } from './app-user-view/app-user-order/app-user-order.component';
+import { AppUserProfileComponent } from './app-user-view/app-user-profile/app-user-profile.component';
 
 const routes: Routes = [
-  { path: '',redirectTo:'/login',pathMatch: 'full' },
+  { path: '', redirectTo: '/login', pathMatch: 'full' },
   { path: 'admin/product', component: AppAdminManagementProductComponent },
   { path: 'login', component: LoginComponent },
   { path: 'admin/customer', component: AppAdminMangementCustomerComponent },
   { path: 'admin/feedback', component: AppAdminFeedbackUserComponent },
   { path: 'admin/importProduct', component: AppAdminManagementImportProductComponent },
   { path: 'admin/collection', component: AdminManagementCollectionComponent },
-  { path: 'home', component: AppUserHomeComponent},
- // { path: 'cart', component: AppUserCartComponent},
-  { path: 'register', component: AppUserRegisterComponent},
-  { path: 'admin', component: AppAdminMenuComponent},
-  { path: 'general-trading-terms', component: GeneralTradingTermsComponent},
- //{ path: '**',redirectTo:'/login',pathMatch: 'full' },
-   //{ path: '/',redirectTo:'/login',pathMatch: 'full' },
- // { path: 'home', component: AppUserHomeComponent },
+  { path: 'home', component: AppUserHomeComponent },
+  // { path: 'cart', component: AppUserCartComponent},
+  { path: 'register', component: AppUserRegisterComponent },
+  { path: 'admin', component: AppAdminMenuComponent },
+  { path: 'general-trading-terms', component: GeneralTradingTermsComponent },
+  //{ path: '**',redirectTo:'/login',pathMatch: 'full' },
+  //{ path: '/',redirectTo:'/login',pathMatch: 'full' },
+  // { path: 'home', component: AppUserHomeComponent },
   { path: 'view', component: AppUserMainComponent },
-  {path: 'collection', component: UserCollectionComponent},
-  {path: 'collection-detail', component: UserCollectionDetailComponent},
-  {path: 'cart', component: CartComponent},
-  {path: 'check-out', component: CheckOutComponent},
-  {path: 'order', component: AppUserOrderComponent},
+  { path: 'collection', component: UserCollectionComponent },
+  { path: 'collection-detail', component: UserCollectionDetailComponent },
+  { path: 'cart', component: CartComponent },
+  { path: 'check-out', component: CheckOutComponent },
+  { path: 'order', component: AppUserOrderComponent },
+  { path: 'profile', component: AppUserProfileComponent },
 ];
 @NgModule({
   imports: [RouterModule.forRoot(routes)],

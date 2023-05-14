@@ -37,6 +37,7 @@ import { CartComponent } from './app-user-view/cart/cart.component';
 import { CheckOutComponent } from './app-user-view/check-out/check-out.component';
 import { UserCollectionDetailComponent } from './app-user-view/user-collection-detail/user-collection-detail.component';
 import { AppUserOrderComponent } from './app-user-view/app-user-order/app-user-order.component';
+import { AppUserProfileComponent } from './app-user-view/app-user-profile/app-user-profile.component';
 
 @NgModule({
   declarations: [
@@ -60,6 +61,7 @@ import { AppUserOrderComponent } from './app-user-view/app-user-order/app-user-o
     CheckOutComponent,
     UserCollectionDetailComponent,
     AppUserOrderComponent,
+    AppUserProfileComponent,
   ],
   imports: [
     BrowserModule,
