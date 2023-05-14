@@ -21,4 +21,6 @@ namespace MOMShop.Dto.Product
         public string ImageUrl { get; set; }
         public List<ProductDetailDto> ProductDetails { get; set; }
     }
+
+
 }

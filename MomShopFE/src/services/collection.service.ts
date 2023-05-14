@@ -27,4 +27,7 @@ export class CollectionService {
   getforEditCollection(id) : Observable<any>{
     return this.http.get(this.baseUrl+ 'detail/' + id)
   }
+  getCollection(id) : Observable<any>{
+    return this.http.get(this.baseUrl+ 'find/' + id)
+  }
 }

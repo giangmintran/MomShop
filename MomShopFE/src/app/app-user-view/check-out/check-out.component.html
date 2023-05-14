@@ -8,7 +8,7 @@
         </div>
         <div class="information-delivery">
             <div class="title-delivery mt-3">Thông tin giao hàng</div>
-            <p class="sub-title mt-2">
+            <p *ngIf="!user" class="sub-title mt-2">
                 Bạn đã có tài khoản? <a href="/login" class="text-login text-decoration-none">Đăng nhập</a>
             </p>
             <form class="form-information col-12">
@@ -101,8 +101,8 @@
                 <button type="button" disabled class="buttton-use">Sử dụng</button>
             </div>
         </div>
-        <hr class="hr-line">
-        <div class="loyal-customer">
+        <hr *ngIf="!user" class="hr-line">
+        <div *ngIf="!user" class="loyal-customer">
             <span class="text-loyalty">Khách hàng thân thiết</span>
             <button type="button" (click)="login()" class="btn-login">Đăng nhập</button>
         </div>

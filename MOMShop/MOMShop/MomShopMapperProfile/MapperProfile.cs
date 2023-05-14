@@ -33,6 +33,8 @@ namespace MOMShop.MomShopMapperProfile
 
             #region Collection
             CreateMap<CollectionDto, Collection>().ReverseMap();
+            CreateMap<ViewCollectionDto, Collection>().ReverseMap();
+            CreateMap<ViewProductCollectionDto, Product>().ReverseMap();
             #endregion
 
             #region Users

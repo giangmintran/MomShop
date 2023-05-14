@@ -26,6 +26,7 @@ import { PaginatorModule } from 'primeng/paginator';
 import { FieldsetModule } from 'primeng/fieldset';
 import { DialogModule } from 'primeng/dialog';
 import { RadioButtonModule  } from 'primeng/radiobutton';
+import { MessagesModule } from "primeng/messages";
 
 @NgModule({
   declarations: [AppAdminMenuComponent],
@@ -65,5 +66,6 @@ import { RadioButtonModule  } from 'primeng/radiobutton';
     FieldsetModule,
     DialogModule,
     RadioButtonModule  ],
+
 }) 
 export class SharedModule {}
