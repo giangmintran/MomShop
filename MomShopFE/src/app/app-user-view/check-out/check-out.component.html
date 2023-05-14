@@ -83,16 +83,21 @@
         </div>
     </div>
     <div class="order-information">
-        <div class="product">
-            <div class="detail-product">
-                <img src="assets/banner.jpg" class="image-product" alt="" width="100" height="100">
-                <div class="description">
-                    <span class="name-product">KING CARD SHIRT</span>
+        <div class="product mb-3" *ngFor="let product of products">
+            <div class="detail-product row ">
+                <div class="col-3 img-product d-flex">
+                    <img src="{{baseUrl}}/{{ product.imageUrl}}" class="image-product" alt="" width="100" height="100">
+                    <span class="product-thumbnail-quantity" aria-hidden="true">{{product.quantity}}</span>
+                </div>
+                <div class="col-6 description align-items-center d-flex">
+                    <span class="name-product">{{product.productName | uppercase}}</span>
                     <br>
-                    <span class="size">M</span>
+                    <span class="size">{{product.size}}</span>
+                </div>
+                <div class="col-3 price-product align-items-center d-flex align-items-end">
+                    <p >{{product.quantity*product.price}}đ</p>
                 </div>
             </div>
-            <p class="price-product">1,2600,000đ</p>
         </div>
         <hr class="hr-line">
         <div class="row mb-3 sale-off">
@@ -108,13 +113,25 @@
         </div>
         <hr class="hr-line">
         <div class="product-fee">
-            <div class="provisional-fee d-flex justify-content-between mb-3">
-                <span class="text-gray">Tạm tính</span>
-                <span class="text-fee">1</span>
+            <div class="provisional-fee d-flex justify-content-between mb-2">
+                <span class="text-gray">Tạm tính:</span>
+                <span class="text-fee">{{totalPrice}}đ</span>
             </div>
-            <div class="delivery-fee d-flex justify-content-between">
+            <div class=" d-flex justify-content-between mb-2">
+                <span class="text-gray">Chiết khấu:</span>
+                <span class="text-fee">0đ</span>
+            </div>
+            <div class="delivery-fee d-flex justify-content-between mb-2">
                 <span class="text-gray">Phí vận chuyển</span>
                 <span class="text-fee">30.000đ</span>
+            </div>
+            <!-- <div class="delivery-fee d-flex justify-content-between mb-2">
+                <span class="text-gray">Điểm tích lũy</span>
+                <span class="text-fee">0đ</span>
+            </div> -->
+            <div class="delivery-fee d-flex justify-content-between">
+                <span class="text-gray">Giảm giá</span>
+                <span class="text-fee">{{discount}}đ</span>
             </div>
         </div>
         <hr class="hr-line">

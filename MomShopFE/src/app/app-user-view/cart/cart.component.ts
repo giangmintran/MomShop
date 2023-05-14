@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, OnDestroy } from '@angular/core';
 import { Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
 import { UserCartService } from 'src/services/cartService.service';
@@ -8,16 +8,21 @@ import { UserCartService } from 'src/services/cartService.service';
   templateUrl: './cart.component.html',
   styleUrls: ['./cart.component.scss']
 })
-export class CartComponent {
+export class CartComponent implements OnDestroy{
   baseUrl = 'http://localhost:5001';
-  products: any[] = null;
+  products: any[] = [];
   value = '';
- // user;
+  // user;
+  totalPrice: number;
 
   constructor(
     private router: Router,
     private cartService: UserCartService,
     public toastr: ToastrService) { }
+  ngOnDestroy(): void {
+    // debugger;
+    // window.alert('1');
+  }
 
   ngOnInit() {
    // this.user = JSON.parse(localStorage.getItem('user'));
@@ -27,24 +32,36 @@ export class CartComponent {
   getProducts(){
     this.cartService.getAllCart().subscribe((res) => {
       this.products = res;
+      this.priceChange();
     })
 
   }
   plusQuantity(param){
     param.quantity++;
+    this.priceChange();
   }
 
   minusQuantity(param){
     param.quantity--;
-    if(param.quantity < 0 ) param.quantity = 0;
+    if(param.quantity < 1 ) param.quantity = 1;
+    this.priceChange();
   }
 
   delete(param){
     this.products = this.products.filter(e => e.id != param.id);
-    this.cartService.deleteCart(param.id).subscribe();
+    this.cartService.deleteCart(param.id).subscribe(() => {
+      this.priceChange();
+    });
   }
 
   checkout(){
     this.router.navigateByUrl('/check-out');
+  }
+
+  priceChange(){
+    this.totalPrice = 0;
+    this.products.map(e => {
+      this.totalPrice += (e.quantity*e.price);
+    })
   }
 }
