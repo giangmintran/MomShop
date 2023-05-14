@@ -56,6 +56,7 @@ namespace MOMShop.Services.Implements.UserProductService
                 if (product != null)
                 {
                     resultItem.Id = item.Id;
+                    resultItem.ProductId = item.ProductId;
                     resultItem.ProductName = product.Name;
                     resultItem.Status = product.Status;
                     resultItem.Price = product.Price;

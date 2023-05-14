@@ -21,7 +21,7 @@ namespace MOMShop.Services.Implements.UserProductService
             _mapper = mapper;
         }
 
-        public OrderDto Create(OrderDto order)
+        public Order Create(OrderDto order)
         {
             var insert = _mapper.Map<Order>(order);
             var result = _dbContext.Orders.Add(insert);
@@ -33,9 +33,10 @@ namespace MOMShop.Services.Implements.UserProductService
             {
                 var detail = _mapper.Map<OrderDetail>(item);
                 detail.OrderId = result.Entity.Id;
+                _dbContext.OrderDetails.Add(detail);
             }
             _dbContext.SaveChanges();
-            return order;
+            return result.Entity;
         }
 
         public List<ViewOrderDto> FindAll(FilterOrderDto input)

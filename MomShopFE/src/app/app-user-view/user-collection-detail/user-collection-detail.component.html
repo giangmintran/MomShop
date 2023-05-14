@@ -1,7 +1,7 @@
 <app-header></app-header>
-<div id="container" class="row"  style="margin-top:50px;margin-bottom:50px">
+<div id="container" class="row"  style="margin-top:50px;margin-bottom:50px;margin-left:50px">
     <div class="row col-lg-5 col-md-12 col-sm-12 col-12" style="position: relative;">
-        <div class="col-lg-12 col-md-12 col-sm-12 col-12" style="height: auto;display: flex;">
+        <div class="col-lg-12 col-md-12 col-sm-12 col-12 " style="height: auto;display: flex;">
             <img alt="Card" src="{{baseUrl}}/{{ product.imageUrl}}"
                 style="width: 70%; object-fit: cover;" />
         </div>
@@ -34,11 +34,15 @@
 
             <div style="display:flex">
                 <h1 class="text-uppercase font-weight-bold" style="font-weight: bold;display:block">SIZE:</h1>
-                <div style="margin-left: 20px;margin-top:1.5%">
+                <div style="margin-left: 20px;margin-top: 0.4rem;">
                         <div class="flex flex-wrap gap-3"  style="display:flex">
-                            <div class="flex align-items-center" *ngFor="let item of productSize">
-                                <p-radioButton name="pizza" value="{{item.size}}" [(ngModel)]="value" ></p-radioButton>
-                                <label style="margin-left: 5px; font-size: 24px">{{item.size}}</label>
+                            <div class="flex align-items-center" style="display:flex" *ngFor="let item of productSize">
+                                <div>
+                                    <p-radioButton name="size" value="{{item.size}}" [(ngModel)]="value" ></p-radioButton>
+                                </div>
+                                <div>
+                                    <label style="margin-left: 5px; font-size: 24px">{{item.size}}</label>
+                                </div>
                             </div>
                         </div>
                 </div>

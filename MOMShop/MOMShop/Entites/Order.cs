@@ -26,8 +26,9 @@ namespace MOMShop.Entites
         /// </summary>
         [Comment("Thoi gian nhan hang du kien")]
         public DateTime IntendedTime { get; set; }
+        [Comment("1. Cod, 2.Bank")]
         public int PaymentType { get; set; }
-        [Comment("1. Khoi tao, 2.Da nhan, 3. Da giao, 4. Da xoa")]
+        [Comment("1. Khoi tao, 2.Dang giao va chua nhan tien , 3.Dang giao va da nhan tien, 4. Hoan thanh, 5. Da xoa")]
         public int OrderStatus { get; set; }
         public float TotalAmount { get; set; }
         public float DeliveryCost { get; set; }

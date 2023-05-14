@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using MOMShop.Dto.Cart;
 using MOMShop.Dto.Order;
+using MOMShop.Entites;
 using MOMShop.Services.Interfaces.UserService;
 using System;
 
@@ -17,7 +18,7 @@ namespace MOMShop.Controllers.User
         }
 
         [HttpPost("add")]
-        public OrderDto Create(OrderDto input)
+        public Order Create(OrderDto input)
         {
             try
             {

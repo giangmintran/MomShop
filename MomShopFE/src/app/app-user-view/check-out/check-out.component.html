@@ -14,18 +14,18 @@
             <form class="form-information col-12">
                 <div class="row mb-3">
                     <div class="col-12">
-                        <input type="text" placeholder="Họ và tên" class="col-12 input">
+                        <input type="text" placeholder="Họ và tên" class="col-12 input" name="fullName" [(ngModel)]="userInfo.fullName">
                     </div>
                 </div>
                 <div class="row mb-3">
                     <div class="col-12 d-flex justify-content-between">
-                        <input type="text" placeholder="Email" class="input email-input">
-                        <input type="text" placeholder="Số điện thoại" class="input phone-input">
+                        <input type="text" placeholder="Email" class="input email-input" name="email" [(ngModel)]="userInfo.email">
+                        <input type="text" placeholder="Số điện thoại" class="input phone-input" name="phone" [(ngModel)]="userInfo.phone">
                     </div>
                 </div>
                 <div class="row mb-3">
                     <div class="col-12">
-                        <input type="text" placeholder="Địa chỉ" class="col-12 input">
+                        <input type="text" placeholder="Địa chỉ" class="col-12 input" name="address" [(ngModel)]="userInfo.address">
                     </div>
                 </div>
                 <div class="row mb-3">
@@ -77,7 +77,7 @@
                 </div>
                 <div class="footer-form d-flex justify-content-between align-items-center">
                     <a href="/cart" class="link-cart text-decoration-none">Giỏ hàng</a>
-                    <button type="submit" class="btn-completed">Hoàn tất đơn hàng</button>
+                    <button type="submit" class="btn-completed" (click)="completeCheckOut()">Hoàn tất đơn hàng</button>
                 </div>
             </form>
         </div>
@@ -137,7 +137,7 @@
         <hr class="hr-line">
         <div class="total-fee-product">
             <span>Tổng cộng</span>
-            <span class="text-fee-total"><span class="text-unit">VND</span>1,2600,000đ</span>
+            <span class="text-fee-total"><span class="text-unit">VND</span>{{totalPrice + 30000 - discount}}đ</span>
         </div>
     </div>
 </div>

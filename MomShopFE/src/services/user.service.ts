@@ -16,4 +16,18 @@ export class UserService{
     register(input:RegisterDto){
         return this.http.post(this.baseUrl+'register',input,{responseType: 'text'})
     }
+
+
+
+
+
+
+
+
+    //quan code tam
+    findUser(){
+        const user = JSON.parse(localStorage.getItem('user'));
+    return this.http.get(this.baseUrl + 'find/' + user.id);
+        // return this.http.post(this.baseUrl+'register',input,{responseType: 'text'})
+    }
 }
