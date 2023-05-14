@@ -39,9 +39,9 @@ namespace MOMShop.Entites
         public string Gender { get; set; }
 
         /// <summary>
-        /// Avatar
+        /// Address
         /// </summary>
-        public string Avatar { get; set; }
+        public string Address { get; set; }
         public string CreatedBy { get; set; }
         public bool Deleted { get; set; }
     }
