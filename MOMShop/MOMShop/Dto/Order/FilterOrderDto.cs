@@ -8,5 +8,10 @@ namespace MOMShop.Dto.Order
     {
         [FromQuery(Name = "status")]
         public int? Status { get; set; }
+        [FromQuery(Name = "orderCode")]
+        public string OrderCode { get; set; }
+
+        [FromQuery(Name = "customer")]
+        public int? CustomerId { get; set; }
     }
 }

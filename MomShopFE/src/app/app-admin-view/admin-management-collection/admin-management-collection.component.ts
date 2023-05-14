@@ -118,7 +118,7 @@ export class AdminManagementCollectionComponent implements OnInit {
   }
 
   createCollection(){
-    this.router.navigate(['admin/collection-management/collection/create'], { queryParams : { isCreateNew: true }});
+    this.router.navigate(['admin/collection-management/collection/create']);
   }
 
   deleteCollection(row) {

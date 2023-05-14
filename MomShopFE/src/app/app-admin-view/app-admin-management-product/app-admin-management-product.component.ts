@@ -7,6 +7,7 @@ import { ConfirmEventType, ConfirmationService, MenuItem, MessageService } from 
 import { DialogService, DynamicDialogRef } from 'primeng/dynamicdialog';
 import { CreateOrEditProductTestComponent } from './create-or-edit-product-test/create-or-edit-product-test.component';
 import { ProductStatus } from 'src/shared/AppConst';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-app-admin-management-product',
@@ -55,6 +56,7 @@ export class AppAdminManagementProductComponent{
     public dialogService: DialogService, 
     public messageService: MessageService,
     private confirmationService: ConfirmationService,
+    private router: Router,
     ) {
     this.colsProduct = [
       {
@@ -128,20 +130,7 @@ export class AppAdminManagementProductComponent{
    this.getDetailProductData();
   }
   createProduct() {
-    this.ref = this.dialogService.open(CreateOrEditProductTestComponent, { 
-      data: {
-      },
-      header: 'Chi tiết sản phẩm',
-      width: '70%',
-      contentStyle: { "max-height": "1900px", overflow: "auto", "margin-bottom": "40px"},
-      baseZIndex: 10000,
-    });
-    this.ref.onClose.subscribe((data) => {
-      if(data){
-        this.messageService.add({ severity: 'success', summary: 'Thông báo', detail: 'Thêm thành công', life: 3000 });
-        window.location.reload();
-      }
-    });
+    this.router.navigate(['admin/product-management/product/create']);
   }
   editProduct(row) {
     const ref = this.dialogService.open(CreateOrEditProductTestComponent, {

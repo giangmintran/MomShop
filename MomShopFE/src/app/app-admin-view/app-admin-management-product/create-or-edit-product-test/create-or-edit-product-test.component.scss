@@ -4,21 +4,20 @@
 }
 
 .img-preview-container {
-  background-color: #f7f7f7;
+  background-color: #fff;
   position: relative;
-
-  .img-preview {
-    background: center center no-repeat;
-    background-size: contain;
-    height: 300px;
-    width: 300px;
-
-    &-error {
-      display: none;
-    }
-  }
 }
 
+.img-preview {
+  background: center center no-repeat;
+  background-size: contain;
+  height: 400px;
+  width: 400px;
+
+  &-error {
+    display: none;
+  }
+}
 .img-loading-overlay {
   background-color: black;
   bottom: 0;
@@ -77,3 +76,4 @@
     background-color: #ffff !important;
   }
 }
+  
