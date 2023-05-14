@@ -19,6 +19,12 @@ namespace MOMShop.Services.Implements
             _mapper = mapper;
         }
 
+        public UserDto FindById(int id)
+        {
+            var user = _dbContext.Users.FirstOrDefault(e => e.Id == id);
+            return _mapper.Map<UserDto>(user);
+        }
+
         public UserDto Login(LoginDto input)
         {
             var user = _dbContext.Users.FirstOrDefault(e => e.Email == input.Email && e.Password == input.Password);

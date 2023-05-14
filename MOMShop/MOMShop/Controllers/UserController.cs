@@ -43,5 +43,19 @@ namespace MOMShop.Controllers
                 throw new Exception(ex.Message);
             }
         }
+
+        [HttpGet("find/{id}")]
+        public UserDto Find(int id)
+        {
+            try
+            {
+                var result = _services.FindById(id);
+                return result;
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(ex.Message);
+            }
+        }
     }
 }

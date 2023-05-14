@@ -5,6 +5,7 @@ namespace MOMShop.Services.Interfaces
     public interface IUserServices
     {
         UserDto Login(LoginDto input);
+        UserDto FindById(int id);
         string Register(RegisterDto input);
     }
 }
