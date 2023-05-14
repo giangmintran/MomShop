@@ -34,7 +34,7 @@ namespace MOMShop.Controllers.User
         }
 
         [HttpPost("add")]
-        public CartDto Create(CartDto input)
+        public string Create(CartDto input)
         {
             try
             {

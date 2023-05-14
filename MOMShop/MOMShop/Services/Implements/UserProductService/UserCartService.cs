@@ -19,7 +19,7 @@ namespace MOMShop.Services.Implements.UserProductService
             _dbContext = dbContext;
             _mapper = mapper;
         }
-        public CartDto Create(CartDto input)
+        public string Create(CartDto input)
         {
             var productCart = _dbContext.Carts.FirstOrDefault(e => e.ProductId == input.ProductId && e.CustomerId == input.CustomerId);
             if (productCart == null)
@@ -28,8 +28,11 @@ namespace MOMShop.Services.Implements.UserProductService
                 insert.Quantity = 1;
                 var entity = _dbContext.Carts.Add(insert);
                 _dbContext.SaveChanges();
+            } else
+            {
+                return "error"
             }
-            return _mapper.Map<CartDto>(input);
+            return "success";
         }
 
         public void Delete(int id)
