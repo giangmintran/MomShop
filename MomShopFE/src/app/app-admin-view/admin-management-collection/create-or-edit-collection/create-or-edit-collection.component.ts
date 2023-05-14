@@ -105,11 +105,12 @@ export class CreateOrEditCollectionComponent implements OnInit {
     console.log("Collection", this.collection);
 
     this.collectionService.createOrEdit(this.collection).subscribe((data) => {
-      this.toastr.success(
-        "Thêm thành công",
-        "Thông báo",
-        { timeOut: 3000 }
-      );
+      // this.toastr.success(
+      //   "Thêm thành công",
+      //   "Thông báo",
+      //   { timeOut: 3000 }
+      // );
+      this.messageService.add({ severity: 'success', summary: 'Thông báo', detail: 'Cập nhật thành công', life: 3000 });
     })
   }
   getData(): void {
@@ -225,11 +226,7 @@ export class CreateOrEditCollectionComponent implements OnInit {
     });
     this.ref.onClose.subscribe((data) => {
       if(data){
-        this.toastr.success(
-          "Cập nhật thành công",
-          "Thông báo",
-          { timeOut: 3000 }
-        );
+        this.messageService.add({ severity: 'success', summary: 'Thông báo', detail: 'Cập nhật thành công', life: 3000 });
         this.route.queryParams.subscribe(params => {
           const id = params['id'];
           if (id){

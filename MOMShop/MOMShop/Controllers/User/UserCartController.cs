@@ -59,5 +59,18 @@ namespace MOMShop.Controllers.User
                 throw new Exception(ex.Message);
             }
         }
+
+        [HttpPut("update")]
+        public void Update(UpdateCartDto input)
+        {
+            try
+            {
+                _services.Update(input);
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(ex.Message);
+            }
+        }
     }
 }

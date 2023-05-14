@@ -3,6 +3,7 @@ using MOMShop.Dto.Cart;
 using MOMShop.Entites;
 using MOMShop.MomShopDbContext;
 using MOMShop.Services.Interfaces.UserService;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 
@@ -77,6 +78,17 @@ namespace MOMShop.Services.Implements.UserProductService
                 _dbContext.SaveChanges();
             }
             return _mapper.Map<CartDto>(cartItem);
+        }
+
+        public void Update(UpdateCartDto input)
+        {
+            var cartDetail = _dbContext.Carts.FirstOrDefault(e => e.Id == input.Id);
+            if (cartDetail != null)
+            {
+                throw new Exception("Không tìm thấy thông tin sản phẩm trong giỏ hàng");
+            }
+            cartDetail.Quantity = input.Quantity;
+            _dbContext.SaveChanges();
         }
     }
 }

@@ -113,11 +113,12 @@ export class CreateOrEditProductCollectionComponent implements OnInit {
       });
     }
     else {
-      this.toastr.warning(
-        "Vui lòng chọn sản phẩm",
-        "Thông báo",
-        { timeOut: 3000 }
-      );
+      // this.toastr.warning(
+      //   "Vui lòng chọn sản phẩm",
+      //   "Thông báo",
+      //   { timeOut: 3000 }
+      // );
+      this.messageService.add({ severity: 'warn', summary: 'Thông báo', detail: 'Vui lòng chọn sản phẩm', life: 3000 });
     }
   }
   validate(): boolean{

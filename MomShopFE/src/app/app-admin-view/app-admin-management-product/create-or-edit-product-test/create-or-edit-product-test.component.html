@@ -1,112 +1,113 @@
-    <div class="container1">
-        <div class="user">
-            <div class="mb-2">
-                <button (click)="backToProductList()" pButton pRipple type="button" icon="pi pi-angle-left"
-                    class="p-button-rounded p-button-text" label="Quay lại"></button>
-            </div>
-            <div class="card p-fluid" style="margin: 0 40px; height: 80%">
-                <div class="row" style="margin: 20px">
-                    <div class="row">
-                        <div class="col-8">
-                            <h5 class="mb-2">Thêm mới sản phẩm</h5>
-                            <hr class="hr-line">
-                            <div class="row">
-                                <div class="col-6">
-                                    <div class="field mb-">
-                                        <label class="mb-2" htmlFor="code">Mã sản phẩm<span class="required-field"> *
-                                            </span>
-                                        </label>
-                                        <input [(ngModel)]="product.code" type="text" id="code" name="code" pInputText
-                                            maxlength="256" />
-                                    </div>
-                                </div>
-                                <div class="col-6">
-                                    <div class="field mb-1">
-                                        <label class="mb-2" htmlFor="name">Tên sản phẩm<span class="required-field"> *
-                                            </span>
-                                        </label>
-                                        <input [(ngModel)]="product.name" type="text" id="name" name="name" pInputText
-                                            maxlength="256" />
-                                    </div>
+<div class="container1">
+    <div class="user">
+        <div class="mb-2">
+            <button (click)="backToProductList()" pButton pRipple type="button" icon="pi pi-angle-left"
+                class="p-button-rounded p-button-text" label="Quay lại"></button>
+        </div>
+        <div class="card p-fluid" style="margin: 0 40px; height: 80%">
+            <div class="row" style="margin: 20px">
+                <div class="row">
+                    <div class="col-8">
+                        <h5 class="mb-2">Thêm mới sản phẩm</h5>
+                        <hr class="hr-line">
+                        <div class="row">
+                            <div class="col-6">
+                                <div class="field mb-">
+                                    <label class="mb-2" htmlFor="code">Mã sản phẩm<span class="required-field"> *
+                                        </span>
+                                    </label>
+                                    <input [(ngModel)]="product.code" type="text" id="code" name="code" pInputText
+                                        maxlength="256" />
                                 </div>
                             </div>
-
-                            <div class="row">
-                                <div class="col-4">
-                                    <div class="field mb-1">
-                                        <label class="mb-2" htmlFor="price">Giá bán<span class="required-field"> * </span>
-                                        </label>
-                                        <input [(ngModel)]="product.price" type="number" id="price" name="price"
-                                            pInputText />
-                                    </div>
-                                </div>
-                                <div class="col-4">
-                                    <div class="field mb-1">
-                                        <label class="mb-2" for="productType" htmlFor="productType">Loại sản phẩm<span
-                                                class="required-field"> * </span> </label>
-                                        <p-dropdown appendTo="body" optionValue="code" name="productType" optionLabel="name"
-                                            [(ngModel)]="product.productType" [options]="types" inputId="productType"
-                                            [style]="{'width':'100%'}">
-                                        </p-dropdown>
-                                    </div>
-                                </div>
-                                <div class="col-4">
-                                    <div class="field mb-1">
-                                        <label class="mb-2" htmlFor="status">Trạng thái<span class="required-field"> *
-                                            </span>
-                                        </label>
-                                        <p-dropdown appendTo="body" optionValue="code" name="status" optionLabel="name"
-                                            [(ngModel)]="product.status" [options]="statuses" [style]="{'width':'100%'}">
-                                        </p-dropdown>
-                                    </div>
+                            <div class="col-6">
+                                <div class="field mb-1">
+                                    <label class="mb-2" htmlFor="name">Tên sản phẩm<span class="required-field"> *
+                                        </span>
+                                    </label>
+                                    <input [(ngModel)]="product.name" type="text" id="name" name="name" pInputText
+                                        maxlength="256" />
                                 </div>
                             </div>
-
-                            <div class="row">
-                                <div class="col-12">
-                                    <div class="field mb-2">
-                                        <label class="mb-2" htmlFor="description">Mô tả</label>
-                                        <textarea style="width: 100%; max-width: 100%;" rows="3" pInputTextarea
-                                            [(ngModel)]="product.description" name="description"></textarea>
-                                    </div>
-                                </div>
-                            </div>
-                            <h5 class="mb-2">Thêm chi tiết sản phẩm</h5>
-                            <hr class="hr-line">
                         </div>
-                        <div class="col-4">
-                            <h5 class="mb-2">Thêm ảnh</h5>
-                            <hr class="hr-line">
-                            <div>
-                                <label for="file-input">
-                                </label>
-                                <br>
-                                <input #imageInput type="file" accept="image/*" (change)="processFile(imageInput)"
-                                    id="file-input">
-                                <br>
-                                <br>
-                                <div *ngIf="selectedFile">
-                                    <img style="width: 600px; height:600px; object-fit: cover; margin-right: 20px;" src="{{selectedFile.src}}">
+
+                        <div class="row">
+                            <div class="col-4">
+                                <div class="field mb-1">
+                                    <label class="mb-2" htmlFor="price">Giá bán<span class="required-field"> * </span>
+                                    </label>
+                                    <input [(ngModel)]="product.price" type="number" id="price" name="price"
+                                        pInputText />
                                 </div>
                             </div>
-                            <!-- <div class="card center" style="width: 50%; height: auto;">
+                            <div class="col-4">
+                                <div class="field mb-1">
+                                    <label class="mb-2" for="productType" htmlFor="productType">Loại sản phẩm<span
+                                            class="required-field"> * </span> </label>
+                                    <p-dropdown appendTo="body" optionValue="code" name="productType" optionLabel="name"
+                                        [(ngModel)]="product.productType" [options]="types" inputId="productType"
+                                        [style]="{'width':'100%'}">
+                                    </p-dropdown>
+                                </div>
+                            </div>
+                            <div class="col-4">
+                                <div class="field mb-1">
+                                    <label class="mb-2" htmlFor="status">Trạng thái<span class="required-field"> *
+                                        </span>
+                                    </label>
+                                    <p-dropdown appendTo="body" optionValue="code" name="status" optionLabel="name"
+                                        [(ngModel)]="product.status" [options]="statuses" [style]="{'width':'100%'}">
+                                    </p-dropdown>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <div class="col-12">
+                                <div class="field mb-2">
+                                    <label class="mb-2" htmlFor="description">Mô tả</label>
+                                    <textarea style="width: 100%; max-width: 100%;" rows="3" pInputTextarea
+                                        [(ngModel)]="product.description" name="description"></textarea>
+                                </div>
+                            </div>
+                        </div>
+                        <h5 class="mb-2">Thêm chi tiết sản phẩm</h5>
+                        <hr class="hr-line">
+                    </div>
+                    <div class="col-4">
+                        <h5 class="mb-2">Thêm ảnh</h5>
+                        <hr class="hr-line">
+                        <div>
+                            <label for="file-input">
+                            </label>
+                            <br>
+                            <input #imageInput type="file" accept="image/*" (change)="processFile(imageInput)"
+                                id="file-input">
+                            <br>
+                            <br>
+                            <div *ngIf="selectedFile">
+                                <img style="width: 600px; height:600px; object-fit: cover; margin-right: 20px;"
+                                    src="{{selectedFile.src}}">
+                            </div>
+                        </div>
+                        <!-- <div class="card center" style="width: 50%; height: auto;">
                                 <img src="{{baseUrl}}/{{ product.imageUrl}}">
                             </div> -->
-                            <br>
-                        </div>
+                        <br>
                     </div>
-
                 </div>
-                <!-- <div class="p-dialog-footer mt-4" style="width: 100%; position: fixed; left: 0; bottom: 0;">
+
+            </div>
+            <!-- <div class="p-dialog-footer mt-4" style="width: 100%; position: fixed; left: 0; bottom: 0;">
                 <button pButton pRipple label="Hủy" icon="pi pi-times" class="p-button-text p-button-sm p-confirm-dialog-reject mt-4"
                     (click)="close()"></button>
                 <button pButton pRipple label="Lưu" icon="pi pi-check"
                     class="p-button-text p-button-success p-button-sm p-confirm-dialog-approve mt-4"  (click)="save()"></button>
                 </div> -->
-            </div>
-            <div class="mt-2">
-                <button style="float: right; margin-right: 40px; height: 40px;" pButton pRipple label="Submit"
-                    (click)="save()"></button>
-            </div>
+        </div>
+        <div class="mt-2">
+            <button style="float: right; margin-right: 40px; height: 40px;" pButton pRipple label="Submit"
+                (click)="save()"></button>
         </div>
     </div>
+</div>
