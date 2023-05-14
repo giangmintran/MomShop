@@ -23,4 +23,8 @@ export class UserCartService {
         "size": size
       });
     }
+
+  updateQuantity(product: any) {
+      return this.http.put(this.baseUrl + 'update', product);
+  }
 }

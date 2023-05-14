@@ -84,7 +84,7 @@ namespace MOMShop.Services.Implements.UserProductService
         public void Update(UpdateCartDto input)
         {
             var cartDetail = _dbContext.Carts.FirstOrDefault(e => e.Id == input.Id);
-            if (cartDetail != null)
+            if (cartDetail == null)
             {
                 throw new Exception("Không tìm thấy thông tin sản phẩm trong giỏ hàng");
             }
