@@ -19,10 +19,19 @@ import { UserCollectionDetailComponent } from './app-user-view/user-collection-d
 import { CheckOutComponent } from './app-user-view/check-out/check-out.component';
 import { AppUserOrderComponent } from './app-user-view/app-user-order/app-user-order.component';
 import { CreateOrEditCollectionComponent } from './app-admin-view/admin-management-collection/create-or-edit-collection/create-or-edit-collection.component';
+import { CreateOrEditProductTestComponent } from './app-admin-view/app-admin-management-product/create-or-edit-product-test/create-or-edit-product-test.component';
 
 const routes: Routes = [
   { path: '',redirectTo:'/login',pathMatch: 'full' },
-  { path: 'admin/product', component: AppAdminManagementProductComponent },
+  //{ path: 'admin/product', component: AppAdminManagementProductComponent },
+  {
+    path: "admin/product-management",
+    children: [
+      { path: 'product', component: AppAdminManagementProductComponent,},
+      { path: 'product/create', component: CreateOrEditProductTestComponent},
+      //{ path: 'product/detail', component: CreateOrEditCollectionComponent},
+    ] 
+  },
   { path: 'login', component: LoginComponent },
   { path: 'admin/customer', component: AppAdminMangementCustomerComponent },
   { path: 'admin/feedback', component: AppAdminFeedbackUserComponent },

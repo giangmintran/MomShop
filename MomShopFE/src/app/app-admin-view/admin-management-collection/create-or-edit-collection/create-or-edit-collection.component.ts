@@ -210,7 +210,7 @@ export class CreateOrEditCollectionComponent implements OnInit {
   }
 
   backToCollectionList(){
-    this.router.navigate(['admin/collection-management/collection'], { queryParams : { isCreateNew: true }});
+    this.router.navigate(['admin/collection-management/collection']);
   }
 
   updateProductCollection(){

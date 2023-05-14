@@ -12,6 +12,7 @@ import { ProductDetailDto } from 'src/models/productDetail';
 import { ImageService } from 'src/services/image.Service';
 import { FileHandle } from 'src/shared/dragDrop.directive';
 import { ProductConst } from 'src/shared/AppConst';
+import { Router } from '@angular/router';
 // import { ImageService } from 'src/services/image.Service';
 
 class ImageSnippet {
@@ -24,6 +25,7 @@ class ImageSnippet {
   selector: 'app-create-or-edit-product-test',
   templateUrl: './create-or-edit-product-test.component.html',
   styleUrls: ['./create-or-edit-product-test.component.scss'],
+  providers: [DialogService,ConfirmationService, MessageService]
 })
 
 export class CreateOrEditProductTestComponent implements OnInit {
@@ -41,37 +43,36 @@ export class CreateOrEditProductTestComponent implements OnInit {
   metaKeySelectionDetail: boolean = true;
   imageObject;
   baseUrl = 'http://localhost:5001';
+  imageUrlDefault = 'assets/images.png';
 
   constructor(private http: HttpClient,
-    public dialogService: DialogService, 
     public messageService: MessageService,  
-    public configDialog: DynamicDialogConfig,
     public productServices: ProductService,
     public toastr: ToastrService,
-    public ref: DynamicDialogRef,
     public imageService: ImageService,
     private confirmationService: ConfirmationService,
+    private router: Router,
     ) {}
   ngOnInit(): void {
-    console.log("ầv", this.configDialog?.data.product);
+    //console.log("ầv", this.configDialog?.data.product);
     this.getData();
   }
 
   getData(){
-    if(this.configDialog?.data.product) {
-      this.productId = this.configDialog?.data.product[0].id
-      this.productServices.getforEditProduct(this.configDialog.data?.product[0].id).subscribe(
-        (response) => {
-          console.log("res: ", response);
-          this.product = response;
-          this.imageObject = this.baseUrl + response.imageUrl;
-          this.genlistAction(this.product.productDetails);
-        },
-        (err) => {
-          console.log("err----", err);
-        }
-      );
-    }
+    //if(this.configDialog?.data.product) {
+      // this.productId = this.configDialog?.data.product[0].id
+      // this.productServices.getforEditProduct(this.configDialog.data?.product[0].id).subscribe(
+      //   (response) => {
+      //     console.log("res: ", response);
+      //     this.product = response;
+      //     this.imageObject = this.baseUrl + response.imageUrl;
+      //     this.genlistAction(this.product.productDetails);
+      //   },
+      //   (err) => {
+      //     console.log("err----", err);
+      //   }
+      // );
+    //}
   }
   private onSuccess() {
     this.selectedFile.pending = false;
@@ -89,86 +90,105 @@ export class CreateOrEditProductTestComponent implements OnInit {
     const reader = new FileReader();
 
     reader.addEventListener('load', (event: any) => {
-
       this.selectedFile = new ImageSnippet(event.target.result, file);
       console.log("src", this.selectedFile.file);
     });
-
     reader.readAsDataURL(file);
   }
-  
+  uploadedFiles: any[] = [];
+
+  onUpload(event: any) {
+    console.log(event);
+    
+    for(let file of event.files) {
+      this.uploadedFiles.push(file);
+    }
+  }
+
+  createImageFromBlob(file: any) {
+    let reader = new FileReader();
+    reader.addEventListener("load", () => {
+      file.url = reader.result;
+      console.log("file url", reader.result);
+      
+    }, false);
+
+    if (file) {
+      reader.readAsDataURL(file);
+    }
+  }
   addDetail() {
     // this.modalCreateOrEdit.show();
-    const ref = this.dialogService.open(CreateOrEditProductDetailTestComponent, { 
-      header: 'Thông tin chi tiết',
-      width: '600px',
-      contentStyle: { "max-height": "1000px", overflow: "auto", "margin-bottom": "40px", },
-      data: {
-        productId: this.productId
-      }
-    });
+    // const ref = this.dialogService.open(CreateOrEditProductDetailTestComponent, { 
+    //   header: 'Thông tin chi tiết',
+    //   width: '600px',
+    //   contentStyle: { "max-height": "1000px", overflow: "auto", "margin-bottom": "40px", },
+    //   data: {
+    //     productId: this.productId
+    //   }
+    // });
 
-    ref.onClose.subscribe(() => {
-      this.productServices.getforEditProduct(this.configDialog.data?.product[0].id).subscribe(
-        (response) => {
-        console.log("res: ", response);
-          this.product = response;
-          this.genlistAction(this.product.productDetails);
-          this.messageService.add({ severity: 'success', summary: 'Thông báo', detail: 'Thêm thành công', life: 3000 });
-        },
-        (err) => {
-          console.log("err----", err);
-        }
-      );
-    });
+    // ref.onClose.subscribe(() => {
+    //   this.productServices.getforEditProduct(this.configDialog.data?.product[0].id).subscribe(
+    //     (response) => {
+    //     console.log("res: ", response);
+    //       this.product = response;
+    //       this.genlistAction(this.product.productDetails);
+    //       this.messageService.add({ severity: 'success', summary: 'Thông báo', detail: 'Thêm thành công', life: 3000 });
+    //     },
+    //     (err) => {
+    //       console.log("err----", err);
+    //     }
+    //   );
+    // });
   }
 
   editDetail(productDetail) {
     // this.modalCreateOrEdit.show();
-    const ref = this.dialogService.open(CreateOrEditProductDetailTestComponent, { 
-      header: 'Thông tin chi tiết',
-      width: '600px',
-      contentStyle: { "max-height": "1000px", overflow: "auto", "margin-bottom": "40px", },
-      data: {
-        productDetail: productDetail
-      }
-    });
+    // const ref = this.dialogService.open(CreateOrEditProductDetailTestComponent, { 
+    //   header: 'Thông tin chi tiết',
+    //   width: '600px',
+    //   contentStyle: { "max-height": "1000px", overflow: "auto", "margin-bottom": "40px", },
+    //   data: {
+    //     productDetail: productDetail
+    //   }
+    // });
 
-    ref.onClose.subscribe(() => {
-      this.productServices.getforEditProduct(this.configDialog.data?.product[0].id).subscribe(
-        (response) => {
-        console.log("res: ", response);
-          this.product = response;
-          this.genlistAction(this.product.productDetails);
-          this.messageService.add({ severity: 'success', summary: 'Thông báo', detail: 'Cập nhật thành công', life: 3000 });
-        },
-        (err) => {
-          console.log("err----", err);
-        }
-      );
-    });
+    // ref.onClose.subscribe(() => {
+    //   this.productServices.getforEditProduct(this.configDialog.data?.product[0].id).subscribe(
+    //     (response) => {
+    //     console.log("res: ", response);
+    //       this.product = response;
+    //       this.genlistAction(this.product.productDetails);
+    //       this.messageService.add({ severity: 'success', summary: 'Thông báo', detail: 'Cập nhật thành công', life: 3000 });
+    //     },
+    //     (err) => {
+    //       console.log("err----", err);
+    //     }
+    //   );
+    // });
   }
 
   deleteDetail(row){
-    this.confirmationService.confirm({
-      message: 'Bạn có chắc chắn muốn xóa?',
-      header: 'Xác nhận',
-      icon: 'pi pi-info-circle',
-      accept: () => {
-          this.productServices.deleteDetailProduct(row.id).subscribe((data)=>{
-            this.messageService.add({ severity: 'success', summary: 'Thông báo', detail: 'Xóa thành công', life: 3000 });
-            this.getData();
-    });
-      },
-      reject: (type) => {
-          switch (type) {
-              case ConfirmEventType.REJECT:
-                  break;
-              case ConfirmEventType.CANCEL:
-                  break;
-          }
-      }
-    });
+    // this.confirmationService.confirm({
+    //   message: 'Bạn có chắc chắn muốn xóa?',
+    //   header: 'Xác nhận',
+    //   icon: 'pi pi-info-circle',
+    //   accept: () => {
+    //       this.productServices.deleteDetailProduct(row.id).subscribe((data)=>{
+    //         this.messageService.add({ severity: 'success', summary: 'Thông báo', detail: 'Xóa thành công', life: 3000 });
+    //         this.getData();
+    // });
+    //   },
+    //   reject: (type) => {
+    //       switch (type) {
+    //           case ConfirmEventType.REJECT:
+    //               break;
+    //           case ConfirmEventType.CANCEL:
+    //               break;
+    //       }
+    //   }
+    // });
   }
   save() {
     if(this.validate()){
@@ -187,7 +207,7 @@ export class CreateOrEditProductTestComponent implements OnInit {
             this.onError();
           })
         }
-        this.ref.close(true);
+        //this.ref.close(true);
       });
     } else {
       this.messageService.add({ severity: 'error', summary: 'Thông báo', detail: 'Vui lòng nhập đầy đủ thông tin', life: 3000 });
@@ -195,7 +215,7 @@ export class CreateOrEditProductTestComponent implements OnInit {
   }
 
   close() {
-    this.ref.close(false);
+    //this.ref.close(false);
   }
 
   onBasicUploadAuto(event) {
@@ -243,5 +263,9 @@ export class CreateOrEditProductTestComponent implements OnInit {
 
   selectProductDetail(productDetail: ProductDetailDto) {
     this.messageService.add({ severity: 'info', summary: 'Product Selected', detail: productDetail.size });
+  }
+
+  backToProductList(){
+    this.router.navigate(['admin/product-management/product']);
   }
 }
