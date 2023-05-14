@@ -51,9 +51,9 @@
                 <div class="content-product-list product-list filter row">
                     <div class="col-lg-3 col-md-6 col-6" *ngFor="let product of productsPagination"
                         style="margin-bottom: 15px;text-align: center;">
-                        <p-card [style]="{ width: '400px', height: '550px'}">
+                        <p-card [style]="{ width: '300px'}">
                             <ng-template pTemplate="header">
-                                <img alt="Card" src="{{baseUrl}}/{{ product.imageUrl}}" height="350px"
+                                <img alt="Card" src="{{baseUrl}}/{{ product.imageUrl}}" height="200px"
                                     style="object-fit: cover;" />
                                 <p style="font-size: 24px;" class="mt-2" >
                                     {{ product.name }}

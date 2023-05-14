@@ -38,11 +38,13 @@ export class CartComponent implements OnDestroy{
   }
   plusQuantity(param){
     param.quantity++;
+    this.priceChange();
   }
 
   minusQuantity(param){
     param.quantity--;
     if(param.quantity < 1 ) param.quantity = 1;
+    this.priceChange();
   }
 
   delete(param){
