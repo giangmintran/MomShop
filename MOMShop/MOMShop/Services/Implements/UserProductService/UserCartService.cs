@@ -21,7 +21,7 @@ namespace MOMShop.Services.Implements.UserProductService
         }
         public string Create(CartDto input)
         {
-            var productCart = _dbContext.Carts.FirstOrDefault(e => e.ProductId == input.ProductId && e.CustomerId == input.CustomerId);
+            var productCart = _dbContext.Carts.FirstOrDefault(e => e.ProductId == input.ProductId && e.Size == input.Size && e.CustomerId == input.CustomerId);
             if (productCart == null)
             {
                 var insert = _mapper.Map<Cart>(input);
@@ -30,7 +30,7 @@ namespace MOMShop.Services.Implements.UserProductService
                 _dbContext.SaveChanges();
             } else
             {
-                return "error"
+                return "error";
             }
             return "success";
         }
