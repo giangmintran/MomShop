@@ -1,49 +1,62 @@
-
 <div class="container1">
-    <div class="block-button mb-3">
-		<!-- <p-button label="Submit"></p-button> -->
-        <!-- <button class="btn btn-add mr-2 btn-outline-primary"  (click)="createUsers()">Thêm</button> -->
-        <button class="btn btn-add ml-2 btn-outline-primary" [disabled]="!selectedRow" (click)="editUser()">Sửa</button>
-        <button class="btn btn-add ml-2 btn-delete btn-outline-danger" [disabled]="!selectedRow" (click)="deleteUser()">Xoá</button>
-        <button *ngIf="!filter" class="btn btn-filter mr-2 btn-outline-primary"  (click)="onFilterChange()">Hiện bộ lọc</button>
-        <button *ngIf="filter"class="btn btn-filter mr-2 btn-outline-primary"  (click)="onFilterChange()">Ẩn bộ lọc</button>
-    </div>
-    <div class="user">
-		<div class="row mb-3 mt-3" *ngIf="filter">
-			<div class="col-md-3"><input type="text" class="input-text" placeholder="Nhập tên khách hàng" pInputText [(ngModel)]="phone" /></div>
-			<div class="col-md-3"><input type="text" class="input-text" placeholder="Nhập SDT" pInputText [(ngModel)]="name" /></div>
-			<div class="col-md-3"><input type="text" class="input-text" placeholder="Nhập email" pInputText [(ngModel)]="email" /></div>
+	<div class="user">
+		<div class="card p-fluid" style="margin: 0 40px;">
+			<div style="margin: 20px">
+				<div style="float: right; margin-right: 40px">
+					<!-- <p-button label="Submit"></p-button> -->
+					<!-- <button class="btn btn-add mr-2 btn-outline-primary"  (click)="createUsers()">Thêm</button> -->
+					<button class="btn btn-add ml-2 btn-outline-primary" [disabled]="!selectedRow"
+						(click)="editUser()">Sửa</button>
+					<button class="btn btn-add ml-2 btn-delete btn-outline-danger" [disabled]="!selectedRow"
+						(click)="deleteUser()">Xoá</button>
+					<button *ngIf="!filter" class="btn btn-filter mr-2 btn-outline-primary"
+						(click)="onFilterChange()">Hiện bộ
+						lọc</button>
+					<button *ngIf="filter" class="btn btn-filter mr-2 btn-outline-primary" (click)="onFilterChange()">Ẩn
+						bộ
+						lọc</button>
+				</div>
+				<div class="row mb-3 mt-3" *ngIf="filter">
+					<div class="col-md-3"><input type="text" class="input-text" placeholder="Nhập tên khách hàng"
+							pInputText [(ngModel)]="phone" /></div>
+					<div class="col-md-3"><input type="text" class="input-text" placeholder="Nhập SDT" pInputText
+							[(ngModel)]="name" /></div>
+					<div class="col-md-3"><input type="text" class="input-text" placeholder="Nhập email" pInputText
+							[(ngModel)]="email" /></div>
+				</div>
+					<p-table [value]="tableData" [paginator]="true" [rows]="10" [rowsPerPageOptions]="[5,10,15,20]"
+						(onLazyLoad)="getAllCustomer()" [tableStyle]="{'width': '100% -280px','font-size':'0.8rem'}"
+						paginatorPosition="bottom" [columns]="cols" selectionMode="single" [(selection)]="selectedRow"
+						(selectionChange)="onSelectionChange($event)" [rows]="2">
+						<ng-template pTemplate="header" let-columns>
+							<tr>
+								<th>STT</th>
+								<th *ngFor="let cols of columns">
+									{{cols.header}}
+								</th>
+							</tr>
+						</ng-template>
+
+						<ng-template pTemplate="body" let-tableData="$implicit" let-rowIndex="rowIndex"
+							let-columns="columns">
+							<tr [pSelectableRow]="tableData">
+								<td>
+									{{rowIndex+1}}
+								</td>
+								<td *ngFor="let cols of columns">
+									{{tableData[cols.field]}}
+								</td>
+								<td>
+									<button class="btn btn-add ml-2 btn-outline-primary" [disabled]="!selectedRow"
+										(click)="editUser()">Sửa</button>
+									<button class="btn btn-add ml-2 btn-delete btn-outline-danger"
+										[disabled]="!selectedRow" (click)="deleteUser()">Xoá</button>
+								</td>
+							</tr>
+						</ng-template>
+					</p-table>
+			</div>
 		</div>
-		<div class="row">
-			<p-table [value]="tableData"  [paginator]="true" [rows]="10" [rowsPerPageOptions]="[5,10,15,20]"
-			(onLazyLoad)="getAllCustomer()" [tableStyle]="{'width': '100% -280px','font-size':'0.8rem'}" paginatorPosition="bottom"
-	  [columns]="cols" selectionMode="single" [(selection)]="selectedRow" (selectionChange)="onSelectionChange($event)"
-	   [rows]="2" >
-		<ng-template pTemplate="header" let-columns>
-			<tr>
-				<th>STT</th>
-				<th *ngFor="let cols of columns">
-					{{cols.header}}
-				</th>
-			</tr>
-		</ng-template>
-	
-		<ng-template pTemplate="body" let-tableData="$implicit" let-rowIndex="rowIndex" let-columns="columns">
-			<tr [pSelectableRow]="tableData">
-				<td>
-					{{rowIndex+1}}
-				</td>
-				<td *ngFor="let cols of columns">
-					{{tableData[cols.field]}}
-				</td>
-				<td>
-					<button class="btn btn-add ml-2 btn-outline-primary" [disabled]="!selectedRow" (click)="editUser()">Sửa</button>
-        <button class="btn btn-add ml-2 btn-delete btn-outline-danger" [disabled]="!selectedRow" (click)="deleteUser()">Xoá</button>
-				</td>
-			</tr>
-		</ng-template>
-			</p-table> 
-		</div>
-    </div>
+	</div>
 </div>
 <app-create-or-edit-customer #createCustomer (modalSave)="getAllCustomer()"></app-create-or-edit-customer>

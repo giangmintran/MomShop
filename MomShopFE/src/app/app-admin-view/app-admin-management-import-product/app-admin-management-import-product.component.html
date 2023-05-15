@@ -4,9 +4,10 @@
 	<div class="user">
 		<div class="card p-fluid" style="margin: 0 40px;">
 			<div style="margin: 20px">
-				<div class="block-button mb-3">
+				<div style="float: right; margin-right: 40px">
 					<!-- <p-button label="Submit"></p-button> -->
-					<button class="btn btn-add mr-2 btn-outline-primary" (click)="createReceiveOrder()">Thêm</button>
+					<button class="btn btn-add btn-primary text-white" (click)="createReceiveOrder()"> <i class="pi pi-plus"
+						style="font-size: 0.7rem; color: 'var(--primary-color)'"></i> Thêm</button>
 					<button *ngIf="!filter" class="btn btn-filter mr-2 btn-primary text-white"
 						(click)="onFilterChange()">Hiện bộ lọc</button>
 					<button *ngIf="filter" class="btn btn-filter mr-2 btn-primary text-white"
@@ -14,15 +15,13 @@
 				</div>
 				<div class="row mb-2" *ngIf="filter">
 					<div class="col-3">
-						<label class="label-text" for="listStatus">Trạng thái</label>
 						<p-dropdown [options]="listStatus" name="listStatus" [(ngModel)]="filterStatus"
 							placeholder="Trạng thái" [style]="{'height':'40px','width':'100%'}"
 							(onChange)="getReceiveOrderData()" optionLabel="name" optionValue="code"></p-dropdown>
 					</div>
 					<div class="col-3">
-						<label class="label-text" for="keyword">Tìm kiếm</label>
 						<input type="text" name="keyword" class="input-text" [style]="{'height':'40px'}" pInputText
-							[(ngModel)]="keyword" placeholder="..." />
+							[(ngModel)]="keyword" placeholder="Tìm kiếm" />
 					</div>
 				</div>
 				<p class="mb-2" style="font-size:24px;">Hóa đơn nhập hàng</p>
