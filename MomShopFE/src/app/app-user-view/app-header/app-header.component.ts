@@ -8,16 +8,16 @@ import { ToastrService } from "ngx-toastr";
   styleUrls: ["./app-header.component.scss"],
 })
 export class AppHeaderComponent {
-  isAccount : boolean = false;
+  isAccount: boolean = false;
   @Output() modalSaves: EventEmitter<any> = new EventEmitter<any>();
   @Output() backHome: EventEmitter<any> = new EventEmitter<any>();
-
+  accountUser;
   constructor(private router: Router, private toastr: ToastrService) {
-    const user = JSON.parse(localStorage.getItem('user'));
-    if(user){
+    this.accountUser = JSON.parse(localStorage.getItem('user'));
+    if (this.accountUser) {
       this.isAccount = true;
     }
-    else{
+    else {
       this.isAccount = false;
     }
   }
@@ -29,7 +29,7 @@ export class AppHeaderComponent {
   }
   logout() {
     this.toastr.success("Đăng xuất thành công", "Thông báo", { timeOut: 2000 });
-    localStorage.setItem('user',null);
+    localStorage.setItem('user', null);
     this.router.navigateByUrl('/home');
   }
 }

@@ -54,7 +54,7 @@ import { MessagesModule } from "primeng/messages";
     TagModule,
     RatingModule,
     PaginatorModule,
-    RadioButtonModule 
+    RadioButtonModule,
   ],
   exports: [AppAdminMenuComponent,
     CardModule,
@@ -65,7 +65,7 @@ import { MessagesModule } from "primeng/messages";
     PaginatorModule,
     FieldsetModule,
     DialogModule,
-    RadioButtonModule  ],
+    RadioButtonModule],
 
 }) 
 export class SharedModule {}

@@ -9,20 +9,25 @@
         <div class="information">
             <div class="d-flex justify-content-between align-items-baseline" style="width: 55%;">
                 <label for="username" class="color-text">Tên đăng nhập</label>
-                <input type="text" class="input">
+                <input type="text" class="input text-secondary" [(ngModel)]="user.fullName">
             </div>
-            <div class="d-flex justify-content-between align-items-baseline" style="width: 55%;">
-                <label for="email" class="color-text">Email</label>
-                <input type="text" class="input">
+            <div class="d-flex align-items-baseline" style="width: 55%;">
+                <label for="phone" class="color-text">Giới tính</label>
+                <div class="d-flex justify-content-between align-items-baseline" style="margin-left:80px;width:30%">
+                    <label for="" class="text-secondary">Nam</label>
+                    <input type="radio" class="input-radio mb-4" name="gender" value="Nam" [(ngModel)]="user.gender">
+                    <label for="" class="text-secondary">Nữ</label>
+                    <input type="radio" class="input-radio mb-4" name="gender" value="Nữ" [(ngModel)]="user.gender">
+                </div>
             </div>
             <div class="d-flex justify-content-between align-items-baseline" style="width: 55%;">
                 <label for="phone" class="color-text">Số điện thoại</label>
-                <input type="text" class="input">
+                <input type="text" class="input text-secondary" [(ngModel)]="user.phone">
             </div>
             <div class="d-flex justify-content-between align-items-baseline" style="width: 38%;">
                 <label for="dateOfBirth" class="color-text">Ngày sinh</label>
-                <p-calendar name="receiveOrder.receivedDate" value="receiveOrder.receivedDate" dateFormat="dd/mm/yy"
-                    [showIcon]="false" [style]="{'width':'100%'}" ></p-calendar>
+                <p-calendar  value="user.birthday" dateFormat="dd/mm/yy" [(ngModel)]="user.birthDay"
+                    [showIcon]="false" [style]="{'width':'100%'}"></p-calendar>
             </div>
             <button class="save-info" (click)="saveProfile()">Lưu</button>
         </div>

@@ -31,7 +31,7 @@
             <div style="display: inline;margin-top: 28px;" class="user-option">
                 <a><img
                         src="https://file.hstatic.net/1000351433/file/user_bfb942d5edb24fc895104e6524135e07.png"
-                        width="40" height="40" /></a>
+                        width="40" height="40" /><span *ngIf="isAccount" class="text-danger" style="font-weight: bold;margin-left: 8px;">{{accountUser.fullName}}</span></a>
                         <div class="block-option">
                             <ul class="list-option">
                                 <li class="list-unstyled mb-2" *ngIf="isAccount"><a class="item-option" href="/profile">Tài khoản của tôi</a></li>

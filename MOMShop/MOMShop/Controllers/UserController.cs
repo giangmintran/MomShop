@@ -57,5 +57,19 @@ namespace MOMShop.Controllers
                 throw new Exception(ex.Message);
             }
         }
+        [HttpPut("update")]
+        public string UpdateInforUser(UserDto input)
+        {
+            try
+            {
+                var result = _services.UpdateInforUser(input);
+                return result;
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(ex.Message);
+            }
+        }
+
     }
 }

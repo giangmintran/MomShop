@@ -48,5 +48,20 @@ namespace MOMShop.Services.Implements
             _dbContext.SaveChanges();
             return "success";
         }
+        public string UpdateInforUser(UserDto input)
+        {
+            var checkDuplicateUserName = _dbContext.Users.FirstOrDefault(e => e.FullName == input.FullName && e.Id != input.Id);
+            if (checkDuplicateUserName!=null)
+            {
+                return "duplicate";
+            }
+            var userUpdate = _dbContext.Users.FirstOrDefault(e => e.Id == input.Id);
+            userUpdate.FullName = input.FullName;
+            userUpdate.BirthDay = input.BirthDay;
+            userUpdate.Gender = input.Gender;
+            userUpdate.Phone = input.Phone;
+            _dbContext.SaveChanges();
+            return "success";
+        }
     }
 }

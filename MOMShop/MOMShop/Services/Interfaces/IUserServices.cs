@@ -7,5 +7,6 @@ namespace MOMShop.Services.Interfaces
         UserDto Login(LoginDto input);
         UserDto FindById(int id);
         string Register(RegisterDto input);
+        string UpdateInforUser(UserDto input);
     }
 }

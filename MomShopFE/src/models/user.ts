@@ -1,4 +1,11 @@
 export class UserDto {
-  email: number;
-  password: number;
+  id: number;
+  email: string;
+  password: string;
+  phone: string;
+  fullName: string;
+  birthDay: Date;
+  gender: string;
+  address: string;
+  createdBy: string
 }
