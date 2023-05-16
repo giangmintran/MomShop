@@ -43,13 +43,29 @@ namespace MOMShop.Services.Implements.UserProductService
         {
             var orders = _dbContext.Orders.Where(e => e.CreatedBy == input.CustomerId && !e.Deleted 
                                                     && (input.Status == null || e.OrderStatus == input.Status) 
-                                                    && (input.OrderCode == null || e.OrderCode == input.OrderCode)).ToList();
+                                                    && (input.OrderCode == null || e.OrderCode.Contains(input.OrderCode))).ToList();
             var result = _mapper.Map<List<ViewOrderDto>>(orders);
             foreach (var item in result)
             {
                 var orderDetail = _dbContext.OrderDetails.Where(e => e.OrderId == item.Id).ToList();
-                item.Details = orderDetail;
+                item.Details = _mapper.Map<List<ViewOrderDetail>>(orderDetail);
+                foreach (var detail in item.Details)
+                {
+                    var product = _dbContext.Products.FirstOrDefault(e => e.Id == detail.ProductId && !e.Deleted);
+                    if (product != null)
+                    {
+                        detail.Name = product.Name;
+                        var productImage = _dbContext.ProductImages.FirstOrDefault(e => e.ProductId == product.Id);
+                        detail.ImageUrl = productImage?.ImageUrl;
+                    }
+                }
             }
+
+            if (input.Keyword != null)
+            {
+                result = result.Where(e => e.Details.Where(detail => detail.Name.Contains(input.Keyword)).Any()).ToList();
+            }
+
             return result;
         }
     }

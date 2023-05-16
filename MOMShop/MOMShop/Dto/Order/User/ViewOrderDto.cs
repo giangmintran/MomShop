@@ -23,6 +23,17 @@ namespace MOMShop.Dto.Order.User
         public string DiscountCode { get; set; }
         public float TotalAmount { get; set; }
         public float Description { get; set; }
-        public List<OrderDetail> Details { get; set; }
+        public int CreatedBy { get; set; }
+        public List<ViewOrderDetail> Details { get; set; }
+    }
+    public class ViewOrderDetail 
+    {
+        public int Id { get; set; }
+        public int OrderId { get; set; }
+        public int ProductId { get; set; }
+        public string Name { get; set; }
+        public string ImageUrl { get; set; }
+        public string Size { get; set; }
+        public int Quantity { get; set; }
     }
 }
