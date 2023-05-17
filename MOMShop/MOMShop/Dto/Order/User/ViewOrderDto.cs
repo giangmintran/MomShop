@@ -36,5 +36,9 @@ namespace MOMShop.Dto.Order.User
         public string ImageUrl { get; set; }
         public string Size { get; set; }
         public int Quantity { get; set; }
+        /// <summary>
+        /// Tổng giá trị sản phẩm ở detail
+        /// </summary>
+        public float Total { get; set; }
     }
 }

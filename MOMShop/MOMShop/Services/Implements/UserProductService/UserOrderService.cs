@@ -58,6 +58,7 @@ namespace MOMShop.Services.Implements.UserProductService
                         detail.Price = product.Price;
                         var productImage = _dbContext.ProductImages.FirstOrDefault(e => e.ProductId == product.Id);
                         detail.ImageUrl = productImage?.ImageUrl;
+                        detail.Total = detail.Price * detail.Quantity;
                     }
                 }
             }
