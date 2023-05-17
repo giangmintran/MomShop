@@ -35,6 +35,7 @@
 }
 .image-product{
     margin-right: 20px;
+    border-radius: 5px;
 }
 .block-payment{
    display: flex;
@@ -54,4 +55,10 @@
 }
 .order-code{
     
+}
+.description-order{
+    display: flex;
+    justify-content: space-between;
+    flex:1;
+    align-items: center;
 }
