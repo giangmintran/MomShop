@@ -55,6 +55,7 @@ namespace MOMShop.Services.Implements.UserProductService
                     if (product != null)
                     {
                         detail.Name = product.Name;
+                        detail.Price = product.Price;
                         var productImage = _dbContext.ProductImages.FirstOrDefault(e => e.ProductId == product.Id);
                         detail.ImageUrl = productImage?.ImageUrl;
                     }
