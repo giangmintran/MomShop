@@ -33,13 +33,23 @@ namespace MOMShop.Services.Implements
             _hostEnvironment = hostEnvironment;
         }
 
-        public ProductDto AddProducts(UpdateProductDto input)
+        public ProductDto AddProducts(CreateProductDto input)
         {
-            //var productCode = input.Name.ToLower();
-            //productCode = System.Text.RegularExpressions.Regex.Replace(productCode, @"\p{IsCombiningDiacriticalMarks}+", string.Empty);
             var insert = _mapper.Map<Product>(input);
-            //insert.Code = productCode;
             var result = _dbContext.Products.Add(insert);
+            _dbContext.SaveChanges();
+
+            foreach (var item in input.ProductDetails)
+            {
+                var insertDetail = new ProductDetail()
+                {
+                    ProductId = result.Entity.Id,
+                    Size = item.Size,
+                    Quantity = item.Quantity,
+                    Description = item.Description
+                };
+                _dbContext.ProductDetails.Add(insertDetail);
+            }
             _dbContext.SaveChanges();
             return _mapper.Map<ProductDto>(result.Entity);
         }
@@ -66,6 +76,27 @@ namespace MOMShop.Services.Implements
             product.Status = input.Status;
             product.Description = input.Description;
             product.ProductType = input.ProductType;
+
+            foreach (var item in input.ProductDetails)
+            {
+                var detail = _dbContext.ProductDetails.FirstOrDefault(e => e.Size == item.Size && e.ProductId == product.Id);
+                if(detail != null)
+                {
+                    detail.Quantity = item.Quantity;
+                    detail.Size = item.Size;
+                    detail.Description = item.Description;
+                } else
+                {
+                    var insertDetail = new ProductDetail()
+                    {
+                        ProductId = product.Id,
+                        Size = item.Size,
+                        Quantity = item.Quantity,
+                        Description = item.Description
+                    };
+                    _dbContext.ProductDetails.Add(insertDetail);
+                }
+            }
 
             _dbContext.SaveChanges();
             return _mapper.Map<ProductDto>(product);

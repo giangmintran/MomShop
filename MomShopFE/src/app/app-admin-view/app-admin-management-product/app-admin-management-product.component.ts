@@ -7,7 +7,7 @@ import { ConfirmEventType, ConfirmationService, MenuItem, MessageService } from 
 import { DialogService, DynamicDialogRef } from 'primeng/dynamicdialog';
 import { CreateOrEditProductTestComponent } from './create-or-edit-product-test/create-or-edit-product-test.component';
 import { ProductStatus } from 'src/shared/AppConst';
-import { Router } from '@angular/router';
+import { NavigationExtras, Router } from '@angular/router';
 
 @Component({
   selector: 'app-app-admin-management-product',
@@ -133,23 +133,10 @@ export class AppAdminManagementProductComponent{
     this.router.navigate(['admin/product-management/product/create']);
   }
   editProduct(row) {
-    const ref = this.dialogService.open(CreateOrEditProductTestComponent, {
-      header: "Cập nhật thông tin",
-      width: "1000px",
-      height: "800px",
-      contentStyle: { "max-height": "800px", overflow: "auto", "margin-bottom": "40px", },
-      baseZIndex: 10000,
-      data: {
-        product: this.selectedProduct,
-      },
-    });
-    //
-    ref.onClose.subscribe((data) => {
-      if (data){
-        this.messageService.add({ severity: 'success', summary: 'Thông báo', detail: 'Thêm thành công', life: 3000 });
-        window.location.reload();
-      }
-    });
+    const navigationExtras: NavigationExtras = {
+      queryParams: { id: row.id }
+    };
+    this.router.navigate(['admin/product-management/product/detail'],navigationExtras);
   }
   deleteProduct(row) {
     this.confirmationService.confirm({

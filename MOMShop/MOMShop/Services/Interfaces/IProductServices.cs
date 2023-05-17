@@ -10,7 +10,7 @@ namespace MOMShop.Services.Interfaces
     public interface IProductServices
     {
         Paging<ProductDto> GetProducts(FilterProductDto input);
-        ProductDto AddProducts(UpdateProductDto input);
+        ProductDto AddProducts(CreateProductDto input);
         List<ProductDetailDto> Details(int id);
         ProductDto FindById(int id);
         ProductDto UpdateProducts(UpdateProductDto input);

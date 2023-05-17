@@ -103,13 +103,7 @@ export class CreateOrEditCollectionComponent implements OnInit {
     });
     this.collection.products = this.productIds
     console.log("Collection", this.collection);
-
     this.collectionService.createOrEdit(this.collection).subscribe((data) => {
-      // this.toastr.success(
-      //   "Thêm thành công",
-      //   "Thông báo",
-      //   { timeOut: 3000 }
-      // );
       this.messageService.add({ severity: 'success', summary: 'Thông báo', detail: 'Cập nhật thành công', life: 3000 });
     })
   }

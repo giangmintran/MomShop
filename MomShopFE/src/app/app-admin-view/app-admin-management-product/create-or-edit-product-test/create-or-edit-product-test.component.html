@@ -1,3 +1,4 @@
+<p-toast></p-toast>
 <div class="container1">
     <div class="user">
         <div class="mb-2">
@@ -8,7 +9,8 @@
             <div class="row" style="margin: 20px">
                 <div class="row">
                     <div class="col-8">
-                        <h5 class="mb-2">Thêm mới sản phẩm</h5>
+                        <h5 *ngIf="!product.id" class="mb-2">Thêm mới sản phẩm</h5>
+                        <h5 *ngIf="product.id" class="mb-2">Thông tin sản phẩm</h5>
                         <hr class="hr-line">
                         <div class="row">
                             <div class="col-6">
@@ -71,8 +73,48 @@
                                 </div>
                             </div>
                         </div>
-                        <h5 class="mb-2">Thêm chi tiết sản phẩm</h5>
+
+                        <h5 class="mb-2">Thông tin chi tiết sản phẩm</h5>
                         <hr class="hr-line">
+                        <div class="row">
+                            <div class="col-10"></div>
+                            <div class="col-2">
+                                <button pButton pRipple label="Thêm" icon="pi pi-plus" class="p-button-success mr-2"
+                                    (click)="addvalue()">
+                                </button>
+                            </div>
+                        </div>
+                        <ng-container *ngFor="let productDetail of productDetails; let i = index">
+                            <div class="row">
+                                <div class="col-3">
+                                    <div class="field mb-2">
+                                        <label htmlFor="size">
+                                            Size <span class="required-field"> * </span>
+                                        </label>
+                                        <input [(ngModel)]="productDetail.size" type="text" id="size" name="size"
+                                            pInputText />
+                                    </div>
+                                </div>
+                                <div class="col-3">
+                                    <div class="field mb-2">
+                                        <label htmlFor="quantity">
+                                            Số lượng <span class="required-field"> * </span>
+                                        </label>
+                                        <input [(ngModel)]="productDetail.quantity" type="number" id="quantity"
+                                            name="quantity" pInputText />
+                                    </div>
+                                </div>
+                                <div class="col-6">
+                                    <div class="field mb-2">
+                                        <label htmlFor="description">
+                                            Mô tả <span class="required-field"> * </span>
+                                        </label>
+                                        <input [(ngModel)]="productDetail.description" type="text" id="description"
+                                            name="description" pInputText />
+                                    </div>
+                                </div>
+                            </div>
+                        </ng-container>
                     </div>
                     <div class="col-4">
                         <h5 class="mb-2">Thêm ảnh</h5>
@@ -86,17 +128,17 @@
                             <br>
                             <br>
                             <div *ngIf="selectedFile">
-                                <img style="width: 600px; height:600px; object-fit: cover; margin-right: 20px;"
+                                <img style="width: 400px; height:400px; object-fit: cover; margin-right: 20px;"
                                     src="{{selectedFile.src}}">
                             </div>
                         </div>
-                        <!-- <div class="card center" style="width: 50%; height: auto;">
-                                <img src="{{baseUrl}}/{{ product.imageUrl}}">
-                            </div> -->
+                        <div *ngIf="product.id" class="card center"
+                            style="width: 400px; height:400px; object-fit: cover;">
+                            <img src="{{baseUrl}}/{{ product.imageUrl}}">
+                        </div>
                         <br>
                     </div>
                 </div>
-
             </div>
             <!-- <div class="p-dialog-footer mt-4" style="width: 100%; position: fixed; left: 0; bottom: 0;">
                 <button pButton pRipple label="Hủy" icon="pi pi-times" class="p-button-text p-button-sm p-confirm-dialog-reject mt-4"

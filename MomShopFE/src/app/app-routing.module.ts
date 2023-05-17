@@ -30,7 +30,7 @@ const routes: Routes = [
     children: [
       { path: 'product', component: AppAdminManagementProductComponent,},
       { path: 'product/create', component: CreateOrEditProductTestComponent},
-      //{ path: 'product/detail', component: CreateOrEditCollectionComponent},
+      { path: 'product/detail', component: CreateOrEditProductTestComponent},
     ] 
   },
   { path: 'login', component: LoginComponent },

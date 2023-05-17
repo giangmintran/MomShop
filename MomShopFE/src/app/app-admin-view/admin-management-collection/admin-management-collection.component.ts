@@ -69,7 +69,7 @@ export class AdminManagementCollectionComponent implements OnInit {
   }
   editProduct(row: any) {
     const navigationExtras: NavigationExtras = {
-      queryParams: { id: '2' }
+      queryParams: { id: row.id }
     };
     this.router.navigate(['admin/collection-management/collection/detail'],navigationExtras);
   }
