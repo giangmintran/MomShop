@@ -22,7 +22,7 @@ namespace MOMShop.Dto.Order.User
         public float DeliveryCost { get; set; }
         public string DiscountCode { get; set; }
         public float TotalAmount { get; set; }
-        public float Description { get; set; }
+        public string Description { get; set; }
         public int CreatedBy { get; set; }
         public List<ViewOrderDetail> Details { get; set; }
     }
