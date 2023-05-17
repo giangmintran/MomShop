@@ -1,7 +1,8 @@
 import { Component } from '@angular/core';
-import { Order } from 'src/models/order';
 import { OrderFilter } from 'src/models/orderFilter';
+import { ViewOrderDto } from 'src/models/user/viewOrderDto';
 import { OrderService } from 'src/services/order.service';
+import { UserOrderService } from 'src/services/user-order.service';
 
 @Component({
   selector: 'app-app-user-order',
@@ -9,11 +10,12 @@ import { OrderService } from 'src/services/order.service';
   styleUrls: ['./app-user-order.component.scss']
 })
 export class AppUserOrderComponent {
-    dataOrder;
-    filterOrder: OrderFilter
-    constructor(private orderService:OrderService){
-        this.orderService.getAllOrder(this.filterOrder).subscribe(result=>{
-          this.dataOrder = result;
-        })
-    }
+  dataOrder;
+  filterOrder: OrderFilter = new OrderFilter;
+  constructor(private userOrder: UserOrderService) {
+    this.filterOrder.customerId = 1;
+    this.userOrder.getAllOrder(this.filterOrder).subscribe(result => {
+      this.dataOrder = result;
+    })
+  }
 }
