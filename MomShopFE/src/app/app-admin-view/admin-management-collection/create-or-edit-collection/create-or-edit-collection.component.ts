@@ -213,7 +213,7 @@ export class CreateOrEditCollectionComponent implements OnInit {
       data: {
         collection: this.collection
       },
-      header: 'Chi tiết bộ sưu t',
+      header: 'Chi tiết bộ sưu tập',
       width: '70%',
       contentStyle: { "max-height": "1900px", overflow: "auto", "margin-bottom": "40px"},
       baseZIndex: 10000,

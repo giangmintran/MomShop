@@ -19,6 +19,8 @@ export class ProductService {
   }
   createOrEdit(product: any) {
     if (product.id) {
+      console.log("update");
+      
       return this.http.put(this.baseUrl + 'update', product);
     } else {
       return this.http.post(this.baseUrl + 'add', product);

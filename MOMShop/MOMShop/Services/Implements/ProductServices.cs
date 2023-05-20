@@ -62,14 +62,17 @@ namespace MOMShop.Services.Implements
                 throw new System.Exception("Không tìm thấy sản phẩm");
             }
 
-            _dbContext.HistoryUpdates.Add(new HistoryUpdate()
+            if(product.Price != input.Price)
             {
-                Table = HistoryUpdateTable.PRODUCT,
-                ReferId = product.Id,
-                ColumnUpdate = HistoryUpdateColumn.PRODUCT_PRICE,
-                OldValue = product.Price.ToString(),
-                NewValue = input.Price.ToString()
-            });
+                _dbContext.HistoryUpdates.Add(new HistoryUpdate()
+                {
+                    Table = HistoryUpdateTable.PRODUCT,
+                    ReferId = product.Id,
+                    ColumnUpdate = HistoryUpdateColumn.PRODUCT_PRICE,
+                    OldValue = product.Price.ToString(),
+                    NewValue = input.Price.ToString()
+                });
+            }
 
             product.Name = input.Name;
             product.Code = input.Code;
@@ -77,8 +80,16 @@ namespace MOMShop.Services.Implements
             product.Description = input.Description;
             product.ProductType = input.ProductType;
 
+            if (input.ProductDetails.Count() == 0)
+            {
+                var removelList = _dbContext.ProductDetails.Where(e => e.ProductId == product.Id);
+                _dbContext.ProductDetails.RemoveRange(removelList);
+            }
+
             foreach (var item in input.ProductDetails)
             {
+                var removelList = _dbContext.ProductDetails.Where(e => e.ProductId == product.Id && !input.ProductDetails.Select(d => d.Size).Contains(e.Size));
+                _dbContext.ProductDetails.RemoveRange(removelList);
                 var detail = _dbContext.ProductDetails.FirstOrDefault(e => e.Size == item.Size && e.ProductId == product.Id);
                 if(detail != null)
                 {

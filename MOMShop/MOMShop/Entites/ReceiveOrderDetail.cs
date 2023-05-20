@@ -8,7 +8,6 @@ namespace MOMShop.Entites
         [Key]
         public int Id { get; set; }
         public int ReceiveOrderId { get; set; }
-        [Comment("ReceiveProductCode")]
         public string Code { get; set; }
         public string Name { get; set; }
         public int Type { get; set; }

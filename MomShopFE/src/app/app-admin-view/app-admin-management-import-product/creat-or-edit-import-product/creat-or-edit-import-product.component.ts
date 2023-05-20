@@ -5,14 +5,16 @@ import { ConfirmEventType, ConfirmationService, MessageService } from "primeng/a
 import { DialogService, DynamicDialogConfig, DynamicDialogRef } from "primeng/dynamicdialog";
 import { ReceiveOrderDto } from "src/models/receiverOrder";
 import { ReceiveOrderService } from "src/services/receiveOrder.service";
-import { ProductStatus, ReceivedOrderConst } from "src/shared/AppConst";
+import { ProductConst, ProductStatus, ReceivedOrderConst } from "src/shared/AppConst";
 import { CreateOrEditDetailImportProductComponent } from "../create-or-edit-detail-import-product/create-or-edit-detail-import-product.component";
 import { ReceivedOrderDetail } from "src/models/receivedOrderDetail";
+import { ActivatedRoute, Router } from "@angular/router";
 
 @Component({
   selector: "app-creat-or-edit-import-product",
   templateUrl: "./creat-or-edit-import-product.component.html",
   styleUrls: ["./creat-or-edit-import-product.component.scss"],
+  providers: [DialogService, ConfirmationService, MessageService]
 })
 export class CreatOrEditImportProductComponent implements OnInit {
   receiveOrder: ReceiveOrderDto = new ReceiveOrderDto();
@@ -28,16 +30,19 @@ export class CreatOrEditImportProductComponent implements OnInit {
   selectedRow;
   colDetails;
   listAction: any[] = [];
+  receivedOrderDetails: any = [];
   ProductStatus = ProductStatus;
-
+  ref: DynamicDialogRef
+  types = ProductConst.productType;
+  
   constructor(
-    public dialogService: DialogService, 
     public messageService: MessageService,  
-    public configDialog: DynamicDialogConfig,
     public receivedOrderService: ReceiveOrderService,
     public toastr: ToastrService,
-    public ref: DynamicDialogRef,
     private confirmationService: ConfirmationService,
+    private router: Router,
+    private route: ActivatedRoute,
+    public dialogService: DialogService, 
   ) {}
   ngOnInit(): void {
     this.listTypeProduct = [
@@ -58,18 +63,16 @@ export class CreatOrEditImportProductComponent implements OnInit {
   }
 
   getData(){
-    if(this.configDialog?.data.receivedOrder) {
-      this.receivedOrderService.getReceiveOrderById(this.configDialog?.data.receivedOrder.id).subscribe((data) => {
-        console.log("edit", data);
-        this.receiveOrder = data;
-        this.receiveOrder.createdDate = this.configDialog?.data.receivedOrder.createdDateDisplay;
-        this.receiveOrder.receivedDate = this.configDialog?.data.receivedOrder.receivedDateDisplay;
-        if(this.receiveOrder.details){
-          this.showData(this.receiveOrder.details)
-          this.genlistAction(this.receiveOrder.details);
-        }
-      }); 
-    }
+    //   this.receivedOrderService.getReceiveOrderById(this.configDialog?.data.receivedOrder.id).subscribe((data) => {
+    //     console.log("edit", data);
+    //     this.receiveOrder = data;
+    //     this.receiveOrder.createdDate = this.configDialog?.data.receivedOrder.createdDateDisplay;
+    //     this.receiveOrder.receivedDate = this.configDialog?.data.receivedOrder.receivedDateDisplay;
+    //     if(this.receiveOrder.details){
+    //       this.showData(this.receiveOrder.details)
+    //       this.genlistAction(this.receiveOrder.details);
+    //     }
+    //   }); 
   }
 
   showData(rows){
@@ -87,19 +90,19 @@ export class CreatOrEditImportProductComponent implements OnInit {
     }
   }
   close() {
-    this.ref.close(false);
   }
 
   save() {
     if(this.validate()){
       let receivedDate = this.receiveOrder.receivedDate.getDate() + 1;
       this.receiveOrder.receivedDate.setDate(receivedDate);
-
-      console.log("date", this.receiveOrder.receivedDate);
-
-      this.receivedOrderService.createOrEditReceiveOrder(this.receiveOrder).subscribe(() => {
-        this.ref.close(true);
-      });
+      console.log("order", this.receiveOrder);
+      console.log("detaal", this.receivedOrderDetails);
+      this.receiveOrder.details = this.receivedOrderDetails;
+      console.log("resilt", this.receiveOrder);
+      // this.receivedOrderService.createOrEditReceiveOrder(this.receiveOrder).subscribe(() => {
+      // });
+      this.messageService.add({ severity: 'success', summary: 'Thông báo', detail: 'Thêm thành công', life: 3000 });
     }
     else {
       this.messageService.add({ severity: 'error', summary: 'Thông báo', detail: 'Vui lòng nhập đầy đủ thông tin', life: 3000 });
@@ -140,14 +143,31 @@ export class CreatOrEditImportProductComponent implements OnInit {
     });
   }
 
+  backToCollectionList(){
+    this.router.navigate(['admin/received-order/order']);
+  }
+  addvalue() {
+    this.receivedOrderDetails.push({ });
+  }
+  removeDetail(index){
+    this.confirmationService.confirm({
+      message: 'Xóa giá trị này?',
+      acceptLabel: 'Đồng ý',
+      rejectLabel: 'Hủy',
+      icon: 'pi pi-exclamation-triangle',
+      accept: () => {
+        this.receivedOrderDetails.splice(index, 1);
+      }
+    });
+  }
   createDetail(){
     this.ref = this.dialogService.open(CreateOrEditDetailImportProductComponent, {
       data: {
-        receivedOrderId: this.configDialog?.data.receivedOrder.id
+        receivedOrderId: this.receiveOrder.id
       },
       header: 'Thêm mới',
-      width: '50%',
-      height: '50%',
+      width: '70%',
+      height: '70%',
       contentStyle: { "max-height": "1900px", overflow: "auto", "margin-bottom": "40px" },
       baseZIndex: 10000,
     });
@@ -160,23 +180,23 @@ export class CreatOrEditImportProductComponent implements OnInit {
   }
 
   editDetail(row){
-    const ref = this.dialogService.open(CreateOrEditDetailImportProductComponent, {
-      header: "Cập nhật thông tin",
-      width: "50%",
-      height: "50%",
-      contentStyle: { "max-height": "800px", overflow: "auto", "margin-bottom": "40px", },
-      baseZIndex: 10000,
-      data: {
-        receivedOrder: row,
-      },
-    });
-    //
-    ref.onClose.subscribe((data) => {
-      if (data){
-        this.messageService.add({ severity: 'success', summary: 'Thông báo', detail: 'Cập nhật thành công', life: 3000 });
-        this.getData();
-      }
-    });
+    // const ref = this.dialogService.open(CreateOrEditDetailImportProductComponent, {
+    //   header: "Cập nhật thông tin",
+    //   width: "50%",
+    //   height: "50%",
+    //   contentStyle: { "max-height": "800px", overflow: "auto", "margin-bottom": "40px", },
+    //   baseZIndex: 10000,
+    //   data: {
+    //     receivedOrder: row,
+    //   },
+    // });
+    // //
+    // ref.onClose.subscribe((data) => {
+    //   if (data){
+    //     this.messageService.add({ severity: 'success', summary: 'Thông báo', detail: 'Cập nhật thành công', life: 3000 });
+    //     this.getData();
+    //   }
+    // });
   }
 
   deleteDetail(row){
