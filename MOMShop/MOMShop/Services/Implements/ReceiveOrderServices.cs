@@ -110,23 +110,23 @@ namespace MOMShop.Services.Implements
             receiveOrder.Receiver = input.Receiver;
             receiveOrder.Description = input.Description;
 
-            var products = _dbContext.ReceiveOrderDetails.Where(e => e.ReceiveOrderId == receiveOrder.Id && !input.Details.Contains(e.ProductId)).ToList();
-            foreach (var item in products)
-            {
-                _dbContext.ProductCollections.Remove(item);
-            }
-            foreach (var item in input.Products)
-            {
-                var productCollection = _dbContext.ProductCollections.FirstOrDefault(e => e.ProductId == item && e.CollectionId == collection.Id);
-                if (productCollection == null)
-                {
-                    _dbContext.ProductCollections.Add(new ProductCollection
-                    {
-                        CollectionId = collection.Id,
-                        ProductId = item,
-                    });
-                }
-            }
+            //var products = _dbContext.ReceiveOrderDetails.Where(e => e.ReceiveOrderId == receiveOrder.Id && !input.Details.Contains(e.ProductId)).ToList();
+            //foreach (var item in products)
+            //{
+            //    _dbContext.ProductCollections.Remove(item);
+            //}
+            //foreach (var item in input.Products)
+            //{
+            //    var productCollection = _dbContext.ProductCollections.FirstOrDefault(e => e.ProductId == item && e.CollectionId == collection.Id);
+            //    if (productCollection == null)
+            //    {
+            //        _dbContext.ProductCollections.Add(new ProductCollection
+            //        {
+            //            CollectionId = collection.Id,
+            //            ProductId = item,
+            //        });
+            //    }
+            //}
             _dbContext.SaveChanges();
             return _mapper.Map<ReceiveOrderDto>(receiveOrder);
         }
