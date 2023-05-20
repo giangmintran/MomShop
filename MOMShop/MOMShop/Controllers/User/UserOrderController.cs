@@ -4,6 +4,7 @@ using MOMShop.Dto.Order;
 using MOMShop.Dto.Order.User;
 using MOMShop.Entites;
 using MOMShop.Services.Interfaces.UserService;
+using MOMShop.Utils;
 using System;
 using System.Collections.Generic;
 
@@ -40,6 +41,19 @@ namespace MOMShop.Controllers.User
             {
                 var result = _services.FindAll(input);
                 return result;
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(ex.Message);
+            }
+        }
+
+        [HttpPut("cancel-order/{id}")]
+        public void CancelOrder(int id)
+        {
+            try
+            {
+                 _services.UpdateStatus(id, OrderStatus.DA_HUY);
             }
             catch (Exception ex)
             {
