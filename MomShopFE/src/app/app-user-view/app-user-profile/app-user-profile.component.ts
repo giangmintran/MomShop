@@ -10,9 +10,14 @@ import * as moment from 'moment';
 })
 export class AppUserProfileComponent {
   user: UserDto = new UserDto;
+  userProfile:UserDto= new UserDto;
 
   constructor(private userService: UserService, private toastr: ToastrService) {
     this.updateUserInfo();
+    const userId = JSON.parse(localStorage.getItem('user'));
+     this.userService.findUserById(userId).subscribe((result: UserDto)=>{
+      this.userProfile = result;
+     })
   }
   updateUserInfo() {
     this.userService.findUser().subscribe((result: UserDto) => {

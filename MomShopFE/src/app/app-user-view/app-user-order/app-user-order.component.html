@@ -4,14 +4,14 @@
 </div> -->
 <div class="list-order mb-5">
     <h2 class="text-center mb-5">Thông tin đơn hàng</h2>
-    <div class="container">
+    <div class="container" *ngFor="let order of dataOrder">
         <div class="product">
-            <div class="row">
-                <div class="col-6"></div>
+            <div class="row d-flex align-items-center">
+                <div class="col-6"><p class="order-code">{{order.orderCode}}</p></div>
                 <div class="col-6 d-flex justify-content-between align-items-center">
                     <div class="block-transport">
                         <i class="fa-solid fa-truck"></i>
-                        <span class="text-status">Đã giao thành công</span>
+                        <span class="text-status">{{order.status}}</span>
                     </div>
                     <hr class="sparate-line">
                     <a href="/vote" class="vote text-decoration-none">Đánh Giá</a>
@@ -19,27 +19,15 @@
             </div>
         </div>
         <hr>
-        <div class="detail-product mt-4">
-            <img src="assets/banner.jpg" alt="" width="100" height="100" class="image-product">
+        <div class="detail-product mt-4" *ngFor="let item of order.details">
+            <img src="{{baseUrl}}/{{ item.imageUrl}}" alt="" width="100" height="100" class="image-product">
             <div class="description-order">
                 <div>
-                    <p class="name-product">Túi đeo chéo thời trang nam nữ cao cấp</p>
-                    <p class="category-product">x1</p>
+                    <p class="name-product">{{item.name}}</p>
+                    <p class="category-product">x{{item.quantity}}</p>
                 </div>
                 <div class="unit-price">
-                    <p class="price">200000</p>
-                </div>
-            </div>
-        </div>
-        <div class="detail-product mt-4">
-            <img src="assets/banner.jpg" alt="" width="100" height="100" class="image-product">
-            <div class="description-order">
-                <div>
-                    <p class="name-product">Túi đeo chéo thời trang nam nữ cao cấp</p>
-                    <p class="category-product">x1</p>
-                </div>
-                <div class="unit-price">
-                    <p class="price">200000</p>
+                    <p class="price">{{item.total | currency:"VND":"symbol"}}</p>
                 </div>
             </div>
         </div>
@@ -48,36 +36,7 @@
             <div class="block-payment">
                 <i class="fa-sharp fa-solid fa-shield-halved icon-policy"></i>
                 <span>Thành tiền:</span>
-                <span class="fee">208.000đ</span>
-            </div>
-        </div>
-    </div>
-    <div class="container">
-        <div class="product">
-            <div class="row d-flex align-items-center">
-                <div class="col-6"><p class="order-code">OrderCode</p></div>
-                <div class="col-6 d-flex ju3stify-content-between align-items-center">
-                    <i class="fa-solid fa-truck"></i>
-                    <span class="text-status">Đơn hàng đã được giao thành công</span>
-                    <hr class="sparate-line">
-                    <a href="/vote" class="vote text-decoration-none">Đánh Giá</a>
-                </div>
-            </div>
-        </div>
-        <hr>
-        <div class="detail-product mt-4">
-            <img src="assets/banner.jpg" alt="" width="100" height="100" class="image-product">
-            <div class="description-order">
-                <p class="name-product">Túi đeo chéo thời trang nam nữ cao cấp</p>
-                <p class="category-product">x1</p>
-            </div>
-        </div>
-        <hr>
-        <div class="row d-flex justify-content-end pb-5">
-            <div class="block-payment">
-                <i class="fa-sharp fa-solid fa-shield-halved icon-policy"></i>
-                <span>Thành tiền:</span>
-                <span class="fee">208.000đ</span>
+                <span class="fee">{{order.totalAmount | currency:"VND":"symbol"}}</span>
             </div>
         </div>
     </div>

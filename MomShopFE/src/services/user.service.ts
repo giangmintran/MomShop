@@ -27,4 +27,7 @@ export class UserService {
     updateInforUser(user:UserDto){
         return this.http.put(this.baseUrl +'update',user,{responseType: 'text'});
     }
+    findUserById(id){
+        return this.http.get(this.baseUrl + 'find/'+ id);
+    }
 }
