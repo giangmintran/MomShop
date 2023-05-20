@@ -8,12 +8,13 @@ import { DialogService, DynamicDialogConfig, DynamicDialogRef } from 'primeng/dy
 import { ConfirmEventType, ConfirmationService, MessageService } from 'primeng/api';
 import { DatePipe } from '@angular/common';
 import { ReceivedOrderConst } from 'src/shared/AppConst';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-app-admin-management-import-product',
   templateUrl: './app-admin-management-import-product.component.html',
   styleUrls: ['./app-admin-management-import-product.component.scss'],
-  providers: [DialogService,ConfirmationService, MessageService, DatePipe]
+  providers: [ConfirmationService, MessageService, DatePipe]
 })
 export class AppAdminManagementImportProductComponent implements OnInit{
   ref: DynamicDialogRef;
@@ -31,10 +32,10 @@ export class AppAdminManagementImportProductComponent implements OnInit{
   constructor(private http: HttpClient, 
     public receiveOrder: ReceiveOrderService, 
     public toastr: ToastrService, 
-    public dialogService: DialogService, 
     public messageService: MessageService,
     private confirmationService: ConfirmationService,
-    private datePipe: DatePipe
+    private datePipe: DatePipe,
+    private router: Router,
     ) {}
   ngOnInit(): void {
     this.cols = [
@@ -88,40 +89,26 @@ export class AppAdminManagementImportProductComponent implements OnInit{
     this.getReceiveOrderDetailData();
   }
   createReceiveOrder() {
-    this.ref = this.dialogService.open(CreatOrEditImportProductComponent, {
-      data: {
-      },
-      header: 'Thêm mới',
-      width: '70%',
-      height: '90%',
-      contentStyle: { "max-height": "1900px", overflow: "auto", "margin-bottom": "40px" },
-      baseZIndex: 10000,
-    });
-    this.ref.onClose.subscribe((data) => {
-      if (data) {
-        this.messageService.add({ severity: 'success', summary: 'Thông báo', detail: 'Thêm thành công', life: 3000 });
-        this.getReceiveOrderData();
-      }
-    });
+    this.router.navigate(['admin/received-order/order/create']);
   }
   editReceiveOrder(row) {
-    const ref = this.dialogService.open(CreatOrEditImportProductComponent, {
-      header: "Cập nhật thông tin",
-      width: "1400px",
-      height: "800px",
-      contentStyle: { "max-height": "800px", overflow: "auto", "margin-bottom": "40px", },
-      baseZIndex: 10000,
-      data: {
-        receivedOrder: row,
-      },
-    });
+    // const ref = this.dialogService.open(CreatOrEditImportProductComponent, {
+    //   header: "Cập nhật thông tin",
+    //   width: "1400px",
+    //   height: "800px",
+    //   contentStyle: { "max-height": "800px", overflow: "auto", "margin-bottom": "40px", },
+    //   baseZIndex: 10000,
+    //   data: {
+    //     receivedOrder: row,
+    //   },
+    // });
     //
-    ref.onClose.subscribe((data) => {
-      if (data){
-        this.messageService.add({ severity: 'success', summary: 'Thông báo', detail: 'Cập nhật thành công', life: 3000 });
-        this.getReceiveOrderData();
-      }
-    });
+    // ref.onClose.subscribe((data) => {
+    //   if (data){
+    //     this.messageService.add({ severity: 'success', summary: 'Thông báo', detail: 'Cập nhật thành công', life: 3000 });
+    //     this.getReceiveOrderData();
+    //   }
+    // });
   }
   deleteReceiveOrder(row) {
     this.confirmationService.confirm({

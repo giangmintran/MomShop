@@ -21,6 +21,7 @@ import { AppUserOrderComponent } from './app-user-view/app-user-order/app-user-o
 import { CreateOrEditCollectionComponent } from './app-admin-view/admin-management-collection/create-or-edit-collection/create-or-edit-collection.component';
 import { CreateOrEditProductTestComponent } from './app-admin-view/app-admin-management-product/create-or-edit-product-test/create-or-edit-product-test.component';
 import { AppUserProfileComponent } from './app-user-view/app-user-profile/app-user-profile.component';
+import { CreatOrEditImportProductComponent } from './app-admin-view/app-admin-management-import-product/creat-or-edit-import-product/creat-or-edit-import-product.component';
 
 const routes: Routes = [
   { path: '',redirectTo:'/login',pathMatch: 'full' },
@@ -37,6 +38,14 @@ const routes: Routes = [
   { path: 'admin/customer', component: AppAdminMangementCustomerComponent },
   { path: 'admin/feedback', component: AppAdminFeedbackUserComponent },
   { path: 'admin/importProduct', component: AppAdminManagementImportProductComponent },
+  {
+    path: "admin/received-order",
+    children: [
+      { path: 'order', component: AppAdminManagementImportProductComponent,},
+      { path: 'order/create', component: CreatOrEditImportProductComponent},
+      { path: 'order/detail', component: CreateOrEditCollectionComponent},
+    ] 
+  },
   {
     path: "admin/collection-management",
     children: [

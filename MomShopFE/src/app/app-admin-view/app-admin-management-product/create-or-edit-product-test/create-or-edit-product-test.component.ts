@@ -2,7 +2,6 @@ import { HttpClient } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { ConfirmEventType, ConfirmationService, MenuItem, MessageService } from 'primeng/api';
 import { DialogService, DynamicDialogConfig, DynamicDialogRef } from 'primeng/dynamicdialog';
-import { CreateOrEditProductDetailTestComponent } from '../create-or-edit-product-detail-test/create-or-edit-product-detail-test.component';
 import { ProductService } from 'src/services/product.service';
 import { ToastrService } from 'ngx-toastr';
 import { ProductDto } from 'src/models/product';
@@ -82,6 +81,17 @@ export class CreateOrEditProductTestComponent implements OnInit {
 
   addvalue() {
     this.productDetails.push({ });
+  }
+  removeDetail(index){
+    this.confirmationService.confirm({
+      message: 'Xóa giá trị này?',
+      acceptLabel: 'Đồng ý',
+      rejectLabel: 'Hủy',
+      icon: 'pi pi-exclamation-triangle',
+      accept: () => {
+        this.productDetails.splice(index, 1);
+      }
+    });
   }
   removeElement(index) {
     this.confirmationService.confirm({

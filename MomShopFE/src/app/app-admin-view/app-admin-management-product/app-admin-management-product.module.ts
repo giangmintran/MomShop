@@ -9,12 +9,9 @@ import { InputTextModule } from 'primeng/inputtext';
 import { TableModule } from 'primeng/table';
 import { AppBsModalModule } from 'src/directive/app-bs-modal.module';
 import { AppAdminViewDetailProductComponent } from './app-admin-view-detail-product/app-admin-view-detail-product.component';
-import { CreateOrEditProductComponent } from './create-or-edit-product/create-or-edit-product.component';
-import { CreateOrEditDetailProductComponent } from './create-or-edit-detail-product/create-or-edit-detail-product.component';
 import { MenuModule } from 'primeng/menu';
 import { DynamicDialogModule } from 'primeng/dynamicdialog';
 import { CreateOrEditProductTestComponent } from './create-or-edit-product-test/create-or-edit-product-test.component';
-import { CreateOrEditProductDetailTestComponent } from './create-or-edit-product-detail-test/create-or-edit-product-detail-test.component';
 import { FileUploadModule } from 'primeng/fileupload';
 import { ToastModule } from 'primeng/toast';
 import { ConfirmDialogModule } from 'primeng/confirmdialog';
@@ -25,14 +22,12 @@ import { ToastrModule } from 'ngx-toastr';
   declarations: [
     AppAdminManagementProductComponent,
     AppAdminViewDetailProductComponent,
-    CreateOrEditProductComponent,
-    CreateOrEditDetailProductComponent,
     CreateOrEditProductTestComponent,
-    CreateOrEditProductDetailTestComponent,
   ],
   imports: [
     CommonModule,
     TableModule,
+    FormsModule,
     BrowserAnimationsModule,
     AppBsModalModule,FormsModule,
     DropdownModule,

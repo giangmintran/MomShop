@@ -65,7 +65,7 @@
                             </div>
                             <div class="col-9">
                             </div>
-                            <div class="col-1">
+                            <div class="col-1" *ngIf="collection.id">
                                 <button pButton pRipple label="Cập nhật" style="height: 48px"
                                 (click)="updateProductCollection()"></button>
                             </div>
