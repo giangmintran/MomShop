@@ -9,5 +9,7 @@ namespace MOMShop.Services.Interfaces.UserService
     {
         Order Create(OrderDto order);
         List<ViewOrderDto> FindAll(FilterOrderDto input);
+
+        void UpdateStatus(int id, int status);
     }
 }

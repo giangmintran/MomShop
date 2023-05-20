@@ -70,5 +70,15 @@ namespace MOMShop.Services.Implements.UserProductService
 
             return result;
         }
+
+        public void UpdateStatus(int id, int status)
+        {
+            var order = _dbContext.Orders.FirstOrDefault(e => e.Id == id && !e.Deleted);
+            if (order != null)
+            {
+                order.OrderStatus = status;
+            }
+            _dbContext.SaveChanges();
+        }
     }
 }
