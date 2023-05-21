@@ -1,6 +1,7 @@
 ﻿using AutoMapper;
 using MOMShop.Dto.Cart;
 using MOMShop.Dto.Collection;
+using MOMShop.Dto.Discount;
 using MOMShop.Dto.Order;
 using MOMShop.Dto.Order.User;
 using MOMShop.Dto.Product;
@@ -20,6 +21,7 @@ namespace MOMShop.MomShopMapperProfile
             CreateMap<UpdateProductDto, Product>().ReverseMap();
             CreateMap<ProductDto, Product>().ReverseMap();
             CreateMap<ProductDetailDto, ProductDetail>().ReverseMap();
+            CreateMap<DiscountDto, Discount>().ReverseMap();
             #region Order
             CreateMap<OrderDto, Order>().ReverseMap();
             #endregion
