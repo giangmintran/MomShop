@@ -25,6 +25,7 @@ namespace MOMShop.MomShopDbContext
         public DbSet<Users> Users { get; set; }
         public DbSet<HistoryUpdate> HistoryUpdates { get; set; }
         public DbSet<ProductCollection> ProductCollections { get; set; }
+        public DbSet<Discount> Discounts { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
@@ -85,6 +86,13 @@ namespace MOMShop.MomShopDbContext
             modelBuilder.Entity<Users>(entity =>
             {
                 entity.Property(e => e.Deleted).HasDefaultValue(false);
+            });
+            #endregion
+
+            #region Discount
+            modelBuilder.Entity<Discount>(entity =>
+            {
+                entity.Property(e => e.Status).HasDefaultValue(1);
             });
             #endregion
         }

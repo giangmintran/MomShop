@@ -1,0 +1,79 @@
+﻿using AutoMapper;
+using MOMShop.Dto.Discount;
+using MOMShop.Entites;
+using MOMShop.MomShopDbContext;
+using MOMShop.Services.Interfaces;
+using System.Collections.Generic;
+using System.Linq;
+
+namespace MOMShop.Services.Implements
+{
+    public class DiscoutService : IDiscountService
+    {
+        private readonly ApplicationDbContext _dbContext;
+        private readonly IMapper _mapper;
+
+        public DiscoutService(ApplicationDbContext dbContext, IMapper mapper)
+        {
+            _dbContext = dbContext;
+            _mapper = mapper;
+        }
+
+        public DiscountDto Add(DiscountDto input)
+        {
+            var insert = _mapper.Map<Discount>(input);       
+            _dbContext.Discounts.Add(insert);
+            _dbContext.SaveChanges();
+            return input;
+        }
+
+        public string CheckDiscountCodeExist(string discountCode)
+        {
+            var check = _dbContext.Discounts.FirstOrDefault(d => d.DiscountCode == discountCode);
+            if (check == null)
+            {
+                return "success";
+            }
+            return "duplicate";
+        }
+
+        public void Delete(int id)
+        {
+            var check = _dbContext.Discounts.FirstOrDefault(d => d.Id == id);
+            if (check != null)
+            {
+                _dbContext.Discounts.Remove(check);
+            }
+            _dbContext.SaveChanges();
+        }
+
+        public DiscountDto Find(int id)
+        {
+            var check = _dbContext.Discounts.FirstOrDefault(d => d.Id == id);
+            if (check != null)
+            {
+                return _mapper.Map<DiscountDto>(check);
+            }
+            return null;
+        }
+
+        public List<DiscountDto> GetAll(FilterDiscountDto input)
+        {
+            var result = _dbContext.Discounts.Where(e => (input.DiscountCode == null || e.DiscountCode.Contains(input.DiscountCode)
+                                                        && (input.Status == null || input.Status == e.Status))).ToList();
+
+            return _mapper.Map<List<DiscountDto>>(result);
+        }
+
+        public DiscountDto Update(DiscountDto input)
+        {
+            var check = _dbContext.Discounts.FirstOrDefault(d => d.Id == input.Id);
+            if (check != null)
+            {
+                check.DiscountPercent = input.DiscountPercent;
+                check.Status = input.Status;
+            }
+            return _mapper.Map<DiscountDto>(check);   
+        }
+    }
+}
