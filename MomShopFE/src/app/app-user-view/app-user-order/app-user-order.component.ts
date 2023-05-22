@@ -24,7 +24,7 @@ export class AppUserOrderComponent {
     },
     {
       value: 3,
-      label: "Đã giao thành công",
+      label: "Đã giao",
     },
     {
       value: 4,

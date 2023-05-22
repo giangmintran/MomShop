@@ -66,6 +66,7 @@ const routes: Routes = [
   { path: 'check-out', component: CheckOutComponent },
   { path: 'order', component: AppUserOrderComponent },
   { path: 'profile', component: AppUserProfileComponent },
+  //{ path: 'vote', component: AppUserProfileComponent },
 ];
 @NgModule({
   imports: [RouterModule.forRoot(routes)],
