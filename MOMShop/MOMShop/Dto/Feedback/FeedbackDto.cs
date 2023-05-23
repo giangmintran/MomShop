@@ -4,8 +4,9 @@ namespace MOMShop.Dto.Feedback
 {
     public class FeedbackDto
     {
-        public int Id { get; set; }
+        public int? Id { get; set; }
         public string CustomerName { get; set; }
+        public int OrderId { get; set; }
         public string OrderCode { get; set; }
         public string Content { get; set; }
         public string Email { get; set; }

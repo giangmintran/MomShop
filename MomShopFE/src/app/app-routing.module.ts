@@ -43,7 +43,7 @@ const routes: Routes = [
     children: [
       { path: 'order', component: AppAdminManagementImportProductComponent,},
       { path: 'order/create', component: CreatOrEditImportProductComponent},
-      { path: 'order/detail', component: CreateOrEditCollectionComponent},
+      { path: 'order/detail', component: CreatOrEditImportProductComponent},
     ] 
   },
   {

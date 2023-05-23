@@ -7,7 +7,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 
-namespace MOMShop.Services.Implements.UserProductService
+namespace MOMShop.Services.Implements.UserService
 {
     public class UserCartService : IUserCartService
     {

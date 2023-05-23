@@ -43,8 +43,6 @@ export class CreateOrEditDetailImportProductComponent implements OnInit {
       { name: "Quần", value: 4 },
       { name: "Phụ kiện", value: 5 },
     ];
-    console.log("init", this.configDialog?.data);
-    this.detail.receiveOrderId = this.configDialog?.data.receivedOrderId;
     this.getData();
   }
   show(id?) {

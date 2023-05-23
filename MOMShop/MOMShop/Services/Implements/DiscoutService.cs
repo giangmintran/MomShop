@@ -37,6 +37,16 @@ namespace MOMShop.Services.Implements
             return "duplicate";
         }
 
+        public int CheckDiscountPercent(string discountCode)
+        {
+            var check = _dbContext.Discounts.FirstOrDefault(d => d.DiscountCode == discountCode);
+            if (check != null)
+            {
+                return check.DiscountPercent;
+            }
+            return 0;
+        }
+
         public void Delete(int id)
         {
             var check = _dbContext.Discounts.FirstOrDefault(d => d.Id == id);

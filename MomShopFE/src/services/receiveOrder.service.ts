@@ -1,21 +1,24 @@
 import { HttpClient } from "@angular/common/http";
 import { Injectable } from "@angular/core";
 import { Observable } from "rxjs";
+import { ServiceBase } from "./service-base";
 
 
 @Injectable({
     providedIn: 'root',
 })
 
-export class ReceiveOrderService {
+export class ReceiveOrderService extends ServiceBase{
     baseUrl = 'http://localhost:5001/api/receive-order/';
-    constructor(private http: HttpClient) { }
+    constructor(private http: HttpClient) {
+        super();
+    }
     //xem thông tin đơn hàng
-    getAllReceiveOrder(status?): Observable<any> {
-        if(status == undefined){
-            return this.http.get(this.baseUrl + 'find-all');
-        }
-        return this.http.get(this.baseUrl + 'find-all' +'?status=' + status);
+    getAllReceiveOrder(status?: string, keyword: string = ""): Observable<any> {
+        let url_ = this.baseUrl + `find-all?`;
+        url_ += this.convertParamUrl('status', status ?? '');
+        url_ += this.convertParamUrl("keyword", keyword);
+        return this.http.get(url_);
     }
     //xem thông tin đơn hàng theo id
     getReceiveOrderById(id: number): Observable<any> {

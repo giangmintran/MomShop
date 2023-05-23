@@ -8,7 +8,9 @@ using MOMShop.Services.Interfaces;
 using MOMShop.Utils;
 using System;
 using System.Collections.Generic;
+using System.Drawing;
 using System.Linq;
+using System.Xml.Linq;
 
 namespace MOMShop.Services.Implements
 {
@@ -110,23 +112,37 @@ namespace MOMShop.Services.Implements
             receiveOrder.Receiver = input.Receiver;
             receiveOrder.Description = input.Description;
 
-            //var products = _dbContext.ReceiveOrderDetails.Where(e => e.ReceiveOrderId == receiveOrder.Id && !input.Details.Contains(e.ProductId)).ToList();
-            //foreach (var item in products)
-            //{
-            //    _dbContext.ProductCollections.Remove(item);
-            //}
-            //foreach (var item in input.Products)
-            //{
-            //    var productCollection = _dbContext.ProductCollections.FirstOrDefault(e => e.ProductId == item && e.CollectionId == collection.Id);
-            //    if (productCollection == null)
-            //    {
-            //        _dbContext.ProductCollections.Add(new ProductCollection
-            //        {
-            //            CollectionId = collection.Id,
-            //            ProductId = item,
-            //        });
-            //    }
-            //}
+            var products = _dbContext.ReceiveOrderDetails.Where(e => e.ReceiveOrderId == receiveOrder.Id && (!input.Details.Select(e => e.Code).Contains(e.Code) && !input.Details.Select(e => e.Size).Contains(e.Size))).ToList();
+            foreach (var item in products)
+            {
+                _dbContext.ReceiveOrderDetails.Remove(item);
+            }
+            foreach (var item in input.Details)
+            {
+                var productCollection = _dbContext.ReceiveOrderDetails.FirstOrDefault(e => e.ReceiveOrderId == input.Id && e.Code == item.Code && e.Size == item.Size);
+                if (productCollection == null)
+                {
+                    _dbContext.ReceiveOrderDetails.Add(new ReceiveOrderDetail
+                    {
+                        ReceiveOrderId = receiveOrder.Id,
+                        Code = item.Code,
+                        Size = item.Size,
+                        Name = item.Name,
+                        Quantity = item.Quantity,
+                        Type = item.Type,
+                        Description = item.Description
+                    });
+                }
+                else
+                {
+                    productCollection.Code = item.Code;
+                    productCollection.Size = item.Size;
+                    productCollection.Name = item.Name;
+                    productCollection.Quantity = item.Quantity;
+                    productCollection.Type = item.Type;
+                    productCollection.Description = item.Description;
+                }
+            }
             _dbContext.SaveChanges();
             return _mapper.Map<ReceiveOrderDto>(receiveOrder);
         }

@@ -52,13 +52,15 @@ export class CreatOrEditImportProductComponent implements OnInit {
       { name: "Quần", value: 4 },
       { name: "Phụ kiện", value: 5 },
     ];
-    this.colDetails = [
-      { name: "Áo thun", value: 1 },
-      { name: "Áo sơ mi", value: 2 },
-      { name: "Áo khoác", value: 3 },
-      { name: "Quần", value: 4 },
-      { name: "Phụ kiện", value: 5 },
-    ];
+
+    this.route.queryParams.subscribe(params => {
+      const id = params['id'];
+      if (id){
+        this.show(id);
+      } else {
+        this.getData();
+      }
+    });
     this.getData();
   }
 
@@ -85,7 +87,10 @@ export class CreatOrEditImportProductComponent implements OnInit {
     if (id) {
       this.receivedOrderService.getReceiveOrderById(id).subscribe((data) => {
         this.receiveOrder = data;
-        this.receiveOrder.id = id;
+        const dateObj = new Date(this.receiveOrder.receivedDate); 
+        dateObj.setDate(dateObj.getDate() + 1);
+        this.receiveOrder.receivedDate = dateObj;
+        this.receivedOrderDetails = data.details;
       })
     }
   }
@@ -100,9 +105,9 @@ export class CreatOrEditImportProductComponent implements OnInit {
       console.log("detaal", this.receivedOrderDetails);
       this.receiveOrder.details = this.receivedOrderDetails;
       console.log("resilt", this.receiveOrder);
-      // this.receivedOrderService.createOrEditReceiveOrder(this.receiveOrder).subscribe(() => {
-      // });
-      this.messageService.add({ severity: 'success', summary: 'Thông báo', detail: 'Thêm thành công', life: 3000 });
+      this.receivedOrderService.createOrEditReceiveOrder(this.receiveOrder).subscribe(() => {
+        this.messageService.add({ severity: 'success', summary: 'Thông báo', detail: 'Cập nhật thành công', life: 3000 });
+      });
     }
     else {
       this.messageService.add({ severity: 'error', summary: 'Thông báo', detail: 'Vui lòng nhập đầy đủ thông tin', life: 3000 });
@@ -111,7 +116,6 @@ export class CreatOrEditImportProductComponent implements OnInit {
 
   validate(): boolean{
     console.log(this.receiveOrder);
-    
     if(this.receiveOrder.code == null || this.receiveOrder.supplier == null || this.receiveOrder.status == null || this.receiveOrder.receiver == null){
       return false;
     }
@@ -147,9 +151,26 @@ export class CreatOrEditImportProductComponent implements OnInit {
     this.router.navigate(['admin/received-order/order']);
   }
   addvalue() {
-    this.receivedOrderDetails.push({ });
+    if(this.receivedOrderDetails == null){
+      this.receivedOrderDetails = [];
+      this.receivedOrderDetails.push({ });
+    } else {
+      if (this.receivedOrderDetails.length > 0){
+        this.receivedOrderDetails.forEach(element => {
+          console.log("ele", element.code);
+          if(element.code != undefined || element.name != undefined || element.size != undefined || element.quantity != undefined){
+            this.receivedOrderDetails.push({ });
+          }
+          else {
+            this.messageService.add({ severity: 'warn', summary: 'Thông báo', detail: 'Vui lòng nhập đầy đủ thông tin', life: 3000 });
+          }
+        });
+      }
+    }
   }
   removeDetail(index){
+    console.log("2222");
+    
     this.confirmationService.confirm({
       message: 'Xóa giá trị này?',
       acceptLabel: 'Đồng ý',
@@ -180,23 +201,7 @@ export class CreatOrEditImportProductComponent implements OnInit {
   }
 
   editDetail(row){
-    // const ref = this.dialogService.open(CreateOrEditDetailImportProductComponent, {
-    //   header: "Cập nhật thông tin",
-    //   width: "50%",
-    //   height: "50%",
-    //   contentStyle: { "max-height": "800px", overflow: "auto", "margin-bottom": "40px", },
-    //   baseZIndex: 10000,
-    //   data: {
-    //     receivedOrder: row,
-    //   },
-    // });
-    // //
-    // ref.onClose.subscribe((data) => {
-    //   if (data){
-    //     this.messageService.add({ severity: 'success', summary: 'Thông báo', detail: 'Cập nhật thành công', life: 3000 });
-    //     this.getData();
-    //   }
-    // });
+    
   }
 
   deleteDetail(row){

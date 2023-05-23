@@ -15,13 +15,15 @@
 				</div>
 				<div class="row mb-2" *ngIf="filter">
 					<div class="col-3">
+						<label class="mb-1" for="listStatus">Trạng thái</label>
 						<p-dropdown [options]="listStatus" name="listStatus" [(ngModel)]="filterStatus"
 							placeholder="Trạng thái" [style]="{'height':'40px','width':'100%'}"
-							(onChange)="getReceiveOrderData()" optionLabel="name" optionValue="code"></p-dropdown>
+							(onChange)="getReceiveOrderData()" optionLabel="name" optionValue="code" placeholder="Trạng thái"></p-dropdown>
 					</div>
 					<div class="col-3">
+						<label class="mb-1" for="listStatus">Tìm kiếm</label>
 						<input type="text" name="keyword" class="input-text" [style]="{'height':'40px'}" pInputText
-							[(ngModel)]="keyword" placeholder="Tìm kiếm" />
+							[(ngModel)]="keyword" placeholder="..."  (keyup)="startTimer()"/>
 					</div>
 				</div>
 				<p class="mb-2" style="font-size:24px;">Hóa đơn nhập hàng</p>

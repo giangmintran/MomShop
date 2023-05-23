@@ -11,5 +11,6 @@ namespace MOMShop.Services.Interfaces
         List<DiscountDto> GetAll(FilterDiscountDto input);
         DiscountDto Find(int id);
         string CheckDiscountCodeExist(string discountCode);
+        int CheckDiscountPercent(string discountCode);
     }
 }

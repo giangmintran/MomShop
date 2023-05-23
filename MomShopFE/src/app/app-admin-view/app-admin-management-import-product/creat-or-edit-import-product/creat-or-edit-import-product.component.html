@@ -1,3 +1,5 @@
+<p-toast></p-toast>
+<p-confirmDialog [style]="{width: 'auto', 'min-width': '300px'}" header="Thông báo" [baseZIndex]="10000"></p-confirmDialog>
 <div class="container1">
     <div class="user">
         <div class="mb-2">
@@ -33,7 +35,7 @@
                                 <label class="mb-2" htmlFor="receivedDate">Ngày nhận đơn<span class="required-field"> *
                                     </span>
                                 </label>
-                                <p-calendar name="receiveOrder.receivedDate" value="receiveOrder.receivedDate"
+                                <p-calendar name="receivedDate" value="receivedDate"
                                     [(ngModel)]="receiveOrder.receivedDate" dateFormat="dd/mm/yy"
                                     [style]="{'width':'100%'}" [showButtonBar]="true"></p-calendar>
                             </div>
@@ -131,7 +133,7 @@
                             <div class="col-4">
                                 <div class="field mb-2">
                                     <label htmlFor="description">
-                                        Mô tả <span class="required-field"> * </span>
+                                        Mô tả
                                     </label>
                                     <input [(ngModel)]="receivedOrderDetail.description" type="text" id="description"
                                         name="description" pInputText />
