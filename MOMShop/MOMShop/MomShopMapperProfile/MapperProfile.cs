@@ -2,6 +2,7 @@
 using MOMShop.Dto.Cart;
 using MOMShop.Dto.Collection;
 using MOMShop.Dto.Discount;
+using MOMShop.Dto.Feedback;
 using MOMShop.Dto.Order;
 using MOMShop.Dto.Order.User;
 using MOMShop.Dto.Product;
@@ -55,6 +56,10 @@ namespace MOMShop.MomShopMapperProfile
             CreateMap<ViewOrderDto, Order>().ReverseMap();
             CreateMap<ViewOrderDetail, OrderDetail>().ReverseMap();
             CreateMap<CreateOrderDetailDto, OrderDetail>().ReverseMap();
+            #endregion
+
+            #region FeedBack
+            CreateMap<FeedbackDto, Feedback>().ReverseMap();
             #endregion
         }
     }
