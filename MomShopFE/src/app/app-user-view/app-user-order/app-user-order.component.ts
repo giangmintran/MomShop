@@ -1,7 +1,5 @@
 import { Component, ViewChild } from "@angular/core";
 import { FilterOrderDto } from "src/models/orderFilter";
-import { ViewOrderDto } from "src/models/user/viewOrderDto";
-import { OrderService } from "src/services/order.service";
 import { UserOrderService } from "src/services/user-order.service";
 import { AppUserVoteComponent } from "./app-user-vote/app-user-vote.component";
 
@@ -11,7 +9,8 @@ import { AppUserVoteComponent } from "./app-user-vote/app-user-vote.component";
   styleUrls: ["./app-user-order.component.scss"],
 })
 export class AppUserOrderComponent {
-  @ViewChild("userVote" , { static: true }) modalVote = new AppUserVoteComponent;
+  @ViewChild("userVote", { static: true }) modalVote : AppUserVoteComponent;
+
   baseUrl = "http://localhost:5001";
   dataOrder;
   statusName;
@@ -44,7 +43,7 @@ export class AppUserOrderComponent {
       console.log(this.dataOrder);
     });
   }
-  openModalVote(){
-    this.modalVote.show();
+  openModalVote(order){
+    this.modalVote.show(order);
   }
 }
