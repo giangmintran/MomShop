@@ -27,6 +27,7 @@ import { FieldsetModule } from 'primeng/fieldset';
 import { DialogModule } from 'primeng/dialog';
 import { RadioButtonModule  } from 'primeng/radiobutton';
 import { MessagesModule } from "primeng/messages";
+import { AppUserOrderModule } from "./app/app-user-view/app-user-order/app-user-order.module";
 
 @NgModule({
   declarations: [AppAdminMenuComponent],
@@ -54,7 +55,7 @@ import { MessagesModule } from "primeng/messages";
     TagModule,
     RatingModule,
     PaginatorModule,
-    RadioButtonModule,
+    RadioButtonModule
   ],
   exports: [AppAdminMenuComponent,
     CardModule,
@@ -65,6 +66,7 @@ import { MessagesModule } from "primeng/messages";
     PaginatorModule,
     FieldsetModule,
     DialogModule,
+    AppUserOrderModule,
     RadioButtonModule],
 
 }) 
