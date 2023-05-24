@@ -21,6 +21,7 @@ namespace MOMShop.Services.Implements.UserProductService
         {
             var insert = _mapper.Map<Feedback>(input);
             _dbContext.Feedbacks.Add(insert);
+            _dbContext.SaveChanges();
             return input;
         }
     }
