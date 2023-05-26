@@ -12,19 +12,19 @@ import { UserFeedBackService } from 'src/services/user-feedback.service';
 })
 export class AppUserVoteComponent {
 
-  data: FeedbackDto = new FeedbackDto();
+  data: FeedbackDto = new FeedbackDto;
   @ViewChild("createOrEditModal", { static: true }) modal: ModalDirective;
   active: boolean = false;
   saving: boolean = false;
   constructor(public userFeedBack: UserFeedBackService, public toartr: ToastrService) {
   }
   show(order) {
-    this.modal.show();
-    this.data.customerName = JSON.parse(localStorage.getItem('user')).userName;
+    this.data.customerName = JSON.parse(localStorage.getItem('user'))?.userName;
     this.data.orderCode = order.orderCode;
     this.data.orderId = order.id;
     this.data.createdDate = moment().add(1, 'days').toDate();
-    this.data.email = JSON.parse(localStorage.getItem('user')).email;
+    this.data.email = JSON.parse(localStorage.getItem('user'))?.email;
+    this.modal.show();
   }
   close() {
     this.modal.hide();

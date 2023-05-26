@@ -17,6 +17,6 @@ import { FormsModule } from '@angular/forms';
     AppBsModalModule,
     FormsModule
   ],
-  exports:[AppUserVoteComponent]
+  exports:[AppUserVoteComponent,AppUserOrderDeliveryComponent]
 })
 export class AppUserOrderModule { }

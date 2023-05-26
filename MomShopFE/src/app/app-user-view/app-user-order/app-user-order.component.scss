@@ -41,7 +41,7 @@
 .block-payment{
    display: flex;
    justify-content: space-around;
-   align-items: center;
+   align-items: baseline;
    width: 100%;
 }
 .fee{
@@ -77,4 +77,7 @@
     padding: 8px 10px;
     border:none;
     margin-left: 20px;
+}
+.block-transport{
+    cursor: pointer;
 }

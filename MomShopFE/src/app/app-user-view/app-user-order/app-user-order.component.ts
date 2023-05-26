@@ -2,6 +2,7 @@ import { Component, ViewChild } from "@angular/core";
 import { FilterOrderDto } from "src/models/orderFilter";
 import { UserOrderService } from "src/services/user-order.service";
 import { AppUserVoteComponent } from "./app-user-vote/app-user-vote.component";
+import { AppUserOrderDeliveryComponent } from "./app-user-order-delivery/app-user-order-delivery.component";
 
 @Component({
   selector: "app-app-user-order",
@@ -9,7 +10,8 @@ import { AppUserVoteComponent } from "./app-user-vote/app-user-vote.component";
   styleUrls: ["./app-user-order.component.scss"],
 })
 export class AppUserOrderComponent {
-  @ViewChild("userVote", { static: true }) modalVote : AppUserVoteComponent;
+  @ViewChild("userVote", { static: true }) modalVote: AppUserVoteComponent;
+  @ViewChild("userstatusOrder", { static: true }) modalStatus: AppUserOrderDeliveryComponent;
 
   baseUrl = "http://localhost:5001";
   dataOrder;
@@ -37,13 +39,16 @@ export class AppUserOrderComponent {
     this.filterOrder.customerId = 1;
     this.userOrder.getAllOrder(this.filterOrder).subscribe((result) => {
       this.dataOrder = result;
-      this.dataOrder.forEach(ele=>{
-        ele.statusName = this.listStatus.find(e=>e.value == ele.orderStatus).label;
+      this.dataOrder.forEach(ele => {
+        ele.statusName = this.listStatus.find(e => e.value == ele.orderStatus).label;
       })
       console.log(this.dataOrder);
     });
   }
-  openModalVote(order){
+  openModalVote(order) {
     this.modalVote.show(order);
+  }
+  openModalStatusOrder() {
+    this.modalStatus.show()
   }
 }

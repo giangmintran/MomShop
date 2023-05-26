@@ -3,7 +3,7 @@ import { Component } from '@angular/core';
 import { ModalDirective } from 'ngx-bootstrap/modal';
 
 @Component({
-  selector: 'app-app-user-order-delivery',
+  selector: 'app-user-order-delivery',
   templateUrl: './app-user-order-delivery.component.html',
   styleUrls: ['./app-user-order-delivery.component.scss']
 })

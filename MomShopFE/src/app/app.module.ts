@@ -37,6 +37,7 @@ import { CheckOutComponent } from './app-user-view/check-out/check-out.component
 import { UserCollectionDetailComponent } from './app-user-view/user-collection-detail/user-collection-detail.component';
 import { AppUserOrderComponent } from './app-user-view/app-user-order/app-user-order.component';
 import { AppUserProfileComponent } from './app-user-view/app-user-profile/app-user-profile.component';
+import { AppUserOrderDeliveryComponent } from './app-user-view/app-user-order/app-user-order-delivery/app-user-order-delivery.component';
 
 @NgModule({
   declarations: [
