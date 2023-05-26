@@ -8,13 +8,13 @@
         </div>
         <div class="information-delivery">
             <div class="title-delivery mt-3">Thông tin giao hàng</div>
-            <p *ngIf="!user" class="sub-title mt-2">
+            <!-- <p *ngIf="!user" class="sub-title mt-2">
                 Bạn đã có tài khoản? <a href="/login" class="text-login text-decoration-none">Đăng nhập</a>
-            </p>
+            </p> -->
             <form class="form-information col-12">
                 <div class="row mb-3">
                     <div class="col-12">
-                        <input type="text" placeholder="Họ và tên" class="col-12 input" name="fullName" [(ngModel)]="userInfo.fullName">
+                        <input type="text" placeholder="Họ và tên" class="col-12 input" name="FullName" [(ngModel)]="userInfo.fullName">
                     </div>
                 </div>
                 <div class="row mb-3">
@@ -103,7 +103,7 @@
         <div class="row mb-3 sale-off">
             <div class="d-flex justify-content-between block-sale-off">
                 <input type="text" placeholder="Mã giảm giá" (keyup)="saleOff()" class="input-sale-off" [(ngModel)]="saleOffs">
-                <button type="button" disabled class="buttton-use">Sử dụng</button>
+                <button type="button" [disabled]="!saleOffs.trim()" class="buttton-use" (click)="useDisCount()">Sử dụng</button>
             </div>
         </div>
         <hr *ngIf="!user" class="hr-line">
@@ -131,13 +131,13 @@
             </div> -->
             <div class="delivery-fee d-flex justify-content-between">
                 <span class="text-gray">Giảm giá</span>
-                <span class="text-fee">{{discount}}đ</span>
+                <span class="text-fee">{{this.totalPrice*this.discount/100}}đ</span>
             </div>
         </div>
         <hr class="hr-line">
         <div class="total-fee-product">
             <span>Tổng cộng</span>
-            <span class="text-fee-total"><span class="text-unit">VND</span>{{totalPrice + 30000 - discount}}đ</span>
+            <span class="text-fee-total"><span class="text-unit">VND</span>{{totalAmount}}đ</span>
         </div>
     </div>
 </div>

@@ -6,6 +6,8 @@ import { ToastrService } from 'ngx-toastr';
 import { UserCartService } from 'src/services/cartService.service';
 import { UserOrderService } from 'src/services/user-order.service';
 import { UserService } from 'src/services/user.service';
+import { DiscountService } from 'src/services/discount.service';
+import { UserDto } from 'src/models/user';
 
 @Component({
   selector: 'app-check-out',
@@ -15,17 +17,19 @@ import { UserService } from 'src/services/user.service';
 export class CheckOutComponent {
   delivery = 'delivery';
   data;
-  saleOffs: string;
+  saleOffs: string = '';
   payOption = "cod";
   user;
-  totalPrice: number;
+  totalPrice: number; // tổng tiền chưa bao gồm mã giảm phí ship
+  totalAmount: number = 0;
   products: any[] = [];
   baseUrl = 'http://localhost:5001';
   discount = 0;
-  userInfo;
+  userInfo: UserDto = new UserDto();
   constructor(private http: HttpClient, private router: Router,private cartService: UserCartService,
     private userService: UserService,public toastr: ToastrService,
-    private userOrderService: UserOrderService) {
+    private userOrderService: UserOrderService,
+    private discountService: DiscountService) {
     this.http.get("https://dev-online-gateway.ghn.vn/shiip/public-api/master-data/province").subscribe(data => {
       console.log(data);
     });
@@ -35,7 +39,9 @@ export class CheckOutComponent {
   }
 
   getProducts(){
-    this.cartService.getAllCart().subscribe((res) => {
+    this.cartService.getAllCart().pipe(finalize(() => {
+      this.calSumPrice();
+    })).subscribe((res) => {
       this.products = res;
       this.priceChange();
     })
@@ -52,7 +58,7 @@ export class CheckOutComponent {
     
   }
   getUserInfo(){
-    this.userService.findUser().subscribe((res) => {
+    this.userService.findUser().subscribe((res:any) => {
       // console.log(res);
       this.userInfo = res;
     })
@@ -66,12 +72,35 @@ export class CheckOutComponent {
     var input = document.querySelector<HTMLElement>(".input-sale-off");
     if (this.saleOffs.trim() !== "") {
       button.style.backgroundColor = "#338dbc";
-      button.setAttribute('disabled', 'false');
+     // button.setAttribute('disabled', 'false');
     }
-    else{
+    else {
       button.style.backgroundColor = "#c8c8c8";
-      button.setAttribute('disabled', 'true');
+     // button.setAttribute('enabled', 'enabled');
     }
+    if(this.discount > 0){
+      this.toastr.warning('Mã giảm giá bị hủy!');
+      this.discount = 0 ;
+      this.calSumPrice();
+    }
+  }
+
+  useDisCount(){
+    this.discountService.applyDiscount(this.saleOffs).subscribe((res:any) => {
+      if(res == 0) {
+        this.toastr.warning('Mã không hợp lệ');
+        this.discount = 0;
+      }
+      else if(this.saleOffs == '1'){
+        this.toastr.success('Áp dụng mã thành công');
+        this.discount = res;
+      }
+      this.calSumPrice();
+    })
+  }
+
+  calSumPrice(){
+    this.totalAmount = this.totalPrice + 30000 - this.totalPrice*this.discount/100;
   }
 
   completeCheckOut(){
@@ -90,8 +119,8 @@ export class CheckOutComponent {
       "paymentType": this.payOption == "cod" ? 1 : this.payOption == "bank" ? 2 : 0,
       "orderStatus": 1,
       "deliveryCost": 30000,
-      "discountCode": "string",
-      "totalAmount": this.totalPrice + 30000 - this.discount,
+      "discountCode": this.saleOffs,
+      "totalAmount": this.totalAmount,
       "description": "",
       "createdBy": this.userInfo?.id ?? 0,
       "orderDetails": []

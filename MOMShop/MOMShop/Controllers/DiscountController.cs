@@ -102,11 +102,11 @@ namespace MOMShop.Controllers
         }
 
         [HttpPut("check-discount")]
-        public string CheckDiscount(string discountCode)
+        public int CheckDiscount(string discountCode)
         {
             try
             {
-                var result = _services.CheckDiscountCodeExist(discountCode);
+                var result = _services.CheckDiscountPercent(discountCode);
                 return result;
             }
             catch (Exception ex)
