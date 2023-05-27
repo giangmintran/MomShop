@@ -7,5 +7,8 @@ export class UserDto {
   birthDay: Date;
   gender: string;
   address: string;
+  province: string;
+  district: string;
+  nation: string;
   createdBy: string
 }

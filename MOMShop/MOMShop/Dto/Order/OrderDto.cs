@@ -26,12 +26,23 @@ namespace MOMShop.Dto.Order
         public string Description { get; set; }
         public int? CreatedBy { get; set; }
         public List<CreateOrderDetailDto> OrderDetails { get; set; }
+        public List<Events> Events { get; set; }
     }
 
     public class CreateOrderDetailDto
     {
         public int ProductId { get; set; }
+        public string ProductCode { get; set; }
+        public string ProductName { get; set; }
         public string Size { get; set; }
         public int Quantity { get; set; }
+        public float Price { get; set; }
+        public string ImageUrl { get; set; }
+    }
+
+    public class Events
+    {
+        public string Summary { get; set; }
+        public DateTime? CreatedDate { get; set; }
     }
 }

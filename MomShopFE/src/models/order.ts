@@ -3,6 +3,8 @@ export class Order{
     orderCode:string;
     customerName:string;
     address:string;
+    province:string;
+    district:string;
     email:string;
     phone:string;
     createdDate:Date;
@@ -10,5 +12,6 @@ export class Order{
     paymentType:number;
     orderStatus:number;
     totalAmount:number;
-    
+    orderDetails: any[];
+    events: any[];
 }

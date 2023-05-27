@@ -95,6 +95,11 @@ namespace MOMShop.MomShopDbContext
                 entity.Property(e => e.Status).HasDefaultValue(1);
             });
             #endregion
+
+            modelBuilder.Entity<HistoryUpdate>(entity =>
+            {
+                entity.Property(e => e.CreatedDate).HasDefaultValueSql("getdate()");
+            });
         }
     }
 }

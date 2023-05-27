@@ -5,4 +5,7 @@ export class RegisterDto{
     phone:string;
     birthday:string;
     fullname:string
+    address:string
+    province:string
+    district:string
 }

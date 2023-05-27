@@ -154,10 +154,10 @@ export class CreatOrEditImportProductComponent implements OnInit {
     if(this.receivedOrderDetails == null){
       this.receivedOrderDetails = [];
       this.receivedOrderDetails.push({ });
-    } else {
+    } 
+    else {
       if (this.receivedOrderDetails.length > 0){
         this.receivedOrderDetails.forEach(element => {
-          console.log("ele", element.code);
           if(element.code != undefined || element.name != undefined || element.size != undefined || element.quantity != undefined){
             this.receivedOrderDetails.push({ });
           }

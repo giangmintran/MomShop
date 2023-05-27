@@ -50,7 +50,7 @@ export class LoginComponent {
           "Thông báo",
           { timeOut: 3000 }
         );
-        this.router.navigateByUrl('/home')
+        this.router.navigateByUrl('/view')
       }
     });
   }

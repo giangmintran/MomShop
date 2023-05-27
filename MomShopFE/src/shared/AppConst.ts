@@ -65,7 +65,53 @@ export class ProductConst {
     }
     
 }
+export class OrderConst {
+    public static mediaStatus = {
+        ACTIVE: 'Đã đăng',
+        PENDING: 'Trình duyệt',
+        DELETED: 'Đã xoá',
+        DRAFT: 'Bản nháp'
+    }
 
+    public static orderStatus = [
+        {
+            name: 'Tất cả',
+            code: undefined
+        },
+        {
+            name: 'Khởi tạo',
+            code: 1
+        },
+        {
+            name: 'Đã nhận',
+            code: 2
+        },
+        {
+            name: 'Đang giao',
+            code: 3
+        },
+        {
+            name: 'Hoàn thành',
+            code: 4
+        },
+        {
+            name: 'Đã hủy',
+            code: 5
+        },
+    ]
+    public static getStatus(code){
+        const result = this.orderStatus.find(item => 
+            item.code == code
+        );
+        return result?.name ?? "";
+    }
+    public static statusSeverity = {
+        ACTIVE: 'success',
+        PENDING: 'warning',
+        DELETED: 'danger',
+        DRAFT: 'secondary'
+    }
+}
 export class ReceivedOrderConst {
     public static mediaStatus = {
         ACTIVE: 'Đã đăng',

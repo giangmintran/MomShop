@@ -24,6 +24,17 @@
                 <label for="phone" class="color-text">Địa chỉ</label>
                 <input type="text" class="input">
             </div>
+
+            <div class="d-flex justify-content-between align-items-baseline" style="width: 55%;">
+                <label for="phone" class="color-text">Quận/Huyện</label>
+                <input type="text" class="input" [(ngModel)]="user.district">
+            </div>
+
+            <div class="d-flex justify-content-between align-items-baseline" style="width: 55%;">
+                <label for="phone" class="color-text">Thành phố</label>
+                <input type="text" class="input" [(ngModel)]="user.province">
+            </div>
+
             <div class="d-flex justify-content-between align-items-baseline" style="width: 55%;">
                 <label for="phone" class="color-text">Số điện thoại</label>
                 <input type="text" class="input text-secondary" [(ngModel)]="user.phone">

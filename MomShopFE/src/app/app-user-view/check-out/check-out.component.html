@@ -30,14 +30,8 @@
                 </div>
                 <div class="row mb-3">
                     <div class="col-12 d-flex justify-content-between">
-                        <input type="text" placeholder="Quốc gia" class="input national-input">
-                        <input type="text" placeholder="Tỉnh / thành" class="input province-input">
-                    </div>
-                </div>
-                <div class="row mb-3">
-                    <div class="col-12 d-flex justify-content-between">
-                        <input type="text" placeholder="Quận / huyện" class="input district-input">
-                        <input type="text" placeholder="Phường / xã" class="input ward-input">
+                        <input type="text" placeholder="Quận / huyện" class="input district-input" [(ngModel)]="userInfo.province">
+                        <input type="text" placeholder="Tỉnh / thành" class="input province-input" [(ngModel)]="userInfo.district">
                     </div>
                 </div>
                 <div class="row mb-3">

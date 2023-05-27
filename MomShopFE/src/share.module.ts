@@ -28,6 +28,7 @@ import { DialogModule } from 'primeng/dialog';
 import { RadioButtonModule  } from 'primeng/radiobutton';
 import { MessagesModule } from "primeng/messages";
 import { AppUserOrderModule } from "./app/app-user-view/app-user-order/app-user-order.module";
+import { AppAdminManagementOrdertModule } from "./app/app-admin-view/app-admin-management-order/app-admin-management-order.component.module";
 
 @NgModule({
   declarations: [AppAdminMenuComponent],
@@ -49,6 +50,7 @@ import { AppUserOrderModule } from "./app/app-user-view/app-user-order/app-user-
     AppAdminManagementImportProductModule,
     AdminManagementCollectionModule,
     AppAdminManagementProductModule,
+    AppAdminManagementOrdertModule,
     CardModule,
     RouterModule,
     DataViewModule, 

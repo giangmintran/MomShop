@@ -28,6 +28,10 @@ namespace MOMShop.Entites
         /// </summary>
         public string NewValue { get; set; }
         /// <summary>
+        /// Ghi chú
+        /// </summary>
+        public string Summary { get; set; }
+        /// <summary>
         /// Ngày tạo thay đổi
         /// </summary>
         public DateTime CreatedDate { get; set; }

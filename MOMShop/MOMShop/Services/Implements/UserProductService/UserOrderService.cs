@@ -1,9 +1,11 @@
 ﻿using AutoMapper;
+using Microsoft.AspNetCore.Components.Forms;
 using MOMShop.Dto.Order;
 using MOMShop.Dto.Order.User;
 using MOMShop.Entites;
 using MOMShop.MomShopDbContext;
 using MOMShop.Services.Interfaces.UserService;
+using MOMShop.Utils.HistoryUpdate;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -23,6 +25,8 @@ namespace MOMShop.Services.Implements.UserProductService
 
         public Order Create(OrderDto order)
         {
+            order.CreatedDate = DateTime.Now;
+            order.IntendedTime = DateTime.Now.AddDays(3);
             var insert = _mapper.Map<Order>(order);
             var result = _dbContext.Orders.Add(insert);
             _dbContext.SaveChanges();
@@ -36,12 +40,31 @@ namespace MOMShop.Services.Implements.UserProductService
                 _dbContext.OrderDetails.Add(detail);
             }
             _dbContext.SaveChanges();
+
+            foreach (var item in order.OrderDetails)
+            {
+                var cart = _dbContext.Carts.FirstOrDefault(e => e.ProductId == item.ProductId && e.CustomerId == order.CreatedBy);
+                if (cart != null)
+                {
+                    _dbContext.Carts.Remove(cart);
+                }
+            }
+
+            var history = new HistoryUpdate()
+            {
+                Table = HistoryUpdateTable.ORDER,
+                ReferId = result.Entity.Id,
+                Summary = "Thêm mới đơn hàng"
+            };
+            _dbContext.HistoryUpdates.Add(history);
+            _dbContext.SaveChanges();
             return result.Entity;
         }
 
         public List<ViewOrderDto> FindAll(FilterOrderDto input)
         {
-            var orders = _dbContext.Orders.Where(e => e.CreatedBy == input.CustomerId && !e.Deleted 
+            input.CustomerId = 4;
+            var orders = _dbContext.Orders.Where(e => e.CreatedBy == input.CustomerId && !e.Deleted
                                                     && (input.Status == null || e.OrderStatus == input.Status) 
                                                     && (input.OrderCode == null || e.OrderCode.Contains(input.OrderCode))).ToList();
             var result = _mapper.Map<List<ViewOrderDto>>(orders);
@@ -69,6 +92,11 @@ namespace MOMShop.Services.Implements.UserProductService
             }
 
             return result;
+        }
+
+        public OrderDto FindById(int id)
+        {
+            throw new NotImplementedException();
         }
 
         public void UpdateStatus(int id, int status)

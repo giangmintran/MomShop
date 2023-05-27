@@ -1,10 +1,13 @@
 ﻿using MOMShop.Dto.Order;
 using MOMShop.Utils;
+using System.Collections.Generic;
 
 namespace MOMShop.Services.Interfaces
 {
     public interface IOrderServices
     {
-        Paging<OrderDto> GetAllOrder(FilterOrderDto input);
+        List<OrderDto> GetAllOrder(FilterOrderDto input);
+        OrderDto FindById(int id);
+        void UpdateStatus(int id, int status);
     }
 }

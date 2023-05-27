@@ -42,6 +42,9 @@ namespace MOMShop.Entites
         /// Address
         /// </summary>
         public string Address { get; set; }
+        public string Province { get; set; }
+        public string District { get; set; }
+        public int UserType { get; set; }
         public string CreatedBy { get; set; }
         public bool Deleted { get; set; }
     }
