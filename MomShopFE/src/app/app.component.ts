@@ -1,5 +1,6 @@
 import { HttpClient } from "@angular/common/http";
 import { Component, OnInit } from "@angular/core";
+import { UserDto } from "src/models/user";
 interface User {
   Id: number;
   type: number;
@@ -11,7 +12,6 @@ interface User {
 })
 export class AppComponent implements OnInit {
   title = "MomShopFE";
-  user: User;
   visiableMain;
   dataUser: any;
   isAdmin: boolean = false;
@@ -20,18 +20,13 @@ export class AppComponent implements OnInit {
   visiableLogin: boolean = false;
   userType;
   accountUser;
-  constructor(private http: HttpClient) {}
+  user: UserDto;
+  constructor(private http: HttpClient) {
+    this.user = JSON.parse(localStorage.getItem('user'));
+  }
 
   ngOnInit(): void {
     this.accountUser = JSON.parse(localStorage.getItem('user'));
   }
  
-  backHome() {
-    this.visiableMain = true;
-    this.visiableLogin = false;
-  }
-  redirectFormRegister(){
-    this.visiableMain = false;
-    this.visiableLogin = false;
-  }
 }
