@@ -31,7 +31,7 @@ export class LoginComponent {
   checkLogin = false;
   routerPage() {
     console.log(this.user)
-    this._user.login(this.user).subscribe((result) => {
+    this._user.login(this.user).subscribe((result:UserDto) => {
       console.log(result)
       if (result == null) {
         this.toastr.warning(
@@ -50,12 +50,15 @@ export class LoginComponent {
           "Thông báo",
           { timeOut: 3000 }
         );
-        this.router.navigateByUrl('/view')
+        if(result.userType == 1){
+          this.router.navigateByUrl('/admin')
+        }
+        else this.router.navigateByUrl('/home')
       }
     });
   }
   routerRegister() {
     this.router.navigateByUrl('register');
     this.register.emit(null);
-  }
+  } 
 }

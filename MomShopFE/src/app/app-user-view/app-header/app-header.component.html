@@ -34,11 +34,11 @@
                         width="40" height="40" /><span *ngIf="isAccount" class="text-danger" style="font-weight: bold;margin-left: 8px;">{{accountUser.fullName}}</span></a>
                         <div class="block-option">
                             <ul class="list-option">
-                                <li class="list-unstyled mb-2" *ngIf="isAccount"><a class="item-option" href="/profile">Tài khoản của tôi</a></li>
-                                <li class="list-unstyled mb-2" *ngIf="isAccount"><a class="item-option" href="/order">Đơn hàng</a></li>
-                                <li class="list-unstyled mb-2" *ngIf="!isAccount"><a class="item-option" href="/login">Đăng nhập</a></li>
-                                <li class="list-unstyled mb-2" *ngIf="!isAccount"><a class="item-option" href="/register">Đăng ký</a></li>
-                                <li class="list-unstyled mb-2" *ngIf="isAccount"><a class="item-option" (click)="logout()">Đăng xuất</a></li>
+                                <li class="list-unstyled" *ngIf="isAccount"><a class="item-option" href="/profile">Tài khoản của tôi</a></li>
+                                <li class="list-unstyled" *ngIf="isAccount"><a class="item-option" href="/order">Đơn hàng</a></li>
+                                <li class="list-unstyled" *ngIf="!isAccount"><a class="item-option" href="/login">Đăng nhập</a></li>
+                                <li class="list-unstyled" *ngIf="!isAccount"><a class="item-option" href="/register">Đăng ký</a></li>
+                                <li class="list-unstyled" *ngIf="isAccount"><a class="item-option" (click)="logout()">Đăng xuất</a></li>
                                 <li class="list-unstyled"><a class="item-option" href="/view">Thoát</a></li>
                             </ul>
                         </div>

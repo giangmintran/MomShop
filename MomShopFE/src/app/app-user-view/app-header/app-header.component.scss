@@ -13,7 +13,10 @@
     list-style-type: none;
     width: 100%;
     text-align: center;
-    color:black
+    color:black;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
 .list-option{
     display: flex;
@@ -33,4 +36,7 @@
 .item-option:hover{
     background-color: rgb(132, 159, 182);
     cursor: pointer;
+}
+.list-unstyled{
+    height: 45px;
 }

@@ -42,5 +42,6 @@ namespace MOMShop.Dto.Users
         public string Address { get; set; }
         public string CreatedBy { get; set; }
         public bool Deleted { get; set; }
+        public int UserType { get; set; }
     }
 }

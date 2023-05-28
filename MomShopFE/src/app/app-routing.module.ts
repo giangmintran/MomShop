@@ -61,7 +61,7 @@ const routes: Routes = [
     children: [
       { path: 'order', component: AppAdminManagementOrderComponent,},
       { path: 'order/:id', component: CreateOrEditOrderComponent},
-    ] 
+    ]
   },
   { path: 'home', component: AppUserHomeComponent},
  // { path: 'cart', component: AppUserCartComponent},
