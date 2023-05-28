@@ -151,8 +151,7 @@ export class CreatOrEditImportProductComponent implements OnInit {
     this.router.navigate(['admin/received-order/order']);
   }
   addvalue() {
-    if(this.receivedOrderDetails == null){
-      this.receivedOrderDetails = [];
+    if(this.receivedOrderDetails.length == 0){
       this.receivedOrderDetails.push({ });
     } 
     else {

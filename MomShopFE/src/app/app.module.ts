@@ -39,6 +39,7 @@ import { AppUserOrderComponent } from './app-user-view/app-user-order/app-user-o
 import { AppUserProfileComponent } from './app-user-view/app-user-profile/app-user-profile.component';
 import { AppUserOrderDeliveryComponent } from './app-user-view/app-user-order/app-user-order-delivery/app-user-order-delivery.component';
 import { AppAdminManagementOrderComponent } from './app-admin-view/app-admin-management-order/app-admin-management-order.component';
+import { DashboardComponent } from './app-admin-view/dashboard/dashboard.component';
 
 @NgModule({
   declarations: [

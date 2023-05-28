@@ -80,7 +80,21 @@ export class CreateOrEditProductTestComponent implements OnInit {
   }
 
   addvalue() {
-    this.productDetails.push({ });
+    if(this.productDetails.length == 0){
+      this.productDetails.push({ });
+    } 
+    else {
+      if (this.productDetails.length > 0){
+        this.productDetails.forEach(element => {
+          if(element.code != undefined || element.name != undefined || element.size != undefined || element.quantity != undefined){
+            this.productDetails.push({ });
+          }
+          else {
+            this.messageService.add({ severity: 'warn', summary: 'Thông báo', detail: 'Vui lòng nhập đầy đủ thông tin', life: 3000 });
+          }
+        });
+      }
+    }
   }
   removeDetail(index){
     this.confirmationService.confirm({

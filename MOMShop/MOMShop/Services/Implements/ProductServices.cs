@@ -176,7 +176,7 @@ namespace MOMShop.Services.Implements
             var result = new Paging<ProductDto>();
             result.Items = new List<ProductDto>();
 
-            var products = _dbContext.Products.Where(e => !e.Deleted && (input.Status == null || e.Status == input.Status)).OrderByDescending(e => e.Id).ToList();
+            var products = _dbContext.Products.Where(e => !e.Deleted && (input.Status == null || e.Status == input.Status) && (input.Keyword == null || e.Code.Contains(input.Keyword) || e.Name.Contains(input.Keyword))).OrderByDescending(e => e.Id).ToList();
 
             foreach (var product in products)
             {

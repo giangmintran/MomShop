@@ -18,10 +18,13 @@ export class AppComponent implements OnInit {
   sidebarExpanded = true;
   visableCart: boolean = false;
   visiableLogin: boolean = false;
- 
+  userType;
+  accountUser;
   constructor(private http: HttpClient) {}
 
-  ngOnInit(): void {}
+  ngOnInit(): void {
+    this.accountUser = JSON.parse(localStorage.getItem('user'));
+  }
  
   backHome() {
     this.visiableMain = true;

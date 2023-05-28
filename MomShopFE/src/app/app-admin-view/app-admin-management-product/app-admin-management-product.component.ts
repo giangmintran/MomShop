@@ -20,6 +20,7 @@ export class AppAdminManagementProductComponent{
   ref: DynamicDialogRef;
   rows: ProductDto[] = [];
   rowsAfter: ProductDto[] = [];
+  timer: any;
   product: ProductDto;
   colsProduct;
   colsDetailProduct;
@@ -35,7 +36,8 @@ export class AppAdminManagementProductComponent{
   listAction: any[] = [];
   screenHeight: number = window.innerHeight;
   metaKeySelection: boolean = true;
-  ProductStatus = ProductStatus
+  ProductStatus = ProductStatus;
+  keyword;
   listTypeProduct = [
     { name: "Áo thun", value: 1 },
     { name: "Áo sơ mi", value: 2 },
@@ -102,7 +104,7 @@ export class AppAdminManagementProductComponent{
     this.getProductData();
   }
   getProductData(): void {
-    this.productServices.getAllProduct(this.filterStatus).subscribe((data) => {
+    this.productServices.getAllProduct(this.filterStatus, this.keyword).subscribe((data) => {
       console.log("data", data?.items);
       this.rows = data?.items;
       this.genlistAction(this.rows);
@@ -126,6 +128,14 @@ export class AppAdminManagementProductComponent{
       this.detailProduct = data;
     })
   }
+
+  startTimer() {
+    clearTimeout(this.timer); // Đảm bảo rằng timer trước đó được hủy
+    this.timer = setTimeout(() => {
+      this.getProductData();
+    }, 2000); // Thời gian chờ: 3000 milliseconds (3 giây)
+  }
+
   onSelectionChange() {
    this.getDetailProductData();
   }

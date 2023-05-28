@@ -84,7 +84,7 @@ export class AppAdminMangementCustomerComponent {
   }
   deleteUser() {
     this.productServices.deleteProduct(this.selectedRow.id).subscribe((data)=>{
-      this.productServices.getAllProduct(3).subscribe(()=>{
+      this.productServices.getAllProduct(3, "").subscribe(()=>{
         this.toastr.success('Xoá thành công','Thông báo',{
           timeOut:100
         });

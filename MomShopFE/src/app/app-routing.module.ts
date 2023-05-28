@@ -24,6 +24,7 @@ import { AppUserProfileComponent } from './app-user-view/app-user-profile/app-us
 import { CreatOrEditImportProductComponent } from './app-admin-view/app-admin-management-import-product/creat-or-edit-import-product/creat-or-edit-import-product.component';
 import { AppAdminManagementOrderComponent } from './app-admin-view/app-admin-management-order/app-admin-management-order.component';
 import { CreateOrEditOrderComponent } from './app-admin-view/app-admin-management-order/create-or-edit-order/create-or-edit-order.component';
+import { DashboardComponent } from './app-admin-view/dashboard/dashboard.component';
 
 const routes: Routes = [
   { path: '',redirectTo:'/login',pathMatch: 'full' },
@@ -63,6 +64,8 @@ const routes: Routes = [
       { path: 'order/:id', component: CreateOrEditOrderComponent},
     ]
   },
+  { path: 'admin/dashboard', component: DashboardComponent},
+
   { path: 'home', component: AppUserHomeComponent},
  // { path: 'cart', component: AppUserCartComponent},
   { path: 'register', component: AppUserRegisterComponent},
