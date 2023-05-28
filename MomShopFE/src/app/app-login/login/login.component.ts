@@ -51,7 +51,7 @@ export class LoginComponent {
           { timeOut: 3000 }
         );
         if(result.userType == 1){
-          this.router.navigateByUrl('/admin')
+          this.router.navigateByUrl('admin')
         }
         else this.router.navigateByUrl('/home')
       }

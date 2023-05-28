@@ -89,7 +89,7 @@
                     <span class="size">{{product.size}}</span>
                 </div>
                 <div class="col-3 price-product align-items-center d-flex align-items-end">
-                    <p >{{product.quantity*product.price}}đ</p>
+                    <p >{{product.quantity*product.price | currency:"VND":"symbol"}}</p>
                 </div>
             </div>
         </div>
@@ -109,7 +109,7 @@
         <div class="product-fee">
             <div class="provisional-fee d-flex justify-content-between mb-2">
                 <span class="text-gray">Tạm tính:</span>
-                <span class="text-fee">{{totalPrice}}đ</span>
+                <span class="text-fee">{{totalPrice | currency:"VND":"symbol"}}</span>
             </div>
             <div class=" d-flex justify-content-between mb-2">
                 <span class="text-gray">Chiết khấu:</span>
@@ -125,13 +125,13 @@
             </div> -->
             <div class="delivery-fee d-flex justify-content-between">
                 <span class="text-gray">Giảm giá</span>
-                <span class="text-fee">{{this.totalPrice*this.discount/100}}đ</span>
+                <span class="text-fee">{{this.totalPrice*this.discount/100 | currency:"VND":"symbol"}}</span>
             </div>
         </div>
         <hr class="hr-line">
         <div class="total-fee-product">
             <span>Tổng cộng</span>
-            <span class="text-fee-total"><span class="text-unit">VND</span>{{totalAmount}}đ</span>
+            <span class="text-fee-total"><span class="text-unit">VND</span>{{totalAmount | currency:"VND":"symbol"}}</span>
         </div>
     </div>
 </div>
