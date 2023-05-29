@@ -8,4 +8,12 @@
         public const int HOAN_THANH = 4;
         public const int DA_HUY = 5;
     }
+
+    public static class ReceiveOrderStatus
+    {
+        public const int CHUA_THANH_TOAN = 1;
+        public const int DA_THANH_TOAN = 2;
+        public const int HOAN_THANH = 3;
+    }
+
 }

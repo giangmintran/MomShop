@@ -1,18 +1,33 @@
-import { Component, EventEmitter, Input, Output } from '@angular/core';
+import { AfterViewInit, Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { Route, Router } from '@angular/router';
+import { MenuService } from 'src/services/menuService';
 
 @Component({
   selector: 'app-admin-menu',
   templateUrl: './app-admin-menu.component.html',
   styleUrls: ['./app-admin-menu.component.scss']
 })
-export class AppAdminMenuComponent {
+export class AppAdminMenuComponent implements OnInit {
   @Input() isExpanded: boolean = false;
   @Output() toggleSidebar: EventEmitter<boolean> = new EventEmitter<boolean>();
+  constructor(private route:Router, private menuService:MenuService){
+  }
 
-  constructor(private route:Router){}
+  ngOnInit() {
+    window.addEventListener('beforeunload', this.handleBeforeUnload);
+  }
+
+  ngOnDestroy() {
+    window.removeEventListener('beforeunload', this.handleBeforeUnload);
+  }
+
+  handleBeforeUnload() {
+    location.reload();
+    console.log('Sự kiện load lại trang');
+  }
   handleSidebarToggle = () => this.toggleSidebar.emit(!this.isExpanded);
   ClickMenu(option){
+    this.menuService.setShowMenu(!this.menuService.showMenu$);
     var menuItem = document.querySelectorAll(".item");
     var menuActive = document.getElementsByClassName("active")[0];
     menuActive?.classList.remove("active");
@@ -21,6 +36,9 @@ export class AppAdminMenuComponent {
          item.classList.add("active");
        })
     })
+    if(option == 0){
+      this.route.navigateByUrl("admin/dashboard");
+    }
     if(option == 1){
       this.route.navigateByUrl("admin/customer");
     }

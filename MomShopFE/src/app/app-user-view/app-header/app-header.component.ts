@@ -28,6 +28,7 @@ export class AppHeaderComponent {
     this.backHome.emit(null);
   }
   logout() {
+    location.reload();
     this.toastr.success("Đăng xuất thành công", "Thông báo", { timeOut: 2000 });
     localStorage.setItem('user', null);
     this.router.navigateByUrl('/view');

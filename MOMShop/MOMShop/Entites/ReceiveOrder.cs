@@ -14,6 +14,9 @@ namespace MOMShop.Entites
         [Comment("Nguoi gui (Xuong may gui))")]
         public string Supplier { get; set; }
         public string Receiver { get; set; }
+        /// <summary>
+        /// 1. Chưa thanh toán, 2 đã thanh toán, 3 Đã hoàn thành
+        /// </summary>
         public int Status { get; set; }
         public string Description { get; set; }
         public bool Deleted { get; set; }

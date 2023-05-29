@@ -12,6 +12,7 @@ import { SharedModule } from 'src/share.module';
 import { AppAdminMenuComponent } from '../app-admin-menu/app-admin-menu.component';
 import { DashboardComponent } from './dashboard.component';
 import { ChartModule } from 'primeng/chart';
+import { StyleClassModule } from 'primeng/styleclass';
 
 
 @NgModule({
@@ -27,7 +28,8 @@ import { ChartModule } from 'primeng/chart';
     InputTextModule,
     ButtonModule,
     ToastrModule,
-    ChartModule
+    ChartModule,
+    StyleClassModule
   ]
 })
 export class DashboardModule { }

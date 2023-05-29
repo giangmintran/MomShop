@@ -1,6 +1,7 @@
 import { HttpClient } from "@angular/common/http";
 import { Component, OnInit } from "@angular/core";
 import { UserDto } from "src/models/user";
+import { MenuService } from "src/services/menuService";
 interface User {
   Id: number;
   type: number;
@@ -12,7 +13,9 @@ interface User {
 })
 export class AppComponent implements OnInit {
   title = "MomShopFE";
-  visiableMain;
+  showMenu: boolean;
+
+  visiableMain = false;
   dataUser: any;
   isAdmin: boolean = false;
   sidebarExpanded = true;
@@ -21,12 +24,10 @@ export class AppComponent implements OnInit {
   userType;
   accountUser;
   user: UserDto;
-  constructor(private http: HttpClient) {
-    this.user = JSON.parse(localStorage.getItem('user'));
+  constructor(private http: HttpClient, private menuService: MenuService) {
+      this.user = JSON.parse(localStorage.getItem('user'));
   }
-
   ngOnInit(): void {
-    this.accountUser = JSON.parse(localStorage.getItem('user'));
+    
   }
- 
 }
