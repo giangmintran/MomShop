@@ -19,7 +19,6 @@ export class AppAdminMenuComponent implements OnInit {
     if (sessionStorage.getItem('userType')){
       location.reload();
       sessionStorage.clear();
-      
     }
   }
 
@@ -58,7 +57,6 @@ export class AppAdminMenuComponent implements OnInit {
   }
 
   logout() {
-    this.toastr.success("Đăng xuất thành công", "Thông báo", { timeOut: 2000 });
     localStorage.setItem('user', null);
     this.router.navigateByUrl('/view');
     sessionStorage.setItem("adminLogout", "true");

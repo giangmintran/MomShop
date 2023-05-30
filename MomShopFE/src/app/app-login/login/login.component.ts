@@ -43,9 +43,9 @@ export class LoginComponent {
       } else {
         localStorage.setItem('user', JSON.stringify(result));
         sessionStorage.setItem('userType', JSON.stringify(result.userType))
-        
         if(result.userType == 1){
-          this.router.navigateByUrl('admin')
+          this.router.navigateByUrl('admin/dashboard')
+          sessionStorage.setItem('userType', JSON.stringify(result.userType))
         }
         else this.router.navigateByUrl('/view')
       }

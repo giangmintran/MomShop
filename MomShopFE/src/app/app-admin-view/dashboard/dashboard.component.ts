@@ -17,8 +17,13 @@ export class DashboardComponent implements OnInit {
     dataReceiveOrder: number[];
 
     constructor(private http: HttpClient, private route: Router, private dashboard: DashboardService) {
+
     }
     ngOnInit() {
+        if (sessionStorage.getItem('userType')) {
+            location.reload();
+            sessionStorage.clear();
+        }
         this.dashboard.dashboard().subscribe((data: any) => {
             this.dataOrder = data.orders;
             console.log(data.orders);
@@ -27,7 +32,7 @@ export class DashboardComponent implements OnInit {
             this.processData(data);
         });
     }
-    processData(data: any){
+    processData(data: any) {
         const documentStyle = getComputedStyle(document.documentElement);
         const textColor = documentStyle.getPropertyValue('--text-color');
         const textColorSecondary = documentStyle.getPropertyValue('--text-color-secondary');
