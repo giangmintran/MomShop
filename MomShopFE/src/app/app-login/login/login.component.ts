@@ -39,17 +39,11 @@ export class LoginComponent {
           "Thông báo",
           { timeOut: 3000 }
         );
-        //this.router.navigateByUrl('admin')
-        //this.goPage.emit(null);
         return;
       } else {
-        //this.router.navigateByUrl('register')
         localStorage.setItem('user', JSON.stringify(result));
-        this.toastr.success(
-          "Đăng nhập thành công",
-          "Thông báo",
-          { timeOut: 3000 }
-        );
+        sessionStorage.setItem('userType', JSON.stringify(result.userType))
+        
         if(result.userType == 1){
           this.router.navigateByUrl('admin')
         }

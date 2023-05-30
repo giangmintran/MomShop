@@ -1,5 +1,6 @@
 import { AfterViewInit, Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { Route, Router } from '@angular/router';
+import { ToastrService } from 'ngx-toastr';
 import { MenuService } from 'src/services/menuService';
 
 @Component({
@@ -10,21 +11,18 @@ import { MenuService } from 'src/services/menuService';
 export class AppAdminMenuComponent implements OnInit {
   @Input() isExpanded: boolean = false;
   @Output() toggleSidebar: EventEmitter<boolean> = new EventEmitter<boolean>();
-  constructor(private route:Router, private menuService:MenuService){
+
+  constructor(private route:Router, private menuService:MenuService,public toastr: ToastrService,private router: Router){
   }
 
-  ngOnInit() {
-    window.addEventListener('beforeunload', this.handleBeforeUnload);
+  ngOnInit(): void {
+    if (sessionStorage.getItem('userType')){
+      location.reload();
+      sessionStorage.clear();
+      
+    }
   }
 
-  ngOnDestroy() {
-    window.removeEventListener('beforeunload', this.handleBeforeUnload);
-  }
-
-  handleBeforeUnload() {
-    location.reload();
-    console.log('Sự kiện load lại trang');
-  }
   handleSidebarToggle = () => this.toggleSidebar.emit(!this.isExpanded);
   ClickMenu(option){
     this.menuService.setShowMenu(!this.menuService.showMenu$);
@@ -57,5 +55,12 @@ export class AppAdminMenuComponent implements OnInit {
     if(option == 6){
       this.route.navigateByUrl("admin/collection-management/collection");
     }
+  }
+
+  logout() {
+    this.toastr.success("Đăng xuất thành công", "Thông báo", { timeOut: 2000 });
+    localStorage.setItem('user', null);
+    this.router.navigateByUrl('/view');
+    sessionStorage.setItem("adminLogout", "true");
   }
 }

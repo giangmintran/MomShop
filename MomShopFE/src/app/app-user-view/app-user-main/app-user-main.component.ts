@@ -7,6 +7,9 @@ import { Component, OnInit } from '@angular/core';
 })
 export class AppUserMainComponent implements OnInit {
   ngOnInit(): void {
-    
+    if(sessionStorage.getItem("adminLogout")){
+      location.reload();
+      sessionStorage.clear();
+    }
   }
 }

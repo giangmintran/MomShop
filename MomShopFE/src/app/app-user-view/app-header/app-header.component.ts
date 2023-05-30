@@ -30,7 +30,7 @@ export class AppHeaderComponent {
   logout() {
     location.reload();
     this.toastr.success("Đăng xuất thành công", "Thông báo", { timeOut: 2000 });
-    localStorage.setItem('user', null);
+    localStorage.clear();
     this.router.navigateByUrl('/view');
   }
 }

@@ -25,9 +25,8 @@ export class AppComponent implements OnInit {
   accountUser;
   user: UserDto;
   constructor(private http: HttpClient, private menuService: MenuService) {
-      this.user = JSON.parse(localStorage.getItem('user'));
+    this.user = JSON.parse(localStorage.getItem('user'));
   }
   ngOnInit(): void {
-    
   }
 }
