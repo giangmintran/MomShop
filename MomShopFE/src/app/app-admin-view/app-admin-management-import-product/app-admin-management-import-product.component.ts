@@ -72,7 +72,7 @@ export class AppAdminManagementImportProductComponent implements OnInit{
     clearTimeout(this.timer); // Đảm bảo rằng timer trước đó được hủy
     this.timer = setTimeout(() => {
       this.getReceiveOrderData();
-    }, 2000); // Thời gian chờ: 3000 milliseconds (3 giây)
+    }, 1000); // Thời gian chờ: 3000 milliseconds (3 giây)
   }
 
   getReceiveOrderData(): void {
