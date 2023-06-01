@@ -8,4 +8,5 @@ export class RegisterDto{
     address:string
     province:string
     district:string
+    userType:number = 2;
 }

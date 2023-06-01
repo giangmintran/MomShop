@@ -30,9 +30,9 @@ export class CheckOutComponent {
     private userService: UserService,public toastr: ToastrService,
     private userOrderService: UserOrderService,
     private discountService: DiscountService) {
-    this.http.get("https://dev-online-gateway.ghn.vn/shiip/public-api/master-data/province").subscribe(data => {
-      console.log(data);
-    });
+    // this.http.get("https://dev-online-gateway.ghn.vn/shiip/public-api/master-data/province").subscribe(data => {
+    //   console.log(data);
+    // });
 
     this.getProducts();
     this.getUserInfo();

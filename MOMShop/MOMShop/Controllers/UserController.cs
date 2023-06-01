@@ -4,6 +4,7 @@ using MOMShop.Services.Interfaces;
 using System.Collections.Generic;
 using System;
 using MOMShop.Dto.Users;
+using MOMShop.Utils.APIResponse;
 
 namespace MOMShop.Controllers
 {
@@ -31,7 +32,7 @@ namespace MOMShop.Controllers
         }
 
         [HttpPost("register")]
-        public string Register([FromBody] RegisterDto input)
+        public APIResponse Register([FromBody] RegisterDto input)
         {
             try
             {

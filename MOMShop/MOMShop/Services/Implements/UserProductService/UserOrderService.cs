@@ -9,6 +9,16 @@ using MOMShop.Utils.HistoryUpdate;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Net;
+using MOMShop.Dto.Users;
+using System.Reflection.Metadata;
+using MailKit.Security;
+using MimeKit;
+using MailKit.Net.Smtp;
+using MOMShop.Services.Interfaces.Mail;
+using MOMShop.Utils.Mail;
+using System.Threading.Tasks;
+using MOMShop.Utils;
 
 namespace MOMShop.Services.Implements.UserProductService
 {
@@ -16,11 +26,13 @@ namespace MOMShop.Services.Implements.UserProductService
     {
         private readonly ApplicationDbContext _dbContext;
         private readonly IMapper _mapper;
+        private readonly ISendMailService _mail;
 
-        public UserOrderService(ApplicationDbContext dbContext, IMapper mapper)
+        public UserOrderService(ApplicationDbContext dbContext, IMapper mapper, ISendMailService mail)
         {
             _dbContext = dbContext;
             _mapper = mapper;
+            _mail = mail;
         }
 
         public Order Create(OrderDto order)
@@ -28,11 +40,11 @@ namespace MOMShop.Services.Implements.UserProductService
             order.CreatedDate = DateTime.Now;
             order.IntendedTime = DateTime.Now.AddDays(3);
             var insert = _mapper.Map<Order>(order);
+            var orderCode = RandomNumberGenerator.GenerateRandomNumber(8);
+            insert.OrderCode = orderCode;
             var result = _dbContext.Orders.Add(insert);
             _dbContext.SaveChanges();
 
-            var orderCode = "HD" + result.Entity.Id.ToString("D6");
-            result.Entity.OrderCode = orderCode;
             foreach (var item in order.OrderDetails)
             {
                 var detail = _mapper.Map<OrderDetail>(item);
@@ -50,6 +62,23 @@ namespace MOMShop.Services.Implements.UserProductService
                 }
             }
 
+            // Cấu hình thông tin SMTP
+            try
+            {
+                // Lấy dịch vụ sendmailservice
+                MailContent content = new MailContent
+                {
+                    To = "giangcoi2001@gmail.com",
+                    Subject = $"[ĐƠN HÀNG {result.Entity.OrderCode} ĐÃ ĐƯỢC ĐẶT THÀNH CÔNG]",
+                    Body = $"<h1>MOMSHOP</h1>\r\n    <h2>ĐƠN HÀNG #{result.Entity.OrderCode}</h2>\r\n    <p>Cảm ơn bạn đã đặt hàng, đơn hàng sẽ sớm được xử lý.</p>\r\n    <p>Vui lòng theo dõi gmail để biết tình trạng giao hàng.</p>\r\n    <p>\r\n        <a href=\"http://localhost:4200/order\">Xem đơn hàng</a>\r\n        hoặc\r\n        <a href=\"http://localhost:4200/view\">Đến cửa hàng của chúng tôi</a>\r\n    </p>"
+                };
+                _mail.SendMail(content);
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine("Failed to send email: " + ex.Message);
+            }
+
             var history = new HistoryUpdate()
             {
                 Table = HistoryUpdateTable.ORDER,
@@ -63,7 +92,6 @@ namespace MOMShop.Services.Implements.UserProductService
 
         public List<ViewOrderDto> FindAll(FilterOrderDto input)
         {
-            input.CustomerId = 4;
             var orders = _dbContext.Orders.Where(e => e.CreatedBy == input.CustomerId && !e.Deleted
                                                     && (input.Status == null || e.OrderStatus == input.Status) 
                                                     && (input.OrderCode == null || e.OrderCode.Contains(input.OrderCode))).ToList();
@@ -97,6 +125,11 @@ namespace MOMShop.Services.Implements.UserProductService
         public OrderDto FindById(int id)
         {
             throw new NotImplementedException();
+        }
+
+        public async Task SendMail()
+        {
+            
         }
 
         public void UpdateStatus(int id, int status)

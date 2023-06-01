@@ -15,7 +15,7 @@ export class UserService {
         return this.http.post(this.baseUrl + 'login', input)
     }
     register(input: RegisterDto) {
-        return this.http.post(this.baseUrl + 'register', input, { responseType: 'text' })
+        return this.http.post(this.baseUrl + 'register', input)
     }
 
     //quan code tam

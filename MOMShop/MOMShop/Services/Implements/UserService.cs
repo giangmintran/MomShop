@@ -4,6 +4,7 @@ using MOMShop.Dto.Users;
 using MOMShop.Entites;
 using MOMShop.MomShopDbContext;
 using MOMShop.Services.Interfaces;
+using MOMShop.Utils.APIResponse;
 using System.Linq;
 
 namespace MOMShop.Services.Implements
@@ -35,18 +36,24 @@ namespace MOMShop.Services.Implements
             return _mapper.Map<UserDto>(user);
         }
 
-        public string Register(RegisterDto input)
+        public APIResponse Register(RegisterDto input)
         {
             var insert = _mapper.Map<Users>(input);
 
             var user = _dbContext.Users.FirstOrDefault(e => e.Email == input.Email && !e.Deleted);
             if (user != null)
             {
-                return "duplicate";
+                return new APIResponse()
+                {
+                    Message = "duplicate"
+                };
             }
-            _dbContext.Users.Add(insert);
+            var result = _dbContext.Users.Add(insert);
             _dbContext.SaveChanges();
-            return "success";
+            return new APIResponse()
+            {
+                Data = result.Entity,
+            }; 
         }
         public string UpdateInforUser(UserDto input)
         {

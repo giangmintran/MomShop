@@ -30,7 +30,7 @@
 					[(selection)]="selectedOrder">
 					<ng-template pTemplate="header" let-columns>
 						<tr>
-                            <td style="max-width: 5rem; min-width: 5rem; font-weight: bold; padding-left: 10px;" pFrozenColumn
+                            <td style="max-width: 6rem; min-width: 6rem; font-weight: bold; padding-left: 10px;" pFrozenColumn
 								alignFrozen="left" [frozen]="true" class="b-border-frozen-left">Mã hóa đơn</td>
 							<th *ngFor="let cols of columns">
 								{{cols.header}}
@@ -41,7 +41,7 @@
 					</ng-template>
 					<ng-template pTemplate="body" let-rows let-rowIndex="rowIndex" let-columns="columns">
 						<tr [pSelectableRow]="rows">
-                            <td style="max-width: 5rem; min-width: 5rem; justify-content: center;" pFrozenColumn
+                            <td style="max-width: 6rem; min-width: 6rem; justify-content: center;" pFrozenColumn
 								alignFrozen="left" [frozen]="true" class="b-border-frozen-left">{{ rows.orderCode }}</td>
 							<td *ngFor="let cols of columns">
 								{{rows[cols.field]}}

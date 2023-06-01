@@ -11,5 +11,7 @@ export class AppUserMainComponent implements OnInit {
       location.reload();
       sessionStorage.clear();
     }
+
+    console.log(localStorage.getItem('user'));
   }
 }

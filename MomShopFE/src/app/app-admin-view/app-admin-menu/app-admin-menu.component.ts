@@ -13,13 +13,13 @@ export class AppAdminMenuComponent implements OnInit {
   @Output() toggleSidebar: EventEmitter<boolean> = new EventEmitter<boolean>();
 
   constructor(private route:Router, private menuService:MenuService,public toastr: ToastrService,private router: Router){
-  }
-
-  ngOnInit(): void {
     if (sessionStorage.getItem('userType')){
       location.reload();
       sessionStorage.clear();
     }
+  }
+
+  ngOnInit(): void {
   }
 
   handleSidebarToggle = () => this.toggleSidebar.emit(!this.isExpanded);

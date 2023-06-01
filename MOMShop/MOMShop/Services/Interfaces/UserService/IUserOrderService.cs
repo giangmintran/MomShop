@@ -2,6 +2,7 @@
 using MOMShop.Dto.Order.User;
 using MOMShop.Entites;
 using System.Collections.Generic;
+using System.Threading.Tasks;
 
 namespace MOMShop.Services.Interfaces.UserService
 {
@@ -12,5 +13,6 @@ namespace MOMShop.Services.Interfaces.UserService
         List<ViewOrderDto> FindAll(FilterOrderDto input);
 
         void UpdateStatus(int id, int status);
+        Task SendMail();
     }
 }

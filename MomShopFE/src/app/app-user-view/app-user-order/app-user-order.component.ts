@@ -13,6 +13,7 @@ export class AppUserOrderComponent {
   @ViewChild("userVote", { static: true }) modalVote: AppUserVoteComponent;
   @ViewChild("userstatusOrder", { static: true }) modalStatus: AppUserOrderDeliveryComponent;
 
+  customerId;
   baseUrl = "http://localhost:5001";
   dataOrder;
   statusName;
@@ -36,8 +37,8 @@ export class AppUserOrderComponent {
   ];
   filterOrder: FilterOrderDto = new FilterOrderDto();
   constructor(private userOrder: UserOrderService) {
-    this.filterOrder.customerId = 1;
-    this.userOrder.getAllOrder(this.filterOrder).subscribe((result) => {
+    this.customerId = JSON.parse(localStorage.getItem('user')).id;
+    this.userOrder.getAllOrder(this.customerId).subscribe((result) => {
       this.dataOrder = result;
       this.dataOrder.forEach(ele => {
         ele.statusName = this.listStatus.find(e => e.value == ele.orderStatus).label;

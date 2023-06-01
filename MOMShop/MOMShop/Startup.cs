@@ -1,4 +1,4 @@
-using Microsoft.AspNetCore.Builder;
+﻿using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
@@ -10,7 +10,9 @@ using MOMShop.MomShopMapperProfile;
 using MOMShop.Services.Implements;
 using MOMShop.Services.Implements.UserProductService;
 using MOMShop.Services.Interfaces;
+using MOMShop.Services.Interfaces.Mail;
 using MOMShop.Services.Interfaces.UserService;
+using MOMShop.Utils.Mail;
 
 namespace MOMShop
 {
@@ -41,7 +43,9 @@ namespace MOMShop
             {
                 c.SwaggerDoc("v1", new OpenApiInfo { Title = "MOMShop", Version = "v1" });
             });
-
+            services.AddOptions();                                         // Kích hoạt Options
+            var mailsettings = Configuration.GetSection("MailSettings");  // đọc config
+            services.Configure<MailSettings>(mailsettings);                // đăng ký để Inject
             services.AddAutoMapper(typeof(MapperProfile));
             //Add Services
             services.AddScoped<IProductServices, ProductServices>();
@@ -58,6 +62,9 @@ namespace MOMShop
             services.AddScoped<IDiscountService, DiscoutService>();
             services.AddScoped<IUserFeedbackService, UserFeedBackService>();
             services.AddScoped<IDashboardService, DashboardService>();
+            services.AddTransient<ISendMailService, SendMailService>();
+
+            
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

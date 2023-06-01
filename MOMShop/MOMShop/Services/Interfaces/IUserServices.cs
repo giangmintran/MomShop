@@ -1,4 +1,5 @@
 ﻿using MOMShop.Dto.Users;
+using MOMShop.Utils.APIResponse;
 
 namespace MOMShop.Services.Interfaces
 {
@@ -6,7 +7,7 @@ namespace MOMShop.Services.Interfaces
     {
         UserDto Login(LoginDto input);
         UserDto FindById(int id);
-        string Register(RegisterDto input);
+        APIResponse Register(RegisterDto input);
         string UpdateInforUser(UserDto input);
     }
 }

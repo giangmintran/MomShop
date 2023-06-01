@@ -11,7 +11,7 @@ namespace MOMShop.Dto.Order
         [FromQuery(Name = "orderCode")]
         public string OrderCode { get; set; }
 
-        [FromQuery(Name = "customer")]
+        [FromQuery(Name = "customerId")]
         public int? CustomerId { get; set; }
     }
 }
