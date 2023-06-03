@@ -12,10 +12,10 @@ export class AppHeaderComponent {
   @Output() modalSaves: EventEmitter<any> = new EventEmitter<any>();
   @Output() backHome: EventEmitter<any> = new EventEmitter<any>();
   @HostListener('window:beforeunload', ['$event'])
-  beforeunloadHandler(event: Event) {
-    // Xóa dữ liệu trong LocalStorage
-    localStorage.clear();
-  }
+  // beforeunloadHandler(event: Event) {
+  //   // Xóa dữ liệu trong LocalStorage
+  //   localStorage.clear();
+  // }
 
   accountUser;
   constructor(private router: Router, private toastr: ToastrService) {

@@ -48,6 +48,11 @@ export class LoginComponent {
           sessionStorage.setItem('userType', JSON.stringify(result.userType))
         }
         else this.router.navigateByUrl('/view')
+        this.toastr.success(
+          "Đăng nhập thành công",
+          "Thông báo",
+          { timeOut: 3000 }
+        );
       }
     });
   }
