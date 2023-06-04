@@ -15,7 +15,7 @@
                         <span class="text-status">{{order.statusName}}</span>
                     </div>
                     <hr class="sparate-line">
-                    <a class="vote text-decoration-none" (click)="openModalVote(order)">Đánh Giá</a>
+                    <a class="vote text-decoration-none" *ngIf="order.orderStatus == 4" (click)="openModalVote(order)">Đánh Giá</a>
                 </div>
             </div>
         </div>
@@ -35,7 +35,7 @@
         <hr>
         <div class="row d-flex justify-content-end pb-5 mt-3">
             <div class="col-8">
-                <button *ngIf="order.orderStatus == 1" class="btn-cancel ml-3">Huỷ</button>
+                <button *ngIf="order.orderStatus == 1" class="btn-cancel ml-3" (click)="cancelOrder()">Huỷ</button>
             </div>
             <div class="col-4">
                 <div class="block-payment">
