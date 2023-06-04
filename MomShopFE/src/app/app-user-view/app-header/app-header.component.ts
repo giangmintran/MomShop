@@ -11,7 +11,7 @@ export class AppHeaderComponent {
   isAccount: boolean = false;
   @Output() modalSaves: EventEmitter<any> = new EventEmitter<any>();
   @Output() backHome: EventEmitter<any> = new EventEmitter<any>();
-  @HostListener('window:beforeunload', ['$event'])
+  //@HostListener('window:beforeunload', ['$event'])
   // beforeunloadHandler(event: Event) {
   //   // Xóa dữ liệu trong LocalStorage
   //   localStorage.clear();

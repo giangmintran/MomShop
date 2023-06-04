@@ -14,10 +14,10 @@ export class AppUserProfileComponent {
 
   constructor(private userService: UserService, private toastr: ToastrService) {
     this.updateUserInfo();
-    const userId = JSON.parse(localStorage.getItem('user'));
-     this.userService.findUserById(userId).subscribe((result: UserDto)=>{
-      this.userProfile = result;
-     })
+    // const userId = JSON.parse(localStorage.getItem('user'));
+    //  this.userService.findUserById(userId).subscribe((result: UserDto)=>{
+    //   this.userProfile = result;
+    //  })
   }
   updateUserInfo() {
     this.userService.findUser().subscribe((result: UserDto) => {
