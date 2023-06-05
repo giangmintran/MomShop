@@ -31,7 +31,8 @@ import { ServiceBase } from "./service-base";
     }
 
     cancelOrder(id) {
-      const user = JSON.parse(localStorage.getItem('user'));
-      return this.http.put(this.baseUrl + 'cancel-order/' + user.id,null);
+      console.log("service id", id);
+      
+      return this.http.put(this.baseUrl + 'cancel-order/' + id, null);
     }
   }
