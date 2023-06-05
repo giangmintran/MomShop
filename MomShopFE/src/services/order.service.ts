@@ -33,6 +33,6 @@ import { ServiceBase } from "./service-base";
     cancelOrder(id) {
       console.log("service id", id);
       
-      return this.http.put(this.baseUrl + 'cancel-order/' + id, null);
+      return this.http.put('http://localhost:5001/api/user/order/cancel-order/' + id, null);
     }
   }
