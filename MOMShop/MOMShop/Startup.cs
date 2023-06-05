@@ -8,11 +8,14 @@ using Microsoft.OpenApi.Models;
 using MOMShop.MomShopDbContext;
 using MOMShop.MomShopMapperProfile;
 using MOMShop.Services.Implements;
+using MOMShop.Services.Implements.Payment;
 using MOMShop.Services.Implements.UserProductService;
 using MOMShop.Services.Interfaces;
 using MOMShop.Services.Interfaces.Mail;
+using MOMShop.Services.Interfaces.PaymentService;
 using MOMShop.Services.Interfaces.UserService;
 using MOMShop.Utils.Mail;
+using MOMShop.Utils.Payment;
 
 namespace MOMShop
 {
@@ -46,7 +49,13 @@ namespace MOMShop
             services.AddOptions();                                         // Kích hoạt Options
             var mailsettings = Configuration.GetSection("MailSettings");  // đọc config
             services.Configure<MailSettings>(mailsettings);                // đăng ký để Inject
+
+            services.AddOptions();                                         // Kích hoạt Options
+            var vnPaySettings = Configuration.GetSection("VNPaySettings");  // đọc config
+            services.Configure<VNPaySettings>(vnPaySettings);
+
             services.AddAutoMapper(typeof(MapperProfile));
+            services.AddHttpContextAccessor();
             //Add Services
             services.AddScoped<IProductServices, ProductServices>();
             services.AddScoped<IProductDetailServices, ProductDetailServices>();
@@ -63,8 +72,8 @@ namespace MOMShop
             services.AddScoped<IUserFeedbackService, UserFeedBackService>();
             services.AddScoped<IDashboardService, DashboardService>();
             services.AddTransient<ISendMailService, SendMailService>();
+            services.AddScoped<IPaymentService, PaymentService>();
 
-            
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

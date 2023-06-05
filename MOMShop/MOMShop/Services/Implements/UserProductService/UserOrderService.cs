@@ -19,6 +19,9 @@ using MOMShop.Services.Interfaces.Mail;
 using MOMShop.Utils.Mail;
 using System.Threading.Tasks;
 using MOMShop.Utils;
+using Microsoft.AspNetCore.Mvc;
+using MOMShop.Utils.Payment;
+using Microsoft.AspNetCore.Http;
 
 namespace MOMShop.Services.Implements.UserProductService
 {
@@ -27,20 +30,25 @@ namespace MOMShop.Services.Implements.UserProductService
         private readonly ApplicationDbContext _dbContext;
         private readonly IMapper _mapper;
         private readonly ISendMailService _mail;
+        private readonly IHttpContextAccessor _httpContextAccessor;
 
-        public UserOrderService(ApplicationDbContext dbContext, IMapper mapper, ISendMailService mail)
+        public UserOrderService(ApplicationDbContext dbContext, IMapper mapper, ISendMailService mail, IHttpContextAccessor httpContextAccessor)
         {
             _dbContext = dbContext;
             _mapper = mapper;
             _mail = mail;
+            _httpContextAccessor = httpContextAccessor;
         }
 
         public Order Create(OrderDto order)
         {
+
+            
             order.CreatedDate = DateTime.Now;
             order.IntendedTime = DateTime.Now.AddDays(3);
             var insert = _mapper.Map<Order>(order);
             var orderCode = RandomNumberGenerator.GenerateRandomNumber(8);
+
             insert.OrderCode = orderCode;
             var result = _dbContext.Orders.Add(insert);
             _dbContext.SaveChanges();

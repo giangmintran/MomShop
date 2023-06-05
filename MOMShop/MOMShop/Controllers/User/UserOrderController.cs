@@ -3,8 +3,11 @@ using MOMShop.Dto.Cart;
 using MOMShop.Dto.Order;
 using MOMShop.Dto.Order.User;
 using MOMShop.Entites;
+using MOMShop.Services.Interfaces.PaymentService;
 using MOMShop.Services.Interfaces.UserService;
 using MOMShop.Utils;
+using MOMShop.Utils.APIResponse;
+using MOMShop.Utils.Payment;
 using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
@@ -15,10 +18,12 @@ namespace MOMShop.Controllers.User
     [ApiController]
     public class UserOrderController : ControllerBase
     {
-        private IUserOrderService _services;
-        public UserOrderController(IUserOrderService services)
+        private readonly IUserOrderService _services;
+        private readonly IPaymentService _paymentServices;
+        public UserOrderController(IUserOrderService services, IPaymentService paymentServices)
         {
             _services = services;
+            _paymentServices = paymentServices;
         }
 
         [HttpPost("add")]
@@ -69,6 +74,20 @@ namespace MOMShop.Controllers.User
             try
             {
                  _services.UpdateStatus(id, OrderStatus.DA_HUY);
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(ex.Message);
+            }
+        }
+
+        [HttpPost("create-paymet")]
+        public Task<APIResponse> CreatePayment()
+        {
+            try
+            {
+                var result = _paymentServices.CreatePayment(new PaymentRequestModel());
+                return result;
             }
             catch (Exception ex)
             {
