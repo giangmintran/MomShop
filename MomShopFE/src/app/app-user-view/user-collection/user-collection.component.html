@@ -58,7 +58,13 @@
                                 <p style="font-size: 24px;" class="mt-2" >
                                     {{ product.name }}
                                 </p>
-                                <p style="font-size: 18px;">
+                                <p-tag
+                                    styleClass="p-tag-{{ ProductStatus.getProductStatus(product.status)}}" 
+                                    severity="{{ ProductStatus.getProductTag(product.status) }}" 
+                                    value="{{ ProductStatus.getProductStatus(product.status) }}">
+                                </p-tag>
+                                
+                                <p style="font-size: 18px; margin-top: 8px;">
                                     {{ product.price + ' VND' }}
                                 </p>
                                 <p-button label="Detail" icon="pi pi-shopping-cart" styleClass="p-button"

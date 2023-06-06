@@ -179,17 +179,22 @@ export class ProductStatus{
         {
             name: 'Đang bán',
             code: 1,
-            tag: 'success'
+            severity: 'success'
         },
         {
             name: 'Chưa mở bán',
             code: 2,
-            tag: 'primary'
+            severity: 'primary'
         },
         {
             name: 'Khóa',
             code: 3,
-            tag: 'warning'
+            severity: 'warning'
+        },
+        {
+            name: 'Hết hàng',
+            code: 4,
+            severity: 'danger'
         },
     ]
 
@@ -210,7 +215,7 @@ export class ProductStatus{
         const result = this.productStatus.find(item => 
             item.code == code
         );
-        return result?.tag ?? "";
+        return result?.severity ?? "";
     }
 }
 

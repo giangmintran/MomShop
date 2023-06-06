@@ -3,6 +3,7 @@ import { Component } from '@angular/core';
 import { Router } from '@angular/router';
 import { finalize } from 'rxjs';
 import { UserProductService } from 'src/services/user-product.service';
+import { ProductStatus } from 'src/shared/AppConst';
 
 @Component({
   selector: 'app-user-collection',
@@ -22,6 +23,7 @@ export class UserCollectionComponent {
   total: number;
   page = 0;
 
+  ProductStatus = ProductStatus;
   constructor(private router: Router,
     private http: HttpClient,
     public productServices : UserProductService,
@@ -50,7 +52,7 @@ export class UserCollectionComponent {
   }
 
   getProduct(param){
-    this.productServices.getShirt(param, 1).pipe(finalize(() => {
+    this.productServices.getShirt(param).pipe(finalize(() => {
       this.resetPage();
     })).subscribe((data) => {
       this.products = data;

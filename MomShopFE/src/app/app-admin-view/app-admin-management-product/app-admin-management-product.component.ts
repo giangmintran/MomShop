@@ -82,11 +82,6 @@ export class AppAdminManagementProductComponent{
         header: 'Giá bán',
         width: '10rem'
       },
-      {
-        field: 'productStatusName',
-        header: 'Trạng thái',
-        width: '10rem'
-      },
     ];
     this.colsDetailProduct = [
       {
@@ -115,9 +110,6 @@ export class AppAdminManagementProductComponent{
         if(productTypeName)
         {
           element.productTypeName = productTypeName
-        }
-        if(productStatusName){
-          element.productStatusName = productStatusName
         }
         element.imageUrl = element.imageUrl;
       });
