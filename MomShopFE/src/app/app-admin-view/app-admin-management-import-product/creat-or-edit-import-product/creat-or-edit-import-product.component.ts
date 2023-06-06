@@ -30,6 +30,7 @@ export class CreatOrEditImportProductComponent implements OnInit {
   selectedRow;
   colDetails;
   listAction: any[] = [];
+  totalMoney;
   receivedOrderDetails: any = [];
   ProductStatus = ProductStatus;
   ref: DynamicDialogRef
@@ -82,7 +83,6 @@ export class CreatOrEditImportProductComponent implements OnInit {
         row.typeDisplay = ProductStatus.getProductType(row.type)
     }
   }
-
   show(id?) {
     if (id) {
       this.receivedOrderService.getReceiveOrderById(id).subscribe((data) => {
@@ -200,7 +200,6 @@ export class CreatOrEditImportProductComponent implements OnInit {
   }
 
   editDetail(row){
-    
   }
 
   deleteDetail(row){

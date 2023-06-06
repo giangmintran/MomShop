@@ -100,6 +100,14 @@ export class AppAdminManagementImportProductComponent implements OnInit{
   createReceiveOrder() {
     this.router.navigate(['admin/received-order/order/create']);
   }
+
+  paymentOrder(row){
+    console.log(row);
+    this.receiveOrder.paymentOrder(row.id).subscribe( (res) => {
+      this.messageService.add({ severity: 'success', summary: 'Thông báo', detail: 'Cập nhật thành công', life: 3000 });
+      this.getReceiveOrderData();
+    });
+  }
   editReceiveOrder(row) {
     const navigationExtras: NavigationExtras = {
       queryParams: { id: row.id }
@@ -145,7 +153,19 @@ export class AppAdminManagementImportProductComponent implements OnInit{
             this.editReceiveOrder($event.item.data);
           },
         });
+
         //
+        actions.push({
+          data: receivedOrder,
+          index: index,
+          label: "Đã Thanh Toán",
+          icon: "pi pi-wallet",
+          command: ($event) => {
+            this.paymentOrder($event.item.data);
+          },
+        });
+        //
+
         actions.push({
           data: receivedOrder,
           index: index,
@@ -155,6 +175,8 @@ export class AppAdminManagementImportProductComponent implements OnInit{
             this.deleteReceiveOrder($event.item.data);
           },
         });
+
+        
       return actions;
     });
   }

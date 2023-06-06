@@ -50,6 +50,7 @@ export class AppAdminManagementProductComponent{
     {code :'Đang bán',value:1},
     {code :'Chưa mở bán',value:2},
     {code :'Khoá',value:3},
+    {code :'Hết hàng',value:4},
   ]
   ngOnInit(): void {}
   constructor(private http: HttpClient,

@@ -71,7 +71,7 @@ export class AppUserOrderComponent {
   cancelOrder(id) {
     console.log(id);
     
-    this.order.cancelOrder(id).subscribe(() => {
+    this.userOrder.cancelOrder(id).subscribe(() => {
       console.log("done");
       this.toastr.success("Huỷ đơn hàng thành công", "Thông báo", {
         timeOut: 2000,

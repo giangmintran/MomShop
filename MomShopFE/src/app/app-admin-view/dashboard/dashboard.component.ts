@@ -2,6 +2,7 @@ import { HttpClient } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { DashboardService } from 'src/services/dashboard.service';
+import { DashboardConst } from 'src/shared/AppConst';
 
 @Component({
     selector: 'app-dashboard',
@@ -9,15 +10,41 @@ import { DashboardService } from 'src/services/dashboard.service';
     styleUrls: ['./dashboard.component.scss']
 })
 export class DashboardComponent implements OnInit {
-
+    baseUrl = 'http://localhost:5001';
+    products;
+    responsiveOptions: any[];
     data: any;
     yAxisTicks: number[] = [10, 10, 10, 10, 42, 10, 10, 10, 10, 10, 10, 10];
     options: any;
     dataOrder: number[] = [];
     dataReceiveOrder: number[];
-
+    listStatus;
+    DashboardConst = DashboardConst;
     constructor(private http: HttpClient, private route: Router, private dashboard: DashboardService) {
-
+        this.listStatus = [
+            {code :'Tất cả',value:undefined},
+            {code :'Đang bán',value:1},
+            {code :'Chưa mở bán',value:2},
+            {code :'Khoá',value:3},
+            {code :'Hết hàng',value:4},
+          ]
+        this.responsiveOptions = [
+            {
+                breakpoint: '1199px',
+                numVisible: 1,
+                numScroll: 1
+            },
+            {
+                breakpoint: '991px',
+                numVisible: 2,
+                numScroll: 1
+            },
+            {
+                breakpoint: '767px',
+                numVisible: 1,
+                numScroll: 1
+            }
+        ];
     }
     ngOnInit() {
         if (sessionStorage.getItem('userType')) {
@@ -30,6 +57,14 @@ export class DashboardComponent implements OnInit {
             console.log(this.yAxisTicks);
             this.dataReceiveOrder = data.receivedOrders;
             this.processData(data);
+            this.products = data.products;
+            this.products.forEach(element => {
+                var productStatusName = this.listStatus.find( e=> e.value == element.status).code
+                if(element.status){
+                  element.status = productStatusName
+                }
+                element.imageUrl = element.imageUrl;
+              });
         });
     }
     processData(data: any) {
@@ -92,4 +127,6 @@ export class DashboardComponent implements OnInit {
             }
         };
     }
+
+    
 }

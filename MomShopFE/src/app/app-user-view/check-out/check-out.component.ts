@@ -134,14 +134,23 @@ export class CheckOutComponent {
       });
     }
     //console.log(input);
-    this.userOrderService.addOrder(input).pipe(finalize(() => {
-      this.router.navigateByUrl('/order');
-    })).subscribe((res:any )=> {
-      this.toastr.success(
-        "Tạo đơn hàng "+ res.orderCode + " thành công!" ,
-        "Thông báo",
-        { timeOut: 3000 }
-        );
+    this.userOrderService.addOrder(input).subscribe((res:any )=> {
+      console.log(res);
+      if (res.message == "hethang"){
+        this.toastr.info(
+          "Sản phẩm đã hết hàng" ,
+          "Thông báo",
+          { timeOut: 3000 }
+          );
+        this.router.navigateByUrl('/cart');
+      } else if (res.data != null){
+        this.toastr.success(
+          "Tạo đơn hàng "+ res.orderCode + " thành công!" ,
+          "Thông báo",
+          { timeOut: 3000 }
+          );
+        this.router.navigateByUrl('/order');
+      }
     })
   }
 }

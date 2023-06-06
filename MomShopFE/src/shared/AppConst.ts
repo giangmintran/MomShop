@@ -213,3 +213,19 @@ export class ProductStatus{
         return result?.tag ?? "";
     }
 }
+
+export class DashboardConst {
+    public static getSeverity(status: number) {
+        switch (status) {
+            case 1:
+                return 'success';
+            case 2:
+                return 'warning';
+            case 3:
+                return 'info';
+            case 4:
+                return 'danger';
+        }
+        return "";
+    }
+}

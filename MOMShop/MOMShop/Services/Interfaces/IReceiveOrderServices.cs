@@ -11,5 +11,6 @@ namespace MOMShop.Services.Interfaces
         void Delete(int id);
         ReceiveOrderDto FindById(int id);
         List<ReceiveOrderDto> GetReceiveOrders(FilterReceiveOrderDto input);
+        void UpdateStatus(int id, int status);
     }
 }

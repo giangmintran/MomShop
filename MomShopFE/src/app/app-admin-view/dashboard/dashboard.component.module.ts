@@ -13,6 +13,8 @@ import { AppAdminMenuComponent } from '../app-admin-menu/app-admin-menu.componen
 import { DashboardComponent } from './dashboard.component';
 import { ChartModule } from 'primeng/chart';
 import { StyleClassModule } from 'primeng/styleclass';
+import { CarouselModule } from 'primeng/carousel';
+import { TagModule } from 'primeng/tag';
 
 
 @NgModule({
@@ -29,7 +31,9 @@ import { StyleClassModule } from 'primeng/styleclass';
     ButtonModule,
     ToastrModule,
     ChartModule,
-    StyleClassModule
+    StyleClassModule,
+    CarouselModule,
+    TagModule
   ]
 })
 export class DashboardModule { }

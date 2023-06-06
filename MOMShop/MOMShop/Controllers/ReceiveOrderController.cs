@@ -5,6 +5,7 @@ using MOMShop.Dto.ReceiveOrderDetail;
 using MOMShop.Services.Implements;
 using MOMShop.Services.Interfaces;
 using MOMShop.Utils;
+using MOMShop.Utils.APIResponse;
 using System;
 using System.Collections.Generic;
 
@@ -153,6 +154,35 @@ namespace MOMShop.Controllers
             {
                 var result = _detailServices.FindById(id);
                 return result;
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(ex.Message);
+            }
+        }
+
+        [HttpPut("payment/{id}")]
+        public APIResponse Payment(int id)
+        {
+            try
+            {
+                _services.UpdateStatus(id, ReceiveOrderStatus.DA_THANH_TOAN);
+                return new APIResponse("Ok");
+                
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(ex.Message);
+            }
+        }
+
+        [HttpPut("completed/{id}")]
+        public APIResponse Completed(int id)
+        {
+            try
+            {
+                _services.UpdateStatus(id, ReceiveOrderStatus.HOAN_THANH);
+                return new APIResponse("Ok");
             }
             catch (Exception ex)
             {

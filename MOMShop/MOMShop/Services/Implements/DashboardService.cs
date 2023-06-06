@@ -1,5 +1,7 @@
 ﻿using AutoMapper;
 using MOMShop.Dto.Dashboard;
+using MOMShop.Dto.Product;
+using MOMShop.Dto.ProductDetail;
 using MOMShop.Entites;
 using MOMShop.MomShopDbContext;
 using MOMShop.Services.Interfaces;
@@ -60,6 +62,17 @@ namespace MOMShop.Services.Implements
                 result.ReceivedOrders[item.Month - 1] = item.TotalAmount;
             }
 
+            var products = _dbContext.Products.ToList();
+            result.Products = _mapper.Map<List<ProductDto>>(products);
+            foreach (var product in result.Products)
+            {
+                var productDetails = _dbContext.ProductDetails.Where(e => e.ProductId == product.Id).ToList();
+                var image = _dbContext.ProductImages.FirstOrDefault(e => e.ProductId == product.Id);
+                if (image != null)
+                {
+                    product.ImageUrl = image.ImageUrl;
+                }
+            }
             return result;
         }
     }

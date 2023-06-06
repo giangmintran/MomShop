@@ -22,6 +22,9 @@ using MOMShop.Utils;
 using Microsoft.AspNetCore.Mvc;
 using MOMShop.Utils.Payment;
 using Microsoft.AspNetCore.Http;
+using Microsoft.Data.SqlClient;
+using static Microsoft.EntityFrameworkCore.DbLoggerCategory.Database;
+using MOMShop.Utils.APIResponse;
 
 namespace MOMShop.Services.Implements.UserProductService
 {
@@ -40,62 +43,90 @@ namespace MOMShop.Services.Implements.UserProductService
             _httpContextAccessor = httpContextAccessor;
         }
 
-        public Order Create(OrderDto order)
+        public APIResponse Create(OrderDto order)
         {
 
-            
             order.CreatedDate = DateTime.Now;
             order.IntendedTime = DateTime.Now.AddDays(3);
             var insert = _mapper.Map<Order>(order);
             var orderCode = RandomNumberGenerator.GenerateRandomNumber(8);
 
-            insert.OrderCode = orderCode;
-            var result = _dbContext.Orders.Add(insert);
-            _dbContext.SaveChanges();
+            var transaction = _dbContext.Database.BeginTransaction();
 
-            foreach (var item in order.OrderDetails)
-            {
-                var detail = _mapper.Map<OrderDetail>(item);
-                detail.OrderId = result.Entity.Id;
-                _dbContext.OrderDetails.Add(detail);
-            }
-            _dbContext.SaveChanges();
-
-            foreach (var item in order.OrderDetails)
-            {
-                var cart = _dbContext.Carts.FirstOrDefault(e => e.ProductId == item.ProductId && e.CustomerId == order.CreatedBy);
-                if (cart != null)
-                {
-                    _dbContext.Carts.Remove(cart);
-                }
-            }
-
-            // Cấu hình thông tin SMTP
             try
             {
-                // Lấy dịch vụ sendmailservice
-                MailContent content = new MailContent
+                insert.OrderCode = orderCode;
+                var result = _dbContext.Orders.Add(insert);
+                _dbContext.SaveChanges();
+
+                foreach (var item in order.OrderDetails)
                 {
-                    To = "giangcoi2001@gmail.com",
-                    Subject = $"[ĐƠN HÀNG {result.Entity.OrderCode} ĐÃ ĐƯỢC ĐẶT THÀNH CÔNG]",
-                    Body = $"<h1>MOMSHOP</h1>\r\n    <h2>ĐƠN HÀNG #{result.Entity.OrderCode}</h2>\r\n    <p>Cảm ơn bạn đã đặt hàng, đơn hàng sẽ sớm được xử lý.</p>\r\n    <p>Vui lòng theo dõi gmail để biết tình trạng giao hàng.</p>\r\n    <p>\r\n        <a href=\"http://localhost:4200/order\">Xem đơn hàng</a>\r\n        hoặc\r\n        <a href=\"http://localhost:4200/view\">Đến cửa hàng của chúng tôi</a>\r\n    </p>"
+                    var detail = _mapper.Map<OrderDetail>(item);
+                    var product = _dbContext.Products.FirstOrDefault(e => e.Id == item.ProductId && !e.Deleted);
+                    var productDetail = _dbContext.ProductDetails.FirstOrDefault(p => p.ProductId == item.ProductId && p.Size == item.Size);
+                    if (productDetail != null)
+                    {
+                        if (productDetail.Quantity <= 0)
+                        {
+                            return new APIResponse("hethang");
+                           
+                        }
+                        productDetail.Quantity = productDetail.Quantity - item.Quantity;
+                        if (productDetail.Quantity <= 0)
+                        {
+                            product.Status = Status.HET_HANG;
+                        }
+                    }
+                    detail.OrderId = result.Entity.Id;
+                    _dbContext.OrderDetails.Add(detail);
+                    
+                }
+                _dbContext.SaveChanges();
+
+                foreach (var item in order.OrderDetails)
+                {
+                    var cart = _dbContext.Carts.FirstOrDefault(e => e.ProductId == item.ProductId && e.CustomerId == order.CreatedBy);
+                    if (cart != null)
+                    {
+                        _dbContext.Carts.Remove(cart);
+                    }
+                }
+
+                var history = new HistoryUpdate()
+                {
+                    Table = HistoryUpdateTable.ORDER,
+                    ReferId = result.Entity.Id,
+                    Summary = "Thêm mới đơn hàng"
                 };
-                _mail.SendMail(content);
+                _dbContext.HistoryUpdates.Add(history);
+                _dbContext.SaveChanges();
+                transaction.Commit();
             }
             catch (Exception ex)
             {
-                Console.WriteLine("Failed to send email: " + ex.Message);
+                transaction.Rollback();
             }
 
-            var history = new HistoryUpdate()
-            {
-                Table = HistoryUpdateTable.ORDER,
-                ReferId = result.Entity.Id,
-                Summary = "Thêm mới đơn hàng"
-            };
-            _dbContext.HistoryUpdates.Add(history);
-            _dbContext.SaveChanges();
-            return result.Entity;
+
+            // Cấu hình thông tin SMTP
+            //try
+            //{
+            //     Lấy dịch vụ sendmailservice
+            //    MailContent content = new MailContent
+            //    {
+            //        To = "giangcoi2001@gmail.com",
+            //        Subject = $"[ĐƠN HÀNG {result.Entity.OrderCode} ĐÃ ĐƯỢC ĐẶT THÀNH CÔNG]",
+            //        Body = $"<h1>MOMSHOP</h1>\r\n    <h2>ĐƠN HÀNG #{result.Entity.OrderCode}</h2>\r\n    <p>Cảm ơn bạn đã đặt hàng, đơn hàng sẽ sớm được xử lý.</p>\r\n    <p>Vui lòng theo dõi gmail để biết tình trạng giao hàng.</p>\r\n    <p>\r\n        <a href=\"http://localhost:4200/order\">Xem đơn hàng</a>\r\n        hoặc\r\n        <a href=\"http://localhost:4200/view\">Đến cửa hàng của chúng tôi</a>\r\n    </p>"
+            //    };
+            //    _mail.SendMail(content);
+            //}
+            //catch (Exception ex)
+            //{
+            //    Console.WriteLine("Failed to send email: " + ex.Message);
+            //}
+
+
+            return new APIResponse(insert, "done");
         }
 
         public List<ViewOrderDto> FindAll(FilterOrderDto input)
@@ -133,11 +164,6 @@ namespace MOMShop.Services.Implements.UserProductService
         public OrderDto FindById(int id)
         {
             throw new NotImplementedException();
-        }
-
-        public async Task SendMail()
-        {
-            
         }
 
         public void UpdateStatus(int id, int status)

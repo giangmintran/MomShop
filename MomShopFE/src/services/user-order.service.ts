@@ -20,4 +20,9 @@ export class UserOrderService extends ServiceBase{
     url_ += this.convertParamUrl('customerId', customerId ?? '');
     return this.http.get(url_);
   }
+
+  cancelOrder(id) {
+    console.log("service id", id);
+    return this.http.put(this.baseUrl + 'cancel-order/' + id, null);
+  }
 }

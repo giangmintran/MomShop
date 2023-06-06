@@ -57,4 +57,10 @@ export class ReceiveOrderService extends ServiceBase{
     deleteDetailReceiveOrder(id: number){
         return this.http.delete(this.baseUrl + 'delete-detail/' + id)
     }
+
+    /// chuuyeenr trạng thái sang thanh toán
+    paymentOrder(id: number) {
+        return this.http.put(this.baseUrl + 'payment/' + id, null)
+    }
 }
+

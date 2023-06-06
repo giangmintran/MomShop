@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using MOMShop.Dto.Product;
+using System.Collections.Generic;
 
 namespace MOMShop.Dto.Dashboard
 {
@@ -6,5 +7,6 @@ namespace MOMShop.Dto.Dashboard
     {
         public List<float> Orders { get; set; }
         public List<float> ReceivedOrders { get; set; }
+        public List<ProductDto> Products { get; set; }
     }
 }

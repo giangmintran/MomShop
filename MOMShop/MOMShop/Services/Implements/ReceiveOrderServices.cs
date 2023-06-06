@@ -146,5 +146,17 @@ namespace MOMShop.Services.Implements
             _dbContext.SaveChanges();
             return _mapper.Map<ReceiveOrderDto>(receiveOrder);
         }
+
+        public void UpdateStatus(int id, int status)
+        {
+            var receiveOrder = _dbContext.ReceiveOrders.FirstOrDefault(e => e.Id == id);
+            if (receiveOrder == null)
+            {
+                throw new Exception("Không tìm thấy sản phẩm");
+            }
+
+            receiveOrder.Status = status;
+            _dbContext.SaveChanges();
+        }
     }
 }

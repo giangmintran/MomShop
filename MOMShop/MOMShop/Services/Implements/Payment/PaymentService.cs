@@ -114,10 +114,7 @@ namespace MOMShop.Services.Implements.Payment
             {
                 // Xử lý lỗi từ VNPay
             }
-            return new APIResponse()
-            {
-                Data = response.RequestMessage.RequestUri.OriginalString
-            };
+            return new APIResponse(response.RequestMessage.RequestUri.OriginalString, "");
         }
         private string GenerateChecksum(string data, string key)
         {

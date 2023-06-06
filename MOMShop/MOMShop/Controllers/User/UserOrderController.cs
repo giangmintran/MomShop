@@ -27,25 +27,11 @@ namespace MOMShop.Controllers.User
         }
 
         [HttpPost("add")]
-        public Order Create(OrderDto input)
+        public APIResponse Create(OrderDto input)
         {
             try
             {
                 var result = _services.Create(input);
-                return result;
-            }
-            catch (Exception ex)
-            {
-                throw new Exception(ex.Message);
-            }
-        }
-
-        [HttpPost("send-mail")]
-        public Task SendMail()
-        {
-            try
-            {
-                var result = _services.SendMail();
                 return result;
             }
             catch (Exception ex)

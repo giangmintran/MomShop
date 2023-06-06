@@ -43,29 +43,21 @@ namespace MOMShop.Services.Implements
             var user = _dbContext.Users.FirstOrDefault(e => e.Email == input.Email && !e.Deleted);
             if (user != null)
             {
-                return new APIResponse()
-                {
-                    Message = "duplicate"
-                };
+                return new APIResponse("duplicate");
             }
             var result = _dbContext.Users.Add(insert);
             _dbContext.SaveChanges();
-            return new APIResponse()
-            {
-                Data = result.Entity,
-            }; 
+            return new APIResponse(result.Entity, "ok");
         }
         public string UpdateInforUser(UserDto input)
         {
-            var checkDuplicateUserName = _dbContext.Users.FirstOrDefault(e => e.FullName == input.FullName && e.Id != input.Id);
-            if (checkDuplicateUserName!=null)
-            {
-                return "duplicate";
-            }
             var userUpdate = _dbContext.Users.FirstOrDefault(e => e.Id == input.Id);
             userUpdate.FullName = input.FullName;
             userUpdate.BirthDay = input.BirthDay;
             userUpdate.Gender = input.Gender;
+            userUpdate.Address = input.Address;
+            userUpdate.Province = input.Province;
+            userUpdate.District = input.District;
             userUpdate.Phone = input.Phone;
             _dbContext.SaveChanges();
             return "success";
