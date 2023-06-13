@@ -2,7 +2,7 @@ import { HttpClient } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { DashboardService } from 'src/services/dashboard.service';
-import { DashboardConst } from 'src/shared/AppConst';
+import { DashboardConst, ProductStatus } from 'src/shared/AppConst';
 
 @Component({
     selector: 'app-dashboard',
@@ -20,6 +20,7 @@ export class DashboardComponent implements OnInit {
     dataReceiveOrder: number[];
     listStatus;
     DashboardConst = DashboardConst;
+    ProductStatus = ProductStatus;
     constructor(private http: HttpClient, private route: Router, private dashboard: DashboardService) {
         this.listStatus = [
             {code :'Tất cả',value:undefined},
@@ -55,14 +56,12 @@ export class DashboardComponent implements OnInit {
             this.dataOrder = data.orders;
             console.log(data.orders);
             console.log(this.yAxisTicks);
+            console.log(data.products);
             this.dataReceiveOrder = data.receivedOrders;
             this.processData(data);
             this.products = data.products;
             this.products.forEach(element => {
                 var productStatusName = this.listStatus.find( e=> e.value == element.status).code
-                if(element.status){
-                  element.status = productStatusName
-                }
                 element.imageUrl = element.imageUrl;
               });
         });

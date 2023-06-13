@@ -15,7 +15,11 @@
                             <div>
                                 <h4 class="mb-1">{{ product.name }}</h4>
                                 <h6 class="mt-0 mb-3">{{ product.price + ' VNĐ'}}</h6>
-                                <p-tag [value]="product.status" [severity]="DashboardConst.getSeverity(product.status)"></p-tag>
+                                <p-tag
+                                    styleClass="p-tag-{{ ProductStatus.getProductStatus(product.status)}}" 
+                                    severity="{{ ProductStatus.getProductTag(product.status) }}" 
+                                    value="{{ ProductStatus.getProductStatus(product.status) }}">
+                                </p-tag>
                                 <div class="car-buttons mt-4">
                                     <p-button type="button" styleClass="p-button p-button-rounded mr-2" icon="pi pi-search"></p-button>
                                 </div>
