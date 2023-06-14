@@ -68,6 +68,7 @@ namespace MOMShop
             services.AddScoped<IUserProductService, UserProductService>();
             services.AddScoped<IUserCartService, UserCartService>();
             services.AddScoped<IUserOrderService, UserOrderService>();
+            services.AddScoped<IUserCollectionService, UserCollectionService>();
             services.AddScoped<IDiscountService, DiscoutService>();
             services.AddScoped<IUserFeedbackService, UserFeedBackService>();
             services.AddScoped<IDashboardService, DashboardService>();

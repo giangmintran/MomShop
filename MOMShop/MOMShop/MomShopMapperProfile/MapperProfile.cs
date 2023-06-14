@@ -24,6 +24,7 @@ namespace MOMShop.MomShopMapperProfile
             CreateMap<ProductDetailDto, ProductDetail>().ReverseMap();
             CreateMap<DiscountDto, Discount>().ReverseMap();
             CreateMap<HistoryUpdate, Events>().ReverseMap();
+            CreateMap<UserCollectionDto, Collection>().ReverseMap();
             #region Order
             CreateMap<OrderDto, Order>().ReverseMap();
             #endregion
