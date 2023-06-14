@@ -80,7 +80,7 @@ export class UserCollectionComponent {
   }
   getDetailCollection(id){
       this.userService.getDetailCollection(id).subscribe((result:any)=>{
-        this.products = result.data;
+        this.products = result.data.products;
       })
   }
 
