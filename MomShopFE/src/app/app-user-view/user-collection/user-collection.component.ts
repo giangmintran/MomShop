@@ -3,6 +3,7 @@ import { Component } from '@angular/core';
 import { Router } from '@angular/router';
 import { finalize } from 'rxjs';
 import { UserProductService } from 'src/services/user-product.service';
+import { UserService } from 'src/services/user.service';
 import { ProductStatus } from 'src/shared/AppConst';
 
 @Component({
@@ -13,7 +14,7 @@ import { ProductStatus } from 'src/shared/AppConst';
 export class UserCollectionComponent {
   baseUrl = 'http://localhost:5001';
   layout: string = 'list';
-
+  listCollection;
   products: any[];
   productsPagination: any[];
 
@@ -27,11 +28,14 @@ export class UserCollectionComponent {
   constructor(private router: Router,
     private http: HttpClient,
     public productServices : UserProductService,
+    public userService : UserService
     // public toastr: ToastrService,
     // public dialogService: DialogService, 
     // private confirmationService: ConfirmationService,
     ) {
-
+      this.userService.getAllCollection().subscribe((result:any)=>{
+        this.listCollection = result.data;
+      })
     }
 
   ngOnInit() {
@@ -73,6 +77,11 @@ export class UserCollectionComponent {
       // });
       // console.log(this.tableData);
     });
+  }
+  getDetailCollection(id){
+      this.userService.getDetailCollection(id).subscribe((result:any)=>{
+        this.products = result.data;
+      })
   }
 
   resetPage(){

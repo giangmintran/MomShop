@@ -45,6 +45,11 @@
                             <span class="">PHỤ KIỆN</span>
                         </a>
                     </li>
+                    <li *ngFor="let item of listCollection">
+                        <a  target="_self" (click)="getDetailCollection(item.id)">
+                            <span class="">{{item.name}}</span>
+                        </a>
+                    </li>
                 </ul>
             </div>
             <div class="col-xl-10 col-lg-9 col-md-12 col-12 content-collection mt-4">

@@ -30,4 +30,10 @@ export class UserService {
     findUserById(id){
         return this.http.get(this.baseUrl + 'find/'+ id);
     }
+    getAllCollection(){
+        return this.http.get(this.baseUrl + 'collection')
+    }
+    getDetailCollection(id){
+        return this.http.get(this.baseUrl+'collection/detail/'+id);
+    }
 }
