@@ -28,12 +28,12 @@
 					</div>
 				</div>
 				<p class="mb-3 title" style="color: #3e3f40; font-size: 20px;">Danh sách sản phẩm</p>
-				<p-table [value]="rows" scrollHeight="1000px" [paginator]="true" [rows]="20"
+				<p-table [value]="rows" scrollHeight="700px" [paginator]="true" [rows]="20"
 					[rowsPerPageOptions]="[5,10,15,20]" [scrollable]="true" columnResizeMode="expand"
 					(onLazyLoad)="getProductData()" [tableStyle]="{'min-width': '100%' ,'font-size':'1rem'}"
 					paginatorPosition="bottom" [columns]="colsProduct" selectionMode="multiple"
 					[(selection)]="selectedProduct" [metaKeySelection]="metaKeySelection"
-					[scrollHeight]="getTableHeight(78)">
+					[scrollHeight]="getTableHeight(72)">
 					<ng-template pTemplate="header" style="height:30px " let-columns>
 						<tr>
 							<th style="width: 15rem;">Ảnh</th>

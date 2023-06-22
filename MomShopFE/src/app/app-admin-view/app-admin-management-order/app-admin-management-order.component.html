@@ -24,7 +24,7 @@
 					</div>
 				</div> -->
 				<p class="mb-3 title" style="color: #3e3f40; font-size: 20px;">Danh sách bộ sưu tập</p>
-				<p-table [value]="rows" scrollHeight="1000px" [paginator]="true" [rows]="20"
+				<p-table [value]="rows" scrollHeight="700px" [paginator]="true" [rows]="20"
 					[rowsPerPageOptions]="[5,10,15,20]" [scrollable]="true" (onLazyLoad)="getData()"
 					[tableStyle]="{'min-width': '100%' ,'font-size':'1rem'}" paginatorPosition="bottom" [columns]="cols"
 					[(selection)]="selectedOrder">

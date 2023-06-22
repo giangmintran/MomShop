@@ -62,25 +62,13 @@ export class UserCollectionComponent {
       this.products = data;
       console.log("this", this.products);
       this.total = this.products.length;
-      // this.genlistAction(this.rows);
-      // this.rows.forEach(element => {
-      //   var productTypeName = this.listTypeProduct.find( e=> e.value == element.productType).name
-      //   var productStatusName = this.listStatus.find( e=> e.value == element.status).code
-      //   if(productTypeName)
-      //   {
-      //     element.productTypeName = productTypeName
-      //   }
-      //   if(productStatusName){
-      //     element.productStatusName = productStatusName
-      //   }
-      //   element.imageUrl = element.imageUrl;
-      // });
-      // console.log(this.tableData);
     });
   }
   getDetailCollection(id){
+    console.log("123142", id);
       this.userService.getDetailCollection(id).subscribe((result:any)=>{
-        this.products = result.data.products;
+        console.log(result.data);
+        this.productsPagination = result.data.products;
       })
   }
 
