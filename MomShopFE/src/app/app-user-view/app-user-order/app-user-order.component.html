@@ -4,7 +4,7 @@
 </div> -->
 <div class="list-order mb-5">
     <h2 class="text-center mb-5">Thông tin đơn hàng</h2>
-    <div class="container" *ngFor="let order of dataOrder">
+    <div class="container" *ngFor="let order of dataOrderPagination">
         <div class="product">
             <div class="row d-flex align-items-center">
                 <div class="col-8 d-flex align-items-center"><span class="order-code">Mã đơn hàng:
@@ -46,6 +46,10 @@
             </div>
         </div>
     </div>
+</div>
+<div class="mb-5">
+    <p-paginator (onPageChange)="onPageChange($event)" [first]="first" [rows]="rows"
+                    [totalRecords]="total"></p-paginator>
 </div>
 <app-footer></app-footer>
 <app-user-vote #userVote></app-user-vote>

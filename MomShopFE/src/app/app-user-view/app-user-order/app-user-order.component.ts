@@ -15,10 +15,15 @@ export class AppUserOrderComponent {
   @ViewChild("userVote", { static: true }) modalVote: AppUserVoteComponent;
   @ViewChild("userstatusOrder", { static: true })
   modalStatus: AppUserOrderDeliveryComponent;
+  first: number = 0;
 
+  rows: number = 2;
+  total: number;
+  page = 0;
   customerId;
   baseUrl = "http://localhost:5001";
   dataOrder;
+  dataOrderPagination;
   statusName;
   listStatus = [
     {
@@ -54,6 +59,8 @@ export class AppUserOrderComponent {
   loadData() {
     this.userOrder.getAllOrder(this.customerId).subscribe((result) => {
       this.dataOrder = result;
+      this.total = this.dataOrder.length;
+      this.dataOrderPagination = this.dataOrder;
       this.dataOrder.forEach((ele) => {
         ele.statusName = this.listStatus.find(
           (e) => e.value == ele.orderStatus
@@ -78,5 +85,12 @@ export class AppUserOrderComponent {
       });
       this.loadData();
     });
+  }
+  onPageChange(event) {
+    console.log(event);
+    this.first = event.first;
+    this.rows = event.rows;
+    this.page = event.page;
+    this.dataOrderPagination = this.dataOrder.slice(this.first, (this.page + 1) * this.rows);
   }
 }

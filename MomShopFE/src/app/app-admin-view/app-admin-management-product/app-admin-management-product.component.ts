@@ -7,6 +7,7 @@ import { ConfirmEventType, ConfirmationService, MenuItem, MessageService } from 
 import { DialogService, DynamicDialogRef } from 'primeng/dynamicdialog';
 import { CreateOrEditProductTestComponent } from './create-or-edit-product-test/create-or-edit-product-test.component';
 import { ProductStatus } from 'src/shared/AppConst';
+import { CommonModule } from "@angular/common";
 import { NavigationExtras, Router } from '@angular/router';
 
 @Component({
@@ -26,7 +27,6 @@ export class AppAdminManagementProductComponent{
   colsDetailProduct;
   filter = true;
   filterStatus = null;
-  tableData: any;
   selectedProduct;
   selectedDetailProduct
   totalRecords;
@@ -72,11 +72,11 @@ export class AppAdminManagementProductComponent{
         header: 'Tên sản phẩm',
         width: '25rem'
       },
-      {
-        field: 'productTypeName',
-        header: 'Loại',
-        width: '10rem'
-      },
+      // {
+      //   field: 'productTypeName',
+      //   header: 'Loại',
+      //   width: '10rem'
+      // },
       {
         field: 'price',
         header: 'Giá bán',
@@ -113,7 +113,6 @@ export class AppAdminManagementProductComponent{
         }
         element.imageUrl = element.imageUrl;
       });
-      console.log(this.tableData);
     });
   }
   getDetailProductData():void {
