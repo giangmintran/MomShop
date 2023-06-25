@@ -47,6 +47,20 @@ namespace MOMShop.Controllers
             }
         }
 
+        [HttpGet("view/{id}")]
+        public ViewOrderReciptDto View(int id)
+        {
+            try
+            {
+                var result = _services.ViewOrder(id);
+                return result;
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(ex.Message);
+            }
+        }
+
         [HttpDelete("delete/{id}")]
         public void Delete(int id)
         {

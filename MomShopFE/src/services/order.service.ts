@@ -25,6 +25,10 @@ import { Observable } from "rxjs";
       return this.http.get(this.baseUrl + 'detail/' + id);
     }
 
+    view(id) {
+      return this.http.get(this.baseUrl + 'view/' + id);
+    }
+
     acceptOrder(id) {
       return this.http.put(this.baseUrl + 'accept-order/' + id, null);
     }

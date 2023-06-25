@@ -10,5 +10,6 @@ namespace MOMShop.Services.Interfaces
         OrderDto FindById(int id);
         void UpdateStatus(int id, int status);
         void Delete(int id);
+        ViewOrderReciptDto ViewOrder(int id);
     }
 }

@@ -4,14 +4,16 @@ import { Component, OnInit } from '@angular/core';
 import { NavigationExtras, Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
 import { ConfirmationService, MessageService } from 'primeng/api';
+import { DialogService } from 'primeng/dynamicdialog';
 import { OrderService } from 'src/services/order.service';
 import { OrderConst } from 'src/shared/AppConst';
+import { ViewOrderComponent } from './view-order/view-order.component';
 
 @Component({
   selector: 'app-app-admin-management-order',
   templateUrl: './app-admin-management-order.component.html',
   styleUrls: ['./app-admin-management-order.component.scss'],
-  providers: [ConfirmationService, MessageService, DatePipe]
+  providers: [ConfirmationService, MessageService, DatePipe, DialogService]
 })
 export class AppAdminManagementOrderComponent  implements OnInit {
 
@@ -43,6 +45,7 @@ export class AppAdminManagementOrderComponent  implements OnInit {
     private confirmationService: ConfirmationService,
     private router: Router,
     private datePipe: DatePipe,
+    private dialogService: DialogService,
     ) {}
 
   ngOnInit(): void {
@@ -168,6 +171,16 @@ export class AppAdminManagementOrderComponent  implements OnInit {
             this.deleteOrder($event.item.data.id);
           },
         });
+
+         actions.push({
+          data: product,
+          index: index,
+          label: "Xem hóa đơn",
+          icon: "pi pi-eye",
+          command: ($event) => {
+            this.viewOrder($event.item.data);
+          },
+        });
       return actions;
     });
   }
@@ -218,5 +231,20 @@ export class AppAdminManagementOrderComponent  implements OnInit {
       this.messageService.add({ severity: 'success', summary: 'Thông báo', detail: 'Xóa thành công', life: 3000 });
       this.getData();
    })
+  }
+
+  viewOrder(data: any){
+    console.log(data);
+    
+    const ref = this.dialogService.open(
+			ViewOrderComponent,
+			{
+				header: 'Xem hóa đơn',
+				width: '1000px',
+				contentStyle: { "max-height": "1000px", "overflow": "auto", "margin-bottom": "60px" },
+				baseZIndex: 10000,
+        data: data
+			}
+		);
   }
 }

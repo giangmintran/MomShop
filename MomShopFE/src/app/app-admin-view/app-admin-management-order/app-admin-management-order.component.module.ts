@@ -16,11 +16,13 @@ import { MenuModule } from 'primeng/menu';
 import { AppAdminManagementOrderComponent } from './app-admin-management-order.component';
 import { CreateOrEditOrderComponent } from './create-or-edit-order/create-or-edit-order.component';
 import { TimelineModule } from 'primeng/timeline';
+import { ViewOrderComponent } from './view-order/view-order.component';
 
 @NgModule({
   declarations: [
     AppAdminManagementOrderComponent,
-    CreateOrEditOrderComponent
+    CreateOrEditOrderComponent,
+    ViewOrderComponent
   ],
   imports: [
     CommonModule,

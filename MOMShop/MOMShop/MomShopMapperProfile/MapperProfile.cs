@@ -27,6 +27,7 @@ namespace MOMShop.MomShopMapperProfile
             CreateMap<UserCollectionDto, Collection>().ReverseMap();
             #region Order
             CreateMap<OrderDto, Order>().ReverseMap();
+            CreateMap<ViewOrderReciptDto, Order>().ReverseMap();
             #endregion
 
             #region ReceiveOrder

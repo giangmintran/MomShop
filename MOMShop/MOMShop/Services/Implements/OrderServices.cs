@@ -1,4 +1,5 @@
 ﻿using AutoMapper;
+using DocumentFormat.OpenXml.Office2016.Drawing.ChartDrawing;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using MOMShop.Dto.Order;
@@ -162,6 +163,30 @@ namespace MOMShop.Services.Implements
 
             _dbContext.HistoryUpdates.Add(history);
             _dbContext.SaveChanges();   
+        }
+
+        public ViewOrderReciptDto ViewOrder(int id)
+        {
+            var order = _dbContext.Orders.FirstOrDefault(e => e.Id == id && !e.Deleted);
+            if (order != null)
+            {
+                var result = _mapper.Map<ViewOrderReciptDto>(order);
+                var orderDetail = _dbContext.OrderDetails.Where(e => e.OrderId == order.Id);
+                result.Address = $"{result.Address}, {result.District}, {result.Province}, {result.Nation}";
+                result.OrderDetails = _mapper.Map<List<CreateOrderDetailDto>>(orderDetail);
+                foreach (var item in result.OrderDetails)
+                {
+                    var product = _dbContext.Products.FirstOrDefault(e => e.Id == item.ProductId);
+                    if (product != null)
+                    {
+                        item.Price = product.Price;
+                        item.ProductCode = product.Code;
+                        item.ProductName = $"{product.Name} ({item.Size})";
+                    }
+                }
+                return result;
+            }
+            return null;
         }
     }
 }
