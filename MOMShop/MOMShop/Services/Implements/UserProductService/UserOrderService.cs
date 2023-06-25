@@ -58,6 +58,9 @@ namespace MOMShop.Services.Implements.UserProductService
                 {
                     orderCode = RandomNumberGenerator.GenerateRandomNumber(8);
                     break;
+                } else
+                {
+                    break;
                 }
             }
 

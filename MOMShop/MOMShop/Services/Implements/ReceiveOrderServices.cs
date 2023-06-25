@@ -52,6 +52,7 @@ namespace MOMShop.Services.Implements
             }
 
             insert.Code = orderCode;
+            insert.TotalMoney = total;
             var result = _dbContext.Add(insert);
             _dbContext.SaveChanges();
 
