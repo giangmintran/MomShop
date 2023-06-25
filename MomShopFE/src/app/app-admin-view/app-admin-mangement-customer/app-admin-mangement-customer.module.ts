@@ -12,6 +12,9 @@ import { AppBsModalModule } from 'src/directive/app-bs-modal.module';
 import { CreateOrEditCustomerComponent } from './create-or-edit-customer/create-or-edit-customer.component';
 import { SharedModule } from 'src/share.module';
 import { AppAdminMenuComponent } from '../app-admin-menu/app-admin-menu.component';
+import { ToastModule } from 'primeng/toast';
+import { ConfirmDialogModule } from 'primeng/confirmdialog';
+import { TagModule } from 'primeng/tag';
 
 
 
@@ -29,6 +32,9 @@ import { AppAdminMenuComponent } from '../app-admin-menu/app-admin-menu.componen
     InputTextModule,
     ButtonModule,
     ToastrModule,
+    ToastModule,
+    ConfirmDialogModule,
+    TagModule
   ]
 })
 export class AppAdminMangementCustomerModule { }

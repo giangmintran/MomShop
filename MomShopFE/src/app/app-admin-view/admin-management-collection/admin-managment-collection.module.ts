@@ -17,6 +17,7 @@ import { MenuModule } from 'primeng/menu';
 import { CreateOrEditCollectionComponent } from './create-or-edit-collection/create-or-edit-collection.component';
 import { CreateOrEditProductCollectionComponent } from './create-or-edit-product-collection/create-or-edit-product-collection.component';
 import { TreeTableModule } from 'primeng/treetable';
+import { TagModule } from 'primeng/tag';
 
 @NgModule({
   declarations: [
@@ -39,6 +40,7 @@ import { TreeTableModule } from 'primeng/treetable';
     ConfirmDialogModule,
     MenuModule,
     TreeTableModule,
+    TagModule
   ]
 })
 export class AdminManagementCollectionModule { }

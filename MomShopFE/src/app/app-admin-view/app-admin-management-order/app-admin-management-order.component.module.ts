@@ -17,6 +17,7 @@ import { AppAdminManagementOrderComponent } from './app-admin-management-order.c
 import { CreateOrEditOrderComponent } from './create-or-edit-order/create-or-edit-order.component';
 import { TimelineModule } from 'primeng/timeline';
 import { ViewOrderComponent } from './view-order/view-order.component';
+import { TagModule } from 'primeng/tag';
 
 @NgModule({
   declarations: [
@@ -38,7 +39,8 @@ import { ViewOrderComponent } from './view-order/view-order.component';
     DynamicDialogModule,
     ConfirmDialogModule,
     MenuModule,
-    TimelineModule
+    TimelineModule,
+    TagModule
   ]
 })
 export class AppAdminManagementOrdertModule { }

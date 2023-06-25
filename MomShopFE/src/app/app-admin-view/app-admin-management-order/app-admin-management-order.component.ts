@@ -6,7 +6,7 @@ import { ToastrService } from 'ngx-toastr';
 import { ConfirmationService, MessageService } from 'primeng/api';
 import { DialogService } from 'primeng/dynamicdialog';
 import { OrderService } from 'src/services/order.service';
-import { OrderConst } from 'src/shared/AppConst';
+import { OrderConst, OrderStatus } from 'src/shared/AppConst';
 import { ViewOrderComponent } from './view-order/view-order.component';
 
 @Component({
@@ -37,7 +37,8 @@ export class AppAdminManagementOrderComponent  implements OnInit {
     {code :'Hoàn thành',value:4},
     {code :'Đã hủy',value:5},
   ];
-  OrderConst = OrderConst
+  OrderConst = OrderConst;
+  OrderStatus = OrderStatus;
   constructor(private http: HttpClient, 
     private orderService: OrderService,
     public toastr: ToastrService, 
@@ -71,11 +72,6 @@ export class AppAdminManagementOrderComponent  implements OnInit {
         field: 'addressDelivery',
         header: 'Địa chỉ giao hàng',
       },
-      {
-        field: 'statusDisplay',
-        header: 'Trạng thái',
-      },
-
     ];
     this.getData();
   }
@@ -88,7 +84,6 @@ export class AppAdminManagementOrderComponent  implements OnInit {
         element.addressDelivery = element.address + ", " + element.province + ", " + element.district;
         element.createdDateDisplay = this.formatDate(element.createdDate);
         element.intendedTimeDisplay = this.formatDate(element.intendedTime);
-        element.statusDisplay = OrderConst.getStatus(element.orderStatus);
       });
     });
   }

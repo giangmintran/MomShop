@@ -13,8 +13,6 @@ namespace MOMShop.Dto.Customer
         public string Phone { get; set; }
         public int? Gender { get; set; }
         public DateTime BirthDate { get; set; }
-        public string BankAccount { get; set; }
-        public string BankName { get; set; }
         public bool Deleted { get; set; }
     }
 }

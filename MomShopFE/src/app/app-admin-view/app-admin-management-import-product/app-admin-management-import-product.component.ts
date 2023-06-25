@@ -30,6 +30,8 @@ export class AppAdminManagementImportProductComponent implements OnInit{
   keyword: string | undefined;
   timer: any;
   listStatus = ReceivedOrderConst.receiveStatus;
+
+  ReceivedOrderConst = ReceivedOrderConst;
   constructor(private http: HttpClient, 
     public receiveOrder: ReceiveOrderService, 
     public toastr: ToastrService, 
@@ -59,10 +61,6 @@ export class AppAdminManagementImportProductComponent implements OnInit{
       {
         field: 'receiver',
         header: 'Tên người nhận',
-      },
-      {
-        field: 'statusDisplay',
-        header: 'Trạng thái',
       },
     ];
     this.getReceiveOrderData();

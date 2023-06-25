@@ -16,6 +16,7 @@ import { DynamicDialogModule } from 'primeng/dynamicdialog';
 import { ToastModule } from 'primeng/toast';
 import { ConfirmDialogModule } from 'primeng/confirmdialog';
 import { MenuModule } from 'primeng/menu';
+import { TagModule } from 'primeng/tag';
 
 @NgModule({
   declarations: [
@@ -37,6 +38,7 @@ import { MenuModule } from 'primeng/menu';
     DynamicDialogModule,
     ConfirmDialogModule,
     MenuModule,
+    TagModule
   ]
 })
 export class AppAdminManagementImportProductModule { }

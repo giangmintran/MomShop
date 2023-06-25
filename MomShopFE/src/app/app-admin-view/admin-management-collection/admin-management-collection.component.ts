@@ -6,6 +6,7 @@ import { DialogService, DynamicDialogRef } from 'primeng/dynamicdialog';
 import { CollectionService } from 'src/services/collection.service';
 import { CreateOrEditCollectionComponent } from './create-or-edit-collection/create-or-edit-collection.component';
 import { NavigationExtras, Router } from '@angular/router';
+import { CollectionStatus } from 'src/shared/AppConst';
 
 @Component({
   selector: 'app-admin-management-collection',
@@ -26,6 +27,7 @@ export class AdminManagementCollectionComponent implements OnInit {
   screenHeight: number = window.innerHeight;
   keyword;
   timer: any;
+  CollectionStatus = CollectionStatus;
   listStatus = [
     {code :'Tất cả',value:undefined},
     {code :'Đang bán',value:1},
@@ -52,10 +54,6 @@ export class AdminManagementCollectionComponent implements OnInit {
       {
         field: 'name',
         header: 'Tên bộ sưu tập',
-      },
-      {
-        field: 'statusDisplay',
-        header: 'Trạng thái',
       },
     ];
     this.getData();
@@ -104,16 +102,6 @@ export class AdminManagementCollectionComponent implements OnInit {
       console.log("data", data);
       this.rows = data;
       this.genlistAction(this.rows);
-      this.rows.forEach(element => {
-        var statusDisplay = this.listStatus.find( e=> e.value == element.status).code
-        if(statusDisplay)
-        {
-          element.statusDisplay = statusDisplay
-        }
-        if(statusDisplay){
-          element.statusDisplay = statusDisplay
-        }
-      });
       console.log(this.tableData);
     });
   }

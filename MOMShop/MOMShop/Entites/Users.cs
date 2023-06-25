@@ -46,6 +46,7 @@ namespace MOMShop.Entites
         public string District { get; set; }
         public int UserType { get; set; }
         public string CreatedBy { get; set; }
+        public int Status { get; set; }
         public bool Deleted { get; set; }
     }
 }

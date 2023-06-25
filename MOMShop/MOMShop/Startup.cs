@@ -74,6 +74,7 @@ namespace MOMShop
             services.AddScoped<IDashboardService, DashboardService>();
             services.AddTransient<ISendMailService, SendMailService>();
             services.AddScoped<IPaymentService, PaymentService>();
+            services.AddScoped<ICustomerServices, CustomerService>();
 
         }
 

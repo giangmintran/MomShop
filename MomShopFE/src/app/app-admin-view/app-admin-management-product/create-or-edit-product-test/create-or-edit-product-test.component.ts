@@ -9,7 +9,6 @@ import { ProductDto } from 'src/models/product';
 // import { FileHandle } from 'src/shared/dragDrop.directive';
 import { ProductDetailDto } from 'src/models/productDetail';
 import { ImageService } from 'src/services/image.Service';
-import { FileHandle } from 'src/shared/dragDrop.directive';
 import { ProductConst } from 'src/shared/AppConst';
 import { ActivatedRoute, Router } from '@angular/router';
 // import { ImageService } from 'src/services/image.Service';
@@ -33,7 +32,6 @@ export class CreateOrEditProductTestComponent implements OnInit {
   types = ProductConst.productType;
   statuses = ProductConst.productStatus;
   active;
-  files: FileHandle[] = [];
   menuItems: MenuItem[] = [];
   listAction: any[] = [];
   productId: number;

@@ -4,11 +4,16 @@ import { ToastrService } from 'ngx-toastr';
 import { ProductDto } from 'src/models/product';
 import { ProductService } from 'src/services/product.service';
 import { CreateOrEditCustomerComponent } from './create-or-edit-customer/create-or-edit-customer.component';
+import { ConfirmationService, MessageService } from 'primeng/api';
+import { DatePipe } from '@angular/common';
+import { CustomerService } from 'src/services/cusomter.service';
+import { CustomerConst } from 'src/shared/AppConst';
 
 @Component({
   selector: 'app-app-admin-mangement-customer',
   templateUrl: './app-admin-mangement-customer.component.html',
-  styleUrls: ['./app-admin-mangement-customer.component.scss']
+  styleUrls: ['./app-admin-mangement-customer.component.scss'],
+  providers: [ConfirmationService, MessageService, DatePipe]
 })
 export class AppAdminMangementCustomerComponent {
   @ViewChild('createCustomer', { static: true })
@@ -23,20 +28,20 @@ export class AppAdminMangementCustomerComponent {
   filter: boolean = true;
   selectedRow;
   totalRecords;
+  listStatus;
+  filterStatus;
+  keyword;
+  CustomerConst = CustomerConst;
   ngOnInit(): void {}
-  constructor(private http: HttpClient,public productServices : ProductService,public toastr: ToastrService) {
+  constructor(private http: HttpClient,public customerServices : CustomerService,public toastr: ToastrService) {
     this.cols = [
       // {
       //   field: 'id',
       //   header: '#Id',
       // },
       {
-        field: 'firstName',
-        header: 'Họ',
-      },
-      {
-        field: 'lastName',
-        header: 'Tên Đệm',
+        field: 'fullName',
+        header: 'Họ tên',
       },
       {
         field: 'email',
@@ -51,29 +56,26 @@ export class AppAdminMangementCustomerComponent {
         header: 'Giới tính',
       },
       {
-        field: 'birthDate',
+        field: 'birthDay',
         header: 'Ngày sinh',
       },
       {
-        field: 'bankName',
-        header: 'Tên ngân hàng',
+        field: 'address',
+        header: 'Họ tên',
       },
-      {
-        field: 'ankAccount',
-        header: 'Tên ngân hàng',
-      },
-      // {
-      //   field: 'accumulatePoint',
-      //   header: 'Điểm tích lũy',
-      // },
     ];
     this.getAllCustomer();
   }
   getAllCustomer(): void {
-    this.productServices.getAllProduct(3).subscribe((data)=>{
+    this.customerServices.getAllCustomer().subscribe((data)=>{
+      console.log("dataCustomer", data);
+      
       this.tableData = data;
-      this.totalRecords = this.tableData
     });
+  }
+
+  startTimer(){
+
   }
   onSelectionChange(event) {}
   createUsers() {
@@ -81,16 +83,6 @@ export class AppAdminMangementCustomerComponent {
   }
   editUser() {
     this.modalUser.show(this.selectedRow.id);
-  }
-  deleteUser() {
-    this.productServices.deleteProduct(this.selectedRow.id).subscribe((data)=>{
-      this.productServices.getAllProduct(3, "").subscribe(()=>{
-        this.toastr.success('Xoá thành công','Thông báo',{
-          timeOut:100
-        });
-        this.getAllCustomer();
-      })
-    });
   }
   onFilterChange(){
     this.filter = !this.filter;

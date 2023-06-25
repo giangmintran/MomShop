@@ -55,6 +55,7 @@
 							<th *ngFor="let cols of columns">
 								{{cols.header}}
 							</th>
+							<th style="width: 10rem;">Trạng thái</th>
 							<th style="min-width: 1rem; max-width: 1rem;"><i class="pi pi-cog"
 									style="font-size: 1rem"></i></th>
 						</tr>
@@ -65,6 +66,13 @@
 								alignFrozen="left" [frozen]="true" class="b-border-frozen-left">{{ rows.orderCode }}</td>
 							<td *ngFor="let cols of columns">
 								{{rows[cols.field]}}
+							</td>
+							<td>
+								<p-tag
+                                    styleClass="p-tag-{{ OrderStatus.getOrderStatus(rows.orderStatus)}}" 
+                                    severity="{{ OrderStatus.getOrderTag(rows.orderStatus) }}" 
+                                    value="{{ OrderStatus.getOrderStatus(rows.orderStatus) }}">
+                                </p-tag>
 							</td>
 							<td style="max-width: 3rem; min-width: 3rem; justify-content: center;" pFrozenColumn
 								alignFrozen="right" [frozen]="true" class="b-border-frozen-right b-table-actions">

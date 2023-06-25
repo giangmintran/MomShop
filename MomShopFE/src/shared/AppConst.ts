@@ -127,17 +127,32 @@ export class ReceivedOrderConst {
         },
         {
             name: 'Chưa thanh toán',
-            code: 1
+            code: 1,
+            severity: 'warning'
         },
         {
             name: 'Đã thanh toán',
-            code: 2
+            code: 2,
+            severity: 'success'
         },
         {
             name: 'Đã hoàn thành',
-            code: 3
+            code: 3,
+            severity: 'primary'
         },
     ]
+    public static getOrderStatus(code: number){
+        const result = this.receiveStatus.find(item => 
+            item.code == code
+        );
+        return result?.name ?? "";
+    }
+    public static getOrderTag(code: number){
+        const result = this.receiveStatus.find(item => 
+            item.code == code
+        );
+        return result?.severity ?? "";
+    }
     public static getStatus(code){
         const result = this.receiveStatus.find(item => 
             item.code == code
@@ -220,6 +235,151 @@ export class ProductStatus{
 }
 
 export class DashboardConst {
+    public static getSeverity(status: number) {
+        switch (status) {
+            case 1:
+                return 'success';
+            case 2:
+                return 'warning';
+            case 3:
+                return 'info';
+            case 4:
+                return 'danger';
+        }
+        return "";
+    }
+}
+
+export class CustomerConst {
+    public static customerStatus = [
+        {
+            name: 'Hoạt động',
+            code: 1,
+            severity: 'success'
+        },
+        {
+            name: 'Khóa',
+            code: 2,
+            severity: 'primary'
+        },
+    ]
+    public static getCustomerStatus(code: number){
+        const result = this.customerStatus.find(item => 
+            item.code == code
+        );
+        return result?.name ?? "";
+    }
+    public static getCustomerTag(code: number){
+        const result = this.customerStatus.find(item => 
+            item.code == code
+        );
+        return result?.severity ?? "";
+    }
+
+    public static getSeverity(status: number) {
+        switch (status) {
+            case 1:
+                return 'success';
+            case 2:
+                return 'warning';
+            case 3:
+                return 'info';
+            case 4:
+                return 'danger';
+        }
+        return "";
+    }
+}
+
+export class OrderStatus {
+    public static orderStatus = [
+        {
+            name: 'Khởi tạo',
+            code: 1,
+            severity: 'primary'
+        },
+        {
+            name: 'Đã nhận',
+            code: 2,
+            severity: 'primary'
+        },
+
+        {
+            name: 'Đang giao',
+            code: 3,
+            severity: 'warning'
+        },
+        {
+            name: 'Hoàn thành',
+            code: 4,
+            severity: 'success'
+        },
+        {
+            name: 'Đã hủy',
+            code: 5,
+            severity: 'danger'
+        },
+    ]
+    public static getOrderStatus(code: number){
+        const result = this.orderStatus.find(item => 
+            item.code == code
+        );
+        return result?.name ?? "";
+    }
+    public static getOrderTag(code: number){
+        const result = this.orderStatus.find(item => 
+            item.code == code
+        );
+        return result?.severity ?? "";
+    }
+
+    public static getSeverity(status: number) {
+        switch (status) {
+            case 1:
+                return 'success';
+            case 2:
+                return 'warning';
+            case 3:
+                return 'info';
+            case 4:
+                return 'danger';
+        }
+        return "";
+    }
+}
+
+export class CollectionStatus {
+    public static collectionStatus = [
+        {
+            name: 'Chưa mở bán',
+            code: 2,
+            severity: 'primary'
+        },
+        {
+            name: 'Hoạt động',
+            code: 1,
+            severity: 'success'
+        },
+
+        {
+            name: 'Khóa',
+            code: 3,
+            severity: 'warning'
+        },
+    ]
+    public static getOrderStatus(code: number){
+        const result = this.collectionStatus.find(item => 
+            item.code == code
+        );
+        return result?.name ?? "";
+    }
+    public static getOrderTag(code: number){
+        const result = this.collectionStatus.find(item => 
+            item.code == code
+        );
+        return result?.severity ?? "";
+    }
+
     public static getSeverity(status: number) {
         switch (status) {
             case 1:
