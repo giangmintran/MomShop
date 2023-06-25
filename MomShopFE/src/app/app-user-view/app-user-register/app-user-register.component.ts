@@ -16,6 +16,16 @@ export class AppUserRegisterComponent {
     public toastr: ToastrService, private router: Router) {
   }
   register() {
+    if (this.inputRegister.email) {
+      // Kiểm tra định dạng email
+      const emailRegex = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
+      if (!emailRegex.test(this.inputRegister.email)) {
+        this.toastr.warning("Email phải nhập đúng định dạng",
+        "Thông báo",
+        { timeOut: 3000 })
+        return;
+      }
+    }
     this._user.register(this.inputRegister).subscribe((result: any) => {
       console.log(result.message);
       console.log(result.message === "duplicate");
@@ -30,6 +40,7 @@ export class AppUserRegisterComponent {
         this.toastr.warning("Tài khoản đã tồn tại",
           "Thông báo",
           { timeOut: 2000 });
+          return;
       }
     })
   }

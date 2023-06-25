@@ -1,5 +1,5 @@
 <app-header></app-header>
-<div id="layout-cart" style="margin-top: 30px">
+<div id="layout-cart">
     <div class="wrapper-mainCart">
         <div class="content-bodyCart">
             <div class="container">
@@ -84,7 +84,7 @@
                                                         transform: translateY(-50%);right:2%;
                                                         ">
                                                     {{(product.quantity*product.price)+' VND'}}
-                                                    <button type="button" (click)="delete(product)"><i class="pi pi-trash" style="font-size: 1.2rem" ></i></button>
+                                                    <button type="button" class="btn-delete-product" (click)="delete(product)"><i class="pi pi-trash" style="font-size: 1.2rem" ></i></button>
                                                 </div>
                                             </div>
                                         </div>
@@ -102,7 +102,7 @@
                             </div>
                         </div>
                     </div>
-                    <div class="col-lg-4 col-md-12 col-sm-12 col-12 sidebarCart-sticky "  *ngIf="products.length > 0">
+                    <div class="col-lg-4 col-md-12 col-sm-12 col-12 sidebarCart-sticky"  *ngIf="products.length > 0">
                         <div class="mainCart-sidebar wrap-order-summary">
                             <div class="order-summary-block">
                                 <h4 class="font-weight-bold summary-title">TỔNG HOÁ ĐƠN</h4>
