@@ -28,9 +28,25 @@ export class LoginComponent {
   @Output() goPage: EventEmitter<any> = new EventEmitter<any>();
   @Output() openFormRegister: EventEmitter<any> = new EventEmitter<any>();
   passlogin: boolean = true;
+  checkEmailValid:boolean = false;
   checkLogin = false;
   routerPage() {
-    console.log(this.user)
+    if(this.user.email?.trim() == null || this.user.password?.trim() == null){
+      this.toastr.warning("Phải nhập đầy đủ thông tin đăng nhập",
+      "Thông báo",
+      { timeOut: 3000 })
+      return;
+    }
+    if (this.user.email) {
+      // Kiểm tra định dạng email
+      const emailRegex = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
+      if (!emailRegex.test(this.user.email)) {
+        this.toastr.warning("Email phải nhập đúng định dạng",
+        "Thông báo",
+        { timeOut: 3000 })
+        return;
+      }
+    }
     this._user.login(this.user).subscribe((result:UserDto) => {
       console.log(result)
       if (result == null) {

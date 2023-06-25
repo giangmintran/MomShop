@@ -73,7 +73,7 @@ export class UserCollectionDetailComponent {
             "Thông báo",
             { timeOut: 3000 }
             );
-            this.router.navigateByUrl('/cart');
+           // this.router.navigateByUrl('/cart');
         }
         });
       }
