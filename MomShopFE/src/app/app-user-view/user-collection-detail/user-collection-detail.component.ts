@@ -14,7 +14,7 @@ export class UserCollectionDetailComponent {
   visible = false;
 
   product:any;
-  value: string = 'XS';
+  value: string = '';
     
     productSize: any[] = [
         { size: 'XS', value: 'XS' },
@@ -57,6 +57,7 @@ export class UserCollectionDetailComponent {
     );
     }
     else {
+      this.value = this.value == ''? 'S' : this.value;
       this.cartService.addToCart(this.product.id,user.id, this.value).subscribe((res) => {
         if(res == 'error')
         {

@@ -39,10 +39,10 @@
                 <label for="phone" class="color-text">Số điện thoại</label>
                 <input type="text" class="input text-secondary" [(ngModel)]="user.phone" name="phone">
             </div>
-            <div class="d-flex justify-content-between align-items-baseline" style="width: 38%;">
-                <label for="dateOfBirth" class="color-text">Ngày sinh</label>
+            <div class="d-flex align-items-baseline" style="width: 55%;">
+                <label for="dateOfBirth" class="color-text" style="margin-right: 60px;">Ngày sinh</label>
                 <p-calendar  value="user.birthday" dateFormat="dd/mm/yy" [(ngModel)]="user.birthDay" name="birthDay"
-                    [showIcon]="false" [style]="{'width':'100%'}"></p-calendar>
+                    [showIcon]="false" [style]="{'width':'100%','height':'100%'}"></p-calendar>
             </div>
             <button class="save-info" (click)="saveProfile()">Lưu</button>
         </div>

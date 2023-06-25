@@ -70,7 +70,7 @@
                                             <div class="item-qty" style="width:20%;position: relative;">
                                                 <div class="p-inputgroup" style="margin: 0;position: absolute;top: 50%;-ms-transform: translateY(-50%);transform: translateY(-50%);">
                                                     <button type="button" pButton icon="pi pi-plus" styleClass="p-button-secondary" style="background: black;" (click)="plusQuantity(this.product)"></button>
-                                                    <input type="text" pInputText placeholder="SL" [(ngModel)]="product.quantity" (ngModelChange)="priceChange()"/>
+                                                    <input type="text" pInputText  [(ngModel)]="product.quantity" (ngModelChange)="priceChange()"/>
                                                     <button type="button" pButton icon="pi pi-minus"
                                                         styleClass="p-button-secondary" (click)="minusQuantity(product)"
                                                         style="background: black;"></button>
@@ -83,7 +83,7 @@
                                                         -ms-transform: translateY(-50%);
                                                         transform: translateY(-50%);right:2%;
                                                         ">
-                                                    {{(product.quantity*product.price)+' VND'}}
+                                                    {{(product.quantity*product.price)| currency:"VND":"symbol"}}
                                                     <button type="button" class="btn-delete-product" (click)="delete(product)"><i class="pi pi-trash" style="font-size: 1.2rem" ></i></button>
                                                 </div>
                                             </div>

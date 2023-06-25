@@ -4,6 +4,15 @@
     font-weight: bold;
     cursor: pointer;
 }
+.sidebar-menu{
+    list-style: none;
+    background: #F47916;
+    //height:100%;
+    box-sizing:  content-box;
+    padding: 10px 20px;
+    border-radius: 3px;
+    //position: fixed;
+}
 
 .sidebar-menu li{
     margin-top:15px;

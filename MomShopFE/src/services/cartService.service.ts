@@ -20,7 +20,7 @@ export class UserCartService {
         "id": 0,
         "productId": productId,
         "customerId": customerId,
-        "size": size
+        "size": size ?? 'S'
       },{responseType: 'text'});
     }
 
