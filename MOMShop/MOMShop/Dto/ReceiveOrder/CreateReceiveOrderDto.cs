@@ -21,6 +21,7 @@ namespace MOMShop.Dto.ReceiveOrder
         public int Type { get; set; }
         public string Size { get; set; }
         public int Quantity { get; set; }
+        public float UnitPrice { get; set; }
         public string Description { get; set; }
     }
 }

@@ -32,6 +32,8 @@ export class CreateOrEditProductCollectionComponent implements OnInit {
     {code :'Khoá',value:3},
   ];
   keyword;
+  timer;
+  filter;
   productIds: any[] = [];
   selectedItems: any[] = [];
   collection = new Collection();
@@ -82,7 +84,7 @@ export class CreateOrEditProductCollectionComponent implements OnInit {
   }
 
   getProductData(): void {
-    this.productService.getAllProduct().subscribe((data) => {
+    this.productService.getAllProduct(this.filter,this.keyword).subscribe((data) => {
       console.log("data", data?.items);
       this.rows = data?.items;
       //this.genlistAction(this.rows);
@@ -100,7 +102,12 @@ export class CreateOrEditProductCollectionComponent implements OnInit {
       });
     });
   }
-
+  startTimer() {
+    clearTimeout(this.timer); // Đảm bảo rằng timer trước đó được hủy
+    this.timer = setTimeout(() => {
+      this.getProductData();
+    }, 1000); // Thời gian chờ: 3000 milliseconds (3 giây)
+  }
   save(){
     if(this.validate()){
       this.selectedItems.forEach((item) => {

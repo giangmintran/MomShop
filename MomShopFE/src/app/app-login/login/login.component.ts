@@ -37,7 +37,7 @@ export class LoginComponent {
       { timeOut: 3000 })
       return;
     }
-    if (this.user.email) {
+    if (this.user.email && this.user.email != "admin") {
       // Kiểm tra định dạng email
       const emailRegex = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
       if (!emailRegex.test(this.user.email)) {

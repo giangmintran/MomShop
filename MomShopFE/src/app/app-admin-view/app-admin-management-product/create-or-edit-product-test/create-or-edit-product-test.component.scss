@@ -2,7 +2,9 @@
 .image-upload-container {
   cursor: pointer;
 }
-
+.required-field {
+  color: red;
+}
 .img-preview-container {
   background-color: #fff;
   position: relative;

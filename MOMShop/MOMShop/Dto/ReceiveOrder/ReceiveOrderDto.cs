@@ -16,6 +16,7 @@ namespace MOMShop.Dto.ReceiveOrder
         public string Receiver { get; set; }
         public string Description { get; set; }
         public int Status { get; set; }
+        public float TotalMoney { get; set; }
         public List<ReceiveOrderDetailDto> Details { get; set; }    
     }
 }

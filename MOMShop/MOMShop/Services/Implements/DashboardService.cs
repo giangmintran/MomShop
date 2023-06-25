@@ -28,7 +28,7 @@ namespace MOMShop.Services.Implements
             var result = new DashboardDto();
             result.Orders = Enumerable.Repeat(0f, 12).ToList();
             result.ReceivedOrders = Enumerable.Repeat(0f, 12).ToList();
-            var order = _dbContext.Orders.Where(e => !e.Deleted && e.CreatedDate.Year == DateTime.Now.Year).ToList().GroupBy(o => new { o.CreatedDate.Year, o.CreatedDate.Month }).Select(g => new
+            var order = _dbContext.Orders.Where(e => !e.Deleted && e.CreatedDate.Year == DateTime.Now.Year && e.OrderStatus == OrderStatus.HOAN_THANH).ToList().GroupBy(o => new { o.CreatedDate.Year, o.CreatedDate.Month }).Select(g => new
             {
                 Month = g.Key.Month,
                 TotalAmount = g.Sum(o => o.TotalAmount)
@@ -38,21 +38,15 @@ namespace MOMShop.Services.Implements
 
             foreach (var item in order)
             {
-                result.Orders[item.Month - 1] = item.TotalAmount/10000;
+                result.Orders[item.Month - 1] = item.TotalAmount;
             }
 
-            var recOrder = _dbContext.ReceiveOrders.Where(e => !e.Deleted && e.CreatedDate.Year == DateTime.Now.Year);
-            var queryOrder = from rOrderDetail in _dbContext.ReceiveOrderDetails
-                             join rOrder in recOrder on rOrderDetail.ReceiveOrderId equals rOrder.Id
-                             select new
-                             {
-                                 rOrder.CreatedDate.Month,
-                                 Sum = rOrderDetail.Quantity * rOrderDetail.UnitPrice
-                             };
-            var test = queryOrder.ToList().GroupBy(o => o.Month).Select(g => new
+            var recOrder = _dbContext.ReceiveOrders.Where(e => !e.Deleted && e.CreatedDate.Year == DateTime.Now.Year && e.Status == ReceiveOrderStatus.DA_THANH_TOAN);
+            
+            var test = recOrder.ToList().GroupBy(o => o.CreatedDate.Month).Select(g => new
             {
                 Month = g.Key,
-                TotalAmount = g.Sum(o => o.Sum)
+                TotalAmount = g.Sum(e => e.TotalMoney)
             })
             .OrderBy(m => m.Month)
             .ToList();

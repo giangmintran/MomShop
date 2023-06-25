@@ -29,6 +29,29 @@ namespace MOMShop.Services.Implements
         public ReceiveOrderDto Add(CreateReceiveOrderDto input)
         {
             var insert = _mapper.Map<ReceiveOrder>(input);
+            float total = 0;
+            foreach (var item in input.Details)
+            {
+                total += item.Quantity * item.UnitPrice;
+
+            }
+            var orderCode = RandomNumberGenerator.GenerateRandomNumber(8);
+
+            while (true)
+            {
+                var orderCoedeFind = _dbContext.ReceiveOrders.FirstOrDefault(e => e.Code == orderCode && !e.Deleted);
+                if (orderCoedeFind != null)
+                {
+                    orderCode = RandomNumberGenerator.GenerateRandomNumber(8);
+                    break;
+                }
+                else
+                {
+                    break;
+                }
+            }
+
+            insert.Code = orderCode;
             var result = _dbContext.Add(insert);
             _dbContext.SaveChanges();
 
@@ -42,6 +65,7 @@ namespace MOMShop.Services.Implements
                     Type = item.Type,
                     Size = item.Size,
                     Quantity = item.Quantity,
+                    UnitPrice = item.UnitPrice,
                     Description = item.Description,
                 };
                 _dbContext.ReceiveOrderDetails.Add(detail);

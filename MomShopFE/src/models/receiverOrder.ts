@@ -7,5 +7,6 @@ export class ReceiveOrderDto {
     receiver: string;
     description: string;
     status: number;
+    totalMoney: number;
     details: [];
 }

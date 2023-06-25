@@ -23,11 +23,11 @@ namespace MOMShop.Controllers
         }
 
         [HttpGet("find-all")]
-        public List<CollectionDto> GetAll()
+        public List<CollectionDto> GetAll([FromQuery] FilterCollectionDto input)
         {
             try
             {
-                var result = _services.FindAll();
+                var result = _services.FindAll(input);
                 return result;
             }
             catch (Exception ex)
@@ -79,11 +79,11 @@ namespace MOMShop.Controllers
 
 
         [HttpGet("detail/{id}")]
-        public CollectionDto Details(int id)
+        public CollectionDto Details(int id, string keyword)
         {
             try
             {
-                var result = _services.FindById(id);
+                var result = _services.FindById(id, keyword);
                 return result;
             }
             catch (Exception ex)
@@ -93,11 +93,11 @@ namespace MOMShop.Controllers
         }
 
         [HttpGet("find/{id}")]
-        public ViewCollectionDto Find(int id)
+        public ViewCollectionDto Find(int id, string keyword)
         {
             try
             {
-                var result = _services.Find(id);
+                var result = _services.Find(id, keyword);
                 return result;
             }
             catch (Exception ex)

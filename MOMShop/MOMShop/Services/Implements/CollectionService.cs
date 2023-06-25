@@ -1,6 +1,7 @@
 ﻿using AutoMapper;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.Filters;
 using Microsoft.EntityFrameworkCore;
 using MOMShop.Dto.Collection;
 using MOMShop.Dto.Product;
@@ -60,13 +61,14 @@ namespace MOMShop.Services.Implements
             _dbContext.SaveChanges();
         }
 
-        public List<CollectionDto> FindAll()
+        public List<CollectionDto> FindAll(FilterCollectionDto input)
         {
-            var collections = _dbContext.Collections.Where(e => !e.Deleted).OrderByDescending(e => e.Id).ToList();
+            var collections = _dbContext.Collections.Where(e => !e.Deleted && (input.Status == null || e.Status == input.Status) 
+            && (input.Keyword == null || e.Code.ToLower().Contains(input.Keyword) || e.Name.ToLower().Contains(input.Keyword))).OrderByDescending(e => e.Id).ToList();
             return _mapper.Map<List<CollectionDto>>(collections);
         }
 
-        public CollectionDto FindById(int id)
+        public CollectionDto FindById(int id, string keyword)
         {
             var collection = _dbContext.Collections.FirstOrDefault(e => e.Id == id && !e.Deleted);
             if (collection == null)
@@ -81,7 +83,7 @@ namespace MOMShop.Services.Implements
             }
             return result;
         }
-        public ViewCollectionDto Find(int id)
+        public ViewCollectionDto Find(int id, string keyword)
         {
             var collection = _dbContext.Collections.FirstOrDefault(e => e.Id == id && !e.Deleted);
             if (collection == null)
@@ -107,6 +109,7 @@ namespace MOMShop.Services.Implements
                         list.Add(productItem);
                     }
                 }
+                list = list.Where(e => (keyword == null || e.Code.ToLower().Contains(keyword.ToLower()) || e.Name.ToLower().Contains(keyword.ToLower()))).ToList();
                 result.Products = list;
             }
             return result;

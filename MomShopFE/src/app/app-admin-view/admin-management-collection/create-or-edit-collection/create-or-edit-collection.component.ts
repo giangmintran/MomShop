@@ -30,6 +30,7 @@ export class CreateOrEditCollectionComponent implements OnInit {
   selectedItems: any[] = [];
   productIds: any[] = [];
   keyword;
+  id;
   listTypeProduct = [
     { name: "Áo thun", value: 1 },
     { name: "Áo sơ mi", value: 2 },
@@ -45,6 +46,7 @@ export class CreateOrEditCollectionComponent implements OnInit {
     {code :'Khoá',value:3},
   ];
   cols;
+  timer;
   ref: DynamicDialogRef
   constructor(private http: HttpClient, 
     public messageService: MessageService,  
@@ -60,6 +62,7 @@ export class CreateOrEditCollectionComponent implements OnInit {
   ngOnInit(): void {
     this.route.queryParams.subscribe(params => {
       const id = params['id'];
+      this.id = id
       if (id){
         this.find(id);
       } else {
@@ -203,7 +206,29 @@ export class CreateOrEditCollectionComponent implements OnInit {
       });
     });
   }
-
+  startTimer() {
+    clearTimeout(this.timer); // Đảm bảo rằng timer trước đó được hủy
+    this.timer = setTimeout(() => {
+      this.collectionService.getCollection(this.id, this.keyword).subscribe((data) => {
+        console.log("data", data?.items);
+        this.collection = data;
+        this.rows = data.products;
+        this.genlistAction(this.rows);
+        this.rows.forEach(element => {
+          var productTypeName = this.listTypeProduct.find( e=> e.value == element.productType).name
+          var productStatusName = this.listStatus.find( e=> e.value == element.status).code
+          if(productTypeName)
+          {
+            element.productTypeName = productTypeName
+          }
+          if(productStatusName){
+            element.productStatusName = productStatusName
+          }
+          element.imageUrl = element.imageUrl;
+        });
+      });
+    }, 1000); // Thời gian chờ: 3000 milliseconds (3 giây)
+  }
   backToCollectionList(){
     this.router.navigate(['admin/collection-management/collection']);
   }

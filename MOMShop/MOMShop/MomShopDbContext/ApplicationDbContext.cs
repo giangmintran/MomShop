@@ -86,6 +86,7 @@ namespace MOMShop.MomShopDbContext
             modelBuilder.Entity<Users>(entity =>
             {
                 entity.Property(e => e.Deleted).HasDefaultValue(false);
+                entity.Property(e => e.UserType).HasDefaultValue(2);
             });
             #endregion
 

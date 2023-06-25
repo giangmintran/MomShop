@@ -24,7 +24,8 @@ export class AdminManagementCollectionComponent implements OnInit {
   metaKeySelection: boolean = true;
   selectedCollection;
   screenHeight: number = window.innerHeight;
-
+  keyword;
+  timer: any;
   listStatus = [
     {code :'Tất cả',value:undefined},
     {code :'Đang bán',value:1},
@@ -46,11 +47,11 @@ export class AdminManagementCollectionComponent implements OnInit {
       },
       {
         field: 'code',
-        header: 'Mã',
+        header: 'Mã bộ sưu tập',
       },
       {
         field: 'name',
-        header: 'Tên',
+        header: 'Tên bộ sưu tập',
       },
       {
         field: 'statusDisplay',
@@ -99,7 +100,7 @@ export class AdminManagementCollectionComponent implements OnInit {
     });
   }
   getData(): void {
-    this.collectionService.getAllCollection(this.filterStatus).subscribe((data) => {
+    this.collectionService.getAllCollection(this.filterStatus, this.keyword).subscribe((data) => {
       console.log("data", data);
       this.rows = data;
       this.genlistAction(this.rows);
@@ -116,7 +117,12 @@ export class AdminManagementCollectionComponent implements OnInit {
       console.log(this.tableData);
     });
   }
-
+  startTimer() {
+    clearTimeout(this.timer); // Đảm bảo rằng timer trước đó được hủy
+    this.timer = setTimeout(() => {
+      this.getData();
+    }, 1000); // Thời gian chờ: 3000 milliseconds (3 giây)
+  }
   createCollection(){
     this.router.navigate(['admin/collection-management/collection/create']);
   }

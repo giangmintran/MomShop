@@ -27,6 +27,15 @@ export class AppAdminManagementOrderComponent  implements OnInit {
   keyword: string | undefined;
   timer: any;
   selectedOrder;
+  listStatus = [
+    {code :'Tất cả',value:undefined},
+    {code :'Khởi tạo',value:1},
+    {code :'Đã nhận',value:2},
+    {code :'Đang giao',value:3},
+    {code :'Hoàn thành',value:4},
+    {code :'Đã hủy',value:5},
+  ];
+  OrderConst = OrderConst
   constructor(private http: HttpClient, 
     private orderService: OrderService,
     public toastr: ToastrService, 
@@ -37,6 +46,7 @@ export class AppAdminManagementOrderComponent  implements OnInit {
     ) {}
 
   ngOnInit(): void {
+    
     this.cols = [
       {
         field: 'customerName',
@@ -68,7 +78,7 @@ export class AppAdminManagementOrderComponent  implements OnInit {
   }
 
   getData(): void {
-    this.orderService.getAllOrder().subscribe((data) => {
+    this.orderService.getAllOrder(this.filterStatus, this.keyword).subscribe((data) => {
       this.rows = data;
       this.genlistAction(this.rows);
       this.rows.forEach(element => {
@@ -79,6 +89,10 @@ export class AppAdminManagementOrderComponent  implements OnInit {
       });
     });
   }
+  onFilterChange(){
+    this.filter = !this.filter;
+  }
+  
   formatDate(date: Date) {
     return this.datePipe.transform(date, 'dd/MM/yyyy');
   }
@@ -151,13 +165,18 @@ export class AppAdminManagementOrderComponent  implements OnInit {
           label: "Xoá",
           icon: "pi pi-trash",
           command: ($event) => {
-            //this.deleteProduct($event.item.data);
+            this.deleteOrder($event.item.data.id);
           },
         });
       return actions;
     });
   }
-
+  startTimer() {
+    clearTimeout(this.timer); // Đảm bảo rằng timer trước đó được hủy
+    this.timer = setTimeout(() => {
+      this.getData();
+    }, 1000); // Thời gian chờ: 3000 milliseconds (3 giây)
+  }
   editOrder(data: any){
     console.log(data);
     const navigationExtras: NavigationExtras = {
@@ -190,6 +209,13 @@ export class AppAdminManagementOrderComponent  implements OnInit {
   cancelorder(data: any){
     this.orderService.cancelOrder(data).subscribe((data) => {
       this.messageService.add({ severity: 'success', summary: 'Thông báo', detail: 'Cập nhật thành công', life: 3000 });
+      this.getData();
+   })
+  }
+
+  deleteOrder(id){
+    this.orderService.Delete(id).subscribe((data) => {
+      this.messageService.add({ severity: 'success', summary: 'Thông báo', detail: 'Xóa thành công', life: 3000 });
       this.getData();
    })
   }

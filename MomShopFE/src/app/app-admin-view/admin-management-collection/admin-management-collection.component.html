@@ -18,9 +18,15 @@
 				</div>
 				<div class="row mb-2" *ngIf="filter">
 					<div class="col-md-3">
+						<label class="mb-2" htmlFor="listStatus">Trạng thái<span class="required-field"></span></label>
 						<p-dropdown [options]="listStatus" [(ngModel)]="filterStatus" placeholder="Trạng thái"
 							[style]="{'height':'40px','width':'100%'}" (onChange)="getData()" optionLabel="code"
 							optionValue="value"></p-dropdown>
+					</div>
+					<div class="col-md-3">
+						<label class="mb-2" htmlFor="listStatus">Tên/Mã<span class="required-field"></span></label>
+						<input type="text" name="keyword" class="input-text" [style]="{'height':'40px'}" pInputText
+							[(ngModel)]="keyword" placeholder="Nhập từ khóa"  (keyup)="startTimer()"/>
 					</div>
 				</div>
 				<p class="mb-3 title" style="color: #3e3f40; font-size: 20px;">Danh sách bộ sưu tập</p>

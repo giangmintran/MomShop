@@ -79,6 +79,7 @@ import { DashboardComponent } from './app-admin-view/dashboard/dashboard.compone
     ButtonModule,
     FormsModule,
     CalendarModule,
+    ToastrModule,
 		MenuModule,
     FileUploadModule,
     DynamicDialogModule,

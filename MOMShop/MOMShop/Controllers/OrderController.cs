@@ -47,6 +47,19 @@ namespace MOMShop.Controllers
             }
         }
 
+        [HttpDelete("delete/{id}")]
+        public void Delete(int id)
+        {
+            try
+            {
+                _services.Delete(id);
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(ex.Message);
+            }
+        }
+
         [HttpPut("update-status")]
         public void UpdateStatus(int id, int status)
         {

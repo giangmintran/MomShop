@@ -16,14 +16,34 @@
 					<!-- <button class="btn btn-add ml-2 btn-outline-primary" [disabled]="!selectedProduct" (click)="editUser()">Sửa</button> -->
 					<!-- <button class="btn btn-add ml-2 btn-delete btn-outline-danger" [disabled]="!selectedProduct" (click)="deleteUser()">Xoá</button> -->
 				</div>
-				<!-- <div class="row mb-2" *ngIf="filter">
+				<div style="float: right; margin-right: 40px">
+					<!-- <button class="btn btn-filter mr-2 btn-outline-primary"  (click)="viewDetailProduct()">Xem chi tiết</button> -->
+					<!-- <button class="btn btn-add btn-primary text-white" (click)="createProduct()"> <i class="pi pi-plus"
+							style="font-size: 0.7rem; color: 'var(--primary-color)'"></i> Thêm</button> -->
+					<button *ngIf="!filter" class="btn btn-filter mr-2 btn-primary text-white"
+						(click)="onFilterChange()">Hiện bộ lọc</button>
+					<button *ngIf="filter" class="btn btn-filter mr-2 btn-primary text-white"
+						(click)="onFilterChange()">Ẩn bộ lọc</button>
+					<!-- <button class="btn btn-add mr-2 btn-outline-primary"  (click)="createUsers()">Thêm</button> -->
+					<!-- <button class="btn btn-add ml-2 btn-outline-primary" [disabled]="!selectedProduct" (click)="editUser()">Sửa</button> -->
+					<!-- <button class="btn btn-add ml-2 btn-delete btn-outline-danger" [disabled]="!selectedProduct" (click)="deleteUser()">Xoá</button> -->
+				</div>
+				<div class="row mb-2" *ngIf="filter">
 					<div class="col-md-3">
+						<label class="mb-1" for="listStatus">Trạng thái</label>
 						<p-dropdown [options]="listStatus" [(ngModel)]="filterStatus" placeholder="Trạng thái"
 							[style]="{'height':'40px','width':'100%'}" (onChange)="getData()" optionLabel="code"
 							optionValue="value"></p-dropdown>
 					</div>
-				</div> -->
-				<p class="mb-3 title" style="color: #3e3f40; font-size: 20px;">Danh sách bộ sưu tập</p>
+
+					<div class="col-md-3">
+						<label class="mb-1" for="listStatus">Tìm kiếm</label>
+						<input type="text" name="keyword" class="input-text" [style]="{'height':'40px'}" pInputText
+							[(ngModel)]="keyword" placeholder="Nhập từ khóa"  (keyup)="startTimer()"/>
+					</div>
+				</div>
+
+				<p class="mb-3 title" style="color: #3e3f40; font-size: 20px;">Danh sách đơn hàng</p>
 				<p-table [value]="rows" scrollHeight="700px" [paginator]="true" [rows]="20"
 					[rowsPerPageOptions]="[5,10,15,20]" [scrollable]="true" (onLazyLoad)="getData()"
 					[tableStyle]="{'min-width': '100%' ,'font-size':'1rem'}" paginatorPosition="bottom" [columns]="cols"

@@ -12,6 +12,7 @@ using MOMShop.Utils.Payment;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Net;
 using System.Net.Http;
 using System.Security.Cryptography;
 using System.Security.Policy;
@@ -91,30 +92,26 @@ namespace MOMShop.Services.Implements.Payment
             };
 
 
-            var sortedParameters = postData.OrderBy(x => x.Key); // Sắp xếp tăng dần theo tên tham số
+            var builder = new UriBuilder("https://sandbox.vnpayment.vn/paymentv2/vpcpay.html");
+            builder.Port = -1;
+            var query = HttpUtility.ParseQueryString(builder.Query);
+            query["vnp_Amount"] = "10000";
+            query["vnp_Command"] = "pay";
+            query["vnp_CreateDate"] = "DateTime.Now.ToString(\"yyyyMMddHHmmss\")";
+            query["vnp_CurrCode"] = "VND";
+            query["vnp_ExpireDate"] = "DateTime.Now.AddMinutes(15).ToString(\"yyyyMMddHHmmss\")";
+            query["vnp_IpAddr"] = "127.0.0.1";
+            query["vnp_Locale"] = "vn";
+            query["vnp_OrderInfo"] = "Order Information";
+            query["vnp_OrderType"] = "other";
+            query["vnp_ReturnUrl"] = "http://localhost:4200/view";
+            query["vnp_TmnCode"] = "M2OST1HF";
+            query["vnp_Version"] = "2.1.0";
+            builder.Query = query.ToString();
 
-            // Tạo dữ liệu xác thực
-            var secretKey = _vnPaySettings.Vnp_SecureHash;
+            string url = builder.ToString();
 
-            string requestData = string.Join("&", postData.OrderBy(x => x.Key).Select(x => $"{x.Key}={x.Value}"));
-
-            string checksum = GenerateChecksum(requestData, secretKey);
-            // Thêm checksum vào dữ liệu yêu cầu
-            requestData = requestData + $"&vnp_SecureHash={checksum}";
-            var content = new StringContent(requestData, Encoding.UTF8, "application/json");
-            // Gửi yêu cầu POST đến API thanh toán
-            var response = await _httpClient.PostAsync("https://sandbox.vnpayment.vn/paymentv2/vpcpay.html", content);
-
-            if (response.IsSuccessStatusCode)
-            {
-                var responseContent = await response.Content.ReadAsStringAsync();
-                // Xử lý dữ liệu phản hồi từ VNPay
-            }
-            else
-            {
-                // Xử lý lỗi từ VNPay
-            }
-            return new APIResponse(response.RequestMessage.RequestUri.OriginalString, "");
+            return new APIResponse("");
         }
         private string GenerateChecksum(string data, string key)
         {
@@ -131,6 +128,35 @@ namespace MOMShop.Services.Implements.Payment
         public APIResponse PaymentNotification(PaymentNotificationModel input)
         {
             throw new System.NotImplementedException();
+        }
+
+        public string CalculateHMACSHA512(Dictionary<string, string> data)
+        {
+            // Sắp xếp các trường thông tin theo thứ tự alphabet
+            var sortedData = new SortedDictionary<string, string>(data);
+
+            // Tạo chuỗi dữ liệu
+            string dataString = "";
+            foreach (var entry in sortedData)
+            {
+                dataString += entry.Key + "=" + entry.Value + "&";
+            }
+            dataString = dataString.TrimEnd('&');
+
+            // Thêm secret key vào chuỗi dữ liệu
+            var secretKey = _vnPaySettings.Vnp_SecureHash;
+            dataString += "&" + secretKey;
+
+            // Tính giá trị HMACSHA512 cho chuỗi dữ liệu
+            byte[] secretKeyBytes = Encoding.UTF8.GetBytes(secretKey);
+            byte[] dataBytes = Encoding.UTF8.GetBytes(dataString);
+
+            using (HMACSHA512 hmac = new HMACSHA512(secretKeyBytes))
+            {
+                byte[] hashBytes = hmac.ComputeHash(dataBytes);
+                string hashString = BitConverter.ToString(hashBytes).Replace("-", "").ToLowerInvariant();
+                return hashString;
+            }
         }
     }
 }

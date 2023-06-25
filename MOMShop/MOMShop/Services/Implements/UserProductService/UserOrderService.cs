@@ -51,11 +51,21 @@ namespace MOMShop.Services.Implements.UserProductService
             var insert = _mapper.Map<Order>(order);
             var orderCode = RandomNumberGenerator.GenerateRandomNumber(8);
 
+            while (true)
+            {
+                var orderCoedeFind = _dbContext.Orders.FirstOrDefault(e => e.OrderCode == orderCode && !e.Deleted);
+                if (orderCoedeFind != null)
+                {
+                    orderCode = RandomNumberGenerator.GenerateRandomNumber(8);
+                    break;
+                }
+            }
+
+            insert.OrderCode = orderCode;
             var transaction = _dbContext.Database.BeginTransaction();
 
             try
             {
-                insert.OrderCode = orderCode;
                 var result = _dbContext.Orders.Add(insert);
                 _dbContext.SaveChanges();
 
@@ -72,7 +82,12 @@ namespace MOMShop.Services.Implements.UserProductService
                            
                         }
                         productDetail.Quantity = productDetail.Quantity - item.Quantity;
+                        var productDetails = _dbContext.ProductDetails.Where(p => p.ProductId == item.ProductId);
                         if (productDetail.Quantity <= 0)
+                        {
+                            product.Status = Status.HET_HANG;
+                        }
+                        if(productDetails.All(e => e.Quantity == 0))
                         {
                             product.Status = Status.HET_HANG;
                         }
@@ -101,30 +116,29 @@ namespace MOMShop.Services.Implements.UserProductService
                 _dbContext.HistoryUpdates.Add(history);
                 _dbContext.SaveChanges();
                 transaction.Commit();
+                
             }
             catch (Exception ex)
             {
                 transaction.Rollback();
             }
 
-
-            // Cấu hình thông tin SMTP
-            //try
-            //{
-            //     Lấy dịch vụ sendmailservice
-            //    MailContent content = new MailContent
-            //    {
-            //        To = "giangcoi2001@gmail.com",
-            //        Subject = $"[ĐƠN HÀNG {result.Entity.OrderCode} ĐÃ ĐƯỢC ĐẶT THÀNH CÔNG]",
-            //        Body = $"<h1>MOMSHOP</h1>\r\n    <h2>ĐƠN HÀNG #{result.Entity.OrderCode}</h2>\r\n    <p>Cảm ơn bạn đã đặt hàng, đơn hàng sẽ sớm được xử lý.</p>\r\n    <p>Vui lòng theo dõi gmail để biết tình trạng giao hàng.</p>\r\n    <p>\r\n        <a href=\"http://localhost:4200/order\">Xem đơn hàng</a>\r\n        hoặc\r\n        <a href=\"http://localhost:4200/view\">Đến cửa hàng của chúng tôi</a>\r\n    </p>"
-            //    };
-            //    _mail.SendMail(content);
-            //}
-            //catch (Exception ex)
-            //{
-            //    Console.WriteLine("Failed to send email: " + ex.Message);
-            //}
-
+            //Cấu hình thông tin SMTP
+            try
+            {
+                //Lấy dịch vụ sendmailservice
+                MailContent content = new MailContent
+                {
+                    To = "giangcoi2001@gmail.com",
+                    Subject = $"[ĐƠN HÀNG {orderCode} ĐÃ ĐƯỢC ĐẶT THÀNH CÔNG]",
+                    Body = $"<h1>MOMSHOP</h1>\r\n    <h2>ĐƠN HÀNG #{orderCode}</h2>\r\n    <p>Cảm ơn bạn đã đặt hàng, đơn hàng sẽ sớm được xử lý.</p>\r\n    <p>Vui lòng theo dõi gmail để biết tình trạng giao hàng.</p>\r\n    <p>\r\n        <a href=\"http://localhost:4200/order\">Xem đơn hàng</a>\r\n        hoặc\r\n        <a href=\"http://localhost:4200/view\">Đến cửa hàng của chúng tôi</a>\r\n    </p>"
+                };
+                _mail.SendMail(content);
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine("Failed to send email: " + ex.Message);
+            }
 
             return new APIResponse(insert, "done");
         }

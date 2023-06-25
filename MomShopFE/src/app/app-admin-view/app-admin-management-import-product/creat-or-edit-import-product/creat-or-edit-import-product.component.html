@@ -12,7 +12,7 @@
                     <div class="row">
                         <h5 class="mb-2">Thêm mới hóa đơn</h5>
                         <hr class="hr-line">
-                        <div class="col-1">
+                        <div class="col-1" *ngIf="receiveOrder.id">
                             <div class="field">
                                 <label class="mb-2" htmlFor="code">Mã hóa đơn<span class="required-field"> * </span>
                                 </label>
@@ -21,7 +21,16 @@
                             </div>
                         </div>
 
-                        <div class="col-3">
+                        <div class="col-3"  *ngIf="receiveOrder.id">
+                            <div class="field">
+                                <label class="mb-2" htmlFor="supplier">Tên nhà cung cấp<span class="required-field"> *
+                                    </span>
+                                </label>
+                                <input type="text" id="supplier" name="supplier" pInputText
+                                    [(ngModel)]="receiveOrder.supplier" />
+                            </div>
+                        </div>
+                        <div class="col-4"  *ngIf="!receiveOrder.id">
                             <div class="field">
                                 <label class="mb-2" htmlFor="supplier">Tên nhà cung cấp<span class="required-field"> *
                                     </span>
@@ -63,13 +72,13 @@
                                 [(ngModel)]="receiveOrder.description" name="description"></textarea>
                         </div>
                         <div class="col-10"></div>
-                        <div class="col-2">
+                        <div class="col-2" *ngIf="receiveOrder.id">
                             <div class="field">
-                                <label htmlFor="description">
+                                <label htmlFor="totalMoney">
                                     Tổng tiền
                                 </label>
-                                <input [(ngModel)]="totalMoney" type="text" id="description"
-                                    name="description" pInputText style="border: none;"/>
+                                <input [(ngModel)]="receiveOrder.totalMoney" type="text" id="totalMoney"
+                                    name="totalMoney" pInputText style="border: none;"/>
                             </div>
                             <hr>
                         </div>
@@ -141,7 +150,16 @@
                                         name="quantity" pInputText />
                                 </div>
                             </div>
-                            <div class="col-4">
+                            <div class="col-1">
+                                <div class="field mb-2">
+                                    <label htmlFor="unitPrice">
+                                        Đơn giá
+                                    </label>
+                                    <input [(ngModel)]="receivedOrderDetail.unitPrice" type="text" id="description"
+                                        name="unitPrice" pInputText />
+                                </div>
+                            </div>
+                            <div class="col-3">
                                 <div class="field mb-2">
                                     <label htmlFor="description">
                                         Mô tả

@@ -9,5 +9,6 @@ namespace MOMShop.Services.Interfaces
         List<OrderDto> GetAllOrder(FilterOrderDto input);
         OrderDto FindById(int id);
         void UpdateStatus(int id, int status);
+        void Delete(int id);
     }
 }

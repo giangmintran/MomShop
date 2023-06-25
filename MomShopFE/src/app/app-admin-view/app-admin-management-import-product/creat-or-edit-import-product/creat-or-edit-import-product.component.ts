@@ -35,6 +35,7 @@ export class CreatOrEditImportProductComponent implements OnInit {
   ProductStatus = ProductStatus;
   ref: DynamicDialogRef
   types = ProductConst.productType;
+  id;
   
   constructor(
     public messageService: MessageService,  
@@ -56,13 +57,22 @@ export class CreatOrEditImportProductComponent implements OnInit {
 
     this.route.queryParams.subscribe(params => {
       const id = params['id'];
+      this.id = id;
       if (id){
+        console.log("123");
+        
         this.show(id);
       } else {
         this.getData();
       }
     });
-    this.getData();
+    
+    
+    this.receivedOrderDetails.forEach(element => {
+      this.totalMoney += element.quantity * element.unitPrice;
+    });
+    console.log("total", this.totalMoney);
+    
   }
 
   getData(){
@@ -105,8 +115,13 @@ export class CreatOrEditImportProductComponent implements OnInit {
       console.log("detaal", this.receivedOrderDetails);
       this.receiveOrder.details = this.receivedOrderDetails;
       console.log("resilt", this.receiveOrder);
+      
       this.receivedOrderService.createOrEditReceiveOrder(this.receiveOrder).subscribe(() => {
-        this.messageService.add({ severity: 'success', summary: 'Thông báo', detail: 'Cập nhật thành công', life: 3000 });
+        if (this.id){
+          this.messageService.add({ severity: 'success', summary: 'Thông báo', detail: 'Thêm mới thành công', life: 3000 });
+        } else {
+          this.messageService.add({ severity: 'success', summary: 'Thông báo', detail: 'Cập nhật thành công', life: 3000 });
+        }
       });
     }
     else {
@@ -116,7 +131,7 @@ export class CreatOrEditImportProductComponent implements OnInit {
 
   validate(): boolean{
     console.log(this.receiveOrder);
-    if(this.receiveOrder.code == null || this.receiveOrder.supplier == null || this.receiveOrder.status == null || this.receiveOrder.receiver == null){
+    if(this.receiveOrder.supplier == null || this.receiveOrder.status == null || this.receiveOrder.receiver == null){
       return false;
     }
     return true;

@@ -2,6 +2,7 @@ import { HttpClient } from "@angular/common/http";
 import { Injectable } from "@angular/core";
 import { NgModel } from "@angular/forms";
 import { ServiceBase } from "./service-base";
+import { Observable } from "rxjs";
 
 @Injectable({
     providedIn: 'root',
@@ -11,8 +12,13 @@ import { ServiceBase } from "./service-base";
     constructor(private http: HttpClient) {
       super();
     }
-    getAllOrder() {
-      return this.http.get(this.baseUrl + 'find-all');
+
+    
+    getAllOrder(status?: number, keyword: string = "") : Observable<any>{
+      let url_ = this.baseUrl + `find-all?`;
+      url_ += this.convertParamUrl('status', status ?? '');
+      url_ += this.convertParamUrl("keyword", keyword);
+      return this.http.get(url_);
     }
 
     get(id) {
@@ -28,6 +34,10 @@ import { ServiceBase } from "./service-base";
 
     completeOrder(id) {
       return this.http.put(this.baseUrl + 'complete-order/' + id,null);
+    }
+
+    Delete(id) {
+      return this.http.delete(this.baseUrl + 'delete/' + id);
     }
 
     cancelOrder(id) {

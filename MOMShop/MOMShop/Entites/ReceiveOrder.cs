@@ -19,6 +19,7 @@ namespace MOMShop.Entites
         /// </summary>
         public int Status { get; set; }
         public string Description { get; set; }
+        public float TotalMoney { get; set; }
         public bool Deleted { get; set; }
 
     }
