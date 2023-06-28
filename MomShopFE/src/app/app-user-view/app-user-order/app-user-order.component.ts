@@ -60,7 +60,7 @@ export class AppUserOrderComponent {
     this.userOrder.getAllOrder(this.customerId).subscribe((result) => {
       this.dataOrder = result;
       this.total = this.dataOrder.length;
-      this.dataOrderPagination = this.dataOrder;
+      this.dataOrderPagination = this.dataOrderPagination = this.dataOrder.slice(this.first, (this.page + 1) * this.rows);      ;
       this.dataOrder.forEach((ele) => {
         ele.statusName = this.listStatus.find(
           (e) => e.value == ele.orderStatus

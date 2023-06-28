@@ -19,7 +19,7 @@ export class AppUserVoteComponent {
   constructor(public userFeedBack: UserFeedBackService, public toartr: ToastrService) {
   }
   show(order) {
-    this.data.customerName = JSON.parse(localStorage.getItem('user'))?.userName;
+    this.data.customerName = JSON.parse(localStorage.getItem('user'))?.fullName;
     this.data.orderCode = order.orderCode;
     this.data.orderId = order.id;
     this.data.createdDate = moment().add(1, 'days').toDate();
@@ -30,6 +30,7 @@ export class AppUserVoteComponent {
     this.modal.hide();
   }
   save() {
+    this.data.customerName = JSON.parse(localStorage.getItem('user'))?.fullName;
     this.userFeedBack.addFeedbackUser(this.data).subscribe(() => {
       this.toartr.success("Đánh giá đơn hàng thành công", "Thông báo", { timeOut: 3000 });
       this.modal.hide();
