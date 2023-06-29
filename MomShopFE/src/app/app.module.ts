@@ -40,6 +40,7 @@ import { AppUserProfileComponent } from './app-user-view/app-user-profile/app-us
 import { AppUserOrderDeliveryComponent } from './app-user-view/app-user-order/app-user-order-delivery/app-user-order-delivery.component';
 import { AppAdminManagementOrderComponent } from './app-admin-view/app-admin-management-order/app-admin-management-order.component';
 import { DashboardComponent } from './app-admin-view/dashboard/dashboard.component';
+import { AppUserViewResponseComponent } from './app-user-view/app-user-view-response/app-user-view-response.component';
 
 @NgModule({
   declarations: [
@@ -64,6 +65,7 @@ import { DashboardComponent } from './app-admin-view/dashboard/dashboard.compone
     UserCollectionDetailComponent,
     AppUserOrderComponent,
     AppUserProfileComponent,
+    AppUserViewResponseComponent,
   ],
   imports: [
     BrowserModule,

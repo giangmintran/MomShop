@@ -25,6 +25,7 @@ import { CreatOrEditImportProductComponent } from './app-admin-view/app-admin-ma
 import { AppAdminManagementOrderComponent } from './app-admin-view/app-admin-management-order/app-admin-management-order.component';
 import { CreateOrEditOrderComponent } from './app-admin-view/app-admin-management-order/create-or-edit-order/create-or-edit-order.component';
 import { DashboardComponent } from './app-admin-view/dashboard/dashboard.component';
+import { AppUserViewResponseComponent } from './app-user-view/app-user-view-response/app-user-view-response.component';
 
 const routes: Routes = [
   { path: '',redirectTo:'/login',pathMatch: 'full' },
@@ -78,6 +79,7 @@ const routes: Routes = [
   { path: 'check-out', component: CheckOutComponent },
   { path: 'order', component: AppUserOrderComponent },
   { path: 'profile', component: AppUserProfileComponent },
+  { path: 'response', component: AppUserViewResponseComponent },
   //{ path: 'vote', component: AppUserProfileComponent },
 ];
 @NgModule({
