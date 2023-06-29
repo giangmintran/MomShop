@@ -1,7 +1,7 @@
 import { finalize } from 'rxjs';
 import { HttpClient } from '@angular/common/http';
 import { Component } from '@angular/core';
-import { Router } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
 import { UserCartService } from 'src/services/cartService.service';
 import { UserOrderService } from 'src/services/user-order.service';
@@ -25,15 +25,37 @@ export class CheckOutComponent {
   products: any[] = [];
   baseUrl = 'http://localhost:5001';
   discount = 0;
+  isPayment;
   userInfo: UserDto = new UserDto();
   constructor(private http: HttpClient, private router: Router,private cartService: UserCartService,
     private userService: UserService,public toastr: ToastrService,
     private userOrderService: UserOrderService,
-    private discountService: DiscountService) {
+    private discountService: DiscountService,
+    private route: ActivatedRoute) {
     // this.http.get("https://dev-online-gateway.ghn.vn/shiip/public-api/master-data/province").subscribe(data => {
     //   console.log(data);
     // });
 
+    this.route.queryParams.subscribe(params => {
+      const statusCode = params['vnp_ResponseCode']; // 'query' ở đây tương ứng với tên query parameter bạn muốn lấy giá trị
+      if (statusCode == "00"){
+        this.data.statusCode = statusCode;
+        const orderId = params['vnp_TxnRef'];
+        this.data.statusCode = orderId;
+        this.userOrderService.receiveNofity(this.data).subscribe((data) => {
+          this.toastr.success(
+            "Đặt hàng thành công!" ,
+            "Thông báo",
+            { timeOut: 3000 }
+            );
+        });
+        this.isPayment = true;
+        
+      } else {
+        this.isPayment = false;
+      }
+      
+    });
     this.getProducts();
     this.getUserInfo();
   }
@@ -136,6 +158,9 @@ export class CheckOutComponent {
     //console.log(input);
     this.userOrderService.addOrder(input).subscribe((res:any )=> {
       console.log(res);
+      if (res.message != "done" && res.message != "hethang"){
+        this.redirectUrlFromApi(res.message);
+      }
       if (res.message == "hethang"){
         this.toastr.info(
           "Sản phẩm đã hết hàng" ,
@@ -145,12 +170,19 @@ export class CheckOutComponent {
         this.router.navigateByUrl('/cart');
       } else if (res.data != null){
         this.toastr.success(
-          "Tạo đơn hàng "+ res.orderCode + " thành công!" ,
+          "Tạo đơn hàng "+ res.data.orderCode + " thành công!" ,
           "Thông báo",
           { timeOut: 3000 }
           );
-        this.router.navigateByUrl('/order');
+        //this.router.navigateByUrl('/order');
       }
     })
+  }
+  redirectUrlFromApi(url: string) {
+    const redirectUrl = url;
+    window.location.href = redirectUrl;
+  }
+  returnView(){
+    this.router.navigateByUrl('/view');
   }
 }

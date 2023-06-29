@@ -41,6 +41,15 @@
 						<input type="text" name="keyword" class="input-text" [style]="{'height':'40px'}" pInputText
 							[(ngModel)]="keyword" placeholder="Nhập từ khóa"  (keyup)="startTimer()"/>
 					</div>
+
+					<div class="col-3">
+						<label class="mb-1" for="listStatus">Ngày đặt hàng</label>
+						<p-calendar  class="input-text" [(ngModel)]="createdDate" (ngModelChange)="startTimer1()"></p-calendar>
+					</div>
+					<div class="col-3">
+						<label class="mb-1" for="listStatus">Ngày nhận hàng</label>
+						<p-calendar  class="input-text" [(ngModel)]="intendedTime" (ngModelChange)="startTimer2()"></p-calendar>
+					</div>
 				</div>
 
 				<p class="mb-3 title" style="color: #3e3f40; font-size: 20px;">Danh sách đơn hàng</p>
@@ -87,7 +96,7 @@
 					</ng-template>
 					<ng-template pTemplate="emptymessage">
 						<tr>
-							<td colspan="7">Không có dữ liệu.</td>
+							<td colspan="8">Không có dữ liệu.</td>
 						</tr>
 					</ng-template>
 				</p-table>

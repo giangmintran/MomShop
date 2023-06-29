@@ -25,6 +25,15 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.Data.SqlClient;
 using static Microsoft.EntityFrameworkCore.DbLoggerCategory.Database;
 using MOMShop.Utils.APIResponse;
+using Newtonsoft.Json;
+using System.Net.Http;
+using System.Security.Policy;
+using System.Text;
+using MOMShop.Dto;
+using Org.BouncyCastle.Utilities.Net;
+using Microsoft.Extensions.Configuration;
+using Microsoft.Extensions.Options;
+using static Org.BouncyCastle.Math.EC.ECCurve;
 
 namespace MOMShop.Services.Implements.UserProductService
 {
@@ -34,13 +43,15 @@ namespace MOMShop.Services.Implements.UserProductService
         private readonly IMapper _mapper;
         private readonly ISendMailService _mail;
         private readonly IHttpContextAccessor _httpContextAccessor;
+        private readonly IOptions<VNPaySettings> _vnPaySettings;
 
-        public UserOrderService(ApplicationDbContext dbContext, IMapper mapper, ISendMailService mail, IHttpContextAccessor httpContextAccessor)
+        public UserOrderService(ApplicationDbContext dbContext, IMapper mapper, ISendMailService mail, IHttpContextAccessor httpContextAccessor, IOptions<VNPaySettings> vnPaySettings)
         {
             _dbContext = dbContext;
             _mapper = mapper;
             _mail = mail;
             _httpContextAccessor = httpContextAccessor;
+            _vnPaySettings = vnPaySettings;
         }
 
         public APIResponse Create(OrderDto order)
@@ -66,10 +77,11 @@ namespace MOMShop.Services.Implements.UserProductService
 
             insert.OrderCode = orderCode;
             var transaction = _dbContext.Database.BeginTransaction();
-
+            Order orderGet = new Order();
             try
             {
                 var result = _dbContext.Orders.Add(insert);
+                orderGet = result.Entity;
                 _dbContext.SaveChanges();
 
                 foreach (var item in order.OrderDetails)
@@ -126,21 +138,53 @@ namespace MOMShop.Services.Implements.UserProductService
                 transaction.Rollback();
             }
 
+           
             //Cấu hình thông tin SMTP
-            try
+            //try
+            //{
+            //    //Lấy dịch vụ sendmailservice
+            //    MailContent content = new MailContent
+            //    {
+            //        To = "giangcoi2001@gmail.com",
+            //        Subject = $"[ĐƠN HÀNG {orderCode} ĐÃ ĐƯỢC ĐẶT THÀNH CÔNG]",
+            //        Body = $"<h1>MOMSHOP</h1>\r\n    <h2>ĐƠN HÀNG #{orderCode}</h2>\r\n    <p>Cảm ơn bạn đã đặt hàng, đơn hàng sẽ sớm được xử lý.</p>\r\n    <p>Vui lòng theo dõi gmail để biết tình trạng giao hàng.</p>\r\n    <p>\r\n        <a href=\"http://localhost:4200/order\">Xem đơn hàng</a>\r\n        hoặc\r\n        <a href=\"http://localhost:4200/view\">Đến cửa hàng của chúng tôi</a>\r\n    </p>"
+            //    };
+            //    _mail.SendMail(content);
+            //}
+            //catch (Exception ex)
+            //{
+            //    Console.WriteLine("Failed to send email: " + ex.Message);
+            //}
+
+            if (order.PaymentType == PaymentTypes.CHUYEN_KHOAN)
             {
-                //Lấy dịch vụ sendmailservice
-                MailContent content = new MailContent
-                {
-                    To = "giangcoi2001@gmail.com",
-                    Subject = $"[ĐƠN HÀNG {orderCode} ĐÃ ĐƯỢC ĐẶT THÀNH CÔNG]",
-                    Body = $"<h1>MOMSHOP</h1>\r\n    <h2>ĐƠN HÀNG #{orderCode}</h2>\r\n    <p>Cảm ơn bạn đã đặt hàng, đơn hàng sẽ sớm được xử lý.</p>\r\n    <p>Vui lòng theo dõi gmail để biết tình trạng giao hàng.</p>\r\n    <p>\r\n        <a href=\"http://localhost:4200/order\">Xem đơn hàng</a>\r\n        hoặc\r\n        <a href=\"http://localhost:4200/view\">Đến cửa hàng của chúng tôi</a>\r\n    </p>"
-                };
-                _mail.SendMail(content);
-            }
-            catch (Exception ex)
-            {
-                Console.WriteLine("Failed to send email: " + ex.Message);
+                //Get payment input
+                OrderInfo orderInfo = new OrderInfo();
+                orderInfo.OrderId = (long)orderGet.Id; // Giả lập mã giao dịch hệ thống merchant gửi sang VNPAY
+                orderInfo.Amount = (long)orderGet.TotalAmount; // Giả lập số tiền thanh toán hệ thống merchant gửi sang VNPAY 100,000 VND
+                orderInfo.Status = "0"; //0: Trạng thái thanh toán "chờ thanh toán" hoặc "Pending" khởi tạo giao dịch chưa có IPN
+                orderInfo.CreatedDate = DateTime.Now;
+                //Save order to db
+
+                //Build URL for VNPAY
+                VnPayLibrary vnpay = new VnPayLibrary();
+
+                vnpay.AddRequestData("vnp_Version", VnPayLibrary.VERSION);
+                vnpay.AddRequestData("vnp_Command", _vnPaySettings.Value.Vnp_Command);
+                vnpay.AddRequestData("vnp_TmnCode", _vnPaySettings.Value.Vnp_TmnCode);
+                vnpay.AddRequestData("vnp_Amount", (orderInfo.Amount * 100).ToString()); //Số tiền thanh toán. Số tiền không mang các ký tự phân tách thập phân, phần nghìn, ký tự tiền tệ. Để gửi số tiền thanh toán là 100,000 VND (một trăm nghìn VNĐ) thì merchant cần nhân thêm 100 lần (khử phần thập phân), sau đó gửi sang VNPAY là: 10000000
+                vnpay.AddRequestData("vnp_CreateDate", orderInfo.CreatedDate.ToString("yyyyMMddHHmmss"));
+                vnpay.AddRequestData("vnp_CurrCode", _vnPaySettings.Value.Vnp_CurrCode);
+                vnpay.AddRequestData("vnp_IpAddr", "127.0.0.1");
+                vnpay.AddRequestData("vnp_Locale", _vnPaySettings.Value.Vnp_Locale);
+                vnpay.AddRequestData("vnp_OrderInfo", "Thanh toan don hang:" + orderInfo.OrderId);
+                vnpay.AddRequestData("vnp_OrderType", "other"); //default value: other
+
+                vnpay.AddRequestData("vnp_ReturnUrl", "http://localhost:4200/response");
+                vnpay.AddRequestData("vnp_TxnRef", orderInfo.OrderId.ToString()); // Mã tham chiếu của giao dịch tại hệ thống của merchant. Mã này là duy nhất dùng để phân biệt các đơn hàng gửi sang VNPAY. Không được trùng lặp trong ngày
+
+                string paymentUrl = vnpay.CreateRequestUrl("https://sandbox.vnpayment.vn/paymentv2/vpcpay.html", _vnPaySettings.Value.Vnp_SecureHash);
+                return new APIResponse(insert, paymentUrl);
             }
 
             return new APIResponse(insert, "done");
@@ -148,9 +192,9 @@ namespace MOMShop.Services.Implements.UserProductService
 
         public List<ViewOrderDto> FindAll(FilterOrderDto input)
         {
-            var orders = _dbContext.Orders.Where(e => e.CreatedBy == input.CustomerId && !e.Deleted
+            var orders = _dbContext.Orders.Where(e => e.CreatedBy == input.CustomerId && !e.Deleted && !e.UserDelete
                                                     && (input.Status == null || e.OrderStatus == input.Status) 
-                                                    && (input.OrderCode == null || e.OrderCode.Contains(input.OrderCode))).ToList();
+                                                    && (input.OrderCode == null || e.OrderCode.Contains(input.OrderCode))).OrderByDescending(e => e.Id).ToList();
             var result = _mapper.Map<List<ViewOrderDto>>(orders);
             foreach (var item in result)
             {
@@ -189,6 +233,15 @@ namespace MOMShop.Services.Implements.UserProductService
             if (order != null)
             {
                 order.OrderStatus = status;
+            }
+            _dbContext.SaveChanges();
+        }
+        public void Delete(int id)
+        {
+            var order = _dbContext.Orders.FirstOrDefault(e => e.Id == id && !e.Deleted);
+            if (order != null)
+            {
+                order.UserDelete = true;
             }
             _dbContext.SaveChanges();
         }

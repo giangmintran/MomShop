@@ -12,24 +12,23 @@ export class CustomerService extends ServiceBase{
     super();
   }
 
-  getAllCustomer(status?: number, keyword: string = ""): Observable<any> {
+  getAllCustomer(status?: number, keyword: string = "", date?: string): Observable<any> {
     let url_ = this.baseUrl + `get-all?`;
     url_ += this.convertParamUrl('status', status ?? '');
-    url_ += this.convertParamUrl("keyword", keyword);
+    url_ += this.convertParamUrl("keyword", keyword ?? '');
+    url_ += this.convertParamUrl("birthDate", date ?? '');
     return this.http.get(url_);
   } 
-  deleteCollection(id:number) {
+  deleteCustomer(id:number) {
     return this.http.delete(this.baseUrl + 'delete/' + id);
   }
-  createOrEdit(product: any) {
-    if (product.id) {
-      return this.http.put(this.baseUrl + 'update', product);
-    } else {
-      return this.http.post(this.baseUrl + 'add', product);
-    }
+  
+  get(id) : Observable<any>{
+    return this.http.get(this.baseUrl+ 'get/' + id)
   }
-  getforEditCollection(id) : Observable<any>{
-    return this.http.get(this.baseUrl+ 'detail/' + id)
+
+  changeStatus(id) : Observable<any>{
+    return this.http.put(this.baseUrl+ 'change-status/' + id, null)
   }
   getCollection(id, keyword: string = "") : Observable<any>{
     console.log("keyword", keyword);

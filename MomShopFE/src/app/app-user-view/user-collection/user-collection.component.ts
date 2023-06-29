@@ -23,15 +23,14 @@ export class UserCollectionComponent {
   rows: number = 12;
   total: number;
   page = 0;
-
+  keyword;
+  timer: any;
+  param;
   ProductStatus = ProductStatus;
   constructor(private router: Router,
     private http: HttpClient,
     public productServices : UserProductService,
     public userService : UserService
-    // public toastr: ToastrService,
-    // public dialogService: DialogService, 
-    // private confirmationService: ConfirmationService,
     ) {
       this.userService.getAllCollection().subscribe((result:any)=>{
         this.listCollection = result.data;
@@ -40,7 +39,6 @@ export class UserCollectionComponent {
 
   ngOnInit() {
     this.getProduct('all');
-    // this.productsPagination = this.products.slice(this.first, (this.page + 1) * this.rows);
   }
 
   onPageChange(event) {
@@ -56,13 +54,21 @@ export class UserCollectionComponent {
   }
 
   getProduct(param){
-    this.productServices.getShirt(param).pipe(finalize(() => {
+    console.log("k", this.keyword);
+    
+    this.param = param;
+    this.productServices.getShirt(param, this.keyword).pipe(finalize(() => {
       this.resetPage();
     })).subscribe((data) => {
       this.products = data;
-      console.log("this", this.products);
       this.total = this.products.length;
     });
+  }
+  startTimer() {
+    clearTimeout(this.timer); // Đảm bảo rằng timer trước đó được hủy
+    this.timer = setTimeout(() => {
+      this.getProduct(this.param);
+    }, 1000); // Thời gian chờ: 3000 milliseconds (3 giây)
   }
   getDetailCollection(id){
     console.log("123142", id);

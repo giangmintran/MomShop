@@ -14,11 +14,16 @@ export class DashboardComponent implements OnInit {
     products;
     responsiveOptions: any[];
     data: any;
-    yAxisTicks: number[] = [10, 10, 10, 10, 42, 10, 10, 10, 10, 10, 10, 10];
+    dataEachMonth: any;
     options: any;
+    options2: any;
     dataOrder: number[] = [];
     dataReceiveOrder: number[];
+    dataMonth: number[];
     listStatus;
+    timeSearch: Date;
+    month;
+    year;
     DashboardConst = DashboardConst;
     ProductStatus = ProductStatus;
     constructor(private http: HttpClient, private route: Router, private dashboard: DashboardService) {
@@ -48,15 +53,13 @@ export class DashboardComponent implements OnInit {
         ];
     }
     ngOnInit() {
+        
         if (sessionStorage.getItem('userType')) {
             location.reload();
             sessionStorage.clear();
         }
         this.dashboard.dashboard().subscribe((data: any) => {
             this.dataOrder = data.orders;
-            console.log(data.orders);
-            console.log(this.yAxisTicks);
-            console.log(data.products);
             this.dataReceiveOrder = data.receivedOrders;
             this.processData(data);
             this.products = data.products;
@@ -64,6 +67,19 @@ export class DashboardComponent implements OnInit {
                 var productStatusName = this.listStatus.find( e=> e.value == element.status).code
                 element.imageUrl = element.imageUrl;
               });
+        });
+        this.getChartMonth();
+    }
+
+    getChartMonth(){
+        if (this.timeSearch !== undefined) {
+            this.month = this.timeSearch.getMonth() + 1;
+            this.year = this.timeSearch.getFullYear();
+        }
+        this.dashboard.dashboardSecond(this.month, this.year).subscribe((data: any) => {
+            console.log("reas", data);
+            this.dataMonth = data.totalValue;
+            this.processDataEachYear(data);
         });
     }
     processData(data: any) {
@@ -127,5 +143,59 @@ export class DashboardComponent implements OnInit {
         };
     }
 
+    processDataEachYear(data: any) {
+        const documentStyle = getComputedStyle(document.documentElement);
+        const textColor = documentStyle.getPropertyValue('--text-color');
+        const textColorSecondary = documentStyle.getPropertyValue('--text-color-secondary');
+        const surfaceBorder = documentStyle.getPropertyValue('--surface-border');
+
+        this.dataEachMonth = {
+            labels: data.labels,
+            datasets: [
+                {
+                    label: 'Đơn hoàn thành',
+                    backgroundColor: documentStyle.getPropertyValue('--blue-500'),
+                    borderColor: documentStyle.getPropertyValue('--blue-500'),
+                    data: this.dataMonth
+                },
+            ]
+        };
+
+        this.options2 = {
+            maintainAspectRatio: false,
+            aspectRatio: 0.8,
+            plugins: {
+                legend: {
+                    labels: {
+                        color: textColor
+                    }
+                }
+            },
+            scales: {
+                x: {
+                    ticks: {
+                        color: textColorSecondary,
+                        font: {
+                            weight: 500
+                        }
+                    },
+                    grid: {
+                        color: surfaceBorder,
+                        drawBorder: false
+                    }
+                },
+                y: {
+                    ticks: {
+                        color: textColorSecondary
+                    },
+                    grid: {
+                        color: surfaceBorder,
+                        drawBorder: false
+                    },
+                }
+
+            }
+        };
+    }
     
 }

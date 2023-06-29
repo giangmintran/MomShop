@@ -10,8 +10,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace MOMShop.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20230505035519_update2")]
-    partial class update2
+    [Migration("20230629120314_Init")]
+    partial class Init
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -32,6 +32,9 @@ namespace MOMShop.Migrations
                         .HasColumnType("int");
 
                     b.Property<int>("ProductId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("Quantity")
                         .HasColumnType("int");
 
                     b.Property<string>("Size")
@@ -135,7 +138,7 @@ namespace MOMShop.Migrations
                     b.Property<string>("District")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<bool>("IsDefault")
+                    b.Property<bool?>("IsDefault")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("bit")
                         .HasDefaultValue(true);
@@ -167,6 +170,32 @@ namespace MOMShop.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("CustomerFavourites");
+                });
+
+            modelBuilder.Entity("MOMShop.Entites.Discount", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<int>("Amount")
+                        .HasColumnType("int");
+
+                    b.Property<string>("DiscountCode")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("DiscountPercent")
+                        .HasColumnType("int");
+
+                    b.Property<int>("Status")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasDefaultValue(1);
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Discounts");
                 });
 
             modelBuilder.Entity("MOMShop.Entites.Feedback", b =>
@@ -215,7 +244,9 @@ namespace MOMShop.Migrations
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<DateTime>("CreatedDate")
-                        .HasColumnType("datetime2");
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("datetime2")
+                        .HasDefaultValueSql("getdate()");
 
                     b.Property<string>("NewValue")
                         .HasColumnType("nvarchar(max)");
@@ -225,6 +256,9 @@ namespace MOMShop.Migrations
 
                     b.Property<int>("ReferId")
                         .HasColumnType("int");
+
+                    b.Property<string>("Summary")
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Table")
                         .HasColumnType("nvarchar(max)");
@@ -244,6 +278,9 @@ namespace MOMShop.Migrations
                     b.Property<string>("Address")
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<int?>("CreatedBy")
+                        .HasColumnType("int");
+
                     b.Property<DateTime>("CreatedDate")
                         .HasColumnType("datetime2")
                         .HasComment("Ngay tao don");
@@ -256,12 +293,24 @@ namespace MOMShop.Migrations
                         .HasColumnType("bit")
                         .HasDefaultValue(false);
 
+                    b.Property<float>("DeliveryCost")
+                        .HasColumnType("real");
+
+                    b.Property<string>("DiscountCode")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("District")
+                        .HasColumnType("nvarchar(max)");
+
                     b.Property<string>("Email")
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<DateTime>("IntendedTime")
                         .HasColumnType("datetime2")
                         .HasComment("Thoi gian nhan hang du kien");
+
+                    b.Property<string>("Nation")
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("OrderCode")
                         .HasColumnType("nvarchar(max)");
@@ -270,16 +319,25 @@ namespace MOMShop.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int")
                         .HasDefaultValue(1)
-                        .HasComment("1. Khoi tao, 2.Da nhan, 3. Da giao, 4. Da xoa");
+                        .HasComment("1. Khoi tao, 2.Dang giao va chua nhan tien , 3.Dang giao va da nhan tien, 4. Hoan thanh, 5. Da xoa");
 
                     b.Property<int>("PaymentType")
-                        .HasColumnType("int");
+                        .HasColumnType("int")
+                        .HasComment("1. Cod, 2.Bank");
 
                     b.Property<string>("Phone")
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<string>("Province")
+                        .HasColumnType("nvarchar(max)");
+
                     b.Property<float>("TotalAmount")
                         .HasColumnType("real");
+
+                    b.Property<bool>("UserDelete")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("bit")
+                        .HasDefaultValue(false);
 
                     b.HasKey("Id");
 
@@ -348,6 +406,24 @@ namespace MOMShop.Migrations
                     b.ToTable("Products");
                 });
 
+            modelBuilder.Entity("MOMShop.Entites.ProductCollection", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<int>("CollectionId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("ProductId")
+                        .HasColumnType("int");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("ProductCollections");
+                });
+
             modelBuilder.Entity("MOMShop.Entites.ProductDetail", b =>
                 {
                     b.Property<int>("Id")
@@ -381,6 +457,9 @@ namespace MOMShop.Migrations
 
                     b.Property<string>("ImageUrl")
                         .HasColumnType("nvarchar(max)");
+
+                    b.Property<bool>("IsDefault")
+                        .HasColumnType("bit");
 
                     b.Property<int>("ProductId")
                         .HasColumnType("int");
@@ -426,6 +505,9 @@ namespace MOMShop.Migrations
                         .HasColumnType("nvarchar(max)")
                         .HasComment("Nguoi gui (Xuong may gui))");
 
+                    b.Property<float>("TotalMoney")
+                        .HasColumnType("real");
+
                     b.HasKey("Id");
 
                     b.ToTable("ReceiveOrders");
@@ -439,8 +521,7 @@ namespace MOMShop.Migrations
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
                     b.Property<string>("Code")
-                        .HasColumnType("nvarchar(max)")
-                        .HasComment("ReceiveProductCode");
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Description")
                         .HasColumnType("nvarchar(max)");
@@ -475,7 +556,7 @@ namespace MOMShop.Migrations
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.Property<string>("Avatar")
+                    b.Property<string>("Address")
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<DateTime?>("BirthDay")
@@ -488,6 +569,9 @@ namespace MOMShop.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("bit")
                         .HasDefaultValue(false);
+
+                    b.Property<string>("District")
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Email")
                         .HasColumnType("nvarchar(max)");
@@ -503,6 +587,19 @@ namespace MOMShop.Migrations
 
                     b.Property<string>("Phone")
                         .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Province")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("Status")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasDefaultValue(1);
+
+                    b.Property<int>("UserType")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasDefaultValue(2);
 
                     b.HasKey("Id");
 

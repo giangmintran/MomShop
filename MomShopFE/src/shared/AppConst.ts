@@ -98,6 +98,10 @@ export class OrderConst {
             name: 'Đã hủy',
             code: 5
         },
+        {
+            name: 'Đã thanh toán',
+            code: 6
+        },
     ]
     public static getStatus(code){
         const result = this.orderStatus.find(item => 
@@ -319,6 +323,11 @@ export class OrderStatus {
             code: 5,
             severity: 'danger'
         },
+        {
+            name: 'Đã thanh toán',
+            code: 6,
+            severity: 'success'
+        },
     ]
     public static getOrderStatus(code: number){
         const result = this.orderStatus.find(item => 
@@ -392,5 +401,24 @@ export class CollectionStatus {
                 return 'danger';
         }
         return "";
+    }
+}
+
+export class PaymentType {
+    public static paymentType = [
+        {
+            name: 'Chuyển khoản',
+            code: 2,
+        },
+        {
+            name: 'COD',
+            code: 1,
+        },
+    ]
+    public static getPaymentType(code: number){
+        const result = this.paymentType.find(item => 
+            item.code == code
+        );
+        return result?.name ?? "";
     }
 }

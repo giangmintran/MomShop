@@ -64,6 +64,7 @@ namespace MOMShop.MomShopDbContext
             {
                 entity.Property(e => e.Deleted).HasDefaultValue(false);
                 entity.Property(e => e.OrderStatus).HasDefaultValue(OrderStatus.KHOI_TAO);
+                entity.Property(e => e.UserDelete).HasDefaultValue(false);
             });
             #endregion
 

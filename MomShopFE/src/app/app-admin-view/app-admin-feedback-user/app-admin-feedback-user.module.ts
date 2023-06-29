@@ -9,6 +9,10 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { TableModule } from 'primeng/table';
 import { AppBsModalModule } from 'src/directive/app-bs-modal.module';
 import { AppAdminFeedbackUserComponent } from './app-admin-feedback-user.component';
+import { ToastModule } from 'primeng/toast';
+import { ConfirmDialogModule } from 'primeng/confirmdialog';
+import { RatingModule } from 'primeng/rating';
+import { MenuModule } from 'primeng/menu';
 
 @NgModule({
   declarations: [AppAdminFeedbackUserComponent],
@@ -22,6 +26,10 @@ import { AppAdminFeedbackUserComponent } from './app-admin-feedback-user.compone
     TableModule,
     BrowserAnimationsModule,
     AppBsModalModule,FormsModule,
+    ToastModule,
+    ConfirmDialogModule,
+    RatingModule,
+    MenuModule,
   ]
 })
 export class AppAdminFeedbackUserModule { }

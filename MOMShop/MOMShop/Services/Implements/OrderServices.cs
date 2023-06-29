@@ -73,9 +73,10 @@ namespace MOMShop.Services.Implements
         public List<OrderDto> GetAllOrder(FilterOrderDto input)
         {
             var result = new List<OrderDto>();
-
             var orders = _dbContext.Orders.Where(e => !e.Deleted && (input.Status == null || e.OrderStatus == input.Status)
-            && (input.Keyword == null || e.OrderCode.Contains(input.Keyword) || e.CustomerName.ToLower().Contains(input.Keyword))).OrderByDescending(e => e.Id).ToList();
+            && (input.Keyword == null || e.OrderCode.Contains(input.Keyword) || e.CustomerName.ToLower().Contains(input.Keyword))
+            && (input.CreatedDate == null || e.CreatedDate.Date == input.CreatedDate.Value.Date)
+            && (input.IntendedTime == null || e.IntendedTime.Date == input.IntendedTime.Value.Date)).OrderByDescending(e => e.Id).ToList();
 
             result = _mapper.Map<List<OrderDto>>(orders);
             return result;

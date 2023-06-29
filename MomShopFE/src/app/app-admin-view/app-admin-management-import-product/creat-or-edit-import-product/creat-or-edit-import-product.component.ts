@@ -108,16 +108,25 @@ export class CreatOrEditImportProductComponent implements OnInit {
   }
 
   save() {
-    if(this.validate()){
+    let check = false;
+    this.receivedOrderDetails.forEach(element => {
+      console.log("ele", element);
+      if(element.size == undefined || element.quantity == undefined || element.code == undefined || element.name == undefined){
+        check = true;
+      }
+    });
+    console.log(this.validate());
+    
+    if(this.validate() && !check){
       let receivedDate = this.receiveOrder.receivedDate.getDate() + 1;
       this.receiveOrder.receivedDate.setDate(receivedDate);
       console.log("order", this.receiveOrder);
       console.log("detaal", this.receivedOrderDetails);
       this.receiveOrder.details = this.receivedOrderDetails;
       console.log("resilt", this.receiveOrder);
-      
       this.receivedOrderService.createOrEditReceiveOrder(this.receiveOrder).subscribe(() => {
-        if (this.id){
+        console.log(this.receiveOrder.id);
+        if (this.receiveOrder.id == undefined){
           this.messageService.add({ severity: 'success', summary: 'Thông báo', detail: 'Thêm mới thành công', life: 3000 });
         } else {
           this.messageService.add({ severity: 'success', summary: 'Thông báo', detail: 'Cập nhật thành công', life: 3000 });
@@ -166,25 +175,29 @@ export class CreatOrEditImportProductComponent implements OnInit {
     this.router.navigate(['admin/received-order/order']);
   }
   addvalue() {
-    if(this.receivedOrderDetails.length == 0){
-      this.receivedOrderDetails.push({ });
-    } 
+    let check = false;
+    if (this.receivedOrderDetails.length == 0) {
+      this.receivedOrderDetails.push({});
+    }
     else {
-      if (this.receivedOrderDetails.length > 0){
+      if (this.receivedOrderDetails.length > 0) {
         this.receivedOrderDetails.forEach(element => {
-          if(element.code != undefined || element.name != undefined || element.size != undefined || element.quantity != undefined){
-            this.receivedOrderDetails.push({ });
-          }
-          else {
-            this.messageService.add({ severity: 'warn', summary: 'Thông báo', detail: 'Vui lòng nhập đầy đủ thông tin', life: 3000 });
+          console.log("ele", element);
+          if(element.size == undefined || element.quantity == undefined){
+            check = true;
           }
         });
+      };
+      if (!check) {
+        this.receivedOrderDetails.push({});
+      }
+      else {
+        this.messageService.add({ severity: 'warn', summary: 'Thông báo', detail: 'Vui lòng nhập đầy đủ thông tin', life: 3000 });
       }
     }
+    
   }
   removeDetail(index){
-    console.log("2222");
-    
     this.confirmationService.confirm({
       message: 'Xóa giá trị này?',
       acceptLabel: 'Đồng ý',

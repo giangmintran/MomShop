@@ -5,6 +5,7 @@ using System.Collections.Generic;
 using System;
 using MOMShop.Dto.Customer;
 using MOMShop.Dto.Users;
+using MOMShop.Utils.APIResponse;
 
 namespace MOMShop.Controllers
 {
@@ -26,6 +27,48 @@ namespace MOMShop.Controllers
             {
                 var result = _services.GetAll(input);
                 return result;
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(ex.Message);
+            }
+        }
+
+        [HttpGet("get/{id}")]
+        public APIResponse Get(int id)
+        {
+            try
+            {
+                var result = _services.Find(id);
+                return result;
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(ex.Message);
+            }
+        }
+
+        [HttpPut("change-status/{id}")]
+        public APIResponse ChangeStatus(int id)
+        {
+            try
+            {
+                 _services.ChangeStatus(id);
+                return new APIResponse("ok");
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(ex.Message);
+            }
+        }
+
+        [HttpDelete("delete/{id}")]
+        public APIResponse Delete(int id)
+        {
+            try
+            {
+                _services.Delete(id);
+                return new APIResponse("ok");
             }
             catch (Exception ex)
             {

@@ -8,6 +8,7 @@ using System.Collections.Generic;
 using System;
 using MOMShop.Entites;
 using MOMShop.Dto.Collection;
+using MOMShop.Utils.APIResponse;
 
 namespace MOMShop.Controllers
 {
@@ -37,7 +38,7 @@ namespace MOMShop.Controllers
         }
 
         [HttpPost("add")]
-        public CollectionDto Create([FromBody] CollectionDto input)
+        public APIResponse Create([FromBody] CollectionDto input)
         {
             try
             {

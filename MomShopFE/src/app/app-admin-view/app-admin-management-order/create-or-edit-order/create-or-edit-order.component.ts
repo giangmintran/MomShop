@@ -6,7 +6,7 @@ import { ConfirmationService, MessageService } from 'primeng/api';
 import { DialogService } from 'primeng/dynamicdialog';
 import { Order } from 'src/models/order';
 import { OrderService } from 'src/services/order.service';
-import { OrderConst } from 'src/shared/AppConst';
+import { OrderConst, PaymentType } from 'src/shared/AppConst';
 
 @Component({
   selector: 'app-create-or-edit-order',
@@ -22,7 +22,9 @@ export class CreateOrEditOrderComponent implements OnInit {
   isEdit: boolean = false;
   delivery: string = "VIETTEL POST"
   cols;
+  paymentTypeDisplay;
   events: any[];
+  PaymentType = PaymentType;
   constructor(
     public messageService: MessageService,  
     public toastr: ToastrService,
@@ -106,6 +108,7 @@ export class CreateOrEditOrderComponent implements OnInit {
         this.events.forEach(element => {
           element.createdDate = this.datePipe.transform(element.createdDate, 'dd/MM/yyyy hh:mm');
         });
+        this.paymentTypeDisplay = PaymentType.getPaymentType(this.order.paymentType);
       })
     }
   }

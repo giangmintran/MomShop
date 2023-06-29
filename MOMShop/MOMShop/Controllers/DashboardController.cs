@@ -32,5 +32,19 @@ namespace MOMShop.Controllers
                 throw new Exception(ex.Message);
             }
         }
+
+        [HttpGet("get-by-time")]
+        public DashboardSecondDto GetByTime(int? month, int? year)
+        {
+            try
+            {
+                var result = _services.GetByTime(month, year);
+                return result;
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(ex.Message);
+            }
+        }
     }
 }

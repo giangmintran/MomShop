@@ -14,7 +14,7 @@
                         <div class="field">
                             <label class="mb-2" htmlFor="code">Người đặt<span class="required-field"> * </span>
                             </label>
-                            <input [(ngModel)]="order.customerName" type="text" id="code" name="code" pInputText
+                            <input [(ngModel)]="order.customerName" type="text" id="code" name="code" pInputText readonly
                                 maxlength="256" />
                         </div>
                     </div>
@@ -24,7 +24,7 @@
                                     class="required-field"> *
                                 </span>
                             </label>
-                            <p-calendar name="intendedTime" value="intendedTime" [(ngModel)]="order.intendedTime"
+                            <p-calendar name="intendedTime" value="intendedTime" [(ngModel)]="order.intendedTime" readonly
                                 dateFormat="dd/mm/yy" [style]="{'width':'100%',}" [showButtonBar]="true"></p-calendar>
                         </div>
                     </div>
@@ -33,7 +33,7 @@
                             <label class="mb-2" htmlFor="createdDate">Ngày đặt hàng<span class="required-field"> *
                                 </span>
                             </label>
-                            <p-calendar name="createdDate" value="createdDate" [(ngModel)]="order.createdDate"
+                            <p-calendar name="createdDate" value="createdDate" [(ngModel)]="order.createdDate" readonly
                                 dateFormat="dd/mm/yy" [style]="{'width':'100%'}" [showButtonBar]="true"></p-calendar>
                         </div>
                     </div>
@@ -48,11 +48,19 @@
                     </div>
                 </div>
                 <div class="row" *ngIf="!isEdit">
-                    <div class="col-8">
+                    <div class="col-6">
                         <div class="field">
                             <label class="mb-2" htmlFor="code">Địa chỉ nhận hàng<span class="required-field"> * </span>
                             </label>
-                            <input [(ngModel)]="addressDisplay" type="text" id="code" name="code" pInputText
+                            <input [(ngModel)]="addressDisplay" type="text" id="code" name="code" pInputText readonly
+                                maxlength="256" />
+                        </div>
+                    </div>
+                    <div class="col-2">
+                        <div class="field">
+                            <label class="mb-2" htmlFor="code">Hình thức thanh toán<span class="required-field"> </span>
+                            </label>
+                            <input [(ngModel)]="paymentTypeDisplay" type="text" id="code" name="code" pInputText readonly 
                                 maxlength="256" />
                         </div>
                     </div>

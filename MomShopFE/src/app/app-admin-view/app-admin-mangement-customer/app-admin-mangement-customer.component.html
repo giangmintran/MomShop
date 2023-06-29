@@ -17,7 +17,7 @@
 				<div class="row mb-2" *ngIf="filter">
 					<div class="col-3">
 						<label class="mb-1" for="listStatus">Trạng thái</label>
-						<p-dropdown [options]="listStatus" name="listStatus" [(ngModel)]="filterStatus"
+						<p-dropdown [options]="CustomerConst.customerStatus" name="listStatus" [(ngModel)]="filterStatus"
 							placeholder="Trạng thái" [style]="{'height':'40px','width':'100%'}"
 							(onChange)="getAllCustomer()" optionLabel="name" optionValue="code"
 							placeholder="Trạng thái"></p-dropdown>
@@ -27,12 +27,17 @@
 						<input type="text" name="keyword" class="input-text" [style]="{'height':'40px'}" pInputText
 							[(ngModel)]="keyword" placeholder="Nhập từ khóa" (keyup)="startTimer()" />
 					</div>
+
+					<div class="col-3">
+						<label class="mb-1" for="listStatus">Ngày</label>
+						<p-calendar  class="input-text" [(ngModel)]="date" (ngModelChange)="startTimer()"></p-calendar>
+					</div>
 				</div>
 				<p class="mb-2" style="font-size:24px;">Danh sách tài khoản khách hàng</p>
-				<p-table [value]="tableData" [paginator]="true" [rows]="10" [rowsPerPageOptions]="[5,10,15,20]"
+				<p-table [value]="tableData" [paginator]="true" [rows]="20" [rowsPerPageOptions]="[5,10,15,20]" scrollHeight="680px"
 					(onLazyLoad)="getAllCustomer()" [tableStyle]="{'min-width': '100%-280px' ,'font-size':'1rem'}"
 					paginatorPosition="bottom" [columns]="cols" selectionMode="single" [(selection)]="selectedRow"
-					(selectionChange)="onSelectionChange($event)" [rows]="2">
+					>
 					<ng-template pTemplate="header" let-columns>
 						<tr>
 							<th>STT</th>
@@ -63,7 +68,20 @@
                                     value="{{ CustomerConst.getCustomerStatus(tableData.status) }}">
                                 </p-tag>
 							</td>
-							<td></td>
+							<td style="max-width: 3rem; min-width: 3rem; justify-content: center;" pFrozenColumn
+								alignFrozen="right" [frozen]="true" class=" b-border-frozen-right b-table-actions">
+								<ng-template [ngIf]="true">
+									<i class="pi pi-ellipsis-v" style="padding: 10px 0px"
+										(click)="menu.toggle($event)"></i>
+									<p-menu #menu [popup]="true" appendTo="body"
+										[model]="listAction[rowIndex]"></p-menu>
+								</ng-template>
+							</td>
+						</tr>
+					</ng-template>
+					<ng-template pTemplate="emptymessage">
+						<tr>
+							<td colspan="9">Không có dữ liệu.</td>
 						</tr>
 					</ng-template>
 				</p-table>

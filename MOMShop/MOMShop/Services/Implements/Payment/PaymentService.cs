@@ -3,12 +3,17 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Options;
+using MOMShop.Dto;
+using MOMShop.Entites;
 using MOMShop.MomShopDbContext;
 using MOMShop.Services.Interfaces.Mail;
 using MOMShop.Services.Interfaces.PaymentService;
+using MOMShop.Utils;
 using MOMShop.Utils.APIResponse;
+using MOMShop.Utils.HistoryUpdate;
 using MOMShop.Utils.Mail;
 using MOMShop.Utils.Payment;
+using Org.BouncyCastle.Asn1.X9;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -41,77 +46,9 @@ namespace MOMShop.Services.Implements.Payment
             _httpClient = new HttpClient();
         }
 
-        public async Task<APIResponse> CreatePayment(PaymentRequestModel input)
+        public void CreatePayment1(PaymentRequestModel input)
         {
-            //var order = _dbContext.Orders.FirstOrDefault(e => e.Id == input.OrderId && !e.Deleted);
-            //if (order == null)
-            //{
-            //    return new APIResponse()
-            //    {
-            //        Message = "notfound"
-            //    };
-            //}
-
-            var ipAddress = _httpContextAccessor.HttpContext?.Connection?.RemoteIpAddress?.ToString();
-            //string inputDateTimeString = order.CreatedDate.ToString("yyyyMMddHHmmss");
-            string inputDateTimeString = DateTime.Now.ToString("yyyyMMddHHmmss");
-
-            //var vnPay = new PaymentRequestModel()
-            //{
-            //    // Xây dựng yêu cầu thanh toán dựa trên thông tin từ model và thông tin cấu hình VNPay
-            //    OrderId = order.Id,
-            //    Amount = order.TotalAmount,
-            //    OrderInfo = $"Thanh toán hóa đơn {order.OrderCode}",
-            //    IpAdrr = ipAddress,
-            //    CreateDate = inputDateTimeString,
-            //    BillEmail = order.Email,
-            //    BillMobile = order.Phone,
-            //    TmnCode = _vnPaySettings.TmnCode,
-            //    SecureHashs = _vnPaySettings.SecureHashs,
-            //    Locale = _vnPaySettings.Locale,
-            //    CurrCode = _vnPaySettings.CurrCode,
-            //    Command= _vnPaySettings.Command,
-            //    ReturnUrl= "",
-            //};
-
-            var postData = new Dictionary<string, string>
-            {
-                { "vnp_Amount", "10000" },
-                { "vnp_Command", "pay" },
-                { "vnp_CreateDate", DateTime.Now.ToString("yyyyMMddHHmmss") },
-                { "vnp_CurrCode", "VND" },
-                { "vnp_ExpireDate", DateTime.Now.AddMinutes(15).ToString("yyyyMMddHHmmss") },
-                { "vnp_IpAddr", "127.0.0.1" },
-                { "vnp_Locale", "vn" },
-                { "vnp_OrderInfo", "Order Information" },
-                { "vnp_OrderType", "other" },
-                { "vnp_ReturnUrl", "http://localhost:4200/view" },
-                { "vnp_TmnCode", "M2OST1HF" },
-                { "vnp_TxnRef", "TXNREF123" },
-                { "vnp_Version", "2.1.0" },
-            };
-
-
-            var builder = new UriBuilder("https://sandbox.vnpayment.vn/paymentv2/vpcpay.html");
-            builder.Port = -1;
-            var query = HttpUtility.ParseQueryString(builder.Query);
-            query["vnp_Amount"] = "10000";
-            query["vnp_Command"] = "pay";
-            query["vnp_CreateDate"] = "DateTime.Now.ToString(\"yyyyMMddHHmmss\")";
-            query["vnp_CurrCode"] = "VND";
-            query["vnp_ExpireDate"] = "DateTime.Now.AddMinutes(15).ToString(\"yyyyMMddHHmmss\")";
-            query["vnp_IpAddr"] = "127.0.0.1";
-            query["vnp_Locale"] = "vn";
-            query["vnp_OrderInfo"] = "Order Information";
-            query["vnp_OrderType"] = "other";
-            query["vnp_ReturnUrl"] = "http://localhost:4200/view";
-            query["vnp_TmnCode"] = "M2OST1HF";
-            query["vnp_Version"] = "2.1.0";
-            builder.Query = query.ToString();
-
-            string url = builder.ToString();
-
-            return new APIResponse("");
+            
         }
         private string GenerateChecksum(string data, string key)
         {
@@ -157,6 +94,42 @@ namespace MOMShop.Services.Implements.Payment
                 string hashString = BitConverter.ToString(hashBytes).Replace("-", "").ToLowerInvariant();
                 return hashString;
             }
+        }
+
+        public void ReceiveNotify(PaymentRequestModel input)
+        {
+            if (input.StatusCode == "00")
+            {
+                var order = _dbContext.Orders.FirstOrDefault(e => e.Id.ToString() == input.OrderId && !e.Deleted);
+                if (order != null)
+                {
+                    order.OrderStatus = OrderStatus.DA_THANH_TOAN;
+                    var history = new HistoryUpdate()
+                    {
+                        Table = HistoryUpdateTable.ORDER,
+                        ReferId = order.Id,
+                        Summary = "Thanh toán đơn hàng",
+                    };
+                    _dbContext.HistoryUpdates.Add(history);
+                    //Cấu hình thông tin SMTP
+                    try
+                    {
+                        //Lấy dịch vụ sendmailservice
+                        MailContent content = new MailContent
+                        {
+                            To = "giangcoi2001@gmail.com",
+                            Subject = $"[ĐƠN HÀNG {order.OrderCode} ĐÃ ĐƯỢC ĐẶT THÀNH CÔNG]",
+                            Body = $"<h1>MOMSHOP</h1>\r\n    <h2>ĐƠN HÀNG #{order.OrderCode}</h2>\r\n    <p>Đơn hàng đã được thanh toán. Cảm ơn bạn đã đặt hàng, đơn hàng sẽ sớm được xử lý.</p>\r\n    <p>Vui lòng theo dõi gmail để biết tình trạng giao hàng.</p>\r\n    <p>\r\n        <a href=\"http://localhost:4200/order\">Xem đơn hàng</a>\r\n        hoặc\r\n        <a href=\"http://localhost:4200/view\">Đến cửa hàng của chúng tôi</a>\r\n    </p>"
+                        };
+                        _mail.SendMail(content);
+                    }
+                    catch (Exception ex)
+                    {
+                        Console.WriteLine("Failed to send email: " + ex.Message);
+                    }
+                }
+            }
+            _dbContext.SaveChanges();
         }
     }
 }
