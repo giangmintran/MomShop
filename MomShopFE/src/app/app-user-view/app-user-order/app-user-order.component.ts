@@ -72,8 +72,10 @@ export class AppUserOrderComponent {
   openModalVote(order) {
     this.modalVote.show(order);
   }
-  openModalStatusOrder() {
-    this.modalStatus.show();
+  openModalStatusOrder(orderStatus) {
+    if(orderStatus!= 5){
+      this.modalStatus.show(orderStatus);
+    }
   }
   cancelOrder(id) {
     console.log(id);
