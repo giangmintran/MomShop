@@ -12,11 +12,15 @@ baseUrl = 'http://localhost:5001/api/user/product/';
     super();
   }
 
-  getShirt(shirtName:string, status?: number): Observable<any> {
+  getShirt(shirtName:string, keyword?: string): Observable<any> {
+    console.log("l",keyword);
+    
     let url_ = this.baseUrl + shirtName;
-    if (status != undefined){
-      url_ = url_ + '?status=' + status;
+    if (keyword != undefined){
+      url_ = url_ + '?keyword=' + keyword;
     }
+    console.log("url", url_);
+    
     return this.http.get(url_);
   } 
 }

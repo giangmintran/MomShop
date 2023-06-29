@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using MOMShop.Utils;
+using System;
 using System.Xml.Linq;
 
 namespace MOMShop.Dto.Order
@@ -13,5 +14,9 @@ namespace MOMShop.Dto.Order
 
         [FromQuery(Name = "customerId")]
         public int? CustomerId { get; set; }
+        [FromQuery(Name = "createdDate")]
+        public DateTime? CreatedDate { get; set; }
+        [FromQuery(Name = "intendedTime")]
+        public DateTime? IntendedTime { get; set; }
     }
 }

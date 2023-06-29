@@ -332,6 +332,11 @@ namespace MOMShop.Migrations
                     b.Property<float>("TotalAmount")
                         .HasColumnType("real");
 
+                    b.Property<bool>("UserDelete")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("bit")
+                        .HasDefaultValue(false);
+
                     b.HasKey("Id");
 
                     b.ToTable("Orders");

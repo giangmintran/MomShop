@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using MOMShop.Utils;
+using System;
 
 namespace MOMShop.Dto.ReceiveOrder
 {
@@ -7,5 +8,9 @@ namespace MOMShop.Dto.ReceiveOrder
     {
         [FromQuery(Name = "status")]
         public int? Status { get; set; }
+        [FromQuery(Name = "createdDate")]
+        public DateTime? CreatedDate { get; set; }
+        [FromQuery(Name = "intendedTime")]
+        public DateTime? IntendedTime { get; set; }
     }
 }

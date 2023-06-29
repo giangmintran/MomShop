@@ -5,6 +5,7 @@ using MOMShop.Dto.ProductDetail;
 using MOMShop.Entites;
 using MOMShop.Services.Interfaces;
 using MOMShop.Utils;
+using MOMShop.Utils.APIResponse;
 using System;
 using System.Collections.Generic;
 
@@ -37,7 +38,7 @@ namespace MOMShop.Controllers
         }
 
         [HttpPost("add")]
-        public ProductDto AddProducts([FromBody] UpdateProductDto input)
+        public APIResponse AddProducts([FromBody] UpdateProductDto input)
         {
             try
             {

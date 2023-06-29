@@ -14,6 +14,13 @@ namespace MOMShop.Utils.APIResponse
             Message = message;
         }
 
+
+        public APIResponse(object data)
+        {
+            Data = data;
+            Message = "ok";
+        }
+
         public APIResponse(string message)
         {
             Message = message;

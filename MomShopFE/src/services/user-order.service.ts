@@ -25,4 +25,11 @@ export class UserOrderService extends ServiceBase{
     console.log("service id", id);
     return this.http.put(this.baseUrl + 'cancel-order/' + id, null);
   }
+  deleteOrder(id) {
+    return this.http.delete(this.baseUrl + 'delete/' + id);
+  }
+
+  receiveNofity(data: any) {
+    return this.http.put(this.baseUrl + 'receive-notify', data);
+  }
 }

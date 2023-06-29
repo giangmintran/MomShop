@@ -40,30 +40,30 @@ export class CreateOrEditCollectionComponent implements OnInit {
   ];
   screenHeight: number = window.innerHeight;
   listStatus = [
-    {code :'Tất cả',value:undefined},
-    {code :'Đang bán',value:1},
-    {code :'Chưa mở bán',value:2},
-    {code :'Khoá',value:3},
+    { code: 'Tất cả', value: undefined },
+    { code: 'Đang bán', value: 1 },
+    { code: 'Chưa mở bán', value: 2 },
+    { code: 'Khoá', value: 3 },
   ];
   cols;
   timer;
   ref: DynamicDialogRef
-  constructor(private http: HttpClient, 
-    public messageService: MessageService,  
+  constructor(private http: HttpClient,
+    public messageService: MessageService,
     public collectionService: CollectionService,
     public productService: ProductService,
     public toastr: ToastrService,
     private router: Router,
     private route: ActivatedRoute,
-    public dialogService: DialogService, 
-    
-    ) {}
+    public dialogService: DialogService,
+
+  ) { }
 
   ngOnInit(): void {
     this.route.queryParams.subscribe(params => {
       const id = params['id'];
       this.id = id
-      if (id){
+      if (id) {
         this.find(id);
       } else {
         this.getProductData();
@@ -96,19 +96,31 @@ export class CreateOrEditCollectionComponent implements OnInit {
         width: '10rem'
       },
     ];
-    
+
   }
 
   save() {
-    console.log("productCollection", this.selectedItems);
-    this.selectedItems.forEach((item) => {
+    console.log("213",this.collection);
+    
+    if (this.validate()) {
+      this.selectedItems.forEach((item) => {
         this.productIds.push(item.id);
-    });
-    this.collection.products = this.productIds
-    console.log("Collection", this.collection);
-    this.collectionService.createOrEdit(this.collection).subscribe((data) => {
-      this.messageService.add({ severity: 'success', summary: 'Thông báo', detail: 'Cập nhật thành công', life: 3000 });
-    })
+      });
+      this.collection.products = this.productIds
+      this.collectionService.createOrEdit(this.collection).subscribe((data: any) => {
+        console.log("res", data);
+        if (this.collection.id == undefined) {
+          this.messageService.add({ severity: 'success', summary: 'Thông báo', detail: 'Thêm thành công', life: 3000 });
+        } else {
+          this.messageService.add({ severity: 'success', summary: 'Thông báo', detail: 'Cập nhật thành công', life: 3000 });
+          this.collection.products = data.products;
+        }
+      })
+    }
+    else {
+      this.messageService.add({ severity: 'warn', summary: 'Thông báo', detail: 'Vui lòng nhập đầy đủ thông tin', life: 3000 });
+    }
+
   }
   getData(): void {
     this.collectionService.getAllCollection().subscribe((data) => {
@@ -116,12 +128,11 @@ export class CreateOrEditCollectionComponent implements OnInit {
       this.rows = data;
       this.genlistAction(this.rows);
       this.rows.forEach(element => {
-        var statusDisplay = this.listStatus.find( e=> e.value == element.status).code
-        if(statusDisplay)
-        {
+        var statusDisplay = this.listStatus.find(e => e.value == element.status).code
+        if (statusDisplay) {
           element.statusDisplay = statusDisplay
         }
-        if(statusDisplay){
+        if (statusDisplay) {
           element.statusDisplay = statusDisplay
         }
       });
@@ -131,7 +142,7 @@ export class CreateOrEditCollectionComponent implements OnInit {
   }
   validate(): boolean {
     console.log("product", this.collection.code);
-    if (this.collection.code == null || this.collection.name == null){
+    if (this.collection.code == null || this.collection.name == null) {
       return false;
     }
     return true;
@@ -163,8 +174,8 @@ export class CreateOrEditCollectionComponent implements OnInit {
     // });
   }
 
-  addProductCollection(){
-    
+  addProductCollection() {
+
   }
   getProductData(): void {
     this.productService.getAllProduct().subscribe((data) => {
@@ -172,13 +183,12 @@ export class CreateOrEditCollectionComponent implements OnInit {
       this.rows = data?.items;
       this.genlistAction(this.rows);
       this.rows.forEach(element => {
-        var productTypeName = this.listTypeProduct.find( e=> e.value == element.productType).name
-        var productStatusName = this.listStatus.find( e=> e.value == element.status).code
-        if(productTypeName)
-        {
+        var productTypeName = this.listTypeProduct.find(e => e.value == element.productType).name
+        var productStatusName = this.listStatus.find(e => e.value == element.status).code
+        if (productTypeName) {
           element.productTypeName = productTypeName
         }
-        if(productStatusName){
+        if (productStatusName) {
           element.productStatusName = productStatusName
         }
         element.imageUrl = element.imageUrl;
@@ -193,13 +203,12 @@ export class CreateOrEditCollectionComponent implements OnInit {
       this.rows = data.products;
       this.genlistAction(this.rows);
       this.rows.forEach(element => {
-        var productTypeName = this.listTypeProduct.find( e=> e.value == element.productType).name
-        var productStatusName = this.listStatus.find( e=> e.value == element.status).code
-        if(productTypeName)
-        {
+        var productTypeName = this.listTypeProduct.find(e => e.value == element.productType).name
+        var productStatusName = this.listStatus.find(e => e.value == element.status).code
+        if (productTypeName) {
           element.productTypeName = productTypeName
         }
-        if(productStatusName){
+        if (productStatusName) {
           element.productStatusName = productStatusName
         }
         element.imageUrl = element.imageUrl;
@@ -215,13 +224,12 @@ export class CreateOrEditCollectionComponent implements OnInit {
         this.rows = data.products;
         this.genlistAction(this.rows);
         this.rows.forEach(element => {
-          var productTypeName = this.listTypeProduct.find( e=> e.value == element.productType).name
-          var productStatusName = this.listStatus.find( e=> e.value == element.status).code
-          if(productTypeName)
-          {
+          var productTypeName = this.listTypeProduct.find(e => e.value == element.productType).name
+          var productStatusName = this.listStatus.find(e => e.value == element.status).code
+          if (productTypeName) {
             element.productTypeName = productTypeName
           }
-          if(productStatusName){
+          if (productStatusName) {
             element.productStatusName = productStatusName
           }
           element.imageUrl = element.imageUrl;
@@ -229,27 +237,28 @@ export class CreateOrEditCollectionComponent implements OnInit {
       });
     }, 1000); // Thời gian chờ: 3000 milliseconds (3 giây)
   }
-  backToCollectionList(){
+  backToCollectionList() {
     this.router.navigate(['admin/collection-management/collection']);
   }
 
-  updateProductCollection(){
-    this.ref = this.dialogService.open(CreateOrEditProductCollectionComponent, { 
+  updateProductCollection() {
+    this.ref = this.dialogService.open(CreateOrEditProductCollectionComponent, {
       data: {
         collection: this.collection
       },
       header: 'Chi tiết bộ sưu tập',
       width: '70%',
-      contentStyle: { "max-height": "1900px", overflow: "auto", "margin-bottom": "40px"},
+      contentStyle: { "max-height": "1900px", overflow: "auto", "margin-bottom": "40px" },
       baseZIndex: 10000,
     });
     this.ref.onClose.subscribe((data) => {
-      if(data){
+      if (data) {
         this.messageService.add({ severity: 'success', summary: 'Thông báo', detail: 'Cập nhật thành công', life: 3000 });
         this.route.queryParams.subscribe(params => {
           const id = params['id'];
-          if (id){
+          if (id) {
             this.find(id);
+            this.productIds = this.collection.products;
           }
         });
       }

@@ -29,6 +29,8 @@ export class AppAdminManagementOrderComponent  implements OnInit {
   keyword: string | undefined;
   timer: any;
   selectedOrder;
+  createdDate;
+  intendedTime;
   listStatus = [
     {code :'Tất cả',value:undefined},
     {code :'Khởi tạo',value:1},
@@ -77,7 +79,10 @@ export class AppAdminManagementOrderComponent  implements OnInit {
   }
 
   getData(): void {
-    this.orderService.getAllOrder(this.filterStatus, this.keyword).subscribe((data) => {
+    const created = this.datePipe.transform(this.createdDate, 'yyyy-MM-dd')
+    const intended = this.datePipe.transform(this.intendedTime, 'yyyy-MM-dd')
+
+    this.orderService.getAllOrder(this.filterStatus, this.keyword, created, intended).subscribe((data) => {
       this.rows = data;
       this.genlistAction(this.rows);
       this.rows.forEach(element => {
@@ -108,7 +113,7 @@ export class AppAdminManagementOrderComponent  implements OnInit {
           },
         });
 
-        if (product.orderStatus == 1){
+        if (product.orderStatus == 1 || product.orderStatus == 6){
           actions.push({
             data: product,
             label: "Tiếp nhận đơn",
@@ -180,6 +185,22 @@ export class AppAdminManagementOrderComponent  implements OnInit {
     });
   }
   startTimer() {
+    clearTimeout(this.timer); // Đảm bảo rằng timer trước đó được hủy
+    this.timer = setTimeout(() => {
+      this.getData();
+    }, 1000); // Thời gian chờ: 3000 milliseconds (3 giây)
+  }
+
+  startTimer1() {
+    this.intendedTime = null;
+    clearTimeout(this.timer); // Đảm bảo rằng timer trước đó được hủy
+    this.timer = setTimeout(() => {
+      this.getData();
+    }, 1000); // Thời gian chờ: 3000 milliseconds (3 giây)
+  }
+
+  startTimer2() {
+    this.createdDate = null;
     clearTimeout(this.timer); // Đảm bảo rằng timer trước đó được hủy
     this.timer = setTimeout(() => {
       this.getData();

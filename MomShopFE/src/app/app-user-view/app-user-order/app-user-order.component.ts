@@ -46,6 +46,10 @@ export class AppUserOrderComponent {
       value: 5,
       label: "Đã huỷ",
     },
+    {
+      value: 6,
+      label: "Đã thanh toán",
+    }
   ];
   filterOrder: FilterOrderDto = new FilterOrderDto();
   constructor(
@@ -79,17 +83,23 @@ export class AppUserOrderComponent {
   }
   cancelOrder(id) {
     console.log(id);
-    
     this.userOrder.cancelOrder(id).subscribe(() => {
-      console.log("done");
       this.toastr.success("Huỷ đơn hàng thành công", "Thông báo", {
         timeOut: 2000,
       });
       this.loadData();
     });
   }
+
+  deleteOrder(id){
+    this.userOrder.deleteOrder(id).subscribe(() => {
+      this.toastr.success("Xóa thành công", "Thông báo", {
+        timeOut: 2000,
+      });
+      this.loadData();
+    });
+  }
   onPageChange(event) {
-    console.log(event);
     this.first = event.first;
     this.rows = event.rows;
     this.page = event.page;

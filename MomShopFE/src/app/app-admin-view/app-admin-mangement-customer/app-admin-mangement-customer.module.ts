@@ -15,6 +15,8 @@ import { AppAdminMenuComponent } from '../app-admin-menu/app-admin-menu.componen
 import { ToastModule } from 'primeng/toast';
 import { ConfirmDialogModule } from 'primeng/confirmdialog';
 import { TagModule } from 'primeng/tag';
+import { MenuModule } from 'primeng/menu';
+import { CalendarModule } from 'primeng/calendar';
 
 
 
@@ -34,7 +36,9 @@ import { TagModule } from 'primeng/tag';
     ToastrModule,
     ToastModule,
     ConfirmDialogModule,
-    TagModule
+    TagModule,
+    MenuModule,
+    CalendarModule
   ]
 })
 export class AppAdminMangementCustomerModule { }

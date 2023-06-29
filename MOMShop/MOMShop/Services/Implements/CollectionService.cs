@@ -8,6 +8,7 @@ using MOMShop.Dto.Product;
 using MOMShop.Entites;
 using MOMShop.MomShopDbContext;
 using MOMShop.Services.Interfaces;
+using MOMShop.Utils.APIResponse;
 using System.Collections.Generic;
 using System.Linq;
 
@@ -24,8 +25,13 @@ namespace MOMShop.Services.Implements
             _mapper = mapper;
         }
 
-        public CollectionDto Create(CollectionDto input)
+        public APIResponse Create(CollectionDto input)
         {
+            var check = _dbContext.Collections.FirstOrDefault(e => e.Code == input.Code && !e.Deleted);
+            if(check != null)
+            {
+                return new APIResponse("duplicate");
+            }
             var insert = _mapper.Map<Collection>(input);
             var result = _dbContext.Collections.Add(insert);
             _dbContext.SaveChanges();
@@ -47,7 +53,7 @@ namespace MOMShop.Services.Implements
                 }
             }
             _dbContext.SaveChanges();
-            return _mapper.Map<CollectionDto>(result.Entity);
+            return new APIResponse(_mapper.Map<CollectionDto>(result.Entity),"ok");
         }
 
         public void Delete(int id)
@@ -144,7 +150,9 @@ namespace MOMShop.Services.Implements
                 }
             }
             _dbContext.SaveChanges();
-            return _mapper.Map<CollectionDto>(collection);
+            var result = _mapper.Map<CollectionDto>(collection);
+            result.Products = input.Products;
+            return result;
         }
     }
 }

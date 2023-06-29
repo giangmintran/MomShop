@@ -85,6 +85,7 @@
                                 </button>
                             </div>
                         </div>
+                       <div style="height: 300px; overflow-y: scroll;">
                         <ng-container *ngFor="let productDetail of productDetails; let i = index">
                             <div class="row">
                                 <div class="col-3">
@@ -108,7 +109,7 @@
                                 <div class="col-5">
                                     <div class="field mb-2">
                                         <label htmlFor="description">
-                                            Mô tả <span class="required-field"> * </span>
+                                            Mô tả
                                         </label>
                                         <input [(ngModel)]="productDetail.description" type="text" id="description"
                                             name="description" pInputText />
@@ -121,6 +122,7 @@
                                 </div>
                             </div>
                         </ng-container>
+                       </div>
                     </div>
                     <div class="col-4">
                         <h5 class="mb-2">Thêm ảnh</h5>

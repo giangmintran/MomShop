@@ -55,7 +55,7 @@
             <div class="col-xl-10 col-lg-9 col-md-12 col-12 content-collection">
                 <div class="row mb-4">
                     <div class="col-12">
-                        <input type="text" class="input-search" placeholder="Tìm kiếm sản phẩm...">
+                        <input type="text" [(ngModel)]="keyword" class="input-search" placeholder="Tìm kiếm sản phẩm..." (keyup)="startTimer()">
                         <button class="btn-search"><i class="fa-solid fa-magnifying-glass"></i></button>
                     </div>
                 </div>
@@ -66,7 +66,7 @@
                             <ng-template pTemplate="header">
                                 <img alt="Card" src="{{baseUrl}}/{{ product.imageUrl == null ?
                                  'api/file/get?folder=AP_001&fileName=banner.jpg':product.imageUrl}}"
-                                  height="100%" width="100%"
+                                  height="400px" width="300px"
                                     style="object-fit: cover;" />
                                 <p style="font-size: 24px;" class="mt-2" >
                                     {{ product.name }}

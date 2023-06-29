@@ -40,6 +40,8 @@ namespace MOMShop.Controllers.User
             }
         }
 
+
+
         [HttpGet("get")]
         public List<ViewOrderDto> GetAllByUser([FromQuery] FilterOrderDto input)
         {
@@ -67,13 +69,25 @@ namespace MOMShop.Controllers.User
             }
         }
 
-        [HttpPost("create-paymet")]
-        public Task<APIResponse> CreatePayment()
+        [HttpPut("receive-notify")]
+        public void RecceiveNotify([FromBody] PaymentRequestModel input)
         {
             try
             {
-                var result = _paymentServices.CreatePayment(new PaymentRequestModel());
-                return result;
+                _paymentServices.ReceiveNotify(input);
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(ex.Message);
+            }
+        }
+
+        [HttpDelete("delete/{id}")]
+        public void Delete(int id)
+        {
+            try
+            {
+                _services.Delete(id);
             }
             catch (Exception ex)
             {

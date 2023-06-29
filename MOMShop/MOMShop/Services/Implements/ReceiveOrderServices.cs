@@ -114,7 +114,9 @@ namespace MOMShop.Services.Implements
             || e.Code.Contains(input.Keyword)
             || e.Supplier.Contains(input.Keyword)
             || e.Receiver.Contains(input.Keyword)
-            )).OrderByDescending(e => e.Id).ToList();
+            )
+            && (input.CreatedDate == null || e.CreatedDate.Date == input.CreatedDate.Value.Date)
+            && (input.IntendedTime == null || e.ReceivedDate.Date == input.IntendedTime.Value.Date)).OrderByDescending(e => e.Id).ToList();
             resultItem = _mapper.Map<List<ReceiveOrderDto>>(receiveOrders);
             foreach (var item in resultItem)
             {

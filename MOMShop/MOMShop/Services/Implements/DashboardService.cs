@@ -1,4 +1,5 @@
 ﻿using AutoMapper;
+using Microsoft.AspNetCore.Mvc;
 using MOMShop.Dto.Dashboard;
 using MOMShop.Dto.Product;
 using MOMShop.Dto.ProductDetail;
@@ -23,6 +24,45 @@ namespace MOMShop.Services.Implements
             _dbContext = dbContext;
             _mapper = mapper;
         }
+
+        public DashboardSecondDto GetByTime(int? month, int? year)
+        {
+            var result = new DashboardSecondDto();
+            int days = 0;
+
+            if (month == null && year == null)
+            {
+                month = DateTime.Now.Month;
+                year = DateTime.Now.Year;
+            }
+
+            days = DateTime.DaysInMonth(year.Value, month.Value);
+            result.TotalValue = new List<float>();
+            result.Days = new List<DateTime>();
+            result.Labels = new List<string>();
+
+
+            for (int day = 1; day <= days; day++)
+            {
+                DateTime date = new DateTime(year ?? DateTime.Now.Year, month ?? DateTime.Now.Month, day).Date;
+                result.Days.Add(date);
+            }
+
+            foreach (var item in result.Days)
+            {
+                var orders = _dbContext.Orders.Where(e => !e.Deleted && e.OrderStatus == OrderStatus.HOAN_THANH && e.CreatedDate.Date == item.Date).Sum(e => e.TotalAmount);
+                result.TotalValue.Add(orders);
+            }
+
+            foreach (var item in result.Days)
+            {
+                var label = item.ToString("dd/MM/yyyy");
+                result.Labels.Add(label);
+            }
+
+            return result;
+        }
+
         public DashboardDto Info()
         {
             var result = new DashboardDto();

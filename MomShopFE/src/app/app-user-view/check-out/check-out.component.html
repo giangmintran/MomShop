@@ -71,7 +71,8 @@
                 </div>
                 <div class="footer-form d-flex justify-content-between align-items-center">
                     <a href="/cart" class="link-cart text-decoration-none">Giỏ hàng</a>
-                    <button type="submit" class="btn-completed" (click)="completeCheckOut()">Hoàn tất đơn hàng</button>
+                    <button *ngIf="!isPayment" type="submit" class="btn-completed" (click)="completeCheckOut()">Hoàn tất đơn hàng</button>
+                    <button *ngIf="isPayment"type="submit" class="btn-completed" (click)="returnView()">Về trang chủ</button>
                 </div>
             </form>
         </div>

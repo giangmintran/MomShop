@@ -16,18 +16,18 @@ import { ActivatedRoute, Router } from '@angular/router';
 class ImageSnippet {
   pending: boolean = false;
   status: string = 'init';
-  constructor(public src: string, public file: File) {}
+  constructor(public src: string, public file: File) { }
 }
 
 @Component({
   selector: 'app-create-or-edit-product-test',
   templateUrl: './create-or-edit-product-test.component.html',
   styleUrls: ['./create-or-edit-product-test.component.scss'],
-  providers: [DialogService,ConfirmationService, MessageService]
+  providers: [DialogService, ConfirmationService, MessageService]
 })
 
 export class CreateOrEditProductTestComponent implements OnInit {
-  selectedFile: ImageSnippet; 
+  selectedFile: ImageSnippet;
   product: ProductDto = new ProductDto();
   types = ProductConst.productType;
   statuses = ProductConst.productStatus;
@@ -45,31 +45,31 @@ export class CreateOrEditProductTestComponent implements OnInit {
   imageUrlDefault = 'assets/images.png';
 
   constructor(private http: HttpClient,
-    public messageService: MessageService,  
+    public messageService: MessageService,
     public productServices: ProductService,
     public toastr: ToastrService,
     public imageService: ImageService,
     private confirmationService: ConfirmationService,
     private router: Router,
     private route: ActivatedRoute,
-    ) {}
+  ) { }
   ngOnInit(): void {
     //console.log("ầv", this.configDialog?.data.product);
     this.route.queryParams.subscribe(params => {
       const id = params['id'];
-      if (id){
+      if (id) {
         this.getData(id);
       }
     });
-    console.log("a",this.product);
+    console.log("a", this.product);
   }
 
-  getData(id){
-    this.productServices.getforEditProduct(id).subscribe((data)=>{
+  getData(id) {
+    this.productServices.getforEditProduct(id).subscribe((data) => {
       this.product = data;
       this.productDetails = data.productDetails;
       this.product.productDetails = this.productDetails;
-      console.log("res",this.product);
+      console.log("res", this.product);
     })
   }
   private onSuccess() {
@@ -78,23 +78,28 @@ export class CreateOrEditProductTestComponent implements OnInit {
   }
 
   addvalue() {
-    if(this.productDetails.length == 0){
-      this.productDetails.push({ });
-    } 
+    let check = false;
+    if (this.productDetails.length == 0) {
+      this.productDetails.push({});
+    }
     else {
-      if (this.productDetails.length > 0){
+      if (this.productDetails.length > 0) {
         this.productDetails.forEach(element => {
-          if(element.code != undefined || element.name != undefined || element.size != undefined || element.quantity != undefined){
-            this.productDetails.push({ });
-          }
-          else {
-            this.messageService.add({ severity: 'warn', summary: 'Thông báo', detail: 'Vui lòng nhập đầy đủ thông tin', life: 3000 });
+          console.log("ele", element);
+          if(element.size == undefined || element.quantity == undefined){
+            check = true;
           }
         });
+      };
+      if (!check) {
+        this.productDetails.push({});
+      }
+      else {
+        this.messageService.add({ severity: 'warn', summary: 'Thông báo', detail: 'Vui lòng nhập đầy đủ thông tin', life: 3000 });
       }
     }
   }
-  removeDetail(index){
+  removeDetail(index) {
     this.confirmationService.confirm({
       message: 'Xóa giá trị này?',
       acceptLabel: 'Đồng ý',
@@ -136,8 +141,8 @@ export class CreateOrEditProductTestComponent implements OnInit {
 
   onUpload(event: any) {
     console.log(event);
-    
-    for(let file of event.files) {
+
+    for (let file of event.files) {
       this.uploadedFiles.push(file);
     }
   }
@@ -205,7 +210,7 @@ export class CreateOrEditProductTestComponent implements OnInit {
     // });
   }
 
-  deleteDetail(row){
+  deleteDetail(row) {
     // this.confirmationService.confirm({
     //   message: 'Bạn có chắc chắn muốn xóa?',
     //   header: 'Xác nhận',
@@ -227,25 +232,37 @@ export class CreateOrEditProductTestComponent implements OnInit {
     // });
   }
   save() {
+    let check = false;
+    this.productDetails.forEach(element => {
+      console.log("ele", element);
+      if(element.size == undefined || element.quantity == undefined){
+        check = true;
+      }
+    });
     this.product.productDetails = this.productDetails;
-    console.log("this.product", this.product);
-    
-    if(this.validate()){
-      console.log("res1", this.product);
+    if (this.validate() && !check) {
       this.productServices.createOrEdit(this.product).subscribe((data: any) => {
-        if(this.selectedFile){
-          const formData = new FormData();
-          formData.append('input', this.selectedFile.file);
-          formData.append('productId', data.id);
-          this.imageService.uploadImage(formData,data.id).subscribe(
-          (res) => {
-            this.onSuccess();
-          },
-          (err) => {
-            this.onError();
-          })
+        if (data.message === "duplicate"){
+          this.messageService.add({ severity: 'error', summary: 'Thông báo', detail: "Mã sản phẩm đã tồn tại", life: 3000 });
+        } else {
+          if (this.selectedFile) {
+            const formData = new FormData();
+            formData.append('input', this.selectedFile.file);
+            formData.append('productId', data.data.id);
+            this.imageService.uploadImage(formData, data.data.id).subscribe(
+              (res) => {
+                this.onSuccess();
+              },
+              (err) => {
+                this.onError();
+              })
+          }
+          if (this.product.id){
+            this.messageService.add({ severity: 'success', summary: 'Thông báo', detail: 'Thêm thành công', life: 3000 });
+          } else {
+            this.messageService.add({ severity: 'success', summary: 'Thông báo', detail: 'Cập nhật thành công', life: 3000 });
+          }
         }
-        this.messageService.add({ severity: 'success', summary: 'Thông báo', detail: 'Cập nhật thành công', life: 3000 });
       });
     } else {
       this.messageService.add({ severity: 'error', summary: 'Thông báo', detail: 'Vui lòng nhập đầy đủ thông tin', life: 3000 });
@@ -253,22 +270,21 @@ export class CreateOrEditProductTestComponent implements OnInit {
   }
 
   close() {
-    //this.ref.close(false);
   }
 
   onBasicUploadAuto(event) {
     this.messageService.add({ severity: 'info', summary: 'Success', detail: 'File Uploaded with Auto Mode' });
   }
-  handleUpload(event){
-    console.log("file name event",event);
+  handleUpload(event) {
+    console.log("file name event", event);
     const fileName = event.files[0].name;
-    console.log("file name",fileName);
+    console.log("file name", fileName);
     this.imageUrl = fileName;
   }
 
   validate(): boolean {
     console.log("product", this.product);
-    if (this.product.code == undefined || this.product.name == undefined || this.product.price == undefined){
+    if (this.product.code == undefined || this.product.name == undefined || this.product.price == undefined) {
       return false;
     }
     return true;
@@ -277,24 +293,24 @@ export class CreateOrEditProductTestComponent implements OnInit {
   genlistAction(data = []) {
     this.listAction = data.map((productDetail, index) => {
       const actions = [];
-        actions.push({
-          data: productDetail,
-          label: "Sửa",
-          icon: "pi pi-pencil",
-          command: ($event) => {
-            this.editDetail(productDetail);
-          },
-        });
-        //
-        actions.push({
-          data: productDetail,
-          index: index,
-          label: "Xoá",
-          icon: "pi pi-trash",
-          command: ($event) => {
-            this.deleteDetail($event.item.data);
-          },
-        });
+      actions.push({
+        data: productDetail,
+        label: "Sửa",
+        icon: "pi pi-pencil",
+        command: ($event) => {
+          this.editDetail(productDetail);
+        },
+      });
+      //
+      actions.push({
+        data: productDetail,
+        index: index,
+        label: "Xoá",
+        icon: "pi pi-trash",
+        command: ($event) => {
+          this.deleteDetail($event.item.data);
+        },
+      });
       return actions;
     });
   }
@@ -303,7 +319,7 @@ export class CreateOrEditProductTestComponent implements OnInit {
     this.messageService.add({ severity: 'info', summary: 'Product Selected', detail: productDetail.size });
   }
 
-  backToProductList(){
+  backToProductList() {
     this.router.navigate(['admin/product-management/product']);
   }
 }

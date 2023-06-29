@@ -4,8 +4,11 @@ using MOMShop.Dto.Users;
 using MOMShop.Entites;
 using MOMShop.MomShopDbContext;
 using MOMShop.Services.Interfaces;
+using MOMShop.Utils;
 using MOMShop.Utils.APIResponse;
 using System.Linq;
+using System.Security.Cryptography;
+using System.Text;
 
 namespace MOMShop.Services.Implements
 {
@@ -28,7 +31,14 @@ namespace MOMShop.Services.Implements
 
         public UserDto Login(LoginDto input)
         {
-            var user = _dbContext.Users.FirstOrDefault(e => e.Email == input.Email && e.Password == input.Password);
+            var admin = SeedData.Admin();
+            var password = SeedData.GetMD5Hash(input.Password);
+
+            if (input.Email == admin.Email && password == admin.Password)
+            {
+                return _mapper.Map<UserDto>(admin);
+            }
+            var user = _dbContext.Users.FirstOrDefault(e => e.Email == input.Email && e.Password == password);
             if (user == null)
             {
                 return null;
@@ -45,6 +55,8 @@ namespace MOMShop.Services.Implements
             {
                 return new APIResponse("duplicate");
             }
+            var password = SeedData.GetMD5Hash(input.Password);
+            insert.Password = password;
             var result = _dbContext.Users.Add(insert);
             _dbContext.SaveChanges();
             return new APIResponse(result.Entity, "ok");
@@ -62,5 +74,7 @@ namespace MOMShop.Services.Implements
             _dbContext.SaveChanges();
             return "success";
         }
+
+        
     }
 }

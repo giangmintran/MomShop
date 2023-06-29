@@ -14,10 +14,12 @@ export class ReceiveOrderService extends ServiceBase{
         super();
     }
     //xem thông tin đơn hàng
-    getAllReceiveOrder(status?: string, keyword: string = ""): Observable<any> {
+    getAllReceiveOrder(status?: string, keyword: string = "", createdDate? :string, intendedTime?: string): Observable<any> {
         let url_ = this.baseUrl + `find-all?`;
         url_ += this.convertParamUrl('status', status ?? '');
         url_ += this.convertParamUrl("keyword", keyword);
+        url_ += this.convertParamUrl("createdDate", createdDate ?? '');
+        url_ += this.convertParamUrl("intendedTime", intendedTime ?? '');
         return this.http.get(url_);
     }
     //xem thông tin đơn hàng theo id

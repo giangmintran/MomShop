@@ -23,7 +23,11 @@ namespace MOMShop.Services.Implements.UserProductService
         {
             var result = new List<ProductDto>();
 
-            var products = _dbContext.Products.Where(e => !e.Deleted && (input.Status == null || e.Status == input.Status) && (input.ProductType == null || e.ProductType == input.ProductType)).OrderByDescending(e => e.Id).ToList();
+            var products = _dbContext.Products.Where(e => !e.Deleted 
+            && (e.Status == Status.HOAT_DONG)
+            && (input.Status == null || e.Status == input.Status) 
+            && (input.ProductType == null || e.ProductType == input.ProductType)
+            && (input.Keyword == null || e.Code.ToLower().Contains(input.Keyword.ToLower()) || e.Name.ToLower().Contains(input.Keyword.ToLower()))).OrderByDescending(e => e.Id).ToList();
 
             foreach (var product in products)
             {

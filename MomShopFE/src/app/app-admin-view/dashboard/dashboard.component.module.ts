@@ -15,6 +15,7 @@ import { ChartModule } from 'primeng/chart';
 import { StyleClassModule } from 'primeng/styleclass';
 import { CarouselModule } from 'primeng/carousel';
 import { TagModule } from 'primeng/tag';
+import { CalendarModule } from 'primeng/calendar';
 
 
 @NgModule({
@@ -33,7 +34,8 @@ import { TagModule } from 'primeng/tag';
     ChartModule,
     StyleClassModule,
     CarouselModule,
-    TagModule
+    TagModule,
+    CalendarModule
   ]
 })
 export class DashboardModule { }

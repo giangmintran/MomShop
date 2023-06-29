@@ -30,6 +30,8 @@ export class AppAdminManagementImportProductComponent implements OnInit{
   keyword: string | undefined;
   timer: any;
   listStatus = ReceivedOrderConst.receiveStatus;
+  createdDate;
+  intendedTime
 
   ReceivedOrderConst = ReceivedOrderConst;
   constructor(private http: HttpClient, 
@@ -74,7 +76,9 @@ export class AppAdminManagementImportProductComponent implements OnInit{
   }
 
   getReceiveOrderData(): void {
-    this.receiveOrder.getAllReceiveOrder(this.filterStatus, this.keyword).subscribe((data) => {
+    const created = this.datePipe.transform(this.createdDate, 'yyyy-MM-dd')
+    const intended = this.datePipe.transform(this.intendedTime, 'yyyy-MM-dd')
+    this.receiveOrder.getAllReceiveOrder(this.filterStatus, this.keyword, created, intended).subscribe((data) => {
       this.receiveOrderData = data;
       this.genlistAction(this.receiveOrderData);
       this.receiveOrderData.forEach(element => {
@@ -98,7 +102,21 @@ export class AppAdminManagementImportProductComponent implements OnInit{
   createReceiveOrder() {
     this.router.navigate(['admin/received-order/order/create']);
   }
+  startTimer1() {
+    this.intendedTime = null;
+    clearTimeout(this.timer); // Đảm bảo rằng timer trước đó được hủy
+    this.timer = setTimeout(() => {
+      this.getReceiveOrderData();
+    }, 1000); // Thời gian chờ: 3000 milliseconds (3 giây)
+  }
 
+  startTimer2() {
+    this.createdDate = null;
+    clearTimeout(this.timer); // Đảm bảo rằng timer trước đó được hủy
+    this.timer = setTimeout(() => {
+      this.getReceiveOrderData();
+    }, 1000); // Thời gian chờ: 3000 milliseconds (3 giây)
+  }
   paymentOrder(row){
     console.log(row);
     this.receiveOrder.paymentOrder(row.id).subscribe( (res) => {

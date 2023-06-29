@@ -10,8 +10,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace MOMShop.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20230527032032_user")]
-    partial class user
+    [Migration("20230629115608_initEntity")]
+    partial class initEntity
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -244,7 +244,9 @@ namespace MOMShop.Migrations
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<DateTime>("CreatedDate")
-                        .HasColumnType("datetime2");
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("datetime2")
+                        .HasDefaultValueSql("getdate()");
 
                     b.Property<string>("NewValue")
                         .HasColumnType("nvarchar(max)");
@@ -254,6 +256,9 @@ namespace MOMShop.Migrations
 
                     b.Property<int>("ReferId")
                         .HasColumnType("int");
+
+                    b.Property<string>("Summary")
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Table")
                         .HasColumnType("nvarchar(max)");
@@ -328,6 +333,11 @@ namespace MOMShop.Migrations
 
                     b.Property<float>("TotalAmount")
                         .HasColumnType("real");
+
+                    b.Property<bool>("UserDelete")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("bit")
+                        .HasDefaultValue(false);
 
                     b.HasKey("Id");
 
@@ -495,6 +505,9 @@ namespace MOMShop.Migrations
                         .HasColumnType("nvarchar(max)")
                         .HasComment("Nguoi gui (Xuong may gui))");
 
+                    b.Property<float>("TotalMoney")
+                        .HasColumnType("real");
+
                     b.HasKey("Id");
 
                     b.ToTable("ReceiveOrders");
@@ -578,8 +591,15 @@ namespace MOMShop.Migrations
                     b.Property<string>("Province")
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<int>("Status")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasDefaultValue(1);
+
                     b.Property<int>("UserType")
-                        .HasColumnType("int");
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasDefaultValue(2);
 
                     b.HasKey("Id");
 

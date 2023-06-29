@@ -14,5 +14,6 @@ namespace MOMShop.Services.Interfaces.UserService
         List<ViewOrderDto> FindAll(FilterOrderDto input);
 
         void UpdateStatus(int id, int status);
+        void Delete(int id);
     }
 }
