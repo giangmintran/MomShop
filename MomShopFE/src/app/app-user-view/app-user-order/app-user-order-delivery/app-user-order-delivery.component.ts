@@ -17,7 +17,7 @@ export class AppUserOrderDeliveryComponent {
     this.modal.show();
     setTimeout(()=>{
       this.updateVisalizeStatusVod(orderStatus);
-    },1000)
+    },200)
   }
   close() {
     this.modal.hide();
