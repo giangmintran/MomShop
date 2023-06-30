@@ -1,11 +1,5 @@
 import { Component, EventEmitter, Output } from "@angular/core";
-import {
-  ActivatedRouteSnapshot,
-  CanActivate,
-  Router,
-  RouterStateSnapshot,
-  UrlTree,
-} from "@angular/router";
+import { ActivatedRouteSnapshot, Router, RouterStateSnapshot, UrlTree } from "@angular/router";
 import { ToastrService } from "ngx-toastr";
 import { Observable, finalize } from "rxjs";
 import { LoginDto } from "src/models/login";
