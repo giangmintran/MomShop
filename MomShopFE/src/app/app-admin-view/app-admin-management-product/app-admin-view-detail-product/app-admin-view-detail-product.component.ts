@@ -22,7 +22,8 @@ export class AppAdminViewDetailProductComponent {
   tableData: any;
   productDetail: any;
   cols;
-  colDetails
+  colDetails;
+  isNew = true;
   selectedProduct
   @ViewChild('createOrEditModal', { static: true }) modal: ModalDirective;
   @Output() modalSave: EventEmitter<any> = new EventEmitter<any>();

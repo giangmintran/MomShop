@@ -38,6 +38,7 @@ export class AppAdminManagementProductComponent{
   metaKeySelection: boolean = true;
   ProductStatus = ProductStatus;
   keyword;
+  isNew = true;
   listTypeProduct = [
     { name: "Áo thun", value: 1 },
     { name: "Áo sơ mi", value: 2 },

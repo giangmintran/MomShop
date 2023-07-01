@@ -109,7 +109,6 @@ namespace MOMShop.Services.Implements.UserProductService
                     }
                     detail.OrderId = result.Entity.Id;
                     _dbContext.OrderDetails.Add(detail);
-                    
                 }
                 _dbContext.SaveChanges();
 
@@ -229,11 +228,33 @@ namespace MOMShop.Services.Implements.UserProductService
 
         public void UpdateStatus(int id, int status)
         {
+            string summary = null;
+
             var order = _dbContext.Orders.FirstOrDefault(e => e.Id == id && !e.Deleted);
             if (order != null)
             {
                 order.OrderStatus = status;
             }
+            if (status == OrderStatus.DA_HUY && order.OrderStatus == OrderStatus.DA_HUY)
+            {
+                summary = "Hủy đơn hàng";
+                // Lấy dịch vụ sendmailservice
+                MailContent content = new MailContent
+                {
+                    To = order.Email,
+                    Subject = $"[ĐƠN HÀNG {order.OrderCode} ĐÃ ĐƯỢC HỦY]",
+                    Body = $"<h1>MOMSHOP</h1>\r\n    <h2>ĐƠN HÀNG #{order.OrderCode}</h2>\r\n    <p>Đơn hàng đã được hủy. Nếu bạn quan tâm các sản phẩm khác xin vui lòng truy cập trang web của sshop để biết thêm thông tin chi tiết.</p>" +
+                    $"\r\n    <p>Vui lòng theo dõi gmail để biết tình trạng giao hàng.</p>\r\n    <p>" +
+                    $"\r\n  <a href=\"http://localhost:4200/view\">Đến cửa hàng của chúng tôi</a>\r\n    </p>"
+                };
+                _mail.SendMail(content);
+            }
+            var history = new HistoryUpdate()
+            {
+                Table = HistoryUpdateTable.ORDER,
+                ReferId = order.Id,
+                Summary = summary
+            };
             _dbContext.SaveChanges();
         }
         public void Delete(int id)

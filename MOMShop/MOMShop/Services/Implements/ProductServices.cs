@@ -152,6 +152,9 @@ namespace MOMShop.Services.Implements
                     }
                 }
             }
+
+            var productCollection = _dbContext.ProductCollections.Where(e => e.ProductId == id);
+            _dbContext.ProductCollections.RemoveRange(productCollection);
             _dbContext.Products.Remove(product);
             _dbContext.SaveChanges();
         }

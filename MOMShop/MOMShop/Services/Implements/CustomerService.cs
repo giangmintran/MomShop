@@ -22,7 +22,7 @@ namespace MOMShop.Services.Implements
 
         public List<UserDto> GetAll(FilterCustomerDto input)
         {
-            var query = _dbContext.Users.Where(e => !e.Deleted && e.UserType == 0 && (input.Status == null || e.Status == input.Status)
+            var query = _dbContext.Users.Where(e => !e.Deleted && e.UserType == 2 && (input.Status == null || e.Status == input.Status)
             && (input.BirthDate == null || e.BirthDay != null && e.BirthDay.Value.Date == input.BirthDate.Value.Date)
             && (input.Keyword == null || e.FullName.ToLower().Contains(input.Keyword.ToLower()) || e.Email.ToLower().Contains(input.Keyword.ToLower())));
             var result = _mapper.Map<List<UserDto>>(query.ToList());

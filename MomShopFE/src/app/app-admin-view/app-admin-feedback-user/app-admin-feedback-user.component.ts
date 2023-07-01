@@ -118,21 +118,21 @@ export class AppAdminFeedbackUserComponent implements OnInit {
   genlistAction(data = []) {
     this.listAction = data.map((receivedOrder, index) => {
       const actions = [];
-        actions.push({
-          data: receivedOrder,
-          label: "Sửa",
-          icon: "pi pi-pencil",
-          command: ($event) => {
-            console.log("$22222222222", receivedOrder);
-            //this.editReceiveOrder($event.item.data);
-          },
-        });
+        // actions.push({
+        //   data: receivedOrder,
+        //   label: "Sửa",
+        //   icon: "pi pi-pencil",
+        //   command: ($event) => {
+        //     console.log("$22222222222", receivedOrder);
+        //     //this.editReceiveOrder($event.item.data);
+        //   },
+        // });
 
         //
         actions.push({
           data: receivedOrder,
           index: index,
-          label: "Đã Thanh Toán",
+          label: "Phản hồi",
           icon: "pi pi-wallet",
           command: ($event) => {
             //this.paymentOrder($event.item.data);

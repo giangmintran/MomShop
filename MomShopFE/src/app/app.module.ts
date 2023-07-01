@@ -72,7 +72,6 @@ import { AppUserViewResponseComponent } from './app-user-view/app-user-view-resp
     CommonModule,
     AppRoutingModule,
     HttpClientModule,
-    TableModule,
     BrowserAnimationsModule,
     AppBsModalModule,
     DropdownModule,

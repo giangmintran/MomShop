@@ -43,6 +43,7 @@ export class CreateOrEditProductTestComponent implements OnInit {
   index = 0;
   baseUrl = 'http://localhost:5001';
   imageUrlDefault = 'assets/images.png';
+  isNew = true;
 
   constructor(private http: HttpClient,
     public messageService: MessageService,
@@ -65,6 +66,7 @@ export class CreateOrEditProductTestComponent implements OnInit {
   }
 
   getData(id) {
+    this.isNew = false;
     this.productServices.getforEditProduct(id).subscribe((data) => {
       this.product = data;
       this.productDetails = data.productDetails;
@@ -159,77 +161,15 @@ export class CreateOrEditProductTestComponent implements OnInit {
     }
   }
   addDetail() {
-    // this.modalCreateOrEdit.show();
-    // const ref = this.dialogService.open(CreateOrEditProductDetailTestComponent, { 
-    //   header: 'Thông tin chi tiết',
-    //   width: '600px',
-    //   contentStyle: { "max-height": "1000px", overflow: "auto", "margin-bottom": "40px", },
-    //   data: {
-    //     productId: this.productId
-    //   }
-    // });
-
-    // ref.onClose.subscribe(() => {
-    //   this.productServices.getforEditProduct(this.configDialog.data?.product[0].id).subscribe(
-    //     (response) => {
-    //     console.log("res: ", response);
-    //       this.product = response;
-    //       this.genlistAction(this.product.productDetails);
-    //       this.messageService.add({ severity: 'success', summary: 'Thông báo', detail: 'Thêm thành công', life: 3000 });
-    //     },
-    //     (err) => {
-    //       console.log("err----", err);
-    //     }
-    //   );
-    // });
+    
   }
 
   editDetail(productDetail) {
-    // this.modalCreateOrEdit.show();
-    // const ref = this.dialogService.open(CreateOrEditProductDetailTestComponent, { 
-    //   header: 'Thông tin chi tiết',
-    //   width: '600px',
-    //   contentStyle: { "max-height": "1000px", overflow: "auto", "margin-bottom": "40px", },
-    //   data: {
-    //     productDetail: productDetail
-    //   }
-    // });
-
-    // ref.onClose.subscribe(() => {
-    //   this.productServices.getforEditProduct(this.configDialog.data?.product[0].id).subscribe(
-    //     (response) => {
-    //     console.log("res: ", response);
-    //       this.product = response;
-    //       this.genlistAction(this.product.productDetails);
-    //       this.messageService.add({ severity: 'success', summary: 'Thông báo', detail: 'Cập nhật thành công', life: 3000 });
-    //     },
-    //     (err) => {
-    //       console.log("err----", err);
-    //     }
-    //   );
-    // });
+    
   }
 
   deleteDetail(row) {
-    // this.confirmationService.confirm({
-    //   message: 'Bạn có chắc chắn muốn xóa?',
-    //   header: 'Xác nhận',
-    //   icon: 'pi pi-info-circle',
-    //   accept: () => {
-    //       this.productServices.deleteDetailProduct(row.id).subscribe((data)=>{
-    //         this.messageService.add({ severity: 'success', summary: 'Thông báo', detail: 'Xóa thành công', life: 3000 });
-    //         this.getData();
-    // });
-    //   },
-    //   reject: (type) => {
-    //       switch (type) {
-    //           case ConfirmEventType.REJECT:
-    //               break;
-    //           case ConfirmEventType.CANCEL:
-    //               break;
-    //       }
-    //   }
-    // });
+    
   }
   save() {
     let check = false;
@@ -257,7 +197,7 @@ export class CreateOrEditProductTestComponent implements OnInit {
                 this.onError();
               })
           }
-          if (this.product.id){
+          if (this.isNew){
             this.messageService.add({ severity: 'success', summary: 'Thông báo', detail: 'Thêm thành công', life: 3000 });
           } else {
             this.messageService.add({ severity: 'success', summary: 'Thông báo', detail: 'Cập nhật thành công', life: 3000 });

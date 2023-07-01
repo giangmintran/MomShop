@@ -37,6 +37,7 @@ export class AppAdminMangementCustomerComponent {
   timer;
   listAction: any[] = [];
   ref: DynamicDialogRef;
+  isLock = true;
   CustomerConst = CustomerConst;
   ngOnInit(): void { }
   constructor(private http: HttpClient,
@@ -137,6 +138,7 @@ export class AppAdminMangementCustomerComponent {
 
       if (customer.status == 2) {
         //
+        this.isLock = false;
         actions.push({
           data: customer,
           index: index,
@@ -178,7 +180,11 @@ export class AppAdminMangementCustomerComponent {
   }
   lock(id) {
     this.customerServices.changeStatus(id).subscribe((data) => {
-      this.messageService.add({ severity: 'success', summary: 'Thông báo', detail: 'Khóa tài khoản thành công', life: 3000 });
+      if (this.isLock){
+        this.messageService.add({ severity: 'success', summary: 'Thông báo', detail: 'Khóa tài khoản thành công', life: 3000 });
+      } else {
+        this.messageService.add({ severity: 'success', summary: 'Thông báo', detail: 'Mở khóa thành công', life: 3000 });
+      }
       this.getAllCustomer();
     })
   }

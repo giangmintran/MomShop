@@ -35,27 +35,6 @@ export class CheckOutComponent {
     // this.http.get("https://dev-online-gateway.ghn.vn/shiip/public-api/master-data/province").subscribe(data => {
     //   console.log(data);
     // });
-
-    this.route.queryParams.subscribe(params => {
-      const statusCode = params['vnp_ResponseCode']; // 'query' ở đây tương ứng với tên query parameter bạn muốn lấy giá trị
-      if (statusCode == "00"){
-        this.data.statusCode = statusCode;
-        const orderId = params['vnp_TxnRef'];
-        this.data.statusCode = orderId;
-        this.userOrderService.receiveNofity(this.data).subscribe((data) => {
-          this.toastr.success(
-            "Đặt hàng thành công!" ,
-            "Thông báo",
-            { timeOut: 3000 }
-            );
-        });
-        this.isPayment = true;
-        
-      } else {
-        this.isPayment = false;
-      }
-      
-    });
     this.getProducts();
     this.getUserInfo();
   }

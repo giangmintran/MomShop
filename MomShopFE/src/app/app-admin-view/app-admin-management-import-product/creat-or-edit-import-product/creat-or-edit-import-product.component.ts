@@ -23,7 +23,11 @@ export class CreatOrEditImportProductComponent implements OnInit {
   cities;
   name: string;
   test;
-  listStatus = ReceivedOrderConst.receiveStatus;
+  listStatus = [
+    {name :'Chưa thanh toán',code:1},
+    {name :'Đã thanh toán',code:2},
+    {name :'Hoàn thành',code:3},
+  ];
   listTypeProduct;
   category;
   quantity;
@@ -115,15 +119,12 @@ export class CreatOrEditImportProductComponent implements OnInit {
         check = true;
       }
     });
-    console.log(this.validate());
+    console.log("1",this.validate());
     
     if(this.validate() && !check){
       let receivedDate = this.receiveOrder.receivedDate.getDate() + 1;
       this.receiveOrder.receivedDate.setDate(receivedDate);
-      console.log("order", this.receiveOrder);
-      console.log("detaal", this.receivedOrderDetails);
       this.receiveOrder.details = this.receivedOrderDetails;
-      console.log("resilt", this.receiveOrder);
       this.receivedOrderService.createOrEditReceiveOrder(this.receiveOrder).subscribe(() => {
         console.log(this.receiveOrder.id);
         if (this.receiveOrder.id == undefined){
@@ -139,7 +140,7 @@ export class CreatOrEditImportProductComponent implements OnInit {
   }
 
   validate(): boolean{
-    console.log(this.receiveOrder);
+    console.log("2",this.receiveOrder);
     if(this.receiveOrder.supplier == null || this.receiveOrder.status == null || this.receiveOrder.receiver == null){
       return false;
     }

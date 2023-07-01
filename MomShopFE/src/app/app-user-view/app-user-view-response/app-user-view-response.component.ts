@@ -29,15 +29,10 @@ export class AppUserViewResponseComponent {
       this.statusCode = params['vnp_ResponseCode']; // 'query' ở đây tương ứng với tên query parameter bạn muốn lấy giá trị
       if (this.statusCode == "00"){
         this.orderId = params['vnp_TxnRef'];
-        console.log("statusCode", this.statusCode, this.orderId);
-        console.log(this.data);
-        
         this.data.statusCode = this.statusCode;
         this.data.orderId = this.orderId;
-        console.log(this.data);
 
         this.userOrderService.receiveNofity(this.data).subscribe((data) => {
-          console.log("Ok");
           this.router.navigateByUrl('/view');
         });
         this.isPayment = true;
